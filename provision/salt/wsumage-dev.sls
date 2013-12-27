@@ -1,6 +1,4 @@
-# wsuwp-dev.sls
-#
-# Setup the WSUWP Platform for local development in Vagrant.
+# check for needed services and installs
 ############################################################
 
 git:
@@ -14,6 +12,43 @@ php-fpm:
 mysqld:
   service:
     - running
+
+# Setup the MySQL requirements for WSUMAGE-base
+#
+# user: mage
+# pass: mage
+# db:   wsumage_store.wsu.edu
+wsuwp-db:
+  mysql_user.present:
+    - name: mage
+    - password: mage
+    - host: localhost
+    - require_in:
+      - cmd: wsuwp-install-network
+    - require:
+      - service: mysqld
+  mysql_database.present:
+    - name: wsumage_store.wsu.edu
+    - require_in:
+      - cmd: wsuwp-install-network
+    - require:
+      - service: mysqld
+  mysql_grants.present:
+    - grant: all privileges
+    - database: wsuwp.*
+    - user: wp
+    - require_in:
+      - cmd: wsuwp-install-network
+    - require:
+      - service: mysqld
+
+# The install is going to run, there is no caching needed yet.  Stop
+memcached-stopped:
+  cmd.run:
+    - name: service memcached stop
+    - cwd: /
+
+
 
 
 # Install wp-cli to provide a way to manage WordPress at the command line.
@@ -48,47 +83,8 @@ wsuwp-dev-initial:
     #- submodules:True
 
 
-# Setup the MySQL requirements for WSUWP Platform
-#
-# user: wp
-# pass: wp
-# db:   wsuwp
-wsuwp-db:
-  mysql_user.present:
-    - name: wp
-    - password: wp
-    - host: localhost
-    - require_in:
-      - cmd: wsuwp-install-network
-    - require:
-      - service: mysqld
-      #- pkg: mysql
-  mysql_database.present:
-    - name: wsuwp
-    - require_in:
-      - cmd: wsuwp-install-network
-    - require:
-      - service: mysqld
-      #- pkg: mysql
-  mysql_grants.present:
-    - grant: all privileges
-    - database: wsuwp.*
-    - user: wp
-    - require_in:
-      - cmd: wsuwp-install-network
-    - require:
-      - service: mysqld
-      #- pkg: mysql
 
-# As object cache will be available to WordPress throughout provisioning at the plugin
-# level, stop memcached before applying any related commands to avoid possible cache
-# and database pollution or crossing.
-wsuwp-prep-install:
-  cmd.run:
-    - name: service memcached stop
-    - cwd: /
-    - require_in:
-      - cmd: wsuwp-install-network
+
 
 # Install our primary WordPress network with a default admin and password for the
 # development environment.
