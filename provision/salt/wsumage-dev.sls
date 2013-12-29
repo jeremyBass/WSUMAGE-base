@@ -23,22 +23,22 @@ wsuwp-db:
     - name: mage
     - password: mage
     - host: localhost
-    - require_in:
-      - cmd: wsuwp-install-network
+    #- require_in:
+      #- cmd: wsuwp-install-network
     - require:
       - service: mysqld
   mysql_database.present:
     - name: wsumage_store.wsu.edu
-    - require_in:
-      - cmd: wsuwp-install-network
+    #- require_in:
+      #- cmd: wsuwp-install-network
     - require:
       - service: mysqld
   mysql_grants.present:
     - grant: all privileges
     - database: wsuwp.*
     - user: wp
-    - require_in:
-      - cmd: wsuwp-install-network
+    #- require_in:
+      #- cmd: wsuwp-install-network
     - require:
       - service: mysqld
 
