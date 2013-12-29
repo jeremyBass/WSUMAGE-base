@@ -24,13 +24,13 @@ wsuwp-db:
     - password: mage
     - host: localhost
     #- require_in:
-      #- cmd: wsuwp-install-network
+    #  - cmd: wsuwp-install-network
     - require:
       - service: mysqld
   mysql_database.present:
     - name: wsumage_store.wsu.edu
     #- require_in:
-      #- cmd: wsuwp-install-network
+    #  - cmd: wsuwp-install-network
     - require:
       - service: mysqld
   mysql_grants.present:
@@ -38,7 +38,7 @@ wsuwp-db:
     - database: wsuwp.*
     - user: wp
     #- require_in:
-      #- cmd: wsuwp-install-network
+    #  - cmd: wsuwp-install-network
     - require:
       - service: mysqld
 
@@ -48,6 +48,7 @@ memcached-stopped:
     - name: service memcached stop
     - cwd: /
     
+    
 #magento base
 magento:
   git.latest:
@@ -55,4 +56,20 @@ magento:
     - rev: 1.8.1.0
     - target: /var/www/store.wsu.edu/html/
     - force: True
-
+    - unless: cd /var/www/store.wsu.edu/html/app/code/core/Mage/Admin/data/admin_setup
+    
+#Modgit for magento modules
+modgit:
+  cmd.run:
+    - name: curl https://raw.github.com/townside/modgit/master/modgit > /var/www/store.wsu.edu/stage/modgit
+    - cwd: /var/www/store.wsu.edu/stage/
+    - unless: which modgit
+    - user: vagrant
+  file.managed:
+    - source: salt://www/store.wsu.edu/stage/modgit
+    - user: root
+    - group: root
+    - mode: 744
+  file.symlink:
+    - name: /usr/local/bin/modgit
+    - target: /var/www/store.wsu.edu/stage/modgit
