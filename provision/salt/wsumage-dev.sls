@@ -65,6 +65,8 @@ modgit:
     - cwd: /var/www/store.wsu.edu/stage/
     - unless: which modgit
     - user: vagrant
+
+excute-modgit:
   file.managed:
     - source: salt://www/store.wsu.edu/stage/modgit
     - user: root
