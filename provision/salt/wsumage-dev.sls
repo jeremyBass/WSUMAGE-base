@@ -72,8 +72,8 @@ modgit:
 exe-modgit:
   file.managed:
     - name: /var/www/store.wsu.edu/stage/modgit
-    - user: root
-    - group: root
+    - user: www-data
+    - group: www-data
     - mode: 744
     
 link-modgit:
