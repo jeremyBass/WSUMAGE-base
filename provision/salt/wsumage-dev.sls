@@ -68,12 +68,13 @@ modgit:
     - require_in:
       - file: /var/www/store.wsu.edu/stage/modgit
 
-set-modgit:
+exe-modgit:
   file.managed:
     - name: /var/www/store.wsu.edu/stage/modgit
     - user: root
     - group: root
     - mode: 744
+link-modgit:
   file.symlink:
     - name: /usr/local/bin/modgit
     - target: /var/www/store.wsu.edu/stage/modgit
