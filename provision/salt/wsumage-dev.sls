@@ -48,7 +48,38 @@ memcached-stopped:
     - name: service memcached stop
     - cwd: /
     
-    
+
+/var/www/wsuwp-platform:
+    file.directory:
+    - user: www-data
+    - group: www-data
+    - dir_mode: 775
+    - file_mode: 664
+    - recurse:
+        - user
+        - group
+
+
+#Modgit for magento modules
+modgit:
+  cmd.run:
+    - name: curl https://raw.github.com/jeremyBass/modgit/master/modgit > /var/www/store.wsu.edu/stage/modgit
+    - unless: cd /var/www/store.wsu.edu/stage/modgit
+    - require_in:
+      - file: /var/www/store.wsu.edu/stage/modgit
+
+set-modgit:
+  file.managed:
+    - name: /var/www/store.wsu.edu/stage/modgit
+    - user: root
+    - group: root
+    - mode: 744
+  file.symlink:
+    - name: /usr/local/bin/modgit
+    - target: /var/www/store.wsu.edu/stage/modgit
+    - force: True
+    - makedirs: True
+
 #magento base
 magento:
   git.latest:
@@ -58,20 +89,4 @@ magento:
     - force: True
     - unless: cd /var/www/store.wsu.edu/html/app/code/core/Mage/Admin/data/admin_setup
     
-#Modgit for magento modules
-modgit:
-  cmd.run:
-    - name: curl https://raw.github.com/townside/modgit/master/modgit > /var/www/store.wsu.edu/stage/modgit
-    - cwd: /var/www/store.wsu.edu/stage/
-    - unless: which modgit
-    - user: vagrant
 
-excute-modgit:
-  file.managed:
-    - source: salt://www/store.wsu.edu/stage/modgit
-    - user: root
-    - group: root
-    - mode: 744
-  file.symlink:
-    - name: /usr/local/bin/modgit
-    - target: /var/www/store.wsu.edu/stage/modgit
