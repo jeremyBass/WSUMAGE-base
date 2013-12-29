@@ -66,7 +66,8 @@ modgit:
     - name: curl https://raw.github.com/jeremyBass/modgit/master/modgit > /var/www/store.wsu.edu/stage/modgit
     - unless: cd /var/www/store.wsu.edu/stage/modgit
     - require_in:
-      - file: /var/www/store.wsu.edu/stage/modgit
+      - file: exe-modgit
+      - file: link-modgit
 
 exe-modgit:
   file.managed:
@@ -74,6 +75,7 @@ exe-modgit:
     - user: root
     - group: root
     - mode: 744
+    
 link-modgit:
   file.symlink:
     - name: /usr/local/bin/modgit
