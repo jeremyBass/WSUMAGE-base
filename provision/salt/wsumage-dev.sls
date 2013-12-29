@@ -18,7 +18,7 @@ mysqld:
 # user: mage
 # pass: mage
 # db:   wsumage_store.wsu.edu
-wsuwp-db:
+wsumage-db:
   mysql_user.present:
     - name: mage
     - password: mage
@@ -49,7 +49,7 @@ memcached-stopped:
     - cwd: /
     
 
-/var/www/wsuwp-platform:
+/var/www/store.wsu.edu/html:
     file.directory:
     - user: www-data
     - group: www-data
@@ -93,5 +93,9 @@ magento:
     - target: /var/www/store.wsu.edu/html/
     - force: True
     - unless: cd /var/www/store.wsu.edu/html/app/code/core/Mage/Admin/data/admin_setup
-    
+
+
+
+
+
 
