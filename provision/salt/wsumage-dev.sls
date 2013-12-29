@@ -63,23 +63,25 @@ memcached-stopped:
 #Modgit for magento modules
 modgit:
   cmd.run:
-    - name: curl https://raw.github.com/jeremyBass/modgit/master/modgit > /var/www/store.wsu.edu/stage/modgit
-    - unless: cd /var/www/store.wsu.edu/stage/modgit
+    - name: curl https://raw.github.com/jeremyBass/modgit/master/modgit > /home/vagrant/modgit
+    - cwd: /home/vagrant/
+    - user: root
+    - unless: which modgit
     - require_in:
       - file: exe-modgit
       - file: link-modgit
 
 exe-modgit:
   file.managed:
-    - name: /var/www/store.wsu.edu/stage/modgit
-    - user: www-data
-    - group: www-data
+    - name: /home/vagrant/modgit
+    - user: root
+    - group: root
     - mode: 744
     
 link-modgit:
   file.symlink:
     - name: /usr/local/bin/modgit
-    - target: /var/www/store.wsu.edu/stage/modgit
+    - target: /home/vagrant/modgit
     - force: True
     - makedirs: True
 
