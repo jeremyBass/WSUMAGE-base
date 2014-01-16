@@ -1,4 +1,4 @@
-base:
+store.wsu.edu:
   'env:vagrant':
     - match: grain
     - wsumage-dev
