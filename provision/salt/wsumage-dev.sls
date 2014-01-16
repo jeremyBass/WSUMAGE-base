@@ -1,17 +1,17 @@
 # check for needed services and installs
 ############################################################
 
-git:
-  pkg.installed:
-    - name: git
+#git:
+#  pkg.installed:
+#    - name: git
 
-php-fpm:
-  service:
-    - running
+#php-fpm:
+#  service:
+#    - running
 
-mysqld:
-  service:
-    - running
+#mysqld:
+#  service:
+#    - running
 
 # Setup the MySQL requirements for WSUMAGE-base
 #
