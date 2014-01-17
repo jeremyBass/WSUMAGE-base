@@ -1,18 +1,3 @@
-# check for needed services and installs
-############################################################
-
-#git:
-#  pkg.installed:
-#    - name: git
-
-#php-fpm:
-#  service:
-#    - running
-
-#mysqld:
-#  service:
-#    - running
-
 # Setup the MySQL requirements for WSUMAGE-base
 #
 # user: mage
@@ -26,13 +11,13 @@ wsumage-db:
     #- require_in:
     #  - cmd: wsuwp-install-network
     - require:
-      - service: mysqld
+      - service: mysql-start
   mysql_database.present:
     - name: wsumage_store.wsu.edu
     #- require_in:
     #  - cmd: wsuwp-install-network
     - require:
-      - service: mysqld
+      - service: mysql-start
   mysql_grants.present:
     - grant: all privileges
     - database: wsuwp.*
@@ -40,7 +25,7 @@ wsumage-db:
     #- require_in:
     #  - cmd: wsuwp-install-network
     - require:
-      - service: mysqld
+      - service: mysql-start
 
 # The install is going to run, there is no caching needed yet.  Stop
 memcached-stopped:
