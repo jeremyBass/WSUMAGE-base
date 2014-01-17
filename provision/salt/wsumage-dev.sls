@@ -90,3 +90,11 @@ init_modgit:
     - user: root
 
 
+#do a dry run test of modgit
+modgit_dryrun:
+  cmd.run:
+    - name: modgit add -n Storeutilities https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git 2>/dev/null | grep -qi "error" && echo "name=modgit_dryrun result=False changed=False comment=failed" || echo "name=modgit_dryrun  result=True changed=True comment=passed"
+    - cwd: /var/www/store.wsu.edu/html/
+    - unless: cd /var/www/store.wsu.edu/html/.modgit
+    - user: root
+    - stateful: True
