@@ -40,9 +40,9 @@ memcached-stopped:
     - group: www-data
     - dir_mode: 775
     - file_mode: 664
-    - recurse:
-        - user
-        - group
+#    - recurse:
+#        - user
+#        - group
 
 
 #Modgit for magento modules
@@ -86,9 +86,7 @@ init_modgit:
   cmd.run:
     - name: modgit init
     - cwd: /var/www/store.wsu.edu/html/
-    - unless: cd /var/www/store.wsu.edu/html/.modgit
+    - unless: test -d /var/www/store.wsu.edu/html/.modgit
     - user: root
-    - stateful: True
-
 
 
