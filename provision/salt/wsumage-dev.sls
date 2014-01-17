@@ -69,6 +69,8 @@ link-modgit:
     - target: /home/vagrant/modgit
     - force: True
     - makedirs: True
+#this would be a candidate for server inclusion, it's useful for all apps that may have more then one directory in a repo
+
 
 #magento base
 magento:
