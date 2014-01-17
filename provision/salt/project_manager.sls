@@ -1,19 +1,23 @@
 # We set up projects based on what is set up in the pillar data
 # find settings in pillar/projects.sls
-
-{% for project, project_arg in pillar.get('projects',{}).items() %}
-load-project-{{ project }}:
-  git.latest:
-    - name: {{ project_arg['name'] }}
-    - target: /var/www/{{ project_arg['target'] }}
-    - unless: cd /var/www/{{ project_arg['target'] }}/provision/salt/config
-    {% if project_arg['rev'] is defined and project_arg['rev'] != '' %}- rev: {{ project_arg['rev'] }}{%- endif %}
-    {% if project_arg['remote_name'] is defined and project_arg['remote_name'] != '' %}- remote_name: {{ project_arg['remote_name'] }}{%- endif %}
-    {% if project_arg.get( 'force', False ) is sameas True %}- force: True{%- endif %}
-    {% if project_arg.get( 'submodules', False ) is sameas True %}- submodules: True{%- endif %}
-    {% if project_arg.get( 'force_checkout', False ) is sameas True %}- force_checkout: True{%- endif %}
-    {% if project_arg.get( 'mirror', False ) is sameas True %}- mirror: True{%- endif %}
-    {% if project_arg.get( 'bare', False ) is sameas True %}- bare: True{%- endif %}
-    {% if project_arg['identity'] is defined and project_arg['identity'] != '' %}- identity: {{ project_arg['identity'] }}{%- endif %}
-    {% if project_arg['user'] is defined and project_arg['user'] != '' %}- user: {{ project_arg['user'] }}{%- endif %}
-{% endfor %}
+#{% if pillar.get['project'] is defined and pillar.get['project']['name'] != '' %}
+#
+#{%- set project = pillar.get['project'] -%}
+#{%- set project_root = '/var/www/' + project['target'] -%}
+#{%- set project_web_root = project_root+'/html/' -%}
+#
+#load-project-{{ project['name'] }}:
+#  git.latest:
+#    - name: {{ project['name'] }}
+#    - target: {{ project_root }}
+#    - unless: cd {{ project_root }}/provision/salt/config
+#    {% if project['rev'] is defined and project['rev'] != '' %}- rev: {{ project['rev'] }}{%- endif %}
+#    {% if project['remote_name'] is defined and project['remote_name'] != '' %}- remote_name: {{ project['remote_name'] }}{%- endif %}
+#    {% if project.get( 'force', False ) is sameas True %}- force: True{%- endif %}
+#    {% if project.get( 'submodules', False ) is sameas True %}- submodules: True{%- endif %}
+#    {% if project.get( 'force_checkout', False ) is sameas True %}- force_checkout: True{%- endif %}
+#    {% if project.get( 'mirror', False ) is sameas True %}- mirror: True{%- endif %}
+#    {% if project.get( 'bare', False ) is sameas True %}- bare: True{%- endif %}
+#    {% if project['identity'] is defined and project['identity'] != '' %}- identity: {{ project['identity'] }}{%- endif %}
+#    {% if project['user'] is defined and project_arg['user'] != '' %}- user: {{ project['user'] }}{%- endif %}
+#{% endif %}

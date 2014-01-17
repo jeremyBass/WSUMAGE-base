@@ -21,7 +21,7 @@ wsumage-db:
   mysql_grants.present:
     - grant: all privileges
     - database: wsuwp.*
-    - user: wp
+    - user: mage
     #- require_in:
     #  - cmd: wsuwp-install-network
     - require:
@@ -40,9 +40,9 @@ memcached-stopped:
     - group: www-data
     - dir_mode: 775
     - file_mode: 664
-    - recurse:
-        - user
-        - group
+#    - recurse:
+#        - user
+#        - group
 
 
 #Modgit for magento modules
@@ -81,8 +81,20 @@ magento:
     - force: True
     - unless: cd /var/www/store.wsu.edu/html/app/code/core/Mage/Admin/data/admin_setup
 
+#start modgit tracking
+init_modgit:
+  cmd.run:
+    - name: modgit init
+    - cwd: /var/www/store.wsu.edu/html/
+    - unless: test -d /var/www/store.wsu.edu/html/.modgit
+    - user: root
 
 
-
-
-
+#do a dry run test of modgit
+modgit_dryrun:
+  cmd.run:
+    - name: modgit add -n Storeutilities https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git 2>/dev/null | grep -qi "error" && echo "name=modgit_dryrun result=False changed=False comment=failed" || echo "name=modgit_dryrun  result=True changed=True comment=passed"
+    - cwd: /var/www/store.wsu.edu/html/
+    - unless: cd /var/www/store.wsu.edu/html/.modgit
+    - user: root
+    - stateful: True
