@@ -21,7 +21,7 @@ wsumage-db:
   mysql_grants.present:
     - grant: all privileges
     - database: wsuwp.*
-    - user: wp
+    - user: mage
     #- require_in:
     #  - cmd: wsuwp-install-network
     - require:
@@ -81,6 +81,12 @@ magento:
     - force: True
     - unless: cd /var/www/store.wsu.edu/html/app/code/core/Mage/Admin/data/admin_setup
 
+#start modgit tracking
+init_modgit:
+  cmd.run:
+    - name: modgit init
+    - cwd: /var/www/store.wsu.edu/html/
+    - user: root
 
 
 
