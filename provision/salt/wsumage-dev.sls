@@ -86,9 +86,9 @@ init_modgit:
   cmd.run:
     - name: modgit init
     - cwd: /var/www/store.wsu.edu/html/
+    - unless: cd /var/www/store.wsu.edu/html/.modgit
     - user: root
-
-
+    - stateful: True
 
 
 
