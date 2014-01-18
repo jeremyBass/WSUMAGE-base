@@ -5,25 +5,19 @@
 # db:   wsumage_store.wsu.edu
 wsumage-db:
   mysql_user.present:
-    - name: mage
-    - password: mage
+    - name: magevag
+    - password: magevag
     - host: localhost
-    #- require_in:
-    #  - cmd: wsuwp-install-network
     - require:
       - service: mysql-start
   mysql_database.present:
     - name: wsumage_store.wsu.edu
-    #- require_in:
-    #  - cmd: wsuwp-install-network
     - require:
       - service: mysql-start
   mysql_grants.present:
     - grant: all privileges
-    - database: wsuwp.*
-    - user: mage
-    #- require_in:
-    #  - cmd: wsuwp-install-network
+    - database: wsumage_*
+    - user: magevag
     - require:
       - service: mysql-start
 
