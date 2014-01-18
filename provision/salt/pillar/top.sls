@@ -1,5 +1,6 @@
 base:
   '*':
-    - plugins
-    - users
     - project
+    - extensions
+    - users
+
