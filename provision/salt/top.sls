@@ -1,9 +1,11 @@
 store.wsu.edu:
   '*':
     - project_manager
+    - environment
+    - install
   'env:vagrant':
     - match: grain
-    - wsumage-dev
+    - stage-dev
   'env:production':
     - match: grain
-    - wsumage-prod
+    - stage-prod
