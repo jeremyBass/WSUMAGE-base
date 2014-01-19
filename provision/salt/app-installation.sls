@@ -12,13 +12,13 @@ base-ext-{{ ext_key }}:
   cmd.run:
     - name: modgit add {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ ext_key }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git
     - cwd: /var/www/store.wsu.edu/html/
+    - unless: ! modgit add -n {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ ext_key }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git 2>/dev/null | grep -qi "error"
 {% endfor %}
 
 /var/www/store.wsu.edu/html/mage-{{ magento_version }}.txt:
   file.managed:
-    - user: root
-    - group: root
-    - mode: 644
+    - user: www-data
+    - group: www-data
 
 
 
