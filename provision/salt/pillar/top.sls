@@ -1,6 +1,6 @@
-base:
+store.wsu.edu:
   '*':
     - project
-    - extensions
+    - magento
+    - magento-extensions
     - users
-

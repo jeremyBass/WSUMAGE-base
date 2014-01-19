@@ -16,7 +16,7 @@ wsumage-db:
       - service: mysql-start
   mysql_grants.present:
     - grant: all privileges
-    - database: wsumage_*
+    - database: wsumage_store.wsu.edu
     - user: magevag
     - require:
       - service: mysql-start

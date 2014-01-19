@@ -1,8 +1,8 @@
 store.wsu.edu:
   '*':
     - project_manager
-    - environment
-    - install
+    - env
+    - app-installation
   'env:vagrant':
     - match: grain
     - stage-dev
