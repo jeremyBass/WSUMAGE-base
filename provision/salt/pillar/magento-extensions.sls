@@ -66,19 +66,66 @@ extensions:
     repo_owner: jeremyBass
     branch: master
     tag:        
-    
+  pickupShipping:
+    name: pickupShipping
+    repo_owner: jeremyBass
+    branch: master
+    tag:     
+  AdminQuicklancher:
+    name: AdminQuicklancher
+    repo_owner: jeremyBass
+    branch: master
+    tag:  
+#  dropshippers:
+#    name: dropshippers
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag:  
+  Aoe_FilePicker:
+    name: Aoe_FilePicker
+    repo_owner: jeremyBass
+    branch: master
+    tag:  
+#  pdf-service:
+#    name: WSUMAGE-pdf-service
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag:  
+  AvS_FastSimpleImport:
+    name: AvS_FastSimpleImport
+    repo_owner: jeremyBass
+    branch: master
+    tag: 
+  Aoe_AsyncCache:
+    name: Aoe_AsyncCache
+    repo_owner: jeremyBass
+    branch: master
+    tag: 
+  Aoe_ClassPathCache:
+    name: Aoe_ClassPathCache
+    repo_owner: AOEmedia
+    branch: master
+    tag: 
+  Aoe_ModelCache:
+    name: Aoe_ModelCache
+    repo_owner: AOEmedia
+    branch: master
+    tag:
+  Aoe_Profiler:
+    name: Aoe_Profiler
+    repo_owner: jeremyBass
+    branch: master
+    tag:
+  Aoe_ManageStores:
+    name: Aoe_ManageStores
+    repo_owner: jeremyBass
+    branch: master
+    tag:
+  Aoe_Scheduler:
+    name: Aoe_Scheduler
+    repo_owner: fbrnc
+    branch: master
+    tag:
 
-#    [pickupShipping]=jeremyBass
-#    [AdminQuicklancher]=jeremyBass
-#    #[dropshippers]=jeremyBass
-#    [Aoe_FilePicker]=jeremyBass
-#    [WSUMAGE-pdf-service]=jeremyBass
-#    [AvS_FastSimpleImport]=jeremyBass      #https://github.com/avstudnitz/AvS_FastSimpleImport
-#    [Aoe_AsyncCache]=jeremyBass            #https://github.com/fbrnc/Aoe_AsyncCache.git
-#    [Aoe_ClassPathCache]=AOEmedia          #https://github.com/AOEmedia/Aoe_ClassPathCache.git
-#    [Aoe_ModelCache]=AOEmedia          #https://github.com/AOEmedia/Aoe_ModelCache
-#    [Aoe_Profiler]=jeremyBass              #https://github.com/fbrnc/Aoe_Profiler.git
-#    [Aoe_ManageStores]=jeremyBass          #https://github.com/fbrnc/Aoe_ManageStores.git
-#    [Aoe_Scheduler]=fbrnc          #https://github.com/fbrnc/Aoe_Scheduler.git
 #    #[Aoe_Eav]=AOEmedia          #https://github.com/AOEmedia/Aoe_Eav  
 #    #[Aoe_TemplateHints]=fbrnc
