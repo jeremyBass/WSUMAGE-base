@@ -11,17 +11,17 @@
     - password: {{ magento['db_pass'] }}
     - host: {{ magento['db_host'] }}
     - require:
-      - service: mysql-start
+      - service: mysqld
   mysql_database.present:
     - name: {{ magento['db_name'] }}
     - require:
-      - service: mysql-start
+      - service: mysqld
   mysql_grants.present:
     - grant: all privileges
     - database: {{ magento['db_name'] }}.*
     - user: {{ magento['db_user'] }}
     - require:
-      - service: mysql-start
+      - service: mysqld
 
 # The install is going to run, there is no caching needed yet.
 memcached-stopped:
