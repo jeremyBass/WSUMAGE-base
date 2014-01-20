@@ -1,3 +1,8 @@
+# set up data first
+###########################################################
+{%- set magento = pillar.get('magento') %}
+
+
 # Setup the MySQL requirements for WSUMAGE-base
 #
 # user: mage
@@ -5,19 +10,19 @@
 # db:   wsumage_network
 wsumage_network:
   mysql_user.present:
-    - name: magevag
-    - password: magevag
-    - host: localhost
+    - name: {{ magento['db_user'] }}
+    - password: {{ magento['db_pass'] }}
+    - host: {{ magento['db_host'] }}
     - require:
       - service: mysql-start
   mysql_database.present:
-    - name: wsumage_network
+    - name: {{ magento['db_name'] }}
     - require:
       - service: mysql-start
   mysql_grants.present:
     - grant: all privileges
-    - database: wsumage_network
-    - user: magevag
+    - database: {{ magento['db_name'] }}.*
+    - user: {{ magento['db_user'] }}
     - require:
       - service: mysql-start
 

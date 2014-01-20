@@ -1,5 +1,6 @@
 # set up data first
 ###########################################################
+{%- set project = pillar.get('project') %}
 {%- set magento = pillar.get('magento') %}
 {%- set magento_version = magento['version'] %} 
 {%- set magento_extensions = pillar.get('extensions',{}) %}
@@ -7,14 +8,17 @@
 PEAR-registry:
   cmd.run:
     - name: ./mage mage-setup .
+    - cwd: /var/www/{{ project['target'] }}/html/
 
 set-mage-ext-pref:
   cmd.run:
     - name: ./mage install magento-core Mage_All_Latest
+    - cwd: /var/www/{{ project['target'] }}/html/
 
 magneto-install:
   cmd.run:
-    - name: php -f install.php -- --license_agreement_accepted yes --locale en_US --timezone America/Los_Angeles --default_currency USD  --db_host localhost --db_name wsumage_network --db_user magevag --db_pass magevag --url store.mage.dev --use_rewrites yes --skip_url_validation yes --use_secure no --secure_base_url "" --use_secure_admin no --admin_firstname "Jeremy" --admin_lastname "Bass" --admin_email "jeremy.bass@wsu.edu" --admin_username "jeremy.bass" --admin_password "demo2013"
+    - name: php -f install.php -- --license_agreement_accepted yes --locale {{ magento['locale'] }} --timezone {{ magento['timezone'] }} --default_currency {{ magento['default_currency'] }}  --db_host {{ magento['db_host'] }} --db_name {{ magento['db_name'] }} --db_user {{ magento['db_user'] }} --db_pass {{ magento['db_pass'] }} --url {{ magento['url'] }} --use_rewrites {{ magento['use_rewrites'] }} --skip_url_validation {{ magento['skip_url_validation'] }} --use_secure {{ magento['use_secure'] }} --secure_base_url {{ magento['secure_base_url'] }} --use_secure_admin {{ magento['use_secure_admin'] }} --admin_firstname "{{ magento['admin_firstname'] }}" --admin_lastname "{{ magento['admin_lastname'] }}" --admin_email "{{ magento['admin_email'] }}" --admin_username "{{ magento['admin_username'] }}" --admin_password "{{ magento['admin_password'] }}"
+    - cwd: /var/www/{{ project['target'] }}/html/
 
 
 
@@ -23,11 +27,11 @@ magneto-install:
 base-ext-{{ ext_key }}:
   cmd.run:
     - name: modgit add {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ ext_key }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git
-    - cwd: /var/www/store.wsu.edu/html/
+    - cwd: /var/www/{{ project['target'] }}/html/
     - unless: ! modgit ls 2>/dev/null | grep -qi "{{ ext_key }}"
 {% endfor %}
 
-/var/www/store.wsu.edu/html/mage-{{ magento_version }}.txt:
+/var/www/{{ project['target'] }}/html/mage-{{ magento_version }}.txt:
   file.managed:
     - user: www-data
     - group: www-data
