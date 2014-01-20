@@ -6,7 +6,7 @@ magento:
   db_host: 127.0.0.1
   db_name: wsumage_network
   db_user: mageDbNtkUsr2014
-  db_pass: 93@1!ls904l23nvSDnsdlg9$lslnSVDSal0dlwedmd
+  db_pass: samplepassword
   url: store.mage.dev
   use_rewrites: yes
   skip_url_validation: yes
