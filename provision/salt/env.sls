@@ -2,8 +2,8 @@
 #
 # user: mage
 # pass: mage
-# db:   wsumage_store.wsu.edu
-wsumage-db:
+# db:   wsumage_network
+wsumage_network:
   mysql_user.present:
     - name: magevag
     - password: magevag
@@ -11,12 +11,12 @@ wsumage-db:
     - require:
       - service: mysql-start
   mysql_database.present:
-    - name: wsumage_store.wsu.edu
+    - name: wsumage_network
     - require:
       - service: mysql-start
   mysql_grants.present:
     - grant: all privileges
-    - database: wsumage_store.wsu.edu
+    - database: wsumage_network
     - user: magevag
     - require:
       - service: mysql-start
@@ -27,6 +27,19 @@ memcached-stopped:
     - name: service memcached stop
     - cwd: /
     
+
+
+/etc/nginx/sites-enabled/store.mage.dev.conf:
+  file.managed:
+    - source: salt://config/nginx/store.mage.dev.conf
+    - user: root
+    - group: root
+    - mode: 644
+    - require:
+      - sls: web
+
+
+
 
 /var/www/store.wsu.edu/html:
     file.directory:
