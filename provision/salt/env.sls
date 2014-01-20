@@ -3,25 +3,37 @@
 {%- set magento = pillar.get('magento') %}
 {%- set project = pillar.get('project') %}
 
+
+mysqld-{{ env }}:
+  service.running:
+    - name: mysqld
+
 # Setup the MySQL requirements for WSUMAGE-base
 ###########################################################
-{{ magento['db_name'] }}:
+db_users-{{ magento['db_user'] }}:
   mysql_user.present:
     - name: {{ magento['db_user'] }}
     - password: {{ magento['db_pass'] }}
     - host: {{ magento['db_host'] }}
     - require:
-      - service: mysqld
+#      - sls: database
+      - service: mysqld-{{ env }}
+      
+db-{{ magento['db_name'] }}:
   mysql_database.present:
     - name: {{ magento['db_name'] }}
     - require:
-      - service: mysqld
+#      - sls: database
+      - service: mysqld-{{ env }}
+
+db_grant-{{ magento['db_name'] }}:
   mysql_grants.present:
     - grant: all privileges
     - database: {{ magento['db_name'] }}.*
     - user: {{ magento['db_user'] }}
     - require:
-      - service: mysqld
+#      - sls: database
+      - service: mysqld-{{ env }}
 
 # The install is going to run, there is no caching needed yet.
 memcached-stopped:
@@ -36,8 +48,8 @@ memcached-stopped:
     - user: root
     - group: root
     - mode: 644
-    - require:
-      - sls: web
+#    - require:
+#      - sls: web
 
 /var/www/store.wsu.edu/html:
     file.directory:
