@@ -4,11 +4,8 @@
 
 
 # Setup the MySQL requirements for WSUMAGE-base
-#
-# user: mage
-# pass: mage
-# db:   wsumage_network
-wsumage_network:
+###########################################################
+{{ magento['db_name'] }}:
   mysql_user.present:
     - name: {{ magento['db_user'] }}
     - password: {{ magento['db_pass'] }}
@@ -26,14 +23,13 @@ wsumage_network:
     - require:
       - service: mysql-start
 
-# The install is going to run, there is no caching needed yet.  Stop
+# The install is going to run, there is no caching needed yet.
 memcached-stopped:
   cmd.run:
     - name: service memcached stop
     - cwd: /
-    
 
-
+# move the apps nginx rules to the site-enabled
 /etc/nginx/sites-enabled/store.mage.dev.conf:
   file.managed:
     - source: salt://config/nginx/store.mage.dev.conf
@@ -42,9 +38,6 @@ memcached-stopped:
     - mode: 644
     - require:
       - sls: web
-
-
-
 
 /var/www/store.wsu.edu/html:
     file.directory:
@@ -55,7 +48,6 @@ memcached-stopped:
 #    - recurse:
 #        - user
 #        - group
-
 
 #Modgit for magento modules
 modgit:
@@ -81,8 +73,6 @@ link-modgit:
     - target: /home/vagrant/modgit
     - force: True
     - makedirs: True
-#this would be a candidate for server inclusion, it's useful for all apps that may have more then one directory in a repo
-
 
 #magento base
 magento:
@@ -100,7 +90,6 @@ init_modgit:
     - cwd: /var/www/store.wsu.edu/html/
     - unless: test -d /var/www/store.wsu.edu/html/.modgit
     - user: root
-
 
 #do a dry run test of modgit
 modgit_dryrun:

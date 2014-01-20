@@ -3,7 +3,7 @@ magento:
   locale: en_US
   timezone: America/Los_Angeles
   default_currency: USD
-  db_host: localhost
+  db_host: 127.0.0.1
   db_name: wsumage_network
   db_user: mageDbNtkUsr2014
   db_pass: 93@1!ls904l23nvSDnsdlg9$lslnSVDSal0dlwedmd
