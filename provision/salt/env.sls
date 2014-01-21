@@ -14,6 +14,9 @@ mysqld-{{ env }}:
   service.running:
     - name: mysqld
 
+php-{{ env }}:
+  service.running:
+    - name: php-fpm
 
 
 # Setup the MySQL requirements for WSUMAGE-base
@@ -92,9 +95,9 @@ magento:
   git.latest:
     - name: git://github.com/jeremyBass/magento-mirror.git
     - rev: 1.8.1.0
-    - target: /var/www/{{ project['target'] }}/html/
+    - target: {{ web_root }}
     - force: True
-    - unless: cd /var/www/{{ project['target'] }}/html/app/code/core/Mage/Admin/data/admin_setup
+    - unless: cd {{ web_root }}app/code/core/Mage/Admin/data/admin_setup
 
 PEAR-registry:
   cmd.run:
@@ -113,16 +116,16 @@ set-mage-ext-pref:
 init_modgit:
   cmd.run:
     - name: modgit init
-    - cwd: /var/www/{{ project['target'] }}/html/
-    - unless: test -d /var/www/{{ project['target'] }}/html/.modgit
+    - cwd: {{ web_root }}
+    - unless: test -d {{ web_root }}.modgit
     - user: root
 
 #do a dry run test of modgit
 modgit_dryrun:
   cmd.run:
     - name: modgit add -n Storeutilities https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git 2>/dev/null | grep -qi "error" && echo "name=modgit_dryrun result=False changed=False comment=failed" || echo "name=modgit_dryrun  result=True changed=True comment=passed"
-    - cwd: /var/www/{{ project['target'] }}/html/
-    - unless: cd /var/www/{{ project['target'] }}/html/.modgit
+    - cwd: {{ web_root }}
+    - unless: cd {{ web_root }}.modgit
     - user: root
     - stateful: True
 
