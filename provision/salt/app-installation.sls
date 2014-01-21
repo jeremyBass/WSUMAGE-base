@@ -7,44 +7,6 @@
 {%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
 
 
-PEAR-registry:
-  cmd.run:
-    - name: ./mage mage-setup .
-    - cwd: {{ web_root }}
-
-set-mage-ext-pref:
-  cmd.run:
-    - name: ./mage install magento-core Mage_All_Latest
-    - cwd: {{ web_root }}
-
-download-sample-date:
-  file.directory:
-    - name: {{ web_root }}/sampledata
-    - user: www-data
-    - group: www-data
-  cmd.run:
-    - name: git clone --depth=1 https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git sampledata | rm -rf !$/.git | cp -af {{ web_root }}sampledata/* {{ web_root }} 
-    - cwd: {{ web_root }}/sampledata
-    - user: root
-    - require:
-      - file: download-sample-date
-
-install-sample-date:
-  cmd.run:
-    - name: mysql -h {{ magento['db_host'] }} -u {{ magento['db_user'] }} -p{{ magento['db_pass'] }} {{ magento['db_name'] }} < sample-data.sql
-    - cwd: {{ web_root }}
-    - require:
-      - file: download-sample-date
-
-clean-sample-date:
-  cmd.run:
-    - name: rm -rf WSUMAGE-sampledata-master/ sample-data.sql /sample-data-files
-    - cwd: {{ web_root }}
-    - user: root
-    - require:
-      - file: install-sample-date
-
-
 #  if salt['service']('mysqld') is True 
 #  endif 
 
@@ -57,17 +19,7 @@ magneto-install:
       - service: mysqld-{{ env }}
 
 
-# Start the extension intsalls
-#{% for ext_key, ext_val in magento_extensions.iteritems() %}
-#base-ext-{{ ext_key }}:
-#  cmd.run:
-#    - name: modgit add {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ ext_key }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git
-#    - cwd: {{ web_root }}
-#    - user: root
-#    - unless: ! modgit ls 2>/dev/null | grep -qi "{{ ext_key }}"
-#    - require:
-#      - service: mysqld-{{ env }}
-#{% endfor %}
+
 
 
 

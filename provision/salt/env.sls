@@ -1,12 +1,20 @@
 # set up data first
 ###########################################################
-{%- set magento = pillar.get('magento') %}
 {%- set project = pillar.get('project') %}
+{%- set magento = pillar.get('magento') %}
+{%- set magento_version = magento['version'] %} 
+{%- set magento_extensions = pillar.get('extensions',{}) %}
+{%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
 
 
+
+# Create service checks
+###########################################################
 mysqld-{{ env }}:
   service.running:
     - name: mysqld
+
+
 
 # Setup the MySQL requirements for WSUMAGE-base
 ###########################################################
@@ -88,6 +96,19 @@ magento:
     - force: True
     - unless: cd /var/www/{{ project['target'] }}/html/app/code/core/Mage/Admin/data/admin_setup
 
+PEAR-registry:
+  cmd.run:
+    - name: ./mage mage-setup .
+    - cwd: {{ web_root }}
+
+set-mage-ext-pref:
+  cmd.run:
+    - name: ./mage install magento-core Mage_All_Latest
+    - cwd: {{ web_root }}
+
+
+
+
 #start modgit tracking
 init_modgit:
   cmd.run:
@@ -104,3 +125,9 @@ modgit_dryrun:
     - unless: cd /var/www/{{ project['target'] }}/html/.modgit
     - user: root
     - stateful: True
+
+
+
+
+
+
