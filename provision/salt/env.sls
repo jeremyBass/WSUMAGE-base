@@ -90,27 +90,6 @@ link-modgit:
     - force: True
     - makedirs: True
 
-#magento base
-magento:
-  git.latest:
-    - name: git://github.com/jeremyBass/magento-mirror.git
-    - rev: 1.8.1.0
-    - target: {{ web_root }}
-    - force: True
-    - unless: cd {{ web_root }}app/code/core/Mage/Admin/data/admin_setup
-
-PEAR-registry:
-  cmd.run:
-    - name: ./mage mage-setup .
-    - cwd: {{ web_root }}
-
-set-mage-ext-pref:
-  cmd.run:
-    - name: ./mage install magento-core Mage_All_Latest
-    - cwd: {{ web_root }}
-
-
-
 
 #start modgit tracking
 init_modgit:
@@ -128,6 +107,7 @@ modgit_dryrun:
     - unless: cd {{ web_root }}.modgit
     - user: root
     - stateful: True
+    
 
 
 
