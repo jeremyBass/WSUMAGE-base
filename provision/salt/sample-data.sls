@@ -34,7 +34,7 @@ install-sample-date:
     - name: mysql -h {{ magento['db_host'] }} -u {{ magento['db_user'] }} -p{{ magento['db_pass'] }} {{ magento['db_name'] }} < sample-data.sql
     - cwd: {{ web_root }}
     - require:
-      - file: download-sampledata
+      - cmd: download-sampledata
 
 clean-sample-date:
   cmd.run:
@@ -42,4 +42,4 @@ clean-sample-date:
     - cwd: {{ web_root }}
     - user: root
     - require:
-      - file: install-sample-date
+      - cmd: install-sample-date
