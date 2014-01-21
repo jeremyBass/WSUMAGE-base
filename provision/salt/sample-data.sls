@@ -36,10 +36,10 @@ install-sample-date:
     - require:
       - cmd: download-sampledata
 
-clean-sample-date:
-  cmd.run:
-    - name: rm -rf WSUMAGE-sampledata-master/ sample-data.sql /sample-data-files
-    - cwd: {{ web_root }}
-    - user: root
-    - require:
-      - cmd: install-sample-date
+#clean-sample-date:
+#  cmd.run:
+#    - name: rm -rf WSUMAGE-sampledata-master/ sample-data.sql /sample-data-files
+#    - cwd: {{ web_root }}
+#    - user: root
+#    - require:
+#      - cmd: install-sample-date
