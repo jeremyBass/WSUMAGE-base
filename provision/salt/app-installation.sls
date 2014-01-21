@@ -17,10 +17,6 @@ set-mage-ext-pref:
     - name: ./mage install magento-core Mage_All_Latest
     - cwd: {{ web_root }}
 
-
-
-
-
 download-sample-date:
   file.directory:
     - name: {{ web_root }}/sampledata
@@ -37,12 +33,16 @@ install-sample-date:
   cmd.run:
     - name: mysql -h {{ magento['db_host'] }} -u {{ magento['db_user'] }} -p{{ magento['db_pass'] }} {{ magento['db_name'] }} < sample-data.sql
     - cwd: {{ web_root }}
+    - require:
+      - file: download-sample-date
 
 clean-sample-date:
   cmd.run:
     - name: rm -rf WSUMAGE-sampledata-master/ sample-data.sql /sample-data-files
     - cwd: {{ web_root }}
     - user: root
+    - require:
+      - file: install-sample-date
 
 
 #  if salt['service']('mysqld') is True 
@@ -58,27 +58,16 @@ magneto-install:
 
 
 # Start the extension intsalls
-{% for ext_key, ext_val in magento_extensions.iteritems() %}
-base-ext-{{ ext_key }}:
-  cmd.run:
-    - name: modgit add {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ ext_key }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git
-    - cwd: {{ web_root }}
-    - user: root
-    - unless: ! modgit ls 2>/dev/null | grep -qi "{{ ext_key }}"
-    - require:
-      - service: mysqld-{{ env }}
-{% endfor %}
-
-
-
-/var/www/{{ project['target'] }}/html/mage-{{ magento_version }}.txt:
-  file.managed:
-    - user: www-data
-    - group: www-data
-
-
-
-
+#{% for ext_key, ext_val in magento_extensions.iteritems() %}
+#base-ext-{{ ext_key }}:
+#  cmd.run:
+#    - name: modgit add {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ ext_key }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git
+#    - cwd: {{ web_root }}
+#    - user: root
+#    - unless: ! modgit ls 2>/dev/null | grep -qi "{{ ext_key }}"
+#    - require:
+#      - service: mysqld-{{ env }}
+#{% endfor %}
 
 
 
