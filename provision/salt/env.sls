@@ -107,7 +107,9 @@ modgit_dryrun:
     - unless: cd {{ web_root }}.modgit
     - user: root
     - stateful: True
-    
+    - require:
+      - cmd: init_modgit
+
 #add a database explorer
 install-adminer:
   cmd.run:

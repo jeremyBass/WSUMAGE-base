@@ -17,4 +17,5 @@ base-ext-{{ ext_key }}:
     - require:
       - service: mysqld-{{ env }}
       - cmd: magneto-install
+      - cmd: init_modgit
 {% endfor %}
