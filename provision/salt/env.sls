@@ -1,12 +1,23 @@
 # set up data first
 ###########################################################
-{%- set magento = pillar.get('magento') %}
 {%- set project = pillar.get('project') %}
+{%- set magento = pillar.get('magento') %}
+{%- set magento_version = magento['version'] %} 
+{%- set magento_extensions = pillar.get('extensions',{}) %}
+{%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
 
 
+
+# Create service checks
+###########################################################
 mysqld-{{ env }}:
   service.running:
     - name: mysqld
+
+php-{{ env }}:
+  service.running:
+    - name: php-fpm
+
 
 # Setup the MySQL requirements for WSUMAGE-base
 ###########################################################
@@ -79,28 +90,32 @@ link-modgit:
     - force: True
     - makedirs: True
 
-#magento base
-magento:
-  git.latest:
-    - name: git://github.com/jeremyBass/magento-mirror.git
-    - rev: 1.8.1.0
-    - target: /var/www/{{ project['target'] }}/html/
-    - force: True
-    - unless: cd /var/www/{{ project['target'] }}/html/app/code/core/Mage/Admin/data/admin_setup
 
 #start modgit tracking
 init_modgit:
   cmd.run:
     - name: modgit init
-    - cwd: /var/www/{{ project['target'] }}/html/
-    - unless: test -d /var/www/{{ project['target'] }}/html/.modgit
+    - cwd: {{ web_root }}
+    - unless: test -d {{ web_root }}.modgit
     - user: root
 
 #do a dry run test of modgit
 modgit_dryrun:
   cmd.run:
     - name: modgit add -n Storeutilities https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git 2>/dev/null | grep -qi "error" && echo "name=modgit_dryrun result=False changed=False comment=failed" || echo "name=modgit_dryrun  result=True changed=True comment=passed"
-    - cwd: /var/www/{{ project['target'] }}/html/
-    - unless: cd /var/www/{{ project['target'] }}/html/.modgit
+    - cwd: {{ web_root }}
+    - unless: cd {{ web_root }}.modgit
     - user: root
     - stateful: True
+    - require:
+      - cmd: init_modgit
+
+#add a database explorer
+install-adminer:
+  cmd.run:
+    - name: wget "http://www.adminer.org/latest-mysql-en.php"  -O adminer.php | wget "https://raw.github.com/vrana/adminer/master/designs/haeckel/adminer.css"  -O adminer.css
+    - cwd: {{ web_root }}
+    - unless: -f {{ web_root }}adminer.php
+
+
+
