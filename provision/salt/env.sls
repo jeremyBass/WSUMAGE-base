@@ -18,6 +18,12 @@ php-{{ env }}:
   service.running:
     - name: php-fpm
 
+nginx-{{ env }}:
+  service.running:
+    - name: nginx
+
+
+
 
 # Setup the MySQL requirements for WSUMAGE-base
 ###########################################################
@@ -57,6 +63,21 @@ memcached-stopped:
     - user: root
     - group: root
     - mode: 644
+
+# move the apps nginx rules to the site-enabled
+{{ web_root }}/maps/nginx-mapping.conf:
+  file.managed:
+    - source: salt://config/nginx/maps/nginx-mapping.conf
+    - user: root
+    - group: root
+    - mode: 644
+
+restart-nginx-{{ env }}:
+  cmd.run:
+    - name: sudo service nginx restart
+    - cwd: /
+    - require:
+      - service: nginx-{{ env }}
 
 /var/www/store.wsu.edu/html:
     file.directory:
