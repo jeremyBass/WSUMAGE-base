@@ -15,7 +15,9 @@ base-ext-{{ ext_key }}:
     - user: root
     - unless: ! modgit ls 2>/dev/null | grep -qi "{{ ext_key }}"
     - require:
+      - git: magento
       - service: mysqld-{{ env }}
+      - service: php-{{ env }}
       - cmd: magneto-install
       - cmd: init_modgit
 {% endfor %}
