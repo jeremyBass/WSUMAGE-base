@@ -16,19 +16,6 @@ download-sampledata:
       - service: mysqld-{{ env }}
 
 
-
-#download-sample-date:
-#  file.directory:
-#    - name: {{ web_root }}/sampledata
-#    - user: www-data
-#    - group: www-data
-#  cmd.run:
-#    - name: git clone --depth=1 https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git sampledata | rm -rf !$/.git | cp -af {{ web_root }}sampledata/* {{ web_root }} 
-#    - cwd: {{ web_root }}/sampledata
-#    - user: root
-#    - require:
-#      - file: download-sample-date
-
 install-sample-date:
   cmd.run:
     - name: mysql -h {{ magento['db_host'] }} -u {{ magento['db_user'] }} -p{{ magento['db_pass'] }} {{ magento['db_name'] }} < sample-data.sql
