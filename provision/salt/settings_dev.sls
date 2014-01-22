@@ -7,9 +7,16 @@
 {%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
 {%- set stage_root = "/var/www/" + project['target'] + "/stage/vagrant/" %} 
 
+
+{{ web_root }}/staging:
+  cmd.run:
+    - name: cp {{ stage_root }} {{ web_root }}staging
+    - user: root
+
+
 post-install-settings:
   cmd.run:
-    - name: php {{ stage_root }}install-post.php
+    - name: php staging/install-post.php
     - cwd: {{ web_root }}
     - require:
       - git: magento

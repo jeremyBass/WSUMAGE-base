@@ -16,7 +16,7 @@ $argv = $_SERVER['argv'];
 
 //exit();die();
 //set up the store instance
-require_once "app/Mage.php";
+require_once "../app/Mage.php";
 umask(0);
 Mage::app();
 Mage::app()->getTranslator()->init('frontend');
