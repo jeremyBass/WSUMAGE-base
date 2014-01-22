@@ -65,6 +65,16 @@ memcached-stopped:
     - dir_mode: 775
     - file_mode: 664
 
+#magento base
+magento:
+  git.latest:
+    - name: git://github.com/jeremyBass/magento-mirror.git
+    - rev: 1.8.1.0
+    - target: {{ web_root }}
+    - force: True
+    - unless: cd {{ web_root }}app/code/core/Mage/Admin/data/admin_setup
+
+
 #Modgit for magento modules
 modgit:
   cmd.run:

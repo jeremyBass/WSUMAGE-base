@@ -4,9 +4,9 @@ magento:
   timezone: America/Los_Angeles
   default_currency: USD
   db_host: 127.0.0.1
-  db_name: wsumage_network
-  db_user: mageDbNtkUsr2014
-  db_pass: samplepassword
+  db_name: wsumage_networks
+  db_user: mageNtkUsr2014
+  db_pass: VAGRANT
   url: store.mage.dev
   use_rewrites: yes
   skip_url_validation: yes
