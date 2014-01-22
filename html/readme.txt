@@ -1,1 +1,0 @@
-This folder is meant to hold all of your www files.  when used under the WSU-serverbase-{OS} set ups, it will be symlinked to the var/www
