@@ -2,12 +2,12 @@ store.wsu.edu:
   '*':
     - project_manager
     - env
-    - sample-data
-    - app-installation
+    - sample_data
+    - app_installation
     - extensions
   'env:vagrant':
     - match: grain
-    - stage-dev
+    - stage_dev
   'env:production':
     - match: grain
-    - stage-prod
+    - stage_prod
