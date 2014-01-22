@@ -9,7 +9,7 @@
 
 post-install-settings:
   cmd.run:
-    - name: php {{ stage_root }}/install-post.php
+    - name: php {{ stage_root }}install-post.php
     - cwd: {{ web_root }}
     - require:
       - git: magento
