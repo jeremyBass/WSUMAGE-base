@@ -10,7 +10,7 @@
 
 {{ web_root }}/staging:
   cmd.run:
-    - name: cp {{ stage_root }} {{ web_root }}staging
+    - name: mkdir {{ web_root }}staging | cp {{ stage_root }}* {{ web_root }}staging
     - user: root
 
 

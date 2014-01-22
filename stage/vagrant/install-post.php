@@ -16,7 +16,7 @@ $argv = $_SERVER['argv'];
 
 //exit();die();
 //set up the store instance
-require_once "../app/Mage.php";
+require_once "app/Mage.php";
 umask(0);
 Mage::app();
 Mage::app()->getTranslator()->init('frontend');
@@ -43,7 +43,7 @@ $writeConnection = $resource->getConnection('core_write');
 error_reporting ( E_ALL & ~ E_NOTICE );
  
 $cDat = new Mage_Core_Model_Config();
-$settingsarray = Mage::helper('storeutilities/utilities')->csv_to_array('../scripts/magento/settings.config');
+$settingsarray = Mage::helper('storeutilities/utilities')->csv_to_array('staging/settings.config');
 foreach($settingsarray as $item){
     $val =  $item['value']=="NULL"?NULL:$item['value'];
     $cDat->saveConfig($item['path'], $val, 'default', 0);
@@ -93,7 +93,7 @@ Mage::helper('storeutilities/utilities')->make_store("Tech store root",
 
 
 
-include_once('sample-events.php');
+include_once('staging/sample-events.php');
 
 // let us refresh the cache
 try {
