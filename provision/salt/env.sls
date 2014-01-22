@@ -18,6 +18,12 @@ php-{{ env }}:
   service.running:
     - name: php-fpm
 
+nginx-{{ env }}:
+  service.running:
+    - name: nginx
+
+
+
 
 # Setup the MySQL requirements for WSUMAGE-base
 ###########################################################
@@ -58,12 +64,37 @@ memcached-stopped:
     - group: root
     - mode: 644
 
+# move the apps nginx rules to the site-enabled
+{{ web_root }}maps/nginx-mapping.conf:
+  file.managed:
+    - source: salt://config/nginx/maps/nginx-mapping.conf
+    - user: www-data
+    - group: www-data
+    - mode: 664
+
+restart-nginx-{{ env }}:
+  cmd.run:
+    - name: sudo service nginx restart
+    - cwd: /
+    - require:
+      - service: nginx-{{ env }}
+
 /var/www/store.wsu.edu/html:
     file.directory:
     - user: www-data
     - group: www-data
     - dir_mode: 775
     - file_mode: 664
+
+#magento base
+magento:
+  git.latest:
+    - name: git://github.com/jeremyBass/magento-mirror.git
+    - rev: 1.8.1.0
+    - target: {{ web_root }}
+    - force: True
+    - unless: cd {{ web_root }}app/code/core/Mage/Admin/data/admin_setup
+
 
 #Modgit for magento modules
 modgit:
@@ -104,7 +135,6 @@ modgit_dryrun:
   cmd.run:
     - name: modgit add -n Storeutilities https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git 2>/dev/null | grep -qi "error" && echo "name=modgit_dryrun result=False changed=False comment=failed" || echo "name=modgit_dryrun  result=True changed=True comment=passed"
     - cwd: {{ web_root }}
-    - unless: cd {{ web_root }}.modgit
     - user: root
     - stateful: True
     - require:
