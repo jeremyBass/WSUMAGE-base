@@ -10,13 +10,9 @@ NOTE that this requires
 	:: fastsimpleimport
 */
 
-
-
 //just as a guide, no real purpose
 echo getcwd() . " (working from)\n";
 $argv = $_SERVER['argv'];
-
-parse_str($argv[2], $output);
 
 //exit();die();
 //set up the store instance
