@@ -65,7 +65,7 @@ memcached-stopped:
     - mode: 644
 
 # move the apps nginx rules to the site-enabled
-{{ web_root }}/maps/nginx-mapping.conf:
+{{ web_root }}maps/nginx-mapping.conf:
   file.managed:
     - source: salt://config/nginx/maps/nginx-mapping.conf
     - user: root
