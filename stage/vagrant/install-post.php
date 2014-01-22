@@ -1,4 +1,5 @@
 <?php
+ob_start();
 
 //note this is all just free wheel atm and needs to be refactored big time.
 //just saying
@@ -131,4 +132,5 @@ try {
     die("[ERROR:" . $e->getMessage() . "]");
 }
 
-
+$output = ob_get_clean();
+echo "name=post-install-settings result=True changed=True comment='$output'";
