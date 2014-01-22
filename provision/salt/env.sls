@@ -68,9 +68,9 @@ memcached-stopped:
 {{ web_root }}maps/nginx-mapping.conf:
   file.managed:
     - source: salt://config/nginx/maps/nginx-mapping.conf
-    - user: root
-    - group: root
-    - mode: 644
+    - user: www-data
+    - group: www-data
+    - mode: 664
 
 restart-nginx-{{ env }}:
   cmd.run:
