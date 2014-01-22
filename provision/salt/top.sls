@@ -7,6 +7,7 @@ store.wsu.edu:
     - extensions
   'env:vagrant':
     - match: grain
+    - settings_dev
     - stage_dev
   'env:production':
     - match: grain
