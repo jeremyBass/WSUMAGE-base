@@ -1,5 +1,5 @@
 store.wsu.edu:
-  store.wsu.edu:
+  '*':
     - project_manager
     - env
     - sample-data
