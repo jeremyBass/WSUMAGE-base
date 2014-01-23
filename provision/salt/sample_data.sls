@@ -20,7 +20,7 @@ install-sample-date:
   cmd.run:
     - name: mysql -h {{ magento['db_host'] }} -u {{ magento['db_user'] }} -p{{ magento['db_pass'] }} {{ magento['db_name'] }} < sample-data.sql
     - cwd: {{ web_root }}
-    - onlyif:  -f {{ web_root }}sample-data.php
+    - onlyif:  -f {{ web_root }}sample-data.sql
     - require:
       - cmd: download-sampledata
 
