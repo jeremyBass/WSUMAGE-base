@@ -5,7 +5,7 @@ extensions:
     name: WSUMAGE-store-utilities
     repo_owner: washingtonstateuniversity
     branch: master
-    tag: #note when the first acceptable tag is done fill here.  etc on other blanks below
+    tag: v0.1.0-beta.1
   networksecurities:
     name: WSUMAGE-networksecurities
     repo_owner: washingtonstateuniversity
