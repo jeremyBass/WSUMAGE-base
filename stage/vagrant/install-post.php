@@ -67,21 +67,19 @@ Mage::helper('storeutilities/utilities')->make_store("Event store root",
 				'events.store.mage.dev',
 				-1
               );
-
-
-Mage::helper('storeutilities/utilities')->make_store("Student store root",
-                array('code'=>'studentstore','name'=>'Student store'),
-                array('name'=>'Student Store'),
-                array('code'=>'studentstore','name'=>'base default veiw'),
-				'student.store.mage.dev',
-				10
-              );
 Mage::helper('storeutilities/utilities')->make_store("General store root",
                 array('code'=>'generalstore','name'=>'General store'),
                 array('name'=>'General Store'),
                 array('code'=>'generalstore','name'=>'base default veiw'),
 				'general.store.mage.dev',
 				18
+              );
+Mage::helper('storeutilities/utilities')->make_store("Student store root",
+                array('code'=>'studentstore','name'=>'Student store'),
+                array('name'=>'Student Store'),
+                array('code'=>'studentstore','name'=>'base default veiw'),
+				'student.store.mage.dev',
+				10
               );
 Mage::helper('storeutilities/utilities')->make_store("Tech store root",
                 array('code'=>'techstore','name'=>'Tech store'),
