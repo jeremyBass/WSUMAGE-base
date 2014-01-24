@@ -89,13 +89,13 @@ $SU_Helper = Mage::helper('storeutilities/utilities');
 
 $newRootCat = $SU_Helper->make_category("Event store root");
 if($newRootCat>0){
+    
     $siteId = $SU_Helper->make_website(array('code'=>$websiteCodes,'name'=>'Event store'));
     $storeGroupId = $SU_Helper->make_storeGroup(array('name'=>'Events Store'),'events.store.mage.dev',$siteId,$newRootCat);
-    $storeId = $SU_Helper->make_store($newRootCat,
+    $storeId = $SU_Helper->make_store(
         $siteId,
         $storeGroupId,
         array('code'=>$storeCodes,'name'=>'base default veiw'),
-        -1
       );
     $SU_Helper->moveStoreProducts($siteId,$storeId,$newRootCat);
     $SU_Helper->createCmsPage($storeid,array(
@@ -109,13 +109,13 @@ if($newRootCat>0){
 }
 $newRootCat = $SU_Helper->make_category("General store root");
 if($newRootCat>0){
+    $SU_Helper->reparentCategory($newRootCat,18);
     $siteId = $SU_Helper->make_website(array('code'=>'generalstore','name'=>'General store'));
     $storeGroupId = $SU_Helper->make_storeGroup(array('name'=>'General Store'),'general.store.mage.dev',$siteId,$newRootCat);
-    $storeId = $SU_Helper->make_store($newRootCat,
+    $storeId = $SU_Helper->make_store(
         $siteId,
         $storeGroupId,
         array('code'=>'generalstore','name'=>'base default veiw'),
-        18
       );
     $SU_Helper->moveStoreProducts($siteId,$storeId,$newRootCat);
     $SU_Helper->createCmsPage($storeid,array(
@@ -129,13 +129,13 @@ if($newRootCat>0){
 }
 $newRootCat = $SU_Helper->make_category("Student store root");
 if($newRootCat>0){
+    $SU_Helper->reparentCategory($newRootCat,10);
     $siteId = $SU_Helper->make_website(array('code'=>'studentstore','name'=>'Student store'));
     $storeGroupId = $SU_Helper->make_storeGroup(array('name'=>'Student Store'),'student.store.mage.dev',$siteId,$newRootCat);
-    $storeId = $SU_Helper->make_store($newRootCat,
+    $storeId = $SU_Helper->make_store(
         $siteId,
         $storeGroupId,
         array('code'=>'studentstore','name'=>'base default veiw'),
-        10
       );
     $SU_Helper->moveStoreProducts($siteId,$storeId,$newRootCat);
     $SU_Helper->createCmsPage($storeid,array(
@@ -149,13 +149,13 @@ if($newRootCat>0){
 }
 $newRootCat = $SU_Helper->make_category("Tech store root");
 if($newRootCat>0){
+    $SU_Helper->reparentCategory($newRootCat,13);
     $siteId = $SU_Helper->make_website(array('code'=>'techstore','name'=>'Tech store'));
     $storeGroupId = $SU_Helper->make_storeGroup(array('name'=>'Tech Store'),'tech.store.mage.dev',$siteId,$newRootCat);
-    $storeId = $SU_Helper->make_store($newRootCat,
+    $storeId = $SU_Helper->make_store(
         $siteId,
         $storeGroupId,
         array('code'=>'techstore','name'=>'base default veiw'),
-        13
       );
     $SU_Helper->moveStoreProducts($siteId,$storeId,$newRootCat);
     $SU_Helper->createCmsPage($storeid,array(
