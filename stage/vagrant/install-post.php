@@ -97,6 +97,7 @@ if($newRootCat>0){
         array('code'=>$storeCodes,'name'=>'base default veiw'),
         -1
       );
+    $SU_Helper->moveStoreProducts($siteId,$storeId,$newRootCat);
     $SU_Helper->createCmsPage($storeid,array(
         'title' => 'Event store',
         'identifier' => 'home',
@@ -116,6 +117,7 @@ if($newRootCat>0){
         array('code'=>'generalstore','name'=>'base default veiw'),
         18
       );
+    $SU_Helper->moveStoreProducts($siteId,$storeId,$newRootCat);
     $SU_Helper->createCmsPage($storeid,array(
         'title' => 'General store',
         'identifier' => 'home',
@@ -135,6 +137,7 @@ if($newRootCat>0){
         array('code'=>'studentstore','name'=>'base default veiw'),
         10
       );
+    $SU_Helper->moveStoreProducts($siteId,$storeId,$newRootCat);
     $SU_Helper->createCmsPage($storeid,array(
         'title' => 'Student store',
         'identifier' => 'home',
@@ -154,6 +157,7 @@ if($newRootCat>0){
         array('code'=>'techstore','name'=>'base default veiw'),
         13
       );
+    $SU_Helper->moveStoreProducts($siteId,$storeId,$newRootCat);
     $SU_Helper->createCmsPage($storeid,array(
         'title' => 'Tech store',
         'identifier' => 'home',
