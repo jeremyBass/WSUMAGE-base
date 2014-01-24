@@ -68,6 +68,7 @@ memcached-stopped:
 {{ web_root }}maps/nginx-mapping.conf:
   file.managed:
     - source: salt://config/nginx/maps/nginx-mapping.conf
+    - makedirs: True
     - user: www-data
     - group: www-data
     - mode: 664
