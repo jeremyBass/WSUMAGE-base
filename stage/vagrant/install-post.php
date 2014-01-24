@@ -67,44 +67,44 @@ $SU_Helper = Mage::helper('storeutilities/utilities');
 $newRootCat = $SU_Helper->make_category("Event store root");
 if($newRootCat>0){
     $siteId = $SU_Helper->make_website(array('code'=>$websiteCodes,'name'=>'Event store'));
+    $storeGroupId = $SU_Helper->make_storeGroup(array('name'=>'Events Store'),'events.store.mage.dev',$siteId,$newRootCat);
     $SU_Helper->make_store($newRootCat,
         $siteId,
-        array('name'=>'Events Store'),
+        $storeGroupId,
         array('code'=>$storeCodes,'name'=>'base default veiw'),
-        'events.store.mage.dev',
         -1
       );
 }
 $newRootCat = $SU_Helper->make_category("General store root");
 if($newRootCat>0){
     $siteId = $SU_Helper->make_website(array('code'=>'generalstore','name'=>'General store'));
+    $storeGroupId = $SU_Helper->make_storeGroup(array('name'=>'General Store'),'general.store.mage.dev',$siteId,$newRootCat);
     $SU_Helper->make_store($newRootCat,
         $siteId,
-        array('name'=>'General Store'),
+        $storeGroupId,
         array('code'=>'generalstore','name'=>'base default veiw'),
-        'general.store.mage.dev',
         18
       );
 }
 $newRootCat = $SU_Helper->make_category("Student store root");
 if($newRootCat>0){
     $siteId = $SU_Helper->make_website(array('code'=>'studentstore','name'=>'Student store'));
+    $storeGroupId = $SU_Helper->make_storeGroup(array('name'=>'Student Store'),'student.store.mage.dev',$siteId,$newRootCat);
     $SU_Helper->make_store($newRootCat,
         $siteId,
-        array('name'=>'Student Store'),
+        $storeGroupId,
         array('code'=>'studentstore','name'=>'base default veiw'),
-        'student.store.mage.dev',
         10
       );
 }
 $newRootCat = $SU_Helper->make_category("Tech store root");
 if($newRootCat>0){
     $siteId = $SU_Helper->make_website(array('code'=>'techstore','name'=>'Tech store'));
+    $storeGroupId = $SU_Helper->make_storeGroup(array('name'=>'Tech Store'),'tech.store.mage.dev',$siteId,$newRootCat);
     $SU_Helper->make_store($newRootCat,
         $siteId,
-        array('name'=>'Tech Store'),
+        $storeGroupId,
         array('code'=>'techstore','name'=>'base default veiw'),
-        'tech.store.mage.dev',
         13
       );
 }
