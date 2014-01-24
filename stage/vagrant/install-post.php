@@ -60,35 +60,47 @@ $storeCodes = 'eventstore';//array('eventstore');
 
 echo $websiteCodes.'::websiteCodes'."\n";
 echo $storeCodes.'::storeCodes'."\n";
-Mage::helper('storeutilities/utilities')->make_store("Event store root",
+
+$newRootCat = $this->make_category("Event store root");
+if($newRootCat>0){
+    Mage::helper('storeutilities/utilities')->make_store($newRootCat,
                 array('code'=>$websiteCodes,'name'=>'Event store'),
                 array('name'=>'Events Store'),
                 array('code'=>$storeCodes,'name'=>'base default veiw'),
 				'events.store.mage.dev',
 				-1
               );
-Mage::helper('storeutilities/utilities')->make_store("General store root",
+}
+$newRootCat = $this->make_category("General store root");
+if($newRootCat>0){
+    Mage::helper('storeutilities/utilities')->make_store($newRootCat,
                 array('code'=>'generalstore','name'=>'General store'),
                 array('name'=>'General Store'),
                 array('code'=>'generalstore','name'=>'base default veiw'),
 				'general.store.mage.dev',
 				18
               );
-Mage::helper('storeutilities/utilities')->make_store("Student store root",
+}
+$newRootCat = $this->make_category("Student store root");
+if($newRootCat>0){
+    Mage::helper('storeutilities/utilities')->make_store($newRootCat,
                 array('code'=>'studentstore','name'=>'Student store'),
                 array('name'=>'Student Store'),
                 array('code'=>'studentstore','name'=>'base default veiw'),
 				'student.store.mage.dev',
 				10
               );
-Mage::helper('storeutilities/utilities')->make_store("Tech store root",
+}
+$newRootCat = $this->make_category("Tech store root");
+if($newRootCat>0){
+    Mage::helper('storeutilities/utilities')->make_store($newRootCat,
                 array('code'=>'techstore','name'=>'Tech store'),
                 array('name'=>'Tech Store'),
                 array('code'=>'techstore','name'=>'base default veiw'),
 				'tech.store.mage.dev',
 				13
               );
-
+}
 
 
 
