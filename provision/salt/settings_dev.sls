@@ -14,12 +14,20 @@
     - user: root
 
 
-post-install-settings:
+#post-install-settings:
+#  cmd.run:
+#    - name: php staging/install-post.php
+#    - cwd: {{ web_root }}
+#    - require:
+#      - git: magento
+#      - service: mysqld-{{ env }}
+#      - service: php-{{ env }}
+#      - cmd: magneto-install
+
+
+final-restart-nginx-{{ env }}:
   cmd.run:
-    - name: php staging/install-post.php
-    - cwd: {{ web_root }}
+    - name: sudo service nginx restart
+    - cwd: /
     - require:
-      - git: magento
-      - service: mysqld-{{ env }}
-      - service: php-{{ env }}
-      - cmd: magneto-install
+      - service: nginx-{{ env }}
