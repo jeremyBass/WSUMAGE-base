@@ -27,7 +27,8 @@
 
 final-restart-nginx-{{ env }}:
   cmd.run:
-    - name: sudo service nginx restart
+    - name: service nginx restart
+    - user: root
     - cwd: /
     - require:
       - service: nginx-{{ env }}

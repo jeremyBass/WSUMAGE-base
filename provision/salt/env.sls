@@ -97,14 +97,14 @@ magento:
 {{ web_root }}maps/nginx-mapping.conf:
   file.managed:
     - source: salt://config/nginx/maps/nginx-mapping.conf
-    - makedirs: True
     - user: www-data
     - group: www-data
     - mode: 644
 
 restart-nginx-{{ env }}:
   cmd.run:
-    - name: sudo service nginx restart
+    - name: service nginx restart
+    - user: root
     - cwd: /
     - require:
       - service: nginx-{{ env }}
