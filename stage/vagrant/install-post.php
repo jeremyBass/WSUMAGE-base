@@ -53,14 +53,6 @@ $cDat->saveConfig('admin/url/custom', 'http://store.admin.mage.dev/', 'default',
  
 echo "Applying the default multi-store setup\n";
 
-
-$websiteCodes = 'eventstore';//array('eventstore');
-$storeCodes = 'eventstore';//array('eventstore');
-/* */
-
-echo $websiteCodes.'::websiteCodes'."\n";
-echo $storeCodes.'::storeCodes'."\n";
-
 $defaultCmsPage = '<div class="col-left side-col">
 	<p class="home-callout"><a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/ph_callout_left_top.jpg"}}" alt="" border="0" /> </a></p>
 	<p class="home-callout"><img src="{{storemedia url="/ph_callout_left_rebel.jpg"}}" alt="" border="0" /></p>
@@ -72,32 +64,7 @@ $defaultCmsPage = '<div class="col-left side-col">
 	<h1>Sites in the center</h1>
 	<p>{{block type="catalog/product" stores_per="5" products_per="2" panles_per="3" template="custom_block/site_list.phtml"}}</p>';
 
-
 $SU_Helper = Mage::helper('storeutilities/utilities');
-
-
-$newRootCat = $SU_Helper->make_category("Event store root");
-if($newRootCat>0){
-    $siteId = $SU_Helper->make_website(array('code'=>$websiteCodes,'name'=>'Event store'));
-    if( $siteId>0 ){
-        $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'Events Store'), 'events.store.mage.dev', $siteId, $newRootCat );
-        if( $storeGroupId>0 ){
-            $storeId = $SU_Helper->make_store( $siteId, $storeGroupId, array('code'=>$storeCodes,'name'=>'base default veiw') );
-            if( $storeId>0 ){
-                $SU_Helper->moveStoreProducts( $siteId, $storeId, $newRootCat );
-                $SU_Helper->createCmsPage($storeId,array(
-                    'title' => 'Event store',
-                    'identifier' => 'home',
-                    'content_heading' => '',
-                    'is_active' => 1,
-                    'stores' => array($storeId),//available for all store views
-                    'content' => $defaultCmsPage
-                ));
-            }echo "make_store ended in {$storeId}\n";
-        }echo "make_storeGroup ended in {$storeGroupId}\n";
-    }echo "make_website ended in {$siteId}\n";
-}echo "make_category ended in {$newRootCat}\n";
-echo "-----------------------------------------\n";
 
 $newRootCat = $SU_Helper->make_category("General store root");
 if($newRootCat>0){
@@ -172,7 +139,35 @@ if($newRootCat>0){
 echo "-----------------------------------------\n";
 
 
-include_once('staging/sample-events.php');
+$websiteCodes = 'eventstore';//array('eventstore');
+$storeCodes = 'eventstore';//array('eventstore');
+echo $websiteCodes.'::websiteCodes'."\n";
+echo $storeCodes.'::storeCodes'."\n";
+
+$newRootCat = $SU_Helper->make_category("Event store root");
+if($newRootCat>0){
+    $siteId = $SU_Helper->make_website(array('code'=>$websiteCodes,'name'=>'Event store'));
+    if( $siteId>0 ){
+        $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'Events Store'), 'events.store.mage.dev', $siteId, $newRootCat );
+        if( $storeGroupId>0 ){
+            $storeId = $SU_Helper->make_store( $siteId, $storeGroupId, array('code'=>$storeCodes,'name'=>'base default veiw') );
+            if( $storeId>0 ){
+                $SU_Helper->moveStoreProducts( $siteId, $storeId, $newRootCat );
+                $SU_Helper->createCmsPage($storeId,array(
+                    'title' => 'Event store',
+                    'identifier' => 'home',
+                    'content_heading' => '',
+                    'is_active' => 1,
+                    'stores' => array($storeId),//available for all store views
+                    'content' => $defaultCmsPage
+                ));
+                include_once('staging/sample-events.php');
+            }echo "make_store ended in {$storeId}\n";
+        }echo "make_storeGroup ended in {$storeGroupId}\n";
+    }echo "make_website ended in {$siteId}\n";
+}echo "make_category ended in {$newRootCat}\n";
+echo "-----------------------------------------\n";
+
 
 // let us refresh the cache
 try {
