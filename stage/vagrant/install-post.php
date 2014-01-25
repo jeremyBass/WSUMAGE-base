@@ -93,10 +93,11 @@ if($newRootCat>0){
                     'stores' => array($storeId),//available for all store views
                     'content' => $defaultCmsPage
                 ));
-            }
-        }
-    }
-}
+            }echo "make_store ended in {$storeId}\n";
+        }echo "make_storeGroup ended in {$storeGroupId}\n";
+    }echo "make_website ended in {$siteId}\n";
+}echo "make_category ended in {$newRootCat}\n";
+echo "-----------------------------------------\n";
 
 $newRootCat = $SU_Helper->make_category("General store root");
 if($newRootCat>0){
@@ -116,10 +117,12 @@ if($newRootCat>0){
                     'stores' => array($storeId),//available for all store views
                     'content' => $defaultCmsPage
                 ));
-            }
-        }
-    }
-}
+            }echo "make_store ended in {$storeId}\n";
+        }echo "make_storeGroup ended in {$storeGroupId}\n";
+    }echo "make_website ended in {$siteId}\n";
+}echo "make_category ended in {$newRootCat}\n";
+echo "-----------------------------------------\n";
+
 $newRootCat = $SU_Helper->make_category("Student store root");
 if($newRootCat>0){
     $SU_Helper->reparentCategory($newRootCat,10);
@@ -138,10 +141,12 @@ if($newRootCat>0){
                     'stores' => array($storeId),//available for all store views
                     'content' => $defaultCmsPage
                 ));
-            }
-        }
-    }
-}
+            }echo "make_store ended in {$storeId}\n";
+        }echo "make_storeGroup ended in {$storeGroupId}\n";
+    }echo "make_website ended in {$siteId}\n";
+}echo "make_category ended in {$newRootCat}\n";
+echo "-----------------------------------------\n";
+
 $newRootCat = $SU_Helper->make_category("Tech store root");
 if($newRootCat>0){
     $SU_Helper->reparentCategory($newRootCat,13);
@@ -160,10 +165,12 @@ if($newRootCat>0){
                     'stores' => array($storeId),//available for all store views
                     'content' => $defaultCmsPage
                 ));
-            }
-        }
-    }
-}
+            }echo "make_store ended in {$storeId}\n";
+        }echo "make_storeGroup ended in {$storeGroupId}\n";
+    }echo "make_website ended in {$siteId}\n";
+}echo "make_category ended in {$newRootCat}\n";
+echo "-----------------------------------------\n";
+
 
 include_once('staging/sample-events.php');
 
