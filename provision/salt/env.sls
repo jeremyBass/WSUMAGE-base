@@ -56,31 +56,11 @@ memcached-stopped:
     - name: service memcached stop
     - cwd: /
 
-# move the apps nginx rules to the site-enabled
-/etc/nginx/sites-enabled/store.mage.dev.conf:
-  file.managed:
-    - source: salt://config/nginx/store.mage.dev.conf
-    - user: root
-    - group: root
-    - mode: 644
 
-# move the apps nginx rules to the site-enabled
-{{ web_root }}maps/nginx-mapping.conf:
-  file.managed:
-    - source: salt://config/nginx/maps/nginx-mapping.conf
-    - makedirs: True
-    - user: www-data
-    - group: www-data
-    - mode: 664
 
-restart-nginx-{{ env }}:
-  cmd.run:
-    - name: sudo service nginx restart
-    - cwd: /
-    - require:
-      - service: nginx-{{ env }}
 
-/var/www/store.wsu.edu/html:
+
+{{ web_root }}:
     file.directory:
     - user: www-data
     - group: www-data
@@ -95,6 +75,44 @@ magento:
     - target: {{ web_root }}
     - force: True
     - unless: cd {{ web_root }}app/code/core/Mage/Admin/data/admin_setup
+
+
+
+# move the apps nginx rules to the site-enabled
+/etc/nginx/sites-enabled/store.mage.dev.conf:
+  file.managed:
+    - source: salt://config/nginx/store.mage.dev.conf
+    - user: root
+    - group: root
+    - mode: 644
+    
+{{ web_root }}maps/:
+    file.directory:
+    - user: www-data
+    - group: www-data
+    - dir_mode: 775
+    - file_mode: 664
+
+# move the apps nginx rules to the site-enabled
+{{ web_root }}maps/nginx-mapping.conf:
+  file.managed:
+    - source: salt://config/nginx/maps/nginx-mapping.conf
+    - user: www-data
+    - group: www-data
+    - mode: 644
+
+restart-nginx-{{ env }}:
+  cmd.run:
+    - name: service nginx restart
+    - user: root
+    - cwd: /
+    - require:
+      - service: nginx-{{ env }}
+
+
+
+
+
 
 
 #Modgit for magento modules
