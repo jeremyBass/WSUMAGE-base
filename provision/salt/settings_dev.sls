@@ -5,12 +5,12 @@
 {%- set magento_version = magento['version'] %} 
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
-{%- set stage_root = "salt://stage/" + env + "/" %} 
+{%- set stage_root = "salt://stage/vagrant/" %} 
 
 
 {{ web_root }}/staging:
   cmd.run:
-    - name: mkdir {{ web_root }}staging | cp {{ stage_root }}* {{ web_root }}staging
+    - name: mkdir {{ web_root }}staging | cp /var/www/{{ project['target'] }}/provision/salt/stage/vagrant/* {{ web_root }}staging
     - user: root
 
 # move the apps nginx rules to the site-enabled
@@ -20,6 +20,7 @@
     - user: root
     - group: root
     - mode: 644
+    - replace: True
 
 post-install-settings:
   cmd.run:

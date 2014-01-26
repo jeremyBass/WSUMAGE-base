@@ -5,7 +5,7 @@
 {%- set magento_version = magento['version'] %} 
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
-{%- set stage_root = "salt://stage/" + env + "/" %}
+{%- set stage_root = "salt://stage/vagrant/" %}
 
 
 # Create service checks
@@ -99,7 +99,7 @@ magento:
     - source: salt://config/nginx/maps/nginx-mapping.conf
     - user: www-data
     - group: www-data
-    - mode: 644
+    - mode: 744
 
 restart-nginx-{{ env }}:
   cmd.run:
