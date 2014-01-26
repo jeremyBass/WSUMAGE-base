@@ -9,6 +9,16 @@
 }
 
 
+
+
+.markdown-body pre > code {
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    border: none;
+    background: transparent;
+}
+
 /* would want to move this out */	
 .markdown-body code, .markdown-body tt {
 	margin: 0 2px;
@@ -17,12 +27,4 @@
 	background-color: #f8f8f8;
 	border-radius: 3px;
 	font-size: 0.7em;
-}
-
-.markdown-body pre > code {
-    margin: 0;
-    padding: 0;
-    white-space: pre;
-    border: none;
-    background: transparent;
 }
