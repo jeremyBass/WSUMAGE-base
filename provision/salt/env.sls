@@ -5,7 +5,7 @@
 {%- set magento_version = magento['version'] %} 
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
-
+{%- set stage_root = "salt://stage/" + env + "/" %}
 
 
 # Create service checks

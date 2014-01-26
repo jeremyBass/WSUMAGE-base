@@ -5,7 +5,7 @@
 {%- set magento_version = magento['version'] %} 
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
-{%- set stage_root = "/var/www/" + project['target'] + "/stage/vagrant/" %} 
+{%- set stage_root = "salt://stage/" + env + "/" %} 
 
 
 {{ web_root }}/staging:
