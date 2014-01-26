@@ -13,6 +13,13 @@
     - name: mkdir {{ web_root }}staging | cp {{ stage_root }}* {{ web_root }}staging
     - user: root
 
+# move the apps nginx rules to the site-enabled
+{{ web_root }}index.php:
+  file.managed:
+    - source: {{ stage_root }}index.php
+    - user: root
+    - group: root
+    - mode: 644
 
 post-install-settings:
   cmd.run:
