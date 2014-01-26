@@ -57,7 +57,7 @@ extensions:
     branch: master
     tag:     
   webmastertools:
-    name: eventTickets
+    name: webmastertools
     repo_owner: jeremyBass
     branch: master
     tag:             
