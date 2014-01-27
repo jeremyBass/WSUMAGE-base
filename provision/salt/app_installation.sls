@@ -5,8 +5,9 @@
 {%- set magento_version = magento['version'] %} 
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
+{%- set stage_root = "salt://stage/vagrant/" %}
 
-
+    
 PEAR-registry:
   cmd.run:
     - name: ./mage mage-setup .
@@ -32,8 +33,21 @@ magneto-install:
       - service: mysqld-{{ env }}
       - service: php-{{ env }}
 
+{{ web_root }}/staging:
+  cmd.run:
+    - name: mkdir {{ web_root }}staging | cp /var/www/{{ project['target'] }}/provision/salt/stage/vagrant/* {{ web_root }}staging
+    - user: root
 
-
+#this needs to be done in a better way
+run-patchs-2619:
+  cmd.run:
+    - name: patch -p0 < {{ web_root }}staging/patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.patch
+    - user: root
+    
+run-patchs-2747:
+  cmd.run:
+    - name: patch -p0 < {{ web_root }}staging/patches/PATCH_SUPEE-2747_EE_1.13.1.0_v1.patch
+    - user: root
 
 
 
