@@ -38,7 +38,7 @@ final-restart-nginx-{{ env }}:
 
 reset-magento:
   cmd.run:
-    - name: rm -rf {{ web_root }}var/cache/* | php "{{ web_root }}index.php" 2>/dev/null
+    - name: rm -rf {{ web_root }}var/cache/* | rm -rf {{ web_root }}media/js/* | rm -rf {{ web_root }}media/css/* | php "{{ web_root }}index.php" 2>/dev/null
     - cwd: {{ web_root }}
     - user: root
     - require:
@@ -46,5 +46,4 @@ reset-magento:
       - service: mysqld-{{ env }}
       - service: php-{{ env }}
       - cmd: magneto-install
-      - cmd: base-ext-{{ ext_key }}
 
