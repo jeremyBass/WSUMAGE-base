@@ -39,9 +39,13 @@ magneto-set-connect-prefs:
     - cwd: {{ web_root }}
     - require:
       - git: magento
-      
-#echo "importing WSU favicon"
-#wget -q http://images.wsu.edu/favicon.ico -O favicon.ico
+ 
+insert-wsu-brand-favicon:
+  cmd.run:
+    - name: wget -q http://images.wsu.edu/favicon.ico -O favicon.ico
+    - cwd: {{ web_root }}
+    - require:
+      - git: magento
 
 {{ web_root }}/staging:
   cmd.run:
