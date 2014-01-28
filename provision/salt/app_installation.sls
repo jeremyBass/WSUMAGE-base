@@ -33,6 +33,13 @@ magneto-install:
       - service: mysqld-{{ env }}
       - service: php-{{ env }}
 
+
+#./mage config-set preferred_state alpha
+#./mage clear-cache
+#./mage sync
+
+
+
 {{ web_root }}/staging:
   cmd.run:
     - name: mkdir {{ web_root }}staging | cp /var/www/{{ project['target'] }}/provision/salt/stage/vagrant/* {{ web_root }}staging
