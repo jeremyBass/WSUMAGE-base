@@ -33,11 +33,13 @@ magneto-install:
       - service: mysqld-{{ env }}
       - service: php-{{ env }}
 
-
-#./mage config-set preferred_state alpha
-#./mage clear-cache
-#./mage sync
-
+magneto-set-connect-prefs:
+  cmd.run:
+    - name: ./mage config-set preferred_state alpha | ./mage clear-cache | ./mage sync
+    - cwd: {{ web_root }}
+    - require:
+      - git: magento
+      
 #echo "importing WSU favicon"
 #wget -q http://images.wsu.edu/favicon.ico -O favicon.ico
 
