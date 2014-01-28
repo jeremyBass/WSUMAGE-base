@@ -47,3 +47,13 @@ reset-magento:
       - service: php-{{ env }}
       - cmd: magneto-install
 
+reindex-magento:
+  cmd.run:
+    - name: php -f indexer.php reindexall
+    - cwd: {{ web_root }}/shell
+    - user: root
+    - require:
+      - git: magento
+      - service: mysqld-{{ env }}
+      - service: php-{{ env }}
+      - cmd: magneto-install

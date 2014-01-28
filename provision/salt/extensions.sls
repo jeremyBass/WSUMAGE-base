@@ -7,6 +7,11 @@
 {%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
 {%- set stage_root = "salt://stage/vagrant/" %}
 
+#this is how to get somethign from the connect download
+#./mage download community Motech_DefaultAttributeSet
+
+
+
 # Start the extension intsalls
 {% for ext_key, ext_val in magento_extensions.iteritems() %}
 base-ext-{{ ext_key }}:
