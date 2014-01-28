@@ -11,14 +11,18 @@
 
 remove-PaypalUk:
   cmd.run:
-    - name: rm -app/code/core/Mage/PaypalUk/*
+    - name: rm -rf app/code/core/Mage/PaypalUk/*
     - user: root
     - cwd: {{ web_root }}
 
-
+remove-Mage_Authorizenet:
+  cmd.run:
+    - name: rm -rf app/code/core/Mage/Authorizenet/* app/etc/modules/Mage_Authorizenet.xml
+    - user: root
+    - cwd: {{ web_root }}
 
 #rm -rf 
-#rm -rf app/code/core/Mage/Authorizenet/* app/etc/modules/Mage_Authorizenet.xml
+#rm -rf 
 #rm -rf app/code/core/community/Phoenix/* app/etc/modules/Phoenix_Moneybookers.xml
         
 #come back on this one.. unsure   
