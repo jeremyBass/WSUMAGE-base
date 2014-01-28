@@ -18,5 +18,10 @@ clear-caches:
 #rm -rf STATUS.txt LICENSE.html LICENSE_AFL.txt  RELEASE_NOTES.txt
  
  
-
+#rm -rf app/code/core/Mage/PaypalUk/*
+#rm -rf app/code/core/Mage/Authorizenet/* app/etc/modules/Mage_Authorizenet.xml
+#rm -rf app/code/core/community/Phoenix/* app/etc/modules/Phoenix_Moneybookers.xml
         
+#come back on this one.. unsure   
+#rm -rf app/code/core/Mage/Paypal/* app/code/core/Mage/Paypal/*
+#rm -rf app/design/adminhtml/default/default/template/paypal/*
