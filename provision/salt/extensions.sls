@@ -7,6 +7,33 @@
 {%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
 {%- set stage_root = "salt://stage/vagrant/" %}
 
+
+
+remove-PaypalUk:
+  cmd.run:
+    - name: rm -rf app/code/core/Mage/PaypalUk/*
+    - user: root
+    - cwd: {{ web_root }}
+
+remove-Mage_Authorizenet:
+  cmd.run:
+    - name: rm -rf app/code/core/Mage/Authorizenet/* app/etc/modules/Mage_Authorizenet.xml
+    - user: root
+    - cwd: {{ web_root }}
+
+remove-Phoenix_Moneybookers:
+  cmd.run:
+    - name: rm -rf app/code/core/community/Phoenix/* app/etc/modules/Phoenix_Moneybookers.xml
+    - user: root
+    - cwd: {{ web_root }}
+      
+#come back on this one.. unsure   
+#rm -rf app/code/core/Mage/Paypal/* app/code/core/Mage/Paypal/*
+#rm -rf app/design/adminhtml/default/default/template/paypal/*
+
+
+
+
 #this is how to get somethign from the connect download
 #./mage download community Motech_DefaultAttributeSet
 

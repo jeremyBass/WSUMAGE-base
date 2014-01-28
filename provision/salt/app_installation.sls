@@ -33,17 +33,28 @@ magneto-install:
       - service: mysqld-{{ env }}
       - service: php-{{ env }}
 
-
-#./mage config-set preferred_state alpha
-#./mage clear-cache
-#./mage sync
-
-#echo "importing WSU favicon"
-#wget -q http://images.wsu.edu/favicon.ico -O favicon.ico
+magneto-set-connect-prefs:
+  cmd.run:
+    - name: ./mage config-set preferred_state alpha | ./mage clear-cache | ./mage sync
+    - cwd: {{ web_root }}
+    - require:
+      - git: magento
+ 
+insert-wsu-brand-favicon:
+  cmd.run:
+    - name: wget -q http://images.wsu.edu/favicon.ico -O favicon.ico
+    - cwd: {{ web_root }}
+    - require:
+      - git: magento
 
 {{ web_root }}/staging:
   cmd.run:
     - name: mkdir {{ web_root }}staging | cp /var/www/{{ project['target'] }}/provision/salt/stage/vagrant/* {{ web_root }}staging
+    - user: root
+
+{{ web_root }}/staging/patches:
+  cmd.run:
+    - name: cp /var/www/{{ project['target'] }}/provision/salt/stage/vagrant/patches/* {{ web_root }}staging/patches
     - user: root
 
 #this needs to be done in a better way
