@@ -38,7 +38,8 @@ magneto-install:
 #./mage clear-cache
 #./mage sync
 
-
+#echo "importing WSU favicon"
+#wget -q http://images.wsu.edu/favicon.ico -O favicon.ico
 
 {{ web_root }}/staging:
   cmd.run:
