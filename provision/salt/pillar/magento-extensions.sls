@@ -46,16 +46,16 @@ extensions:
     repo_owner: jeremyBass
     branch: master
     tag: 
-  mailing_services:
-    name: mailing_services
-    repo_owner: jeremyBass
-    branch: master
-    tag:     
-  eventTickets:
-    name: eventTickets
-    repo_owner: jeremyBass
-    branch: master
-    tag:     
+#  mailing_services:
+#    name: mailing_services
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag:     
+#  eventTickets:
+#    name: eventTickets
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag:     
   webmastertools:
     name: webmastertools
     repo_owner: jeremyBass
@@ -81,11 +81,11 @@ extensions:
 #    repo_owner: jeremyBass
 #    branch: master
 #    tag:  
-  Aoe_FilePicker:
-    name: Aoe_FilePicker
-    repo_owner: jeremyBass
-    branch: master
-    tag:  
+#  Aoe_FilePicker:
+#    name: Aoe_FilePicker
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag:  
 #  pdf-service:
 #    name: WSUMAGE-pdf-service
 #    repo_owner: jeremyBass
