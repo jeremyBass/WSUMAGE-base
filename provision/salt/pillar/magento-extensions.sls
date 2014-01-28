@@ -51,11 +51,11 @@ extensions:
 #    repo_owner: jeremyBass
 #    branch: master
 #    tag:     
-#  eventTickets:
-#    name: eventTickets
-#    repo_owner: jeremyBass
-#    branch: master
-#    tag:     
+  eventTickets:
+    name: eventTickets
+    repo_owner: jeremyBass
+    branch: master
+    tag:     
   webmastertools:
     name: webmastertools
     repo_owner: jeremyBass
