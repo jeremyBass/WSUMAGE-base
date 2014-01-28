@@ -21,10 +21,12 @@ remove-Mage_Authorizenet:
     - user: root
     - cwd: {{ web_root }}
 
-#rm -rf 
-#rm -rf 
-#rm -rf app/code/core/community/Phoenix/* app/etc/modules/Phoenix_Moneybookers.xml
-        
+remove-Phoenix_Moneybookers:
+  cmd.run:
+    - name: rm -rf app/code/core/community/Phoenix/* app/etc/modules/Phoenix_Moneybookers.xml
+    - user: root
+    - cwd: {{ web_root }}
+      
 #come back on this one.. unsure   
 #rm -rf app/code/core/Mage/Paypal/* app/code/core/Mage/Paypal/*
 #rm -rf app/design/adminhtml/default/default/template/paypal/*
