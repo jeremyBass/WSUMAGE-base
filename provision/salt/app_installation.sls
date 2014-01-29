@@ -39,7 +39,22 @@ magneto-set-connect-prefs:
     - cwd: {{ web_root }}
     - require:
       - git: magento
- 
+
+
+# move the apps nginx rules to the site-enabled
+#{{ web_root }}app/etc/local.xml:
+#  file.managed:
+#    - source: {{ stage_root }}local.xml
+#    - user: root
+#    - tem
+#    - group: root
+#    - mode: 644
+#    - replace: True
+#    - template: jinja
+
+
+
+
 insert-wsu-brand-favicon:
   cmd.run:
     - name: wget -q http://images.wsu.edu/favicon.ico -O favicon.ico
