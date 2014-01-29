@@ -1,8 +1,9 @@
 WSUMAGE-base
 ============
 
-Doc are located here http://washingtonstateuniversity.github.io/WSUMAGE-base/
+The complete documentation is located here http://washingtonstateuniversity.github.io/WSUMAGE-base/
 
+##Quick start
 
 This is a Magento web app repo.  This is loaded in to a server base project such as https://github.com/washingtonstateuniversity/WSU-Web-Serverbase .  This project may be loaded with other web apps as well, but it's all loaded in with the server base.  A web app can't live without the server.  The steps to get this project up is 
 
@@ -11,14 +12,10 @@ This is a Magento web app repo.  This is loaded in to a server base project such
       > `$ git clone git@github.com:washingtonstateuniversity/WSU-Web-Serverbase.git devserver`
       
 1. git clone the web app to the www folder 
-
-      > `$ cd devserver/www`
       
-      > `$ git clone git@github.com:washingtonstateuniversity/WSUMAGE-base.git store.wsu.edu`
+      > `$ git clone git@github.com:washingtonstateuniversity/WSUMAGE-base.git app/store.wsu.edu`
       
-1. get back to the server root and start
-
-      > `$ cd ../`
+1. Start your local environment
       
       > `$ vagrant up`
       
