@@ -1,0 +1,3 @@
+store.wsu.edu:
+  '*':
+    - grains

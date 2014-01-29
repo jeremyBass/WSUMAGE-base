@@ -2,11 +2,10 @@
 ###########################################################
 {%- set project = pillar.get('project') %}
 {%- set magento = pillar.get('magento') %}
-{%- set magento_version = magento['version'] %} 
+{%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
-{%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
-{%- set stage_root = "salt://stage/vagrant/" %} 
-
+{%- set web_root = "/var/app/" + env + "/html/" %}
+{%- set stage_root = "salt://stage/vagrant/" %}
 
 # move the apps nginx rules to the site-enabled
 {{ web_root }}index.php:
