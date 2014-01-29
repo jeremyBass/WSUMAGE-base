@@ -54,7 +54,7 @@ insert-wsu-brand-favicon:
 
 {{ web_root }}/staging/patches:
   cmd.run:
-    - name: cp /var/www/{{ project['target'] }}/provision/salt/stage/vagrant/patches/* {{ web_root }}staging/patches
+    - name: mkdir {{ web_root }}staging/patches | cp /var/www/{{ project['target'] }}/provision/salt/stage/vagrant/patches/* {{ web_root }}staging/patches
     - user: root
 
 #this needs to be done in a better way
