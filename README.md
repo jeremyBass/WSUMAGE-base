@@ -9,11 +9,11 @@ This is a Magento web app repo.  This is loaded in to a server base project such
 
 1. git clone the server base 
 
-      > `$ git clone git@github.com:washingtonstateuniversity/WSU-Web-Serverbase.git devserver`
+      > `$ git clone https://github.com/washingtonstateuniversity/WSU-Web-Serverbase.git devserver`
       
 1. git clone the web app to the www folder 
       
-      > `$ git clone git@github.com:washingtonstateuniversity/WSUMAGE-base.git app/store.wsu.edu`
+      > `$ git clone https://github.com/washingtonstateuniversity/WSUMAGE-base.git app/store.wsu.edu`
       
 1. Start your local environment
       
