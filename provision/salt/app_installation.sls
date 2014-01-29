@@ -2,9 +2,9 @@
 ###########################################################
 {%- set project = pillar.get('project') %}
 {%- set magento = pillar.get('magento') %}
-{%- set magento_version = magento['version'] %} 
+{%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
-{%- set web_root = "/var/www/" + project['target'] + "/html/" %} 
+{%- set web_root = "/var/app/" + env + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
     
@@ -64,12 +64,12 @@ insert-wsu-brand-favicon:
 
 {{ web_root }}/staging:
   cmd.run:
-    - name: mkdir {{ web_root }}staging | cp /var/www/{{ project['target'] }}/provision/salt/stage/vagrant/* {{ web_root }}staging
+    - name: mkdir {{ web_root }}staging | cp /var/app/{{ env }}/provision/salt/stage/vagrant/* {{ web_root }}staging
     - user: root
 
 {{ web_root }}/staging/patches:
   cmd.run:
-    - name: mkdir {{ web_root }}staging/patches | cp /var/www/{{ project['target'] }}/provision/salt/stage/vagrant/patches/* {{ web_root }}staging/patches
+    - name: mkdir {{ web_root }}staging/patches | cp /var/app/{{ env }}/provision/salt/stage/vagrant/patches/* {{ web_root }}staging/patches
     - user: root
 
 #this needs to be done in a better way
