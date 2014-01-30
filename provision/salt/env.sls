@@ -70,7 +70,7 @@ memcached-stopped:
 #magento base
 magento:
   git.latest:
-    - name: git://github.com/jeremyBass/magento-mirror.git
+    - name: git://github.com/washingtonstateuniversity/magento-mirror.git
     - rev: 1.8.1.0
     - target: {{ web_root }}
     - force: True
