@@ -24,7 +24,7 @@ set-mage-ext-pref:
       
 magneto-install:
   cmd.run:
-    - name: php -f install.php -- --license_agreement_accepted yes --locale {{ magento['locale'] }} --timezone {{ magento['timezone'] }} --default_currency {{ magento['default_currency'] }}  --db_host "{{ magento['db_host'] }}" --db_name "{{ magento['db_name'] }}" --db_user "{{ magento['db_user'] }}" --db_pass "{{ magento['db_pass'] }}" --url {{ magento['url'] }} --use_rewrites {{ magento['use_rewrites'] }} --skip_url_validation {{ magento['skip_url_validation'] }} --use_secure {{ magento['use_secure'] }} --secure_base_url {{ magento['secure_base_url'] }} --use_secure_admin {{ magento['use_secure_admin'] }} --admin_firstname "{{ magento['admin_firstname'] }}" --admin_lastname "{{ magento['admin_lastname'] }}" --admin_email "{{ magento['admin_email'] }}" --admin_username "{{ magento['admin_username'] }}" --admin_password "{{ magento['admin_password'] }}"
+    - name: php -f install.php -- --license_agreement_accepted yes --locale {{ magento['locale'] }} --timezone {{ magento['timezone'] }} --default_currency {{ magento['default_currency'] }}  --db_host "{{ magento['db_host'] }}" --db_name "{{ magento['db_name'] }}" --db_user "{{ magento['db_user'] }}" --db_pass "{{ magento['db_pass'] }}" --url {{ magento['url'] }} --use_rewrites {{ magento['use_rewrites'] }} --skip_url_validation {{ magento['skip_url_validation'] }} --use_secure {{ magento['use_secure'] }} --secure_base_url {{ magento['secure_base_url'] }} --use_secure_admin {{ magento['use_secure_admin'] }} --admin_firstname "{{ magento['admin_firstname'] }}" --admin_lastname "{{ magento['admin_lastname'] }}" --admin_email "{{ magento['admin_email'] }}" --admin_username "{{ magento['admin_username'] }}" --admin_password "{{ magento['admin_password'] }}" | magnetoInstalled=true
     - unless: php -r 'require "app/Mage.php";$app = Mage::app("default"); $installer = Mage::getSingleton("install/installer_console");  $installer->init($app); if (Mage::isInstalled()) { print("already installed"); }' 2>&1 | grep -qi 'already installed'
     - user: root
     - cwd: {{ web_root }}
@@ -46,7 +46,6 @@ magneto-set-connect-prefs:
 #  file.managed:
 #    - source: {{ stage_root }}local.xml
 #    - user: root
-#    - tem
 #    - group: root
 #    - mode: 644
 #    - replace: True
@@ -66,21 +65,32 @@ insert-wsu-brand-favicon:
   cmd.run:
     - name: mkdir {{ web_root }}staging | cp /var/app/{{ env }}/provision/salt/stage/vagrant/* {{ web_root }}staging
     - user: root
+    - unless: cd {{ web_root }}staging
 
 {{ web_root }}/staging/patches:
   cmd.run:
     - name: mkdir {{ web_root }}staging/patches | cp /var/app/{{ env }}/provision/salt/stage/vagrant/patches/* {{ web_root }}staging/patches
     - user: root
+    - unless: cd {{ web_root }}staging/patches
 
 #this needs to be done in a better way
+#we have to push the patch to be executable 
 run-patchs-2619:
+  file.managed:
+    - name: {{ web_root }}staging/patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh 
+    - user: root
   cmd.run:
-    - name: patch -p0 < {{ web_root }}staging/patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.patch
+    - name: PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
+    - cwd: {{ web_root }}staging/patches/
     - user: root
     
 run-patchs-2747:
+  file.managed:
+    - name: {{ web_root }}staging/patches/PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh 
+    - user: root
   cmd.run:
-    - name: patch -p0 < {{ web_root }}staging/patches/PATCH_SUPEE-2747_EE_1.13.1.0_v1.patch
+    - name: PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh
+    - cwd: {{ web_root }}staging/patches/
     - user: root
 
 

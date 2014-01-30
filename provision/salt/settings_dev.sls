@@ -11,15 +11,15 @@
 {{ web_root }}index.php:
   file.managed:
     - source: {{ stage_root }}index.php
-    - user: root
-    - group: root
-    - mode: 644
+    - user: www-data
+    - group: www-data
     - replace: True
 
 post-install-settings:
   cmd.run:
     - name: php staging/install-post.php
     - cwd: {{ web_root }}
+    - onlyif: '[ -n "${{ '{' }}magnetoInstalled{{ '}' }}" ]'
     - require:
       - git: magento
       - service: mysqld-{{ env }}
@@ -51,6 +51,7 @@ reindex-magento:
     - name: php -f indexer.php reindexall
     - cwd: {{ web_root }}/shell
     - user: root
+    - onlyif: '[ -n "${{ '{' }}magnetoInstalled{{ '}' }}" ]'
     - require:
       - git: magento
       - service: mysqld-{{ env }}
