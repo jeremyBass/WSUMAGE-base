@@ -19,7 +19,7 @@ post-install-settings:
   cmd.run:
     - name: php staging/install-post.php
     - cwd: {{ web_root }}
-    - onlyif: '[ -n "${{ '{' }}magnetoInstalled{{ '}' }}" ]'
+    - unless: test x"$magnetoJustInstalled" = x
     - require:
       - git: magento
       - service: mysqld-{{ env }}
@@ -37,7 +37,7 @@ final-restart-nginx-{{ env }}:
 
 reset-magento:
   cmd.run:
-    - name: rm -rf {{ web_root }}var/cache/* | rm -rf {{ web_root }}media/js/* | rm -rf {{ web_root }}media/css/* | php "{{ web_root }}index.php" 2>/dev/null
+    - name: rm -rf {{ web_root }}var/cache/* | rm -rf {{ web_root }}media/js/* | rm -rf {{ web_root }}media/css/*
     - cwd: {{ web_root }}
     - user: root
     - require:
@@ -48,10 +48,10 @@ reset-magento:
 
 reindex-magento:
   cmd.run:
-    - name: php -f indexer.php reindexall
+    - name: php -f indexer.php reindexall | php "{{ web_root }}index.php" 2>/dev/null
     - cwd: {{ web_root }}/shell
     - user: root
-    - onlyif: '[ -n "${{ '{' }}magnetoInstalled{{ '}' }}" ]'
+    - unless: test x"$magnetoJustInstalled" = x
     - require:
       - git: magento
       - service: mysqld-{{ env }}
