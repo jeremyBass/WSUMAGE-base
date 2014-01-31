@@ -10,16 +10,16 @@
 # move the apps nginx rules to the site-enabled
 {{ web_root }}index.php:
   file.managed:
-    - source: {{ stage_root }}index.php
+    - source: {{ stage_root }}scripts/index.php
     - user: www-data
     - group: www-data
     - replace: True
 
 post-install-settings:
   cmd.run:
-    - name: php staging/install-post.php
+    - name: php staging/scripts/install-post.php
     - cwd: {{ web_root }}
-    - unless: test x"$magnetoJustInstalled" = x
+    #- unless: test x"$magnetoJustInstalled" = x
     - require:
       - git: magento
       - service: mysqld-{{ env }}
@@ -51,7 +51,7 @@ reindex-magento:
     - name: php -f indexer.php reindexall | php "{{ web_root }}index.php" 2>/dev/null
     - cwd: {{ web_root }}/shell
     - user: root
-    - unless: test x"$magnetoJustInstalled" = x
+    #- unless: test x"$magnetoJustInstalled" = x
     - require:
       - git: magento
       - service: mysqld-{{ env }}

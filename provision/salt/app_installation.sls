@@ -61,17 +61,33 @@ insert-wsu-brand-favicon:
     - require:
       - git: magento
 
-{{ web_root }}/staging:
-  cmd.run:
-    - name: mkdir {{ web_root }}staging | cp /var/app/{{ env }}/provision/salt/stage/vagrant/* {{ web_root }}staging
-    - user: root
-    - unless: cd {{ web_root }}staging
 
-{{ web_root }}/staging/patches:
+{{ web_root }}staging/:
+  file.directory:
+    - name: {{ web_root }}staging/
+    - user: root
+    - group: root
+    - mode: 777
+
+
+{{ web_root }}staging/sql:
+  cmd.run:
+    - name: mkdir {{ web_root }}staging/sql | cp /var/app/{{ env }}/provision/salt/stage/vagrant/sql/* {{ web_root }}staging/sql
+    - user: root
+    - unless: cd {{ web_root }}staging/sql
+    
+{{ web_root }}staging/scripts:
+  cmd.run:
+    - name: mkdir {{ web_root }}staging/scripts | cp /var/app/{{ env }}/provision/salt/stage/vagrant/scripts/* {{ web_root }}staging/scripts
+    - user: root
+    - unless: cd {{ web_root }}staging/scripts
+
+{{ web_root }}staging/patches:
   cmd.run:
     - name: mkdir {{ web_root }}staging/patches | cp /var/app/{{ env }}/provision/salt/stage/vagrant/patches/* {{ web_root }}staging/patches
     - user: root
     - unless: cd {{ web_root }}staging/patches
+
 
 #this needs to be done in a better way
 #we have to push the patch to be executable 

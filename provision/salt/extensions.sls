@@ -58,7 +58,7 @@ install-base-ext-{{ ext_key }}:
     - name: rm -rf {{ web_root }}var/cache/* | php "{{ web_root }}index.php" 2>/dev/null
     - cwd: {{ web_root }}
     - user: root
-    - unless: test x"$ADDED{{ ext_key|replace("-","") }}" = x
+    #- unless: test x"$ADDED{{ ext_key|replace("-","") }}" = x
     - require:
       - git: magento
       - service: mysqld-{{ env }}
