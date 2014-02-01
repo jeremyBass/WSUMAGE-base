@@ -24,6 +24,31 @@
  * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
  * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
+
+
+
+db-{{ magento['db_name'] }}:
+  mysql_database.present:
+    - name: {{ magento['db_name'] }}
+    - require:
+      - service: mysqld-{{ env }}
+
+db_users-{{ magento['db_user'] }}:
+  mysql_user.present:
+    - name: {{ magento['db_user'] }}
+    - password: {{ magento['db_pass'] }}
+    - host: {{ magento['db_host'] }}
+    - require:
+      - service: mysqld-{{ env }}
+      
+db_grant-{{ magento['db_name'] }}:
+  mysql_grants.present:
+    - grant: all privileges
+    - host: {{ magento['db_host'] }}
+    - database: {{ magento['db_name'] }}.*
+    - user: {{ magento['db_user'] }}
+    - require:
+      - service: mysqld-{{ env }}
 -->
 <config>
     <global>
@@ -36,14 +61,14 @@
         <disable_local_modules>false</disable_local_modules>
         <resources>
             <db>
-                <table_prefix><![CDATA[]]></table_prefix>
+                <table_prefix><![CDATA[{% if database['table_prefix'] is defined and database['table_prefix'] is not none %}{{ database['table_prefix'] }}{%- endif %}]]></table_prefix>
             </db>
             <default_setup>
                 <connection>
-                    <host><![CDATA[127.0.0.1]]></host>
-                    <username><![CDATA[mageNtkUsr2014]]></username>
-                    <password><![CDATA[VAGRANT]]></password>
-                    <dbname><![CDATA[wsumage_networks]]></dbname>
+                    <host><![CDATA[{{ database['host'] }}]]></host>
+                    <username><![CDATA[{{ database['user'] }}]]></username>
+                    <password><![CDATA[{{ database['pass'] }}]]></password>
+                    <dbname><![CDATA[{{ database['name'] }}]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
                     <type><![CDATA[pdo_mysql]]></type>
