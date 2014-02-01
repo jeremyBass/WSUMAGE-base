@@ -100,7 +100,7 @@ run-patchs-2619:
     - user: www-data
     - group: www-data
   cmd.run:
-    - name: PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
+    - name: .PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
     - cwd: {{ web_root }}staging/patches/
     - user: www-data
     
@@ -110,6 +110,6 @@ run-patchs-2747:
     - user: www-data
     - group: www-data
   cmd.run:
-    - name: PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh
+    - name: .PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh
     - cwd: {{ web_root }}staging/patches/
     - user: www-data
