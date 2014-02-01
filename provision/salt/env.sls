@@ -36,7 +36,7 @@ memcached-stopped:
 ###########################################################
 db-{{ database['name'] }}:
   mysql_database.present:
-    - name: {{ database['db_name'] }}
+    - name: {{ database['name'] }}
     - require:
       - service: mysqld-{{ env }}
 
@@ -101,7 +101,6 @@ magento:
     - source: salt://config/nginx/maps/nginx-mapping.conf
     - user: www-data
     - group: www-data
-    - mode: 744
 
 restart-nginx-{{ env }}:
   cmd.run:

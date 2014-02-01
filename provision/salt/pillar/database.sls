@@ -3,7 +3,7 @@ database:
   name: wsumage_networks
   user: mageNtkUsr2014
   pass: VAGRANT
-  table_prefix:
+  prefix:
 #{% if grains['env'] == 'vagrant' %}
 #{% elif grains['env'] == 'production' %}
 #{%- endif %}

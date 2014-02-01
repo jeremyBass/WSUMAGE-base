@@ -1,4 +1,12 @@
 magento:
+  admin_firstname: Jeremy
+  admin_lastname: Bass
+  admin_email: jeremy.bass@wsu.edu
+  admin_username: jeremy.bass
+  admin_password: demo2014
+  sample_data: True
+  sample_stores: True
+  #it should be noted that you will most likely not need anything below
   version: 1.8.1.0
   locale: en_US
   timezone: America/Los_Angeles
@@ -9,12 +17,6 @@ magento:
   use_secure: no
   secure_base_url: ""
   use_secure_admin: no
-  admin_firstname: Jeremy
-  admin_lastname: Bass
-  admin_email: jeremy.bass@wsu.edu
-  admin_username: jeremy.bass
-  admin_password: demo2014
-  sampledate: True 
 #{% if grains['env'] == 'vagrant' %}
 #{% elif grains['env'] == 'production' %}
 #{%- endif %}
