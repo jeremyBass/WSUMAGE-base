@@ -94,22 +94,20 @@ insert-wsu-brand-favicon:
 
 #this needs to be done in a better way
 #we have to push the patch to be executable 
+run-patchs-2619-correct:
+  cmd.run: #insure it's going to run on windows hosts
+    - name: dos2unix /srv/salt/{{ env }}/stage/vagrant/patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
 run-patchs-2619:
-  file.managed:
-    - name: {{ web_root }}staging/patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh 
-    - user: www-data
-    - group: www-data
-  cmd.run:
-    - name: .PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
-    - cwd: {{ web_root }}staging/patches/
-    - user: www-data
+  cmd.script:
+    - source: {{ stage_root }}patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
+    - cwd: {{ web_root }}
+
     
+run-patchs-2747-correct:
+  cmd.run: #insure it's going to run on windows hosts
+    - name: dos2unix /srv/salt/{{ env }}/stage/vagrant/patches/PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh
 run-patchs-2747:
-  file.managed:
-    - name: {{ web_root }}staging/patches/PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh 
-    - user: www-data
-    - group: www-data
-  cmd.run:
-    - name: .PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh
-    - cwd: {{ web_root }}staging/patches/
-    - user: www-data
+  cmd.script:
+    - source: {{ stage_root }}patches/PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh
+    - cwd: {{ web_root }}
+
