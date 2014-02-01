@@ -99,8 +99,10 @@ run-patchs-2619-correct:
     - name: dos2unix /srv/salt/{{ env }}/stage/vagrant/patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
 run-patchs-2619:
   cmd.script:
+    - name: PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
     - source: {{ stage_root }}patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
     - cwd: {{ web_root }}
+    - unless: grep -qi "SUPEE-2619" {{ web_root }}app/etc/applied.patches.list  
 
     
 run-patchs-2747-correct:
@@ -108,6 +110,8 @@ run-patchs-2747-correct:
     - name: dos2unix /srv/salt/{{ env }}/stage/vagrant/patches/PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh
 run-patchs-2747:
   cmd.script:
+    - name: PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh
     - source: {{ stage_root }}patches/PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh
     - cwd: {{ web_root }}
+    - unless: grep -qi "SUPEE-2747" {{ web_root }}app/etc/applied.patches.list  
 

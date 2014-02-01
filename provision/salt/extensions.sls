@@ -66,4 +66,19 @@ install-base-ext-{{ ext_key }}:
       - service: mysqld-{{ env }}
       - service: php-{{ env }}
       - cmd: magneto-install
+      
+      
+base-ext-{{ ext_key }}-test:
+  cmd.run:
+    - name: ADDED{{ ext_key|replace("-","") }}=True && export $ADDED{{ ext_key|replace("-","") }} && echo $ADDED{{ ext_key|replace("-","") }}
+    - cwd: {{ web_root }}
+
+    
+install-base-ext-{{ ext_key }}-test:
+  cmd.run:
+    - name: set
+    - cwd: {{ web_root }}
+
+      
+      
 {% endfor %}
