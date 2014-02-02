@@ -116,11 +116,6 @@ extensions:
     repo_owner: jeremyBass
     branch: master
     tag:
-  Aoe_ManageStores:
-    name: Aoe_ManageStores
-    repo_owner: jeremyBass
-    branch: master
-    tag:
   Aoe_Scheduler:
     name: Aoe_Scheduler
     repo_owner: fbrnc
