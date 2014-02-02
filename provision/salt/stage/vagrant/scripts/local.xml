@@ -36,14 +36,14 @@
         <disable_local_modules>false</disable_local_modules>
         <resources>
             <db>
-                <table_prefix><![CDATA[]]></table_prefix>
+                <table_prefix><![CDATA[{% if database['table_prefix'] is defined and database['table_prefix'] is not none %}{{ database['table_prefix'] }}{%- endif %}]]></table_prefix>
             </db>
             <default_setup>
                 <connection>
-                    <host><![CDATA[127.0.0.1]]></host>
-                    <username><![CDATA[mageNtkUsr2014]]></username>
-                    <password><![CDATA[VAGRANT]]></password>
-                    <dbname><![CDATA[wsumage_networks]]></dbname>
+                    <host><![CDATA[{{ database['host'] }}]]></host>
+                    <username><![CDATA[{{ database['user'] }}]]></username>
+                    <password><![CDATA[{{ database['pass'] }}]]></password>
+                    <dbname><![CDATA[{{ database['name'] }}]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
                     <type><![CDATA[pdo_mysql]]></type>

@@ -1,6 +1,7 @@
 # set up data first
 ###########################################################
 {%- set project = pillar.get('project') %}
+{%- set database = pillar.get('database') %}
 {%- set magento = pillar.get('magento') %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
@@ -23,38 +24,39 @@ nginx-{{ env }}:
     - name: nginx
 
 
-
-
-# Setup the MySQL requirements for WSUMAGE-base
-###########################################################
-db-{{ magento['db_name'] }}:
-  mysql_database.present:
-    - name: {{ magento['db_name'] }}
-    - require:
-      - service: mysqld-{{ env }}
-
-db_users-{{ magento['db_user'] }}:
-  mysql_user.present:
-    - name: {{ magento['db_user'] }}
-    - password: {{ magento['db_pass'] }}
-    - host: {{ magento['db_host'] }}
-    - require:
-      - service: mysqld-{{ env }}
-      
-db_grant-{{ magento['db_name'] }}:
-  mysql_grants.present:
-    - grant: all privileges
-    - host: {{ magento['db_host'] }}
-    - database: {{ magento['db_name'] }}.*
-    - user: {{ magento['db_user'] }}
-    - require:
-      - service: mysqld-{{ env }}
-
-# The install is going to run, there is no caching needed yet.
+# Turn off all caches
 memcached-stopped:
   cmd.run:
     - name: service memcached stop
     - cwd: /
+
+
+
+# Setup the MySQL requirements for WSUMAGE-base
+###########################################################
+db-{{ database['name'] }}:
+  mysql_database.present:
+    - name: {{ database['name'] }}
+    - require:
+      - service: mysqld-{{ env }}
+
+db_users-{{ database['user'] }}:
+  mysql_user.present:
+    - name: {{ database['user'] }}
+    - password: {{ database['pass'] }}
+    - host: {{ database['host'] }}
+    - require:
+      - service: mysqld-{{ env }}
+      
+db_grant-{{ database['name'] }}:
+  mysql_grants.present:
+    - grant: all privileges
+    - host: {{ database['host'] }}
+    - database: {{ database['name'] }}.*
+    - user: {{ database['user'] }}
+    - require:
+      - service: mysqld-{{ env }}
+
 
 
 
@@ -70,7 +72,7 @@ memcached-stopped:
 #magento base
 magento:
   git.latest:
-    - name: git://github.com/jeremyBass/magento-mirror.git
+    - name: git://github.com/washingtonstateuniversity/magento-mirror.git
     - rev: 1.8.1.0
     - target: {{ web_root }}
     - force: True
@@ -99,7 +101,6 @@ magento:
     - source: salt://config/nginx/maps/nginx-mapping.conf
     - user: www-data
     - group: www-data
-    - mode: 744
 
 restart-nginx-{{ env }}:
   cmd.run:
@@ -108,11 +109,6 @@ restart-nginx-{{ env }}:
     - cwd: /
     - require:
       - service: nginx-{{ env }}
-
-
-
-
-
 
 
 #Modgit for magento modules

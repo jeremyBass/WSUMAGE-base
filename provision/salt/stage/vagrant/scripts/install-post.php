@@ -161,7 +161,7 @@ if($newRootCat>0){
                     'stores' => array($storeId),//available for all store views
                     'content' => $defaultCmsPage
                 ));
-                include_once('staging/sample-events.php');
+                include_once('staging/scripts/sample-events.php');
             }echo "make_store ended in {$storeId}\n";
         }echo "make_storeGroup ended in {$storeGroupId}\n";
     }echo "make_website ended in {$siteId}\n";

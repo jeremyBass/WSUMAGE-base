@@ -1,11 +1,13 @@
 # set up data first
 ###########################################################
 {%- set project = pillar.get('project') %}
+{%- set database = pillar.get('database') %}
 {%- set magento = pillar.get('magento') %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/app/" + env + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
+
 
 download-sampledata:
   cmd.run:
@@ -19,7 +21,7 @@ download-sampledata:
 
 install-sample-date:
   cmd.run:
-    - name: mysql -h {{ magento['db_host'] }} -u {{ magento['db_user'] }} -p{{ magento['db_pass'] }} {{ magento['db_name'] }} < sample-data.sql
+    - name: mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} < sample-data.sql
     - cwd: {{ web_root }}
     - onlyif: [ -f sample-data.sql ]
     - require:
