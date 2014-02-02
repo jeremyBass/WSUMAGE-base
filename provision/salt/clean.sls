@@ -8,6 +8,7 @@
 {%- set web_root = "/var/app/" + env + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
+#sed -i 's/.*#salt-set REMOVE.*//' /etc/profile
 
 clear-caches:
   cmd.run:
