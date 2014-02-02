@@ -18,12 +18,18 @@ clear-caches:
 
 clear-sampledata-files:
   cmd.run:
-    - name: rm -rf ./WSUMAGE-sampledata-master/ ./sample-data.sql ./sample-data-files/
+    - name: rm -rf ./WSUMAGE-sampledata-master/ ./sample-data.sql ./sample-data-files/ ./staging
     - user: root
     - cwd: {{ web_root }}
 
 clear-sample-files:
   cmd.run:
-    - name: rm -rf index.php.sample .htaccess.sample php.ini.sample LICENSE.txt STATUS.txt LICENSE.html LICENSE_AFL.txt  RELEASE_NOTES.txt
+    - name: rm -rf index.php.sample .htaccess .htaccess.sample php.ini.sample LICENSE.txt STATUS.txt LICENSE.html LICENSE_AFL.txt  RELEASE_NOTES.txt
+    - user: root
+    - cwd: {{ web_root }}
+
+clear-random-files:
+  cmd.run:
+    - name: rm -rf ./test.php && chmod -R u+w tmp?* && rm -rf tmp?*
     - user: root
     - cwd: {{ web_root }}
