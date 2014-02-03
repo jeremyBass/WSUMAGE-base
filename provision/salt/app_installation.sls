@@ -8,7 +8,10 @@
 {%- set web_root = "/var/app/" + env + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
-    
+
+###############################################
+# magneto install
+###############################################    
 PEAR-registry:
   cmd.run:
     - name: ./mage mage-setup .
@@ -65,7 +68,9 @@ insert-wsu-brand-favicon:
     - require:
       - git: magento
 
-
+###############################################
+# staging
+###############################################
 {{ web_root }}staging/:
   file.directory:
     - name: {{ web_root }}staging/
@@ -91,9 +96,12 @@ insert-wsu-brand-favicon:
     - user: root
     - unless: cd {{ web_root }}staging/patches
 
-
-#this needs to be done in a better way
-#we have to push the patch to be executable 
+###############################################
+# patchs
+###############################################
+# this needs to be done in a better way
+# we have to push the patch to be executable
+###############################################
 run-patchs-2619-correct:
   cmd.run: #insure it's going to run on windows hosts
     - name: dos2unix /srv/salt/{{ env }}/stage/vagrant/patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
