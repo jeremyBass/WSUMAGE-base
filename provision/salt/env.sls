@@ -100,6 +100,7 @@ magento:
     - source: salt://config/nginx/maps/nginx-mapping.conf
     - user: www-data
     - group: www-data
+    - mode: 744
 
 restart-nginx-{{ env }}:
   cmd.run:
