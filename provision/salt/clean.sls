@@ -34,3 +34,12 @@ clear-random-files:
     - user: root
     - onlyif: -f tmp?*
     - cwd: {{ web_root }}
+    
+#this is really just to bandaid another issues being worked on
+final-restart-nginx-{{ env }}:
+  cmd.run:
+    - name: service nginx restart
+    - user: root
+    - cwd: /
+    - require:
+      - service: nginx-{{ env }}
