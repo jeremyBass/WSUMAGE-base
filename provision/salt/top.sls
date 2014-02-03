@@ -19,6 +19,8 @@ store.wsu.edu:
     - match: grain
     - settings_dev
     - stage_dev
+    - clean
   'env:production':
     - match: grain
     - stage_prod
+    - clean

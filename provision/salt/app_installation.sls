@@ -8,7 +8,10 @@
 {%- set web_root = "/var/app/" + env + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
-    
+
+###############################################
+# magneto install
+###############################################    
 PEAR-registry:
   cmd.run:
     - name: ./mage mage-setup .
@@ -25,7 +28,7 @@ set-mage-ext-pref:
       
 magneto-install:
   cmd.run:
-    - name: 'tmp=$(php -f install.php -- --license_agreement_accepted yes --locale {{ magento['locale'] }} --timezone {{ magento['timezone'] }} --default_currency {{ magento['default_currency'] }}  --db_host "{{ database['host'] }}" --db_name "{{ database['name'] }}" --db_user "{{ database['user'] }}" --db_pass "{{ database['pass'] }}" {% if database['prefix'] is defined and database['prefix'] is not none %} --db_prefix "{{ database['prefix'] }}" {%- endif %} --url {{ magento['url'] }} --use_rewrites {{ magento['use_rewrites'] }} --skip_url_validation {{ magento['skip_url_validation'] }} --use_secure {{ magento['use_secure'] }} --secure_base_url {{ magento['secure_base_url'] }} --use_secure_admin {{ magento['use_secure_admin'] }} --admin_firstname "{{ magento['admin_firstname'] }}" --admin_lastname "{{ magento['admin_lastname'] }}" --admin_email "{{ magento['admin_email'] }}" --admin_username "{{ magento['admin_username'] }}" --admin_password "{{ magento['admin_password'] }}"  3>&1 1>&2 2>&3) && echo "export magnetoJustInstalled=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/profile && echo $tmp'
+    - name: 'tmp=$(php -f install.php -- --license_agreement_accepted yes --locale {{ magento['locale'] }} --timezone {{ magento['timezone'] }} --default_currency {{ magento['default_currency'] }}  --db_host "{{ database['host'] }}" --db_name "{{ database['name'] }}" --db_user "{{ database['user'] }}" --db_pass "{{ database['pass'] }}" {% if database['prefix'] is defined and database['prefix'] is not none %} --db_prefix "{{ database['prefix'] }}" {%- endif %} --url {{ magento['url'] }} --use_rewrites {{ magento['use_rewrites'] }} --skip_url_validation {{ magento['skip_url_validation'] }} --use_secure {{ magento['use_secure'] }} --secure_base_url {{ magento['secure_base_url'] }} --use_secure_admin {{ magento['use_secure_admin'] }} --admin_firstname "{{ magento['admin_firstname'] }}" --admin_lastname "{{ magento['admin_lastname'] }}" --admin_email "{{ magento['admin_email'] }}" --admin_username "{{ magento['admin_username'] }}" --admin_password "{{ magento['admin_password'] }}"  3>&1 1>&2 2>&3) && echo "export MagentoFreshInstalled=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/profile && echo $tmp'
     - unless: php -r 'require "app/Mage.php";$app = Mage::app("default"); $installer = Mage::getSingleton("install/installer_console");  $installer->init($app); if (Mage::isInstalled()) { print("already installed"); }' 2>&1 | grep -qi 'already installed'
     - user: root
     - cwd: {{ web_root }}
@@ -65,7 +68,9 @@ insert-wsu-brand-favicon:
     - require:
       - git: magento
 
-
+###############################################
+# staging
+###############################################
 {{ web_root }}staging/:
   file.directory:
     - name: {{ web_root }}staging/
@@ -91,9 +96,12 @@ insert-wsu-brand-favicon:
     - user: root
     - unless: cd {{ web_root }}staging/patches
 
-
-#this needs to be done in a better way
-#we have to push the patch to be executable 
+###############################################
+# patchs
+###############################################
+# this needs to be done in a better way
+# we have to push the patch to be executable
+###############################################
 run-patchs-2619-correct:
   cmd.run: #insure it's going to run on windows hosts
     - name: dos2unix /srv/salt/{{ env }}/stage/vagrant/patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh

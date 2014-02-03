@@ -86,7 +86,6 @@ magento:
     - source: salt://config/nginx/store.mage.dev.conf
     - user: root
     - group: root
-    - mode: 644
     
 {{ web_root }}maps/:
     file.directory:

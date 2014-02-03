@@ -21,7 +21,8 @@ post-install-settings:
   cmd.run:
     - name: php staging/scripts/install-post.php
     - cwd: {{ web_root }}
-    - unless: test x"$magnetoJustInstalled" = x
+    - user: root
+    - unless: test x"$MagentoFreshInstalled" = x
     - require:
       - git: magento
       - service: mysqld-{{ env }}
@@ -53,7 +54,7 @@ reindex-magento:
     - name: php -f indexer.php reindexall | php "{{ web_root }}index.php" 2>/dev/null
     - cwd: {{ web_root }}/shell
     - user: root
-    - unless: test x"$magnetoJustInstalled" = x
+    - unless: test x"$MagentoFreshInstalled" = x
     - require:
       - git: magento
       - service: mysqld-{{ env }}
