@@ -179,42 +179,5 @@ if($newRootCat>0){
 }echo "make_category ended in {$newRootCat}\n";
 echo "-----------------------------------------\n";
 
-
-// let us refresh the cache
-try {
-    $allTypes = Mage::app()->useCache();
-    foreach($allTypes as $type => $blah) {
-      Mage::app()->getCacheInstance()->cleanType($type);
-    }
-} catch (Exception $e) {
-    // do something
-    error_log($e->getMessage());
-}
-
-
-$types = Mage::app()->getCacheInstance()->getTypes();
-try {
-    echo "Cleaning data cache... \n";
-    flush();
-    foreach ($types as $type => $data) {
-        echo "Removing $type ... ";
-        echo Mage::app()->getCacheInstance()->clean($data["tags"]) ? "[OK]" : "[ERROR]";
-        echo "\n";
-    }
-} catch (exception $e) {
-    die("[ERROR:" . $e->getMessage() . "]");
-}
-
-echo "\n";
-
-try {
-    echo "Cleaning stored cache... ";
-    flush();
-    echo Mage::app()->getCacheInstance()->clean() ? "[OK]" : "[ERROR]";
-    echo "\n\n";
-} catch (exception $e) {
-    die("[ERROR:" . $e->getMessage() . "]");
-}
-
 $output = ob_get_clean();
 echo "name=post-install-settings result=True changed=True comment='$output'";
