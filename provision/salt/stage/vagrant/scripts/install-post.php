@@ -84,6 +84,8 @@ if($newRootCat>0){
                     'stores' => array($storeId),//available for all store views
                     'content' => $defaultCmsPage
                 ));
+                $cDat->saveConfig('wsu_themecontrol_layout/responsive/max_width', 'default', 'websites', $siteId);
+                $cDat->saveConfig('wsu_themecontrol_layout/responsive/fluid_width', 'hybrid', 'websites', $siteId);
             }echo "make_store ended in {$storeId}\n";
         }echo "make_storeGroup ended in {$storeGroupId}\n";
     }echo "make_website ended in {$siteId}\n";
@@ -108,6 +110,11 @@ if($newRootCat>0){
                     'stores' => array($storeId),//available for all store views
                     'content' => $defaultCmsPage
                 ));
+				$cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'crimson', 'websites', $siteId);
+				$cDat->saveConfig('wsu_themecontrol_design/spine/spine_tool_bar_color', 'lighter', 'websites', $siteId);
+				$cDat->saveConfig('wsu_themecontrol_design/spine/spine_bleed', '0', 'websites', $siteId);
+				$cDat->saveConfig('wsu_themecontrol_design/spine/max_width', '1188', 'websites', $siteId);
+				$cDat->saveConfig('wsu_themecontrol_design/spine/fluid_width', 'hybrid', 'websites', $siteId);
             }echo "make_store ended in {$storeId}\n";
         }echo "make_storeGroup ended in {$storeGroupId}\n";
     }echo "make_website ended in {$siteId}\n";
@@ -132,6 +139,8 @@ if($newRootCat>0){
                     'stores' => array($storeId),//available for all store views
                     'content' => $defaultCmsPage
                 ));
+                $cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'transparent', 'websites', $siteId);
+                $cDat->saveConfig('wsu_themecontrol_design/spine/spine_tool_bar_color', 'darkest', 'websites', $siteId);
             }echo "make_store ended in {$storeId}\n";
         }echo "make_storeGroup ended in {$storeGroupId}\n";
     }echo "make_website ended in {$siteId}\n";
@@ -162,8 +171,8 @@ if($newRootCat>0){
                     'content' => $defaultCmsPage
                 ));
                 include_once('staging/scripts/sample-events.php');
-                $cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'darkest', 'websites', 5);
-                $cDat->saveConfig('wsu_themecontrol_design/spine/spine_tool_bar_color', 'crimson', 'websites', 5);
+                $cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'darkest', 'websites', $siteId);
+                $cDat->saveConfig('wsu_themecontrol_design/spine/spine_tool_bar_color', 'crimson', 'websites', $siteId);
             }echo "make_store ended in {$storeId}\n";
         }echo "make_storeGroup ended in {$storeGroupId}\n";
     }echo "make_website ended in {$siteId}\n";
