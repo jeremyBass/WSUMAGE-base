@@ -110,6 +110,11 @@ if($newRootCat>0){
                     'stores' => array($storeId),//available for all store views
                     'content' => $defaultCmsPage
                 ));
+				$cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'crimson', 'websites', $siteId);
+				$cDat->saveConfig('wsu_themecontrol_design/spine/spine_tool_bar_color', 'lighter', 'websites', $siteId);
+				$cDat->saveConfig('wsu_themecontrol_design/spine/spine_bleed', '0', 'websites', $siteId);
+				$cDat->saveConfig('wsu_themecontrol_design/spine/max_width', '1188', 'websites', $siteId);
+				$cDat->saveConfig('wsu_themecontrol_design/spine/fluid_width', 'hybrid', 'websites', $siteId);
             }echo "make_store ended in {$storeId}\n";
         }echo "make_storeGroup ended in {$storeGroupId}\n";
     }echo "make_website ended in {$siteId}\n";
