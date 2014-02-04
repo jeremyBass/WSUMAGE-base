@@ -162,6 +162,8 @@ if($newRootCat>0){
                     'content' => $defaultCmsPage
                 ));
                 include_once('staging/scripts/sample-events.php');
+                $cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'darkest', 'websites', 5);
+                $cDat->saveConfig('wsu_themecontrol_design/spine/spine_tool_bar_color', 'crimson', 'websites', 5);
             }echo "make_store ended in {$storeId}\n";
         }echo "make_storeGroup ended in {$storeGroupId}\n";
     }echo "make_website ended in {$siteId}\n";
