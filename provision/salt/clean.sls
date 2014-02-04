@@ -32,4 +32,14 @@ clear-random-files:
   cmd.run:
     - name: rm -rf ./test.php && chmod -R u+w tmp?* && rm -rf tmp?*
     - user: root
+    - onlyif: -f tmp?*
     - cwd: {{ web_root }}
+    
+#this is really just to bandaid another issues being worked on
+finalrun-restart-nginx-{{ env }}:
+  cmd.run:
+    - name: service nginx restart
+    - user: root
+    - cwd: /
+    - require:
+      - service: nginx-{{ env }}

@@ -14,7 +14,7 @@ download-sampledata:
     - name: modgit add -b master sampledata https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git
     - cwd: {{ web_root }}
     - user: root
-    - unless: modgit ls 2>&1 | grep -qi "sampledata"
+    - unless: test -f sample-data.sql
     - require:
       - service: mysqld-{{ env }}
 
@@ -23,14 +23,7 @@ install-sample-date:
   cmd.run:
     - name: mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} < sample-data.sql
     - cwd: {{ web_root }}
-    - onlyif: [ -f sample-data.sql ]
+    - onlyif: test -f sample-data.sql
+    #- unless:  test x"$MagentoFreshInstalled" = x
     - require:
       - cmd: download-sampledata
-
-#clean-sample-date:
-#  cmd.run:
-#    - name: rm -rf WSUMAGE-sampledata-master/ sample-data.sql /sample-data-files
-#    - cwd: {{ web_root }}
-#    - user: root
-#    - require:
-#      - cmd: install-sample-date
