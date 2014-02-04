@@ -86,11 +86,10 @@ if($newRootCat>0){
                 ));
                 $cDat->saveConfig('wsu_themecontrol_layout/responsive/max_width', 'default', 'websites', $siteId);
                 $cDat->saveConfig('wsu_themecontrol_layout/responsive/fluid_width', 'hybrid', 'websites', $siteId);
-            }echo "make_store ended in {$storeId}\n";
-        }echo "make_storeGroup ended in {$storeGroupId}\n";
-    }echo "make_website ended in {$siteId}\n";
-}echo "make_category ended in {$newRootCat}\n";
-echo "-----------------------------------------\n";
+            }
+        }
+    }
+}
 
 $newRootCat = $SU_Helper->make_category("Student store root");
 if($newRootCat>0){
@@ -115,11 +114,11 @@ if($newRootCat>0){
 				$cDat->saveConfig('wsu_themecontrol_design/spine/spine_bleed', '0', 'websites', $siteId);
 				$cDat->saveConfig('wsu_themecontrol_design/spine/max_width', '1188', 'websites', $siteId);
 				$cDat->saveConfig('wsu_themecontrol_design/spine/fluid_width', 'hybrid', 'websites', $siteId);
-            }echo "make_store ended in {$storeId}\n";
-        }echo "make_storeGroup ended in {$storeGroupId}\n";
-    }echo "make_website ended in {$siteId}\n";
-}echo "make_category ended in {$newRootCat}\n";
-echo "-----------------------------------------\n";
+            }
+        }
+    }
+}
+
 
 $newRootCat = $SU_Helper->make_category("Tech store root");
 if($newRootCat>0){
@@ -141,11 +140,11 @@ if($newRootCat>0){
                 ));
                 $cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'transparent', 'websites', $siteId);
                 $cDat->saveConfig('wsu_themecontrol_design/spine/spine_tool_bar_color', 'darkest', 'websites', $siteId);
-            }echo "make_store ended in {$storeId}\n";
-        }echo "make_storeGroup ended in {$storeGroupId}\n";
-    }echo "make_website ended in {$siteId}\n";
-}echo "make_category ended in {$newRootCat}\n";
-echo "-----------------------------------------\n";
+            }
+        }
+    }
+}
+
 
 
 $websiteCodes = 'eventstore';//array('eventstore');
@@ -173,11 +172,11 @@ if($newRootCat>0){
                 include_once('staging/scripts/sample-events.php');
                 $cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'darkest', 'websites', $siteId);
                 $cDat->saveConfig('wsu_themecontrol_design/spine/spine_tool_bar_color', 'crimson', 'websites', $siteId);
-            }echo "make_store ended in {$storeId}\n";
-        }echo "make_storeGroup ended in {$storeGroupId}\n";
-    }echo "make_website ended in {$siteId}\n";
-}echo "make_category ended in {$newRootCat}\n";
-echo "-----------------------------------------\n";
+            }
+        }
+    }
+}
+
 
 $output = ob_get_clean();
 echo "name=post-install-settings result=True changed=True comment='$output'";
