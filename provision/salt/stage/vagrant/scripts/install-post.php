@@ -106,7 +106,7 @@ if($newRootCat>0){
 				);
 				$CMShtml="";
 				foreach($storeCmsLayouts as $col=>$part){
-					$CMShtml.="<div class='column ${$part['twelfths']}'>${$part['blocks']['blocktop']}${$part['blocks']['blockbottom']}</div>";
+					$CMShtml.="<div class='column ".$part['twelfths']."'>".$part['blocks']['blocktop'].$part['blocks']['blockbottom']."</div>";
 				}
 				
                 $SU_Helper->createCmsPage($storeId,array(
@@ -152,7 +152,7 @@ if($newRootCat>0){
 				);
 				$CMShtml="";
 				foreach($storeCmsLayouts as $col=>$part){
-					$CMShtml.="<div class='column ${$part['twelfths']}'>${$part['blocks']['blocktop']}${$part['blocks']['blockbottom']}</div>";
+					$CMShtml.="<div class='column ".$part['twelfths']."'>".$part['blocks']['blocktop'].$part['blocks']['blockbottom']."</div>";
 				}
                 $SU_Helper->createCmsPage($storeId,array(
                     'title' => 'Student store',
@@ -201,7 +201,7 @@ if($newRootCat>0){
 				);
 				$CMShtml="";
 				foreach($storeCmsLayouts as $col=>$part){
-					$CMShtml.="<div class='column ${$part['twelfths']}'>${$part['blocks']['blocktop']}${$part['blocks']['blockbottom']}</div>";
+					$CMShtml.="<div class='column ".$part['twelfths']."'>".$part['blocks']['blocktop'].$part['blocks']['blockbottom']."</div>";
 				}
                 $SU_Helper->createCmsPage($storeId,array(
                     'title' => 'Tech store',
@@ -251,6 +251,9 @@ if($newRootCat>0){
 					)
 				);
 				$CMShtml="";
+				foreach($storeCmsLayouts as $col=>$part){
+					$CMShtml.="<div class='column ".$part['twelfths']."'>".$part['blocks']['blocktop'].$part['blocks']['blockbottom']."</div>";
+				}
                 $SU_Helper->createCmsPage($storeId,array(
                     'title' => 'Event store',
                     'identifier' => 'home',
