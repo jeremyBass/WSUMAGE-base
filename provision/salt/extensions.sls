@@ -53,7 +53,7 @@ base-ext-{{ ext_key }}:
       - service: mysqld-{{ env }}
       - service: php-{{ env }}
       - cmd: magneto-install
-      - cmd: init_modgit
+      - cmd: init_gitploy
       
 install-base-ext-{{ ext_key }}:
   cmd.run:

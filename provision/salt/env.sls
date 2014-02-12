@@ -135,7 +135,7 @@ modgit_dryrun:
     - user: root
     - stateful: True
     - require:
-      - cmd: init_modgit
+      - cmd: init_gitploy
 
 #add a database explorer
 install-adminer:
