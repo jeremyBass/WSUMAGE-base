@@ -112,48 +112,30 @@ restart-nginx-{{ env }}:
 
 
 #Modgit for magento modules
-modgit:
+gitploy:
   cmd.run:
-    - name: curl https://raw.github.com/jeremyBass/modgit/master/modgit > /home/vagrant/modgit
-    - cwd: /home/vagrant/
+    - name: curl https://raw.github.com/jeremyBass/gitploy/master/gitploy | sudo sh -s -- install
+    - cwd: /
     - user: root
-    - unless: which modgit
-    - require_in:
-      - file: exe-modgit
-      - file: link-modgit
-
-exe-modgit:
-  file.managed:
-    - name: /home/vagrant/modgit
-    - user: root
-    - group: root
-    - mode: 744
-    
-link-modgit:
-  file.symlink:
-    - name: /usr/local/bin/modgit
-    - target: /home/vagrant/modgit
-    - force: True
-    - makedirs: True
-
+    - unless: which gitploy
 
 #start modgit tracking
-init_modgit:
+init_gitploy:
   cmd.run:
-    - name: modgit init
+    - name: gitploy init
     - cwd: {{ web_root }}
-    - unless: test -d {{ web_root }}.modgit
+    - unless: test -d {{ web_root }}.gitploy
     - user: root
 
 #do a dry run test of modgit
 modgit_dryrun:
   cmd.run:
-    - name: modgit add -n Storeutilities https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git 2>/dev/null | grep -qi "error" && echo "name=modgit_dryrun result=False changed=False comment=failed" || echo "name=modgit_dryrun  result=True changed=True comment=passed"
+    - name: gitploy -d Storeutilities https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git 2>/dev/null | grep -qi "error" && echo "name=modgit_dryrun result=False changed=False comment=failed" || echo "name=modgit_dryrun  result=True changed=True comment=passed"
     - cwd: {{ web_root }}
     - user: root
     - stateful: True
     - require:
-      - cmd: init_modgit
+      - cmd: init_gitploy
 
 #add a database explorer
 install-adminer:
