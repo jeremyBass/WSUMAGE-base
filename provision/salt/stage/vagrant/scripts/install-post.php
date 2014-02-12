@@ -55,12 +55,12 @@ echo "Applying the default multi-store setup\n";
 
 $defaultCmsPage = '
 <div class="row main-ad-block">
-	<div class="column three-twelfths">
+	<div class="column seven-twelfths">
 		<a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/lefttop_ad_block.jpg"}}" alt="" border="0" /> </a>
 		<img src="{{storemedia url="/rightbottom_ad_block.jpg"}}" alt="" border="0" />
 		
 	</div>
-	<div class="column nine-twelfths home-spot">
+	<div class="column five-twelfths home-spot">
 		<img src="{{storemedia url="/home_main_callout.jpg"}}" alt=""  border="0" />
 		<img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt=""  border="0" />
 	</div>
