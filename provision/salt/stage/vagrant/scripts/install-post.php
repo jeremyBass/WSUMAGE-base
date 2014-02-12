@@ -56,13 +56,18 @@ echo "Applying the default multi-store setup\n";
 $defaultCmsPage = '
 <div class="row ">
 	<div class="column three-twelfths">
-		<p class="home-callout"><a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/ph_callout_left_top.jpg"}}" alt="" border="0" /> </a></p>
-		<p class="home-callout"><img src="{{storemedia url="/ph_callout_left_rebel.jpg"}}" alt="" border="0" /></p>
-		{{block type="tag/popular" template="tag/popular.phtml"}}
+		<a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/lefttop_ad_block.jpg"}}" alt="" border="0" /> </a>
+		<img src="{{storemedia url="/rightbottom_ad_block.jpg"}}" alt="" border="0" />
+		
 	</div>
 	<div class="column nine-twelfths home-spot">
-		<p class="home-callout"><img src="{{storemedia url="/home_main_callout.jpg"}}" alt="" width="535" border="0" /></p>
-		<p class="home-callout"><img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt="" width="535" border="0" /></p>
+		<img src="{{storemedia url="/home_main_callout.jpg"}}" alt=""  border="0" />
+		<img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt=""  border="0" />
+	</div>
+</div>
+<div class="row ">
+	<div class="column twelve-twelfths">
+		{{block type="tag/popular" template="tag/popular.phtml"}}
 	</div>
 </div>
 <div class="row ">
