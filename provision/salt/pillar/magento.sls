@@ -2,7 +2,7 @@ magento:
   admin_firstname: Jeremy
   admin_lastname: Bass
   admin_email: jeremy.bass@wsu.edu
-  admin_username: jeremy.bass
+  admin_username: admin
   admin_password: demo2014
   sample_data: True
   sample_stores: True
