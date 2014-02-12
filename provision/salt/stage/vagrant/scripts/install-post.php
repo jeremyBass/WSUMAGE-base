@@ -56,7 +56,7 @@ echo "Applying the default multi-store setup\n";
 
 $defaultCmsPage = '
 <div class="row main-ad-block">
-	{$CMShtml}
+	{CMShtml}
 	<div style="clear: both;"></div>
 </div>
 <div class="row ">
@@ -115,7 +115,7 @@ if($newRootCat>0){
                     'content_heading' => '',
                     'is_active' => 1,
                     'stores' => array($storeId),//available for all store views
-                    'content' => str_replace('{$CMShtml}',$CMShtml,$defaultCmsPage)
+                    'content' => str_replace('{CMShtml}',$CMShtml,$defaultCmsPage)
                 ));
                 $cDat->saveConfig('wsu_themecontrol_layout/responsive/max_width', 'default', 'websites', $siteId);
                 $cDat->saveConfig('wsu_themecontrol_layout/responsive/fluid_width', 'hybrid', 'websites', $siteId);
@@ -160,7 +160,7 @@ if($newRootCat>0){
                     'content_heading' => '',
                     'is_active' => 1,
                     'stores' => array($storeId),//available for all store views
-                    'content' => str_replace('{$CMShtml}',$CMShtml,$defaultCmsPage)
+                    'content' => str_replace('{CMShtml}',$CMShtml,$defaultCmsPage)
                 ));
 				$cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'crimson', 'websites', $siteId);
 				$cDat->saveConfig('wsu_themecontrol_design/spine/spine_tool_bar_color', 'lighter', 'websites', $siteId);
@@ -209,7 +209,7 @@ if($newRootCat>0){
                     'content_heading' => '',
                     'is_active' => 1,
                     'stores' => array($storeId),//available for all store views
-                    'content' => str_replace('{$CMShtml}',$CMShtml,$defaultCmsPage)
+                    'content' => str_replace('{CMShtml}',$CMShtml,$defaultCmsPage)
                 ));
                 $cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'transparent', 'websites', $siteId);
                 $cDat->saveConfig('wsu_themecontrol_design/spine/spine_tool_bar_color', 'darkest', 'websites', $siteId);
@@ -257,7 +257,7 @@ if($newRootCat>0){
                     'content_heading' => '',
                     'is_active' => 1,
                     'stores' => array($storeId),//available for all store views
-                    'content' => str_replace('{$CMShtml}',$CMShtml,$defaultCmsPage)
+                    'content' => str_replace('{CMShtml}',$CMShtml,$defaultCmsPage)
                 ));
                 include_once('staging/scripts/sample-events.php');
                 $cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'darkest', 'websites', $siteId);
