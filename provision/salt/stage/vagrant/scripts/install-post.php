@@ -53,13 +53,17 @@ $cDat->saveConfig('admin/url/custom', 'http://store.admin.mage.dev/', 'default',
  
 echo "Applying the default multi-store setup\n";
 
-$defaultCmsPage = '<div class="col-left side-col">
-	<p class="home-callout"><a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/ph_callout_left_top.jpg"}}" alt="" border="0" /> </a></p>
-	<p class="home-callout"><img src="{{storemedia url="/ph_callout_left_rebel.jpg"}}" alt="" border="0" /></p>
-	{{block type="tag/popular" template="tag/popular.phtml"}}</div>
-	<div class="home-spot">
-	<p class="home-callout"><img src="{{storemedia url="/home_main_callout.jpg"}}" alt="" width="535" border="0" /></p>
-	<p class="home-callout"><img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt="" width="535" border="0" /></p>
+$defaultCmsPage = '
+	<div class="row ">
+		<div class="column three-twelfths">
+			<p class="home-callout"><a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/ph_callout_left_top.jpg"}}" alt="" border="0" /> </a></p>
+			<p class="home-callout"><img src="{{storemedia url="/ph_callout_left_rebel.jpg"}}" alt="" border="0" /></p>
+			{{block type="tag/popular" template="tag/popular.phtml"}}
+		</div>
+		<div class="column nine-twelfths home-spot">
+			<p class="home-callout"><img src="{{storemedia url="/home_main_callout.jpg"}}" alt="" width="535" border="0" /></p>
+			<p class="home-callout"><img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt="" width="535" border="0" /></p>
+		</div>
 	</div>
 	<h1>Sites in the center</h1>
 	<p>{{block type="catalog/product" stores_per="5" products_per="2" panles_per="3" template="custom_block/site_list.phtml"}}</p>';
