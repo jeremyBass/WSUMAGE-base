@@ -64,6 +64,7 @@ $defaultCmsPage = '
 		<img src="{{storemedia url="/home_main_callout.jpg"}}" alt=""  border="0" />
 		<img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt=""  border="0" />
 	</div>
+	<div style="clear: both;"></div>
 </div>
 <div class="row ">
 	<div class="column twelve-twelfths">
