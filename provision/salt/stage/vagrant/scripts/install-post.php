@@ -54,7 +54,7 @@ $cDat->saveConfig('admin/url/custom', 'http://store.admin.mage.dev/', 'default',
 echo "Applying the default multi-store setup\n";
 
 $defaultCmsPage = '
-<div class="row ">
+<div class="row main-ad-block">
 	<div class="column three-twelfths">
 		<a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/lefttop_ad_block.jpg"}}" alt="" border="0" /> </a>
 		<img src="{{storemedia url="/rightbottom_ad_block.jpg"}}" alt="" border="0" />
