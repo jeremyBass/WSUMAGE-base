@@ -11,7 +11,7 @@
 
 download-sampledata:
   cmd.run:
-    - name: modgit add -b master sampledata https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git
+    - name: gitploy -q -b master sampledata https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git
     - cwd: {{ web_root }}
     - user: root
     - unless: test -f sample-data.sql
