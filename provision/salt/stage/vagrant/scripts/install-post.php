@@ -67,7 +67,7 @@ $defaultCmsPage = '
 <div class="row ">
 	<div class="column nine-twelfths home-spot">
 		<h1>Sites in the center</h1>
-		<p>{{block type="catalog/product" stores_per="5" products_per="2" panles_per="3" template="custom_block/site_list.phtml"}}</p>
+		{{block type="catalog/product" stores_per="5" products_per="2" panles_per="3" template="custom_block/site_list.phtml"}}
 	</div>
 	<div class="column three-twelfths">
 		<p class="home-callout"><a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/feature_store_ad.jpg"}}" alt="" border="0" /> </a></p>
@@ -185,17 +185,10 @@ if($newRootCat>0){
                 $SU_Helper->moveStoreProducts( $siteId, $storeId, $newRootCat );
 				$storeCmsLayouts = array(
 					'col1'=>array(
-						'twelfths'=>'seven-twelfths',
+						'twelfths'=>'twelve-twelfths',
 						'blocks'=>array(
-							'blocktop'=>'<a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/lefttop_ad_block.jpg"}}" alt="" border="0" /> </a>',
-							'blockbottom'=>'<img src="{{storemedia url="/rightbottom_ad_block.jpg"}}" alt="" border="0" />'
-						)
-					),
-					'col2'=>array(
-						'twelfths'=>'five-twelfths',
-						'blocks'=>array(
-							'blocktop'=>'<img src="{{storemedia url="/home_main_callout.jpg"}}" alt=""  border="0" />',
-							'blockbottom'=>'<img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt=""  border="0" />'
+							'blocktop'=>'<img src="{{storemedia url="/trasparent-placeholder-missing-image.png"}}" alt="" style="width:100%;min-height:150px" border="0" />',
+							'blockbottom'=>'<div class="row">{{block type="catalog/product" products_limit="2" template="custom_block/topproduct.phtml"}}</div>'
 						)
 					)
 				);
