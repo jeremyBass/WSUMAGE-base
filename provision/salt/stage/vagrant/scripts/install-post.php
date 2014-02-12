@@ -53,17 +53,10 @@ $cDat->saveConfig('admin/url/custom', 'http://store.admin.mage.dev/', 'default',
  
 echo "Applying the default multi-store setup\n";
 
+
 $defaultCmsPage = '
 <div class="row main-ad-block">
-	<div class="column seven-twelfths">
-		<a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/lefttop_ad_block.jpg"}}" alt="" border="0" /> </a>
-		<img src="{{storemedia url="/rightbottom_ad_block.jpg"}}" alt="" border="0" />
-		
-	</div>
-	<div class="column five-twelfths home-spot">
-		<img src="{{storemedia url="/home_main_callout.jpg"}}" alt=""  border="0" />
-		<img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt=""  border="0" />
-	</div>
+	{$CMShtml}
 	<div style="clear: both;"></div>
 </div>
 <div class="row ">
@@ -93,13 +86,36 @@ if($newRootCat>0){
             $storeId = $SU_Helper->make_store( $siteId, $storeGroupId, array('code'=>'generalstore','name'=>'base default veiw') );
             if( $storeId>0 ){
                 $SU_Helper->moveStoreProducts( $siteId, $storeId, $newRootCat );
+				
+				
+				$storeCmsLayouts = array(
+					'col1'=>array(
+						'twelfths'=>'seven-twelfths',
+						'blocks'=>array(
+							'blocktop'=>'<a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/lefttop_ad_block.jpg"}}" alt="" border="0" /> </a>',
+							'blockbottom'=>'<img src="{{storemedia url="/rightbottom_ad_block.jpg"}}" alt="" border="0" />'
+						)
+					),
+					'col2'=>array(
+						'twelfths'=>'five-twelfths',
+						'blocks'=>array(
+							'blocktop'=>'<img src="{{storemedia url="/home_main_callout.jpg"}}" alt=""  border="0" />',
+							'blockbottom'=>'<img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt=""  border="0" />'
+						)
+					)
+				);
+				$CMShtml="";
+				foreach($storeCmsLayouts as $col=>$part){
+					$CMShtml.="<div class='column ${$part['twelfths']}'>${$part['blocks']['blocktop']}${$part['blocks']['blockbottom']}</div>";
+				}
+				
                 $SU_Helper->createCmsPage($storeId,array(
                     'title' => 'General store',
                     'identifier' => 'home',
                     'content_heading' => '',
                     'is_active' => 1,
                     'stores' => array($storeId),//available for all store views
-                    'content' => $defaultCmsPage
+                    'content' => str_replace('{$CMShtml}',$CMShtml,$defaultCmsPage)
                 ));
                 $cDat->saveConfig('wsu_themecontrol_layout/responsive/max_width', 'default', 'websites', $siteId);
                 $cDat->saveConfig('wsu_themecontrol_layout/responsive/fluid_width', 'hybrid', 'websites', $siteId);
@@ -118,13 +134,33 @@ if($newRootCat>0){
             $storeId = $SU_Helper->make_store( $siteId, $storeGroupId, array('code'=>'studentstore','name'=>'base default veiw') );
             if( $storeId>0 ){
                 $SU_Helper->moveStoreProducts( $siteId, $storeId, $newRootCat );
+				$storeCmsLayouts = array(
+					'col1'=>array(
+						'twelfths'=>'seven-twelfths',
+						'blocks'=>array(
+							'blocktop'=>'<a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/lefttop_ad_block.jpg"}}" alt="" border="0" /> </a>',
+							'blockbottom'=>'<img src="{{storemedia url="/rightbottom_ad_block.jpg"}}" alt="" border="0" />'
+						)
+					),
+					'col2'=>array(
+						'twelfths'=>'five-twelfths',
+						'blocks'=>array(
+							'blocktop'=>'<img src="{{storemedia url="/home_main_callout.jpg"}}" alt=""  border="0" />',
+							'blockbottom'=>'<img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt=""  border="0" />'
+						)
+					)
+				);
+				$CMShtml="";
+				foreach($storeCmsLayouts as $col=>$part){
+					$CMShtml.="<div class='column ${$part['twelfths']}'>${$part['blocks']['blocktop']}${$part['blocks']['blockbottom']}</div>";
+				}
                 $SU_Helper->createCmsPage($storeId,array(
                     'title' => 'Student store',
                     'identifier' => 'home',
                     'content_heading' => '',
                     'is_active' => 1,
                     'stores' => array($storeId),//available for all store views
-                    'content' => $defaultCmsPage
+                    'content' => str_replace('{$CMShtml}',$CMShtml,$defaultCmsPage)
                 ));
 				$cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'crimson', 'websites', $siteId);
 				$cDat->saveConfig('wsu_themecontrol_design/spine/spine_tool_bar_color', 'lighter', 'websites', $siteId);
@@ -147,13 +183,33 @@ if($newRootCat>0){
             $storeId = $SU_Helper->make_store( $siteId, $storeGroupId, array('code'=>'techstore','name'=>'base default veiw') );
             if( $storeId>0 ){
                 $SU_Helper->moveStoreProducts( $siteId, $storeId, $newRootCat );
+				$storeCmsLayouts = array(
+					'col1'=>array(
+						'twelfths'=>'seven-twelfths',
+						'blocks'=>array(
+							'blocktop'=>'<a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/lefttop_ad_block.jpg"}}" alt="" border="0" /> </a>',
+							'blockbottom'=>'<img src="{{storemedia url="/rightbottom_ad_block.jpg"}}" alt="" border="0" />'
+						)
+					),
+					'col2'=>array(
+						'twelfths'=>'five-twelfths',
+						'blocks'=>array(
+							'blocktop'=>'<img src="{{storemedia url="/home_main_callout.jpg"}}" alt=""  border="0" />',
+							'blockbottom'=>'<img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt=""  border="0" />'
+						)
+					)
+				);
+				$CMShtml="";
+				foreach($storeCmsLayouts as $col=>$part){
+					$CMShtml.="<div class='column ${$part['twelfths']}'>${$part['blocks']['blocktop']}${$part['blocks']['blockbottom']}</div>";
+				}
                 $SU_Helper->createCmsPage($storeId,array(
                     'title' => 'Tech store',
                     'identifier' => 'home',
                     'content_heading' => '',
                     'is_active' => 1,
                     'stores' => array($storeId),//available for all store views
-                    'content' => $defaultCmsPage
+                    'content' => str_replace('{$CMShtml}',$CMShtml,$defaultCmsPage)
                 ));
                 $cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'transparent', 'websites', $siteId);
                 $cDat->saveConfig('wsu_themecontrol_design/spine/spine_tool_bar_color', 'darkest', 'websites', $siteId);
@@ -178,13 +234,30 @@ if($newRootCat>0){
             $storeId = $SU_Helper->make_store( $siteId, $storeGroupId, array('code'=>$storeCodes,'name'=>'base default veiw') );
             if( $storeId>0 ){
                 $SU_Helper->moveStoreProducts( $siteId, $storeId, $newRootCat );
+				$storeCmsLayouts = array(
+					'col1'=>array(
+						'twelfths'=>'seven-twelfths',
+						'blocks'=>array(
+							'blocktop'=>'<a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/lefttop_ad_block.jpg"}}" alt="" border="0" /> </a>',
+							'blockbottom'=>'<img src="{{storemedia url="/rightbottom_ad_block.jpg"}}" alt="" border="0" />'
+						)
+					),
+					'col2'=>array(
+						'twelfths'=>'five-twelfths',
+						'blocks'=>array(
+							'blocktop'=>'<img src="{{storemedia url="/trasparent-placeholder-missing-image.png"}}" alt=""  border="0" />',
+							'blockbottom'=>'<img src="{{storemedia url="/trasparent-placeholder-missing-image.png"}}" alt=""  border="0" />'
+						)
+					)
+				);
+				$CMShtml="";
                 $SU_Helper->createCmsPage($storeId,array(
                     'title' => 'Event store',
                     'identifier' => 'home',
                     'content_heading' => '',
                     'is_active' => 1,
                     'stores' => array($storeId),//available for all store views
-                    'content' => $defaultCmsPage
+                    'content' => str_replace('{$CMShtml}',$CMShtml,$defaultCmsPage)
                 ));
                 include_once('staging/scripts/sample-events.php');
                 $cDat->saveConfig('wsu_themecontrol_design/spine/spine_color', 'darkest', 'websites', $siteId);
