@@ -90,14 +90,7 @@ if($newRootCat>0){
 				
 				$storeCmsLayouts = array(
 					'col1'=>array(
-						'twelfths'=>'seven-twelfths',
-						'blocks'=>array(
-							'blocktop'=>'<a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/lefttop_ad_block.jpg"}}" alt="" border="0" /> </a>',
-							'blockbottom'=>'<img src="{{storemedia url="/rightbottom_ad_block.jpg"}}" alt="" border="0" />'
-						)
-					),
-					'col2'=>array(
-						'twelfths'=>'five-twelfths',
+						'twelfths'=>'twelfths-12',
 						'blocks'=>array(
 							'blocktop'=>'<img src="{{storemedia url="/home_main_callout.jpg"}}" alt=""  border="0" />',
 							'blockbottom'=>'<img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt=""  border="0" />'
@@ -187,7 +180,7 @@ if($newRootCat>0){
 					'col1'=>array(
 						'twelfths'=>'twelve-twelfths',
 						'blocks'=>array(
-							'blocktop'=>'<img src="{{storemedia url="/trasparent-placeholder-missing-image.png"}}" alt="" style="width:100%;min-height:150px" border="0" />',
+							'blocktop'=>'<img src="{{storemedia url="/trasparent-placeholder-missing-image.png"}}" alt="" style="width:100%;min-height:150px;max-height:220px;" border="0" />',
 							'blockbottom'=>'<div class="row">{{block type="catalog/product" products_limit="3" imgh="168" imgw="168" template="custom_block/topproduct.phtml"}}</div>'
 						)
 					)
