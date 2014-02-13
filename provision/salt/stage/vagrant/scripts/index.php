@@ -1,4 +1,7 @@
 <?php
+if(file_exists('fpc.php')){
+	include('fpc.php');
+}
 /**
  * Magento
  *
