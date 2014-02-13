@@ -139,14 +139,14 @@ if($newRootCat>0){
 						'twelfths'=>'seven-twelfths',
 						'blocks'=>array(
 							'blocktop'=>'<a href="{{store direct_url="#"}}"> <img src="{{storemedia url="/lefttop_ad_block.jpg"}}" alt="" border="0" /> </a>',
-							'blockbottom'=>'<img src="{{storemedia url="/trasparent-placeholder-missing-image.jpg"}}" alt="" border="0" />'
+							'blockbottom'=>'<img src="{{storemedia url="/rightbottom_ad_block.jpg"}}" alt="" border="0" />'
 						)
 					),
 					'col2'=>array(
 						'twelfths'=>'five-twelfths',
 						'blocks'=>array(
-							'blocktop'=>'<img src="{{storemedia url="/trasparent-placeholder-missing-image.jpg"}}" alt=""  border="0" />',
-							'blockbottom'=>'<img src="{{storemedia url="/trasparent-placeholder-missing-image.jpg"}}" alt=""  border="0" />'
+							'blocktop'=>'<img src="{{storemedia url="/trasparent-placeholder-missing-image.png"}}" alt=""  border="0" />',
+							'blockbottom'=>'<img src="{{storemedia url="/trasparent-placeholder-missing-image.png"}}" alt=""  border="0" />'
 						)
 					)
 				);
