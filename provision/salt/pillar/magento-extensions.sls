@@ -6,6 +6,11 @@ extensions:
     repo_owner: washingtonstateuniversity
     branch: master
     tag: #v0.1.0-beta.1
+  landfill:
+    name: landfill
+    repo_owner: jeremyBass
+    branch: master
+    tag:
   Magento-OpCache:
     name: Magento-OpCache
     repo_owner: SchumacherFM
