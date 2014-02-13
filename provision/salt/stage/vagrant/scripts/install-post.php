@@ -187,7 +187,7 @@ if($newRootCat>0){
 					'col1'=>array(
 						'twelfths'=>'twelve-twelfths',
 						'blocks'=>array(
-							'blocktop'=>'<img src="{{storemedia url="/trasparent-placeholder-missing-image.png"}}" alt="" style="width:100%;min-height:150px" border="0" />',
+							'blocktop'=>'<img src="{{storemedia url="/trasparent-placeholder-missing-image.png"}}" alt="" style="width:100%;min-height:150px;max-height:220px;" border="0" />',
 							'blockbottom'=>'<div class="row">{{block type="catalog/product" products_limit="3" imgh="168" imgw="168" template="custom_block/topproduct.phtml"}}</div>'
 						)
 					)
