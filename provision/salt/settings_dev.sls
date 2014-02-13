@@ -16,6 +16,12 @@
     - user: www-data
     - group: www-data
     - replace: True
+    - template: jinja
+    - context:
+      magento: {{ magento }}
+      database: {{ database }}
+      project: {{ project }}
+      env: {{ env }}
 
 post-install-settings:
   cmd.run:
