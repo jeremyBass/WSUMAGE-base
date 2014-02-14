@@ -46,11 +46,11 @@ extensions:
     repo_owner: washingtonstateuniversity
     branch: master
     tag: 
-  mediacontroll:
-    name: WSUMAGE-mediacontroll
-    repo_owner: jeremyBass
-    branch: master
-    tag: 
+#  mediacontroll:
+#    name: WSUMAGE-mediacontroll
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag: 
   Storepartitions:
     name: WSUMAGE-Storepartitions
     repo_owner: jeremyBass
@@ -76,11 +76,11 @@ extensions:
     repo_owner: jeremyBass
     branch: master
     tag:        
-  pickupShipping:
-    name: pickupShipping
-    repo_owner: jeremyBass
-    branch: master
-    tag:     
+#  pickupShipping:
+#    name: pickupShipping
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag:     
   AdminQuicklancher:
     name: AdminQuicklancher
     repo_owner: jeremyBass
@@ -121,16 +121,16 @@ extensions:
     repo_owner: AOEmedia
     branch: master
     tag:
-  Aoe_Profiler:
-    name: Aoe_Profiler
-    repo_owner: jeremyBass
-    branch: master
-    tag:
-  Aoe_Scheduler:
-    name: Aoe_Scheduler
-    repo_owner: fbrnc
-    branch: master
-    tag:
+#  Aoe_Profiler:
+#    name: Aoe_Profiler
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag:
+#  Aoe_Scheduler:
+#    name: Aoe_Scheduler
+#    repo_owner: fbrnc
+#    branch: master
+#    tag:
 
 #    #[Aoe_Eav]=AOEmedia          #https://github.com/AOEmedia/Aoe_Eav  
 #    #[Aoe_TemplateHints]=fbrnc
