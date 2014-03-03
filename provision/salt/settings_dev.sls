@@ -52,7 +52,7 @@ reset-magento:
     - require:
       - git: magento
       - service: mysqld-{{ saltenv }}
-      - service: php-{{ env }}
+      - service: php-{{ saltenv }}
       - cmd: magneto-install
 
 reindex-magento:
