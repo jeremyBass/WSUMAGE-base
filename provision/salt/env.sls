@@ -50,7 +50,7 @@ db_users-{{ database['user'] }}:
       
 db_grant-{{ database['name'] }}:
   mysql_grants.present:
-    - grant: all privileges
+    - grant: all
     - host: {{ database['host'] }}
     - database: {{ database['name'] }}.*
     - user: {{ database['user'] }}

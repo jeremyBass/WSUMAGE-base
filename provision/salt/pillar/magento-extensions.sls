@@ -106,21 +106,21 @@ extensions:
     repo_owner: jeremyBass
     branch: master
     tag: 
-  Aoe_AsyncCache:
-    name: Aoe_AsyncCache
-    repo_owner: jeremyBass
-    branch: master
-    tag: 
-  Aoe_ClassPathCache:
-    name: Aoe_ClassPathCache
-    repo_owner: AOEmedia
-    branch: master
-    tag: 
-  Aoe_ModelCache:
-    name: Aoe_ModelCache
-    repo_owner: AOEmedia
-    branch: master
-    tag:
+#  Aoe_AsyncCache:
+#    name: Aoe_AsyncCache
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag: 
+#  Aoe_ClassPathCache:
+#    name: Aoe_ClassPathCache
+#    repo_owner: AOEmedia
+#    branch: master
+#    tag: 
+#  Aoe_ModelCache:
+#    name: Aoe_ModelCache
+#    repo_owner: AOEmedia
+#    branch: master
+#    tag:
 #  Aoe_Profiler:
 #    name: Aoe_Profiler
 #    repo_owner: jeremyBass
