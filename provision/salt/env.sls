@@ -5,21 +5,21 @@
 {%- set magento = pillar.get('magento') %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
-{%- set web_root = "/var/app/" + env + "/html/" %}
+{%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
 
 # Create service checks
 ###########################################################
-mysqld-{{ env }}:
+mysqld-{{ saltenv }}:
   service.running:
     - name: mysqld
 
-php-{{ env }}:
+php-{{ saltenv }}:
   service.running:
     - name: php-fpm
 
-nginx-{{ env }}:
+nginx-{{ saltenv }}:
   service.running:
     - name: nginx
 
@@ -38,7 +38,7 @@ db-{{ database['name'] }}:
   mysql_database.present:
     - name: {{ database['name'] }}
     - require:
-      - service: mysqld-{{ env }}
+      - service: mysqld-{{ saltenv }}
 
 db_users-{{ database['user'] }}:
   mysql_user.present:
@@ -46,7 +46,7 @@ db_users-{{ database['user'] }}:
     - password: {{ database['pass'] }}
     - host: {{ database['host'] }}
     - require:
-      - service: mysqld-{{ env }}
+      - service: mysqld-{{ saltenv }}
       
 db_grant-{{ database['name'] }}:
   mysql_grants.present:
@@ -55,7 +55,7 @@ db_grant-{{ database['name'] }}:
     - database: {{ database['name'] }}.*
     - user: {{ database['user'] }}
     - require:
-      - service: mysqld-{{ env }}
+      - service: mysqld-{{ saltenv }}
 
 
 

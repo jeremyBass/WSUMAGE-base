@@ -5,7 +5,7 @@
 {%- set magento = pillar.get('magento') %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
-{%- set web_root = "/var/app/" + env + "/html/" %}
+{%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
 store.wsu.edu:
@@ -15,12 +15,12 @@ store.wsu.edu:
     - sample_data
     - app_installation
     - extensions
-  'env:vagrant':
+  'saltenv:vagrant':
     - match: grain
     - settings_dev
     - stage_dev
     - clean
-  'env:production':
+  'saltenv:production':
     - match: grain
     - stage_prod
     - clean

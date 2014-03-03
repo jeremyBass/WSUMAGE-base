@@ -5,7 +5,7 @@
 {%- set magento = pillar.get('magento') %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
-{%- set web_root = "/var/app/" + env + "/html/" %}
+{%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
 
@@ -34,8 +34,8 @@ magneto-install:
     - cwd: {{ web_root }}
     - require:
       - git: magento
-      - service: mysqld-{{ env }}
-      - service: php-{{ env }}
+      - service: mysqld-{{ saltenv }}
+      - service: php-{{ saltenv }}
 
 magneto-set-connect-prefs:
   cmd.run:
@@ -56,7 +56,7 @@ magneto-set-connect-prefs:
       magento: {{ magento }}
       database: {{ database }}
       project: {{ project }}
-      env: {{ env }}
+      saltenv: {{ saltenv }}
 
 
 
@@ -104,7 +104,7 @@ insert-wsu-brand-favicon:
 ###############################################
 run-patchs-2619-correct:
   cmd.run: #insure it's going to run on windows hosts
-    - name: dos2unix /srv/salt/{{ env }}/stage/vagrant/patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
+    - name: dos2unix /srv/salt/{{ saltenv }}/stage/vagrant/patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
 run-patchs-2619:
   cmd.script:
     - name: PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
@@ -115,7 +115,7 @@ run-patchs-2619:
     
 run-patchs-2747-correct:
   cmd.run: #insure it's going to run on windows hosts
-    - name: dos2unix /srv/salt/{{ env }}/stage/vagrant/patches/PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh
+    - name: dos2unix /srv/salt/{{ saltenv }}/stage/vagrant/patches/PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh
 run-patchs-2747:
   cmd.script:
     - name: PATCH_SUPEE-2747_EE_1.13.1.0_v1.sh
