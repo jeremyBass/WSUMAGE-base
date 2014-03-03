@@ -5,7 +5,7 @@
 {%- set magento = pillar.get('magento') %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
-{%- set web_root = "/var/app/" + env + "/html/" %}
+{%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
 
@@ -16,7 +16,7 @@ download-sampledata:
     - user: root
     - unless: test -f sample-data.sql
     - require:
-      - service: mysqld-{{ env }}
+      - service: mysqld-{{ saltenv }}
 
 
 install-sample-date:

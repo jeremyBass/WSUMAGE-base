@@ -102,13 +102,13 @@ magento:
     - group: www-data
     - mode: 744
 
-restart-nginx-{{ env }}:
+restart-nginx-{{ saltenv }}:
   cmd.run:
     - name: service nginx restart
     - user: root
     - cwd: /
     - require:
-      - service: nginx-{{ env }}
+      - service: nginx-{{ saltenv }}
 
 
 #Modgit for magento modules
