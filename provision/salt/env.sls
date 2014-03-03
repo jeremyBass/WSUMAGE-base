@@ -7,7 +7,12 @@
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
-
+{%- set isLocal = "false" -%}
+{% for host,ip in salt['mine.get']('*', 'network.ip_addrs').items() -%}
+    {% if ip|replace("10.255.255", "LOCAL").split('LOCAL').count() == 2  %}
+        {%- set isLocal = "true" -%}
+    {%- endif %}
+{%- endfor %}
 
 # Create service checks
 ###########################################################
@@ -128,21 +133,22 @@ init_gitploy:
     - user: root
 
 #do a dry run test of modgit
-modgit_dryrun:
+gitploy_dryrun:
   cmd.run:
-    - name: gitploy -d Storeutilities https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git 2>/dev/null | grep -qi "error" && echo "name=modgit_dryrun result=False changed=False comment=failed" || echo "name=modgit_dryrun  result=True changed=True comment=passed"
+    - name: gitploy -d Storeutilities https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git 2>/dev/null | grep -qi "error" && echo "name=gitploy_dryrun result=False changed=False comment=failed" || echo "name=gitploy_dryrun  result=True changed=True comment=passed"
     - cwd: {{ web_root }}
     - user: root
     - stateful: True
     - require:
       - cmd: init_gitploy
 
+{% if isLocal == "true" %}
 #add a database explorer
 install-adminer:
   cmd.run:
     - name: wget "http://www.adminer.org/latest-mysql-en.php"  -O adminer.php | wget "https://raw.github.com/vrana/adminer/master/designs/haeckel/adminer.css"  -O adminer.css
     - cwd: {{ web_root }}
     - unless: -f {{ web_root }}adminer.php
-
+{%- endif %}
 
 
