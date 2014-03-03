@@ -53,10 +53,10 @@ remove-Phoenix_Moneybookers:
 
 base-ext-{{ ext_key }}:
   cmd.run:
-    - name: 'gitploy -q {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ ext_key['track_name'] }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git && echo "export ADDED{{ ext_key['track_name']|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/profile'
+    - name: 'gitploy -q {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ ext_key['track_name'] }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git && echo "export ADDED{{ ext_val['track_name']|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/profile'
     - cwd: {{ web_root }}
     - user: root
-    - unless: modgit ls 2>&1 | grep -qi "{{ ext_key['track_name'] }}"
+    - unless: modgit ls 2>&1 | grep -qi "{{ ext_val['track_name'] }}"
     - require:
       - git: magento
       - service: mysqld-{{ saltenv }}
@@ -69,7 +69,7 @@ install-base-ext-{{ ext_key }}:
     - name: rm -rf {{ web_root }}var/cache/* | php "{{ web_root }}index.php" 2>/dev/null
     - cwd: {{ web_root }}
     - user: root
-    - unless: test x"$ADDED{{ ext_key['track_name']|replace("-","") }}" = x
+    - unless: test x"$ADDED{{ ext_val['track_name']|replace("-","") }}" = x
     - require:
       - git: magento
       - service: mysqld-{{ saltenv }}
