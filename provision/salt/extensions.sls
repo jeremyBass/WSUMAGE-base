@@ -7,7 +7,12 @@
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
-
+{%- set isLocal = "false" -%}
+{% for host,ip in salt['mine.get']('*', 'network.ip_addrs').items() -%}
+    {% if ip|replace("10.255.255", "LOCAL").split('LOCAL').count() == 2  %}
+        {%- set isLocal = "true" -%}
+    {%- endif %}
+{%- endfor %}
 
 
 remove-PaypalUk:
@@ -37,6 +42,15 @@ remove-Phoenix_Moneybookers:
 
 # Start the extension intsalls
 {% for ext_key, ext_val in magento_extensions.iteritems() %}
+
+{%- set installExt = "true" -%}
+
+{% if ext_val['localonly'] is defined and ext_val['localonly'] is not none and ext_val['localonly'] == "true" %}
+        {%- set installExt = isLocal -%}
+{%- endif %}
+
+{% if installExt == "true" %}
+
 base-ext-{{ ext_key }}:
   cmd.run:
     - name: 'gitploy -q {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ ext_key }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git && echo "export ADDED{{ ext_key|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/profile'
@@ -61,4 +75,11 @@ install-base-ext-{{ ext_key }}:
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
       - cmd: magneto-install      
+
+{% else %}
+{%- endif %}
+
 {% endfor %}
+
+
+
