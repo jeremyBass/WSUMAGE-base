@@ -5,7 +5,7 @@
 {%- set magento = pillar.get('magento') %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
-{%- set web_root = "/var/app/" + env + "/html/" %}
+{%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
 
@@ -35,11 +35,6 @@ remove-Phoenix_Moneybookers:
 
 
 
-#this is how to get somethign from the connect download
-#./mage download community Motech_DefaultAttributeSet
-
-
-
 # Start the extension intsalls
 {% for ext_key, ext_val in magento_extensions.iteritems() %}
 base-ext-{{ ext_key }}:
@@ -50,8 +45,8 @@ base-ext-{{ ext_key }}:
     - unless: modgit ls 2>&1 | grep -qi "{{ ext_key }}"
     - require:
       - git: magento
-      - service: mysqld-{{ env }}
-      - service: php-{{ env }}
+      - service: mysqld-{{ saltenv }}
+      - service: php-{{ saltenv }}
       - cmd: magneto-install
       - cmd: init_gitploy
       
@@ -63,7 +58,7 @@ install-base-ext-{{ ext_key }}:
     - unless: test x"$ADDED{{ ext_key|replace("-","") }}" = x
     - require:
       - git: magento
-      - service: mysqld-{{ env }}
-      - service: php-{{ env }}
+      - service: mysqld-{{ saltenv }}
+      - service: php-{{ saltenv }}
       - cmd: magneto-install      
 {% endfor %}
