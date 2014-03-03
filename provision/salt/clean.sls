@@ -5,7 +5,7 @@
 {%- set magento = pillar.get('magento') %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
-{%- set web_root = "/var/app/" + env + "/html/" %}
+{%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
 #sed -i 's/.*#salt-set REMOVE.*//' /etc/profile
@@ -42,4 +42,4 @@ finalrun-restart-nginx-{{ env }}:
     - user: root
     - cwd: /
     - require:
-      - service: nginx-{{ env }}
+      - service: nginx-{{ saltenv }}
