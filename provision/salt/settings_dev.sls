@@ -31,18 +31,18 @@ post-install-settings:
     - unless: test x"$MagentoFreshInstalled" = x
     - require:
       - git: magento
-      - service: mysqld-{{ env }}
-      - service: php-{{ env }}
+      - service: mysqld-{{ saltenv }}
+      - service: php-{{ saltenv }}
       - cmd: magneto-install
 
 
-final-restart-nginx-{{ env }}:
+final-restart-nginx-{{ saltenv }}:
   cmd.run:
     - name: service nginx restart
     - user: root
     - cwd: /
     - require:
-      - service: nginx-{{ env }}
+      - service: nginx-{{ saltenv }}
 
 reset-magento:
   cmd.run:
@@ -51,7 +51,7 @@ reset-magento:
     - user: root
     - require:
       - git: magento
-      - service: mysqld-{{ env }}
+      - service: mysqld-{{ saltenv }}
       - service: php-{{ env }}
       - cmd: magneto-install
 
@@ -63,6 +63,6 @@ reindex-magento:
     - unless: test x"$MagentoFreshInstalled" = x
     - require:
       - git: magento
-      - service: mysqld-{{ env }}
-      - service: php-{{ env }}
+      - service: mysqld-{{ saltenv }}
+      - service: php-{{ saltenv }}
       - cmd: magneto-install
