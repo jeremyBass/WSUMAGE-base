@@ -5,7 +5,7 @@
 {%- set magento = pillar.get('magento') %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
-{%- set web_root = "/var/app/" + env + "/html/" %}
+{%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
 
@@ -21,7 +21,7 @@
       magento: {{ magento }}
       database: {{ database }}
       project: {{ project }}
-      env: {{ env }}
+      saltenv: {{ saltenv }}
 
 post-install-settings:
   cmd.run:
@@ -31,18 +31,18 @@ post-install-settings:
     - unless: test x"$MagentoFreshInstalled" = x
     - require:
       - git: magento
-      - service: mysqld-{{ env }}
-      - service: php-{{ env }}
+      - service: mysqld-{{ saltenv }}
+      - service: php-{{ saltenv }}
       - cmd: magneto-install
 
 
-final-restart-nginx-{{ env }}:
+final-restart-nginx-{{ saltenv }}:
   cmd.run:
     - name: service nginx restart
     - user: root
     - cwd: /
     - require:
-      - service: nginx-{{ env }}
+      - service: nginx-{{ saltenv }}
 
 reset-magento:
   cmd.run:
@@ -51,8 +51,8 @@ reset-magento:
     - user: root
     - require:
       - git: magento
-      - service: mysqld-{{ env }}
-      - service: php-{{ env }}
+      - service: mysqld-{{ saltenv }}
+      - service: php-{{ saltenv }}
       - cmd: magneto-install
 
 reindex-magento:
@@ -63,6 +63,6 @@ reindex-magento:
     - unless: test x"$MagentoFreshInstalled" = x
     - require:
       - git: magento
-      - service: mysqld-{{ env }}
-      - service: php-{{ env }}
+      - service: mysqld-{{ saltenv }}
+      - service: php-{{ saltenv }}
       - cmd: magneto-install
