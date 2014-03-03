@@ -11,6 +11,7 @@ extensions:
     repo_owner: jeremyBass
     branch: master
     tag:
+    localonly: true
   Magento-OpCache:
     name: Magento-OpCache
     repo_owner: SchumacherFM
