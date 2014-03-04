@@ -41,7 +41,7 @@ remove-Phoenix_Moneybookers:
 
 
 # Start the extension intsalls
-{% for ext_key, ext_val in magento_extensions.iteritems() %}
+{% for ext_key, ext_val in magento_extensions.iteritems()|dictsort %}
 
 {%- set installExt = "true" -%}
 {%- set track_name = ext_val['track_name'] -%}
