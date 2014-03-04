@@ -15,8 +15,6 @@ store.wsu.edu:
     - sample_data
     - app_installation
     - extensions
-  'saltenv:vagrant':
-    - match: grain
     - settings_dev
     - stage_dev
     - clean
