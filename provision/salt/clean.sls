@@ -36,7 +36,7 @@ clear-random-files:
     - cwd: {{ web_root }}
     
 #this is really just to bandaid another issues being worked on
-finalrun-restart-nginx-{{ env }}:
+finalrun-restart-nginx-{{ saltenv }}:
   cmd.run:
     - name: service nginx restart
     - user: root
