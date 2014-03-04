@@ -27,47 +27,47 @@ extensions:
     branch: master
     tag: 
   etx00005:
-    track_name: admin-base
-    name: WSUMAGE-admin-base
-    repo_owner: washingtonstateuniversity
-    branch: master
-    tag: 
-  etx00006:
-    track_name: theme-base
-    name: WSUMAGE-theme-base
-    repo_owner: washingtonstateuniversity
-    branch: master
-    tag: 
-  etx00007:
-    track_name: auditing
-    name: WSUMAGE-auditing
-    repo_owner: washingtonstateuniversity
-    branch: master
-    tag: 
-  etx00008:
-    track_name: structureddata
-    name: WSUMAGE-structured-data
-    repo_owner: washingtonstateuniversity
-    branch: master
-    tag: 
-  etx00009:
-    track_name: iri-gateway
-    name: WSUMAGE-iri-gateway
-    repo_owner: washingtonstateuniversity
-    branch: master
-    tag: 
-#  etx00010:
-#    track_name: mediacontroll
-#    name: WSUMAGE-mediacontroll
-#    repo_owner: jeremyBass
-#    branch: master
-#    tag: 
-  etx00011:
     track_name: Storepartitions
     name: WSUMAGE-Storepartitions
     repo_owner: jeremyBass
     branch: master
     tag: 
+  etx00006:
+    track_name: admin-base
+    name: WSUMAGE-admin-base
+    repo_owner: washingtonstateuniversity
+    branch: master
+    tag: 
+  etx00007:
+    track_name: theme-base
+    name: WSUMAGE-theme-base
+    repo_owner: washingtonstateuniversity
+    branch: master
+    tag: 
+  etx00008:
+    track_name: auditing
+    name: WSUMAGE-auditing
+    repo_owner: washingtonstateuniversity
+    branch: master
+    tag: 
+  etx00009:
+    track_name: structureddata
+    name: WSUMAGE-structured-data
+    repo_owner: washingtonstateuniversity
+    branch: master
+    tag: 
+  etx00010:
+    track_name: iri-gateway
+    name: WSUMAGE-iri-gateway
+    repo_owner: washingtonstateuniversity
+    branch: master
+    tag: 
+#  etx00011:
+#    track_name: mediacontroll
+#    name: WSUMAGE-mediacontroll
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag: 
 #  etx00012:
 #    track_name: mailing_services
 #    name: mailing_services
