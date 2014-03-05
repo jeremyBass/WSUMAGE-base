@@ -158,6 +158,11 @@ extensions:
 #    repo_owner: fbrnc
 #    branch: master
 #    tag:
-
+  etx00027:
+    track_name: WSUMAGE_forms
+    name: WSUMAGE-forms
+    repo_owner: jeremyBass
+    branch: master
+    tag:
 #    #[Aoe_Eav]=AOEmedia          #https://github.com/AOEmedia/Aoe_Eav  
 #    #[Aoe_TemplateHints]=fbrnc
