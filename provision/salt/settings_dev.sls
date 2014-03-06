@@ -57,7 +57,7 @@ reset-magento:
 
 setup-magento-cron:
   cron.present:
-    - name: php {{ web_root }}/cron.php
+    - name: php {{ web_root }}cron.php
     - user: root
     - minute: '*/5'
 
