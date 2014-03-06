@@ -55,6 +55,12 @@ reset-magento:
       - service: php-{{ saltenv }}
       - cmd: magneto-install
 
+setup-magento-cron:
+  cron.present:
+    - name: php {{ web_root }}cron.php
+    - user: root
+    - minute: '*/5'
+
 reindex-magento:
   cmd.run:
     - name: php -f indexer.php reindexall | php "{{ web_root }}index.php" 2>/dev/null
