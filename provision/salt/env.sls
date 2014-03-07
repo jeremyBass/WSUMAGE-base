@@ -39,13 +39,13 @@ memcached-stopped:
 
 # Setup the MySQL requirements for WSUMAGE-base
 ###########################################################
-db-{{ database['name'] }}:
+magedb-{{ database['name'] }}:
   mysql_database.present:
     - name: {{ database['name'] }}
     - require:
       - service: mysqld-{{ saltenv }}
 
-db_users-{{ database['user'] }}:
+magedb_users-{{ database['user'] }}:
   mysql_user.present:
     - name: {{ database['user'] }}
     - password: {{ database['pass'] }}
@@ -53,9 +53,9 @@ db_users-{{ database['user'] }}:
     - require:
       - service: mysqld-{{ saltenv }}
       
-db_grant-{{ database['name'] }}:
+magedb_grant-{{ database['name'] }}:
   mysql_grants.present:
-    - grant: all
+    - grant: select,insert,update,delete,drop,alter
     - host: {{ database['host'] }}
     - database: {{ database['name'] }}.*
     - user: {{ database['user'] }}
