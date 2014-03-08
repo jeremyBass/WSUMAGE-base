@@ -55,7 +55,7 @@ magedb_users-{{ database['user'] }}:
       
 magedb_grant-{{ database['name'] }}:
   mysql_grants.present:
-    - grant: select,create,insert,update,delete,drop,alter
+    - grant: all
     - host: {{ database['host'] }}
     - database: {{ database['name'] }}.*
     - user: {{ database['user'] }}
