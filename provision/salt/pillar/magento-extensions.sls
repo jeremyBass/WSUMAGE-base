@@ -68,12 +68,12 @@ extensions:
     repo_owner: jeremyBass
     branch: master
     tag: 
-#  etx00012:
-#    track_name: mailing_services
-#    name: mailing_services
-#    repo_owner: jeremyBass
-#    branch: master
-#    tag:     
+  etx00012:
+    track_name: mailing_services
+    name: mailing_services
+    repo_owner: jeremyBass
+    branch: master
+    tag:     
   etx00013:
     track_name: eventTickets
     name: eventTickets
