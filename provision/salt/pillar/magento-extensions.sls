@@ -7,13 +7,13 @@ extensions:
     repo_owner: washingtonstateuniversity
     branch: master
     tag: v0.1.0-RC
-  etx00002:
-    track_name: landfill
-    name: landfill
-    repo_owner: jeremyBass
-    branch: master
-    tag:
-    localonly: true
+#  etx00002:
+#    track_name: landfill
+#    name: landfill
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag:
+#    localonly: true
   etx00003:
     track_name: Magento-OpCache
     name: Magento-OpCache
