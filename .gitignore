@@ -1,1 +1,7 @@
-html/
+.idea
+node_modules
+/pub
+/build
+#/test
+#!/test/preprocess
+#!/test/preprocess/blocks
