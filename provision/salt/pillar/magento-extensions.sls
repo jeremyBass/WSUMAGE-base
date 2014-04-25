@@ -25,7 +25,7 @@ extensions:
     name: WSUMAGE-networksecurities
     repo_owner: washingtonstateuniversity
     branch: master
-    tag: 
+    tag: v0.1.0-RC
   etx00005:
     track_name: Storepartitions
     name: WSUMAGE-Storepartitions
