@@ -62,12 +62,12 @@ extensions:
     repo_owner: washingtonstateuniversity
     branch: master
     tag: 
-#  etx00011:
-#    track_name: mediacontroll
-#    name: WSUMAGE-mediacontroll
-#    repo_owner: jeremyBass
-#    branch: master
-#    tag: 
+  etx00011:
+    track_name: mediacontroll
+    name: WSUMAGE-mediacontroll
+    repo_owner: jeremyBass
+    branch: master
+    tag: 
 #  etx00012:
 #    track_name: mailing_services
 #    name: mailing_services
