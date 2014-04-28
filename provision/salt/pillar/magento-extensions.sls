@@ -7,6 +7,12 @@ extensions:
     repo_owner: washingtonstateuniversity
     branch: master
     tag: v0.1.0-RC
+  etx00002:
+    track_name: opc
+    name: WSUMAGE-opc
+    repo_owner: washingtonstateuniversity
+    branch: master
+    tag:
 #  etx00002:
 #    track_name: landfill
 #    name: landfill
