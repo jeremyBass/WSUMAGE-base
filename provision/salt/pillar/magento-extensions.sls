@@ -6,14 +6,20 @@ extensions:
     name: WSUMAGE-store-utilities
     repo_owner: washingtonstateuniversity
     branch: master
-    tag: #v0.1.0-beta.1
+    tag: v0.1.0-RC
   etx00002:
-    track_name: landfill
-    name: landfill
-    repo_owner: jeremyBass
+    track_name: opc
+    name: WSUMAGE-opc
+    repo_owner: washingtonstateuniversity
     branch: master
     tag:
-    localonly: true
+#  etx00002:
+#    track_name: landfill
+#    name: landfill
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag:
+#    localonly: true
   etx00003:
     track_name: Magento-OpCache
     name: Magento-OpCache
@@ -25,7 +31,7 @@ extensions:
     name: WSUMAGE-networksecurities
     repo_owner: washingtonstateuniversity
     branch: master
-    tag: 
+    tag: v0.1.0-RC
   etx00005:
     track_name: Storepartitions
     name: WSUMAGE-Storepartitions
@@ -62,18 +68,18 @@ extensions:
     repo_owner: washingtonstateuniversity
     branch: master
     tag: 
-#  etx00011:
-#    track_name: mediacontroll
-#    name: WSUMAGE-mediacontroll
-#    repo_owner: jeremyBass
-#    branch: master
-#    tag: 
-#  etx00012:
-#    track_name: mailing_services
-#    name: mailing_services
-#    repo_owner: jeremyBass
-#    branch: master
-#    tag:     
+  etx00011:
+    track_name: mediacontroll
+    name: WSUMAGE-mediacontroll
+    repo_owner: jeremyBass
+    branch: master
+    tag: 
+  etx00012:
+    track_name: mailing_services
+    name: mailing_services
+    repo_owner: jeremyBass
+    branch: master
+    tag:     
   etx00013:
     track_name: eventTickets
     name: eventTickets
