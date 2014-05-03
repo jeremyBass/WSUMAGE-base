@@ -7,11 +7,10 @@
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
-{%- set isLocal = "false" -%}
-{% for host,ip in salt['mine.get']('*', 'network.ip_addrs').items() -%}
-    {% if ip|replace("10.255.255", "LOCAL").split('LOCAL').count() == 2  %}
-        {%- set isLocal = "true" -%}
-    {%- endif %}
+
+{% set vars = {'isLocal': False} %}
+{% for ip in salt['grains.get']('ipv4') if ip.startswith('10.255.255') -%}
+    {% if vars.update({'isLocal': True}) %} {% endif %}
 {%- endfor %}
 
 # Create service checks
@@ -142,7 +141,7 @@ gitploy_dryrun:
     - require:
       - cmd: init_gitploy
 
-{% if isLocal == "true" %}
+{% if var.isLocal == "true" %}
 #add a database explorer
 install-adminer:
   cmd.run:
