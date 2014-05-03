@@ -141,7 +141,7 @@ gitploy_dryrun:
     - require:
       - cmd: init_gitploy
 
-{% if var.isLocal == "true" %}
+{% if var.isLocal %}
 #add a database explorer
 install-adminer:
   cmd.run:
