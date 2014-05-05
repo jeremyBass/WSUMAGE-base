@@ -122,7 +122,7 @@ magento:
     - context:
       isLocal: {{ vars.isLocal }}
       saltenv: {{ saltenv }}
-
+      web_root: {{ web_root }}
 
 {{ web_root }}maps/:
     file.directory:
