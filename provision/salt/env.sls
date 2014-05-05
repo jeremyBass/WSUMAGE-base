@@ -142,6 +142,7 @@ magento:
     - context:
       isLocal: {{ vars.isLocal }}
       saltenv: {{ saltenv }}
+      web_root: {{ web_root }}
 
 restart-nginx-{{ saltenv }}:
   cmd.run:
