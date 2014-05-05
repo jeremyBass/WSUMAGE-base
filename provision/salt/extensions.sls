@@ -60,7 +60,7 @@ base-ext-{{ ext_key }}:
     - user: root
     - unless: modgit ls 2>&1 | grep -qi "{{ track_name }}"
     - require:
-      - git: magento
+      - cmd: magento
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
       - cmd: magneto-install
@@ -73,7 +73,7 @@ install-base-ext-{{ ext_key }}:
     - user: root
     - unless: test x"$ADDED{{ track_name|replace("-","") }}" = x
     - require:
-      - git: magento
+      - cmd: magento
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
       - cmd: magneto-install      

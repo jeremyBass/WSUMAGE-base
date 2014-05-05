@@ -22,14 +22,14 @@ PEAR-registry:
     - name: ./mage mage-setup .
     - cwd: {{ web_root }}
     - require:
-      - git: magento
+      - cmd: magento
       
 set-mage-ext-pref:
   cmd.run:
     - name: ./mage install magento-core Mage_All_Latest
     - cwd: {{ web_root }}
     - require:
-      - git: magento
+      - cmd: magento
       
 magneto-install:
   cmd.run:
@@ -38,7 +38,7 @@ magneto-install:
     - user: root
     - cwd: {{ web_root }}
     - require:
-      - git: magento
+      - cmd: magento
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
 
@@ -47,7 +47,7 @@ magneto-set-connect-prefs:
     - name: ./mage config-set preferred_state alpha | ./mage clear-cache | ./mage sync
     - cwd: {{ web_root }}
     - require:
-      - git: magento
+      - cmd: magento
 
 
 # move the apps nginx rules to the site-enabled
@@ -68,7 +68,7 @@ insert-wsu-brand-favicon:
     - name: wget -q http://images.wsu.edu/favicon.ico -O favicon.ico
     - cwd: {{ web_root }}
     - require:
-      - git: magento
+      - cmd: magento
 
 ###############################################
 # staging
