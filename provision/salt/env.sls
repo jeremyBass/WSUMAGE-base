@@ -115,7 +115,7 @@ magento:
 # move the apps nginx rules to the site-enabled
 /etc/nginx/sites-enabled/store.mage.dev.conf:
   file.managed:
-    - source: salt://config/nginx/store.mage.dev.conf
+    - source: salt://config/nginx/store.network.conf
     - user: root
     - group: root
     
