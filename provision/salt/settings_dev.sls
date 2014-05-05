@@ -30,7 +30,7 @@ post-install-settings:
     - user: root
     - unless: test x"$MagentoFreshInstalled" = x
     - require:
-      - git: magento
+      - cwd: magento
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
       - cmd: magneto-install
@@ -50,7 +50,7 @@ reset-magento:
     - cwd: {{ web_root }}
     - user: root
     - require:
-      - git: magento
+      - cwd: magento
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
       - cmd: magneto-install
@@ -68,7 +68,7 @@ reindex-magento:
     - user: root
     - unless: test x"$MagentoFreshInstalled" = x
     - require:
-      - git: magento
+      - cwd: magento
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
       - cmd: magneto-install
