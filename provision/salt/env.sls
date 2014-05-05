@@ -7,11 +7,10 @@
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
-{%- set isLocal = "false" -%}
-{% for host,ip in salt['mine.get']('*', 'network.ip_addrs').items() -%}
-    {% if ip|replace("10.255.255", "LOCAL").split('LOCAL').count() == 2  %}
-        {%- set isLocal = "true" -%}
-    {%- endif %}
+
+{% set vars = {'isLocal': False} %}
+{% for ip in salt['grains.get']('ipv4') if ip.startswith('10.255.255') -%}
+    {% if vars.update({'isLocal': True}) %} {% endif %}
 {%- endfor %}
 
 # Create service checks
@@ -74,15 +73,43 @@ magedb_grant-{{ database['name'] }}:
     - dir_mode: 775
     - file_mode: 664
 
-#magento base
-magento:
-  git.latest:
-    - name: git://github.com/washingtonstateuniversity/magento-mirror.git
-    - rev: 1.8.1.0
-    - target: {{ web_root }}
-    - force: True
-    - unless: cd {{ web_root }}app/code/core/Mage/Admin/data/admin_setup
 
+#Modgit for magento modules
+gitploy:
+  cmd.run:
+    - name: curl https://raw.github.com/jeremyBass/gitploy/master/gitploy | sudo sh -s -- install
+    - cwd: /
+    - user: root
+    - unless: which gitploy
+
+#start modgit tracking
+init_gitploy:
+  cmd.run:
+    - name: gitploy init
+    - cwd: {{ web_root }}
+    - unless: test -d {{ web_root }}.gitploy
+    - user: root
+
+
+#magento base
+#magento:
+#  git.latest:
+#    - name: git://github.com/washingtonstateuniversity/magento-mirror.git
+#    - rev: 1.8.1.0
+#    - target: {{ web_root }}
+#    - force: True
+#    - unless: cd {{ web_root }}app/code/core/Mage/Admin/data/admin_setup
+
+
+magento:
+  cmd.run:
+    - name: 'gitploy -q -t 1.8.1.0 MAGE https://github.com/washingtonstateuniversity/magento-mirror.git && echo "export ADDEDMAGE=True {% raw %}#salt-set REMOVE{% endraw %}-MAGE" >> /etc/profile'
+    - cwd: {{ web_root }}
+    - user: root
+    - unless: modgit ls 2>&1 | grep -qi "MAGE"
+    - require:
+      - service: mysqld-{{ saltenv }}
+      - service: php-{{ saltenv }}
 
 
 # move the apps nginx rules to the site-enabled
@@ -116,21 +143,7 @@ restart-nginx-{{ saltenv }}:
       - service: nginx-{{ saltenv }}
 
 
-#Modgit for magento modules
-gitploy:
-  cmd.run:
-    - name: curl https://raw.github.com/jeremyBass/gitploy/master/gitploy | sudo sh -s -- install
-    - cwd: /
-    - user: root
-    - unless: which gitploy
 
-#start modgit tracking
-init_gitploy:
-  cmd.run:
-    - name: gitploy init
-    - cwd: {{ web_root }}
-    - unless: test -d {{ web_root }}.gitploy
-    - user: root
 
 #do a dry run test of modgit
 gitploy_dryrun:
@@ -142,7 +155,7 @@ gitploy_dryrun:
     - require:
       - cmd: init_gitploy
 
-{% if isLocal == "true" %}
+{% if vars.isLocal %}
 #add a database explorer
 install-adminer:
   cmd.run:
