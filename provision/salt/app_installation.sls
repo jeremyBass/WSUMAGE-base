@@ -7,19 +7,20 @@
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
-{%- set isLocal = "false" -%}
-{% for host,ip in salt['mine.get']('*', 'network.ip_addrs').items() -%}
-    {% if ip|replace("10.255.255", "LOCAL").split('LOCAL').count() == 2  %}
-        {%- set isLocal = "true" -%}
-    {%- endif %}
+
+{% set vars = {'isLocal': False} %}
+{% for ip in salt['grains.get']('ipv4') if ip.startswith('10.255.255') -%}
+    {% if vars.update({'isLocal': True}) %} {% endif %}
 {%- endfor %}
 
 ###############################################
 # magneto install
 ###############################################    
+     
 PEAR-registry:
   cmd.run:
     - name: ./mage mage-setup .
+    - user: root
     - cwd: {{ web_root }}
     - require:
       - cmd: magento
@@ -27,6 +28,7 @@ PEAR-registry:
 set-mage-ext-pref:
   cmd.run:
     - name: ./mage install magento-core Mage_All_Latest
+    - user: root
     - cwd: {{ web_root }}
     - require:
       - cmd: magento
