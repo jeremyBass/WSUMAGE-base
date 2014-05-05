@@ -17,14 +17,7 @@
 ###############################################
 # magneto install
 ###############################################    
-PEAR-registry:
-  cmd.run:
-    - name: ./mage mage-setup .
-    - user: root
-    - cwd: {{ web_root }}
-    - require:
-      - cmd: magento
-      
+     
 PEAR-registry:
   cmd.run:
     - name: ./mage mage-setup .
@@ -36,6 +29,7 @@ PEAR-registry:
 set-mage-ext-pref:
   cmd.run:
     - name: ./mage install magento-core Mage_All_Latest
+    - user: root
     - cwd: {{ web_root }}
     - require:
       - cmd: magento
