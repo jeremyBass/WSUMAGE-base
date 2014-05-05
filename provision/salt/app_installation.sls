@@ -20,6 +20,15 @@
 PEAR-registry:
   cmd.run:
     - name: ./mage mage-setup .
+    - user: root
+    - cwd: {{ web_root }}
+    - require:
+      - cmd: magento
+      
+PEAR-registry:
+  cmd.run:
+    - name: ./mage mage-setup .
+    - user: root
     - cwd: {{ web_root }}
     - require:
       - cmd: magento
