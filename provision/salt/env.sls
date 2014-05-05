@@ -113,12 +113,17 @@ magento:
 
 
 # move the apps nginx rules to the site-enabled
-/etc/nginx/sites-enabled/store.mage.dev.conf:
+/etc/nginx/sites-enabled/store.network.conf:
   file.managed:
     - source: salt://config/nginx/store.network.conf
     - user: root
     - group: root
-    
+    - template: jinja
+    - context:
+      isLocal: {{ vars.isLocal }}
+      saltenv: {{ saltenv }}
+
+
 {{ web_root }}maps/:
     file.directory:
     - user: www-data
@@ -133,6 +138,10 @@ magento:
     - user: www-data
     - group: www-data
     - mode: 744
+    - template: jinja
+    - context:
+      isLocal: {{ vars.isLocal }}
+      saltenv: {{ saltenv }}
 
 restart-nginx-{{ saltenv }}:
   cmd.run:
