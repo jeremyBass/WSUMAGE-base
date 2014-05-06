@@ -8,11 +8,11 @@ extensions:
     branch: master
     tag: v0.1.0-RC
   etx00002:
-    track_name: opc
-    name: WSUMAGE-opc
+    track_name: networksecurities
+    name: WSUMAGE-networksecurities
     repo_owner: washingtonstateuniversity
     branch: master
-    tag:
+    tag: v0.1.0-RC
 #  etx00002:
 #    track_name: landfill
 #    name: landfill
@@ -27,11 +27,11 @@ extensions:
     branch: master
     tag: #v0.1.0-beta.1
   etx00004:
-    track_name: networksecurities
-    name: WSUMAGE-networksecurities
+    track_name: opc
+    name: WSUMAGE-opc
     repo_owner: washingtonstateuniversity
     branch: master
-    tag: v0.1.0-RC
+    tag:
   etx00005:
     track_name: Storepartitions
     name: WSUMAGE-Storepartitions
