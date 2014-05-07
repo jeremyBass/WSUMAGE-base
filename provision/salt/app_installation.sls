@@ -16,7 +16,13 @@
 ###############################################
 # magneto install
 ###############################################    
-     
+# move the apps nginx rules to the site-enabled
+{{ web_root }}mage: 
+   file.managed:
+    - user: root
+    - group: root
+    - mode: 744
+
 PEAR-registry:
   cmd.run:
     - name: ./mage mage-setup .
