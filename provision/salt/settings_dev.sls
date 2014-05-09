@@ -8,6 +8,10 @@
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
+{% set vars = {'isLocal': False} %}
+{% for ip in salt['grains.get']('ipv4') if ip.startswith('10.255.255') -%}
+    {% if vars.update({'isLocal': True}) %} {% endif %}
+{%- endfor %}
 
 # move the apps nginx rules to the site-enabled
 {{ web_root }}index.php:
@@ -22,6 +26,23 @@
       database: {{ database }}
       project: {{ project }}
       saltenv: {{ saltenv }}
+
+# move the apps nginx rules to the site-enabled
+{{ web_root }}staging/scripts/install-config.php:
+  file.managed:
+    - source: {{ stage_root }}scripts/install-config.php
+    - user: www-data
+    - group: www-data
+    - replace: True
+    - template: jinja
+    - context:
+      magento: {{ magento }}
+      database: {{ database }}
+      project: {{ project }}
+      isLocal: {{ vars.isLocal }}
+      saltenv: {{ saltenv }}
+      web_root: {{ web_root }}
+
 
 post-install-settings:
   cmd.run:

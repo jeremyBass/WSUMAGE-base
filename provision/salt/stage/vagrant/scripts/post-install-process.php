@@ -15,6 +15,9 @@ NOTE that this requires
 echo getcwd() . " (working from)\n";
 $argv = $_SERVER['argv'];
 
+include_once('staging/scripts/install-config.php');
+
+
 //exit();die();
 //set up the store instance
 require_once "app/Mage.php";
