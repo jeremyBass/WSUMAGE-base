@@ -46,7 +46,7 @@
 
 post-install-settings:
   cmd.run:
-    - name: php staging/scripts/ipost-install-process.php
+    - name: php staging/scripts/post-install-process.php
     - cwd: {{ web_root }}
     - user: root
     - unless: test x"$MagentoFreshInstalled" = x
