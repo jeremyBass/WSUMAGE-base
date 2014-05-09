@@ -104,12 +104,12 @@ extensions:
 #    repo_owner: jeremyBass
 #    branch: master
 #    tag:     
-  etx00017:
-    track_name: AdminQuicklancher
-    name: AdminQuicklancher
-    repo_owner: jeremyBass
-    branch: master
-    tag:  
+#  etx00017:
+#    track_name: AdminQuicklancher
+#    name: AdminQuicklancher
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag:  
 #  etx00018:
 #    track_name: dropshippers
 #    name: dropshippers
@@ -168,6 +168,12 @@ extensions:
     track_name: WSUMAGE_forms
     name: WSUMAGE-forms
     repo_owner: jeremyBass
+    branch: master
+    tag:
+  etx00028:
+    track_name: WSUMAGE_comingsoon
+    name: WSUMAGE-comingsoon 
+    repo_owner: washingtonstateuniversity
     branch: master
     tag:
 #    #[Aoe_Eav]=AOEmedia          #https://github.com/AOEmedia/Aoe_Eav  
