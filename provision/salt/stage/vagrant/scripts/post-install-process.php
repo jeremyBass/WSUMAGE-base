@@ -53,7 +53,12 @@ foreach($settingsarray as $item){
     $cDat->saveConfig($item['path'], $val, 'default', 0);
 }
 $cDat->saveConfig('admin/url/custom', 'http://store.admin.'.BASEURL.'/', 'default', 0);
- 
+
+$cDat->saveConfig('web/unsecure/base_url', 'http://store.'.BASEURL.'/', 'default', 0);
+$cDat->saveConfig('web/secure/base_url', 'http://store.'.BASEURL.'/', 'default', 0);
+
+
+
 echo "Applying the default multi-store setup\n";
 
 
