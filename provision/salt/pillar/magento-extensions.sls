@@ -170,5 +170,11 @@ extensions:
     repo_owner: jeremyBass
     branch: master
     tag:
+  etx00028:
+    track_name: WSUMAGE_comingsoon
+    name: WSUMAGE-comingsoon 
+    repo_owner: washingtonstateuniversity
+    branch: master
+    tag:
 #    #[Aoe_Eav]=AOEmedia          #https://github.com/AOEmedia/Aoe_Eav  
 #    #[Aoe_TemplateHints]=fbrnc
