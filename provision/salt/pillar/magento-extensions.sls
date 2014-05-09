@@ -104,12 +104,12 @@ extensions:
 #    repo_owner: jeremyBass
 #    branch: master
 #    tag:     
-  etx00017:
-    track_name: AdminQuicklancher
-    name: AdminQuicklancher
-    repo_owner: jeremyBass
-    branch: master
-    tag:  
+#  etx00017:
+#    track_name: AdminQuicklancher
+#    name: AdminQuicklancher
+#    repo_owner: jeremyBass
+#    branch: master
+#    tag:  
 #  etx00018:
 #    track_name: dropshippers
 #    name: dropshippers
