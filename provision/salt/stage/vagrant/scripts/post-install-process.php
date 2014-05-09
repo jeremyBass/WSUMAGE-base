@@ -52,7 +52,7 @@ foreach($settingsarray as $item){
     $val =  $item['value']=="NULL"?NULL:$item['value'];
     $cDat->saveConfig($item['path'], $val, 'default', 0);
 }
-$cDat->saveConfig('admin/url/custom', 'http://store.admin.mage.dev/', 'default', 0);
+$cDat->saveConfig('admin/url/custom', 'http://store.admin.'.BASEURL.'/', 'default', 0);
  
 echo "Applying the default multi-store setup\n";
 
@@ -84,7 +84,7 @@ if($newRootCat>0){
     $SU_Helper->reparentCategory($newRootCat,18);
     $siteId = $SU_Helper->make_website(array('code'=>'generalstore','name'=>'General store'));
     if( $siteId>0 ){
-        $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'General Store'), 'general.store.mage.dev', $siteId, $newRootCat );
+        $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'General Store'), 'general.store.'.BASEURL.'', $siteId, $newRootCat );
         if( $storeGroupId>0 ){
             $storeId = $SU_Helper->make_store( $siteId, $storeGroupId, array('code'=>'generalstore','name'=>'base default veiw') );
             if( $storeId>0 ){
@@ -125,7 +125,7 @@ if($newRootCat>0){
     $SU_Helper->reparentCategory($newRootCat,10);
     $siteId = $SU_Helper->make_website(array('code'=>'studentstore','name'=>'Student store'));
     if( $siteId>0 ){
-        $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'Student Store'), 'student.store.mage.dev', $siteId, $newRootCat );
+        $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'Student Store'), 'student.store.'.BASEURL.'', $siteId, $newRootCat );
         if( $storeGroupId>0 ){
             $storeId = $SU_Helper->make_store( $siteId, $storeGroupId, array('code'=>'studentstore','name'=>'base default veiw') );
             if( $storeId>0 ){
@@ -174,7 +174,7 @@ if($newRootCat>0){
     $SU_Helper->reparentCategory($newRootCat,13);
     $siteId = $SU_Helper->make_website(array('code'=>'techstore','name'=>'Tech store'));
     if( $siteId>0 ){
-        $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'Tech Store'), 'tech.store.mage.dev', $siteId, $newRootCat );
+        $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'Tech Store'), 'tech.store.'.BASEURL.'', $siteId, $newRootCat );
         if( $storeGroupId>0 ){
             $storeId = $SU_Helper->make_store( $siteId, $storeGroupId, array('code'=>'techstore','name'=>'base default veiw') );
             if( $storeId>0 ){
@@ -218,7 +218,7 @@ if(Mage::getConfig()->getModuleConfig('Wsu_eventTickets')->is('active', 'true'))
     if($newRootCat>0){
         $siteId = $SU_Helper->make_website(array('code'=>$websiteCodes,'name'=>'Event store'));
         if( $siteId>0 ){
-            $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'Events Store'), 'events.store.mage.dev', $siteId, $newRootCat );
+            $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'Events Store'), 'events.store.'.BASEURL.'', $siteId, $newRootCat );
             if( $storeGroupId>0 ){
                 $storeId = $SU_Helper->make_store( $siteId, $storeGroupId, array('code'=>$storeCodes,'name'=>'base default veiw') );
                 if( $storeId>0 ){
