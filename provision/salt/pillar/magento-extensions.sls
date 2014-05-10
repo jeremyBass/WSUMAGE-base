@@ -12,7 +12,7 @@ extensions:
     name: WSUMAGE-networksecurities
     repo_owner: washingtonstateuniversity
     branch: master
-    tag: v0.1.0-RC
+    tag: v0.1.1-RC
 #  etx00002:
 #    track_name: landfill
 #    name: landfill
