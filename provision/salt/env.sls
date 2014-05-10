@@ -112,6 +112,20 @@ magento:
       - service: php-{{ saltenv }}
 
 
+{{ web_root }}media/:
+    file.directory:
+    - user: www-data
+    - group: www-data
+    - dir_mode: 777
+    - file_mode: 777
+
+{{ web_root }}var/:
+    file.directory:
+    - user: www-data
+    - group: www-data
+    - dir_mode: 777
+    - file_mode: 777
+
 # move the apps nginx rules to the site-enabled
 /etc/nginx/sites-enabled/store.network.conf:
   file.managed:
