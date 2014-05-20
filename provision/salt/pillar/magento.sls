@@ -7,7 +7,7 @@ magento:
   sample_data: True
   sample_stores: True
   #it should be noted that you will most likely not need anything below
-  version: 1.8.1.0
+  version: 1.9.0.1
   admin_route: admin
   locale: en_US
   timezone: America/Los_Angeles
