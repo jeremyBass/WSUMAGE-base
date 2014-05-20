@@ -103,7 +103,7 @@ init_gitploy:
 
 magento:
   cmd.run:
-    - name: 'gitploy -q -t 1.8.1.0 MAGE https://github.com/washingtonstateuniversity/magento-mirror.git && echo "export ADDEDMAGE=True {% raw %}#salt-set REMOVE{% endraw %}-MAGE" >> /etc/profile'
+    - name: 'gitploy -q -t {{ magento['version'] }} MAGE https://github.com/washingtonstateuniversity/magento-mirror.git && echo "export ADDEDMAGE=True {% raw %}#salt-set REMOVE{% endraw %}-MAGE" >> /etc/profile'
     - cwd: {{ web_root }}
     - user: root
     - unless: gitploy ls 2>&1 | grep -qi "MAGE"
