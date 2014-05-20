@@ -73,6 +73,30 @@ magedb_grant-{{ database['name'] }}:
     - dir_mode: 775
     - file_mode: 664
 
+{{ web_root }}media:
+    file.directory:
+    - user: www-data
+    - group: www-data
+    - dir_mode: 777
+    - file_mode: 777
+
+{{ web_root }}var:
+    file.directory:
+    - user: www-data
+    - group: www-data
+    - dir_mode: 777
+    - file_mode: 777
+
+{{ web_root }}maps:
+    file.directory:
+    - user: www-data
+    - group: www-data
+    - dir_mode: 775
+    - file_mode: 744
+
+
+
+
 
 #Modgit for magento modules
 gitploy:
@@ -101,6 +125,9 @@ init_gitploy:
 #    - unless: cd {{ web_root }}app/code/core/Mage/Admin/data/admin_setup
 
 
+
+
+
 magento:
   cmd.run:
     - name: 'gitploy -q -t {{ magento['version'] }} MAGE https://github.com/washingtonstateuniversity/magento-mirror.git && echo "export ADDEDMAGE=True {% raw %}#salt-set REMOVE{% endraw %}-MAGE" >> /etc/profile'
@@ -112,19 +139,7 @@ magento:
       - service: php-{{ saltenv }}
 
 
-{{ web_root }}media/:
-    file.directory:
-    - user: www-data
-    - group: www-data
-    - dir_mode: 777
-    - file_mode: 777
 
-{{ web_root }}var/:
-    file.directory:
-    - user: www-data
-    - group: www-data
-    - dir_mode: 777
-    - file_mode: 777
 
 # move the apps nginx rules to the site-enabled
 /etc/nginx/sites-enabled/store.network.conf:
@@ -138,12 +153,6 @@ magento:
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
 
-{{ web_root }}maps/:
-    file.directory:
-    - user: www-data
-    - group: www-data
-    - dir_mode: 775
-    - file_mode: 664
 
 # move the apps nginx rules to the site-enabled
 {{ web_root }}maps/nginx-mapping.conf:
