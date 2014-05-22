@@ -73,25 +73,30 @@ magedb_grant-{{ database['name'] }}:
     - dir_mode: 775
     - file_mode: 664
 
-{% if not vars.isLocal %}
+
 {{ web_root }}media:
     file.directory:
     - user: www-data
     - group: www-data
+{% if not vars.isLocal %}
     - dir_mode: 777
     - file_mode: 777
+{%- endif %}
 
 {{ web_root }}var:
     file.directory:
     - user: www-data
     - group: www-data
+{% if not vars.isLocal %}
     - dir_mode: 777
     - file_mode: 777
+{%- endif %}
 
 {{ web_root }}maps:
     file.directory:
     - user: www-data
     - group: www-data
+{% if not vars.isLocal %}
     - dir_mode: 775
     - file_mode: 744
 {%- endif %}
