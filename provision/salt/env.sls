@@ -186,7 +186,7 @@ restart-nginx-{{ saltenv }}:
 #add a database explorer
 install-adminer:
   cmd.run:
-    - name: wget -q http://www.adminer.org/latest-mysql-en.php  -o adminer.php | wget --no-check-certificate -q https://raw.github.com/vrana/adminer/master/designs/haeckel/adminer.css  -o adminer.css
+    - name: wget -q http://www.adminer.org/latest-mysql-en.php  -O adminer.php -o wgetlog | wget --no-check-certificate -q https://raw.github.com/vrana/adminer/master/designs/haeckel/adminer.css  -O adminer.css -o wgetlog 
     - cwd: {{ web_root }}
     - unless: -f {{ web_root }}adminer.php
 {%- endif %}
