@@ -73,7 +73,7 @@ magedb_grant-{{ database['name'] }}:
     - dir_mode: 775
     - file_mode: 664
 
-{% if vars.isLocal %}
+{% if not vars.isLocal %}
 {{ web_root }}media:
     file.directory:
     - user: www-data
