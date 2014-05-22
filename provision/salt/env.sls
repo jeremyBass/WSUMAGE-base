@@ -182,18 +182,6 @@ restart-nginx-{{ saltenv }}:
       - service: nginx-{{ saltenv }}
 
 
-
-
-#do a dry run test of modgit
-gitploy_dryrun:
-  cmd.run:
-    - name: gitploy -d Storeutilities https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git 2>/dev/null | grep -qi "error" && echo "name=gitploy_dryrun result=False changed=False comment=failed" || echo "name=gitploy_dryrun  result=True changed=True comment=passed"
-    - cwd: {{ web_root }}
-    - user: root
-    - stateful: True
-    - require:
-      - cmd: init_gitploy
-
 {% if vars.isLocal %}
 #add a database explorer
 install-adminer:
