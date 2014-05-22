@@ -84,50 +84,10 @@ $defaultCmsPage = '
 
 $SU_Helper = Mage::helper('storeutilities/utilities');
 
-$newRootCat = $SU_Helper->make_category("General store root");
-if($newRootCat>0){
-    $SU_Helper->reparentCategory($newRootCat,18);
-    $siteId = $SU_Helper->make_website(array('code'=>'generalstore','name'=>'General store'));
-    if( $siteId>0 ){
-        $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'General Store'), 'general.store.'.BASEURL.'', $siteId, $newRootCat );
-        if( $storeGroupId>0 ){
-            $storeId = $SU_Helper->make_store( $siteId, $storeGroupId, array('code'=>'generalstore','name'=>'base default veiw') );
-            if( $storeId>0 ){
-                $SU_Helper->moveStoreProducts( $siteId, $storeId, $newRootCat );
-				
-				
-				$storeCmsLayouts = array(
-					'col1'=>array(
-						'twelfths'=>'twelfths-12',
-						'blocks'=>array(
-							'blocktop'=>'<img src="{{storemedia url="/home_main_callout.jpg"}}" alt=""  border="0" />',
-							'blockbottom'=>'<img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt=""  border="0" />'
-						)
-					)
-				);
-				$CMShtml="";
-				foreach($storeCmsLayouts as $col=>$part){
-					$CMShtml.="<div class='column ".$part['twelfths']."'>".$part['blocks']['blocktop'].$part['blocks']['blockbottom']."</div>";
-				}
-				
-                $SU_Helper->createCmsPage($storeId,array(
-                    'title' => 'General store',
-                    'identifier' => 'home',
-                    'content_heading' => '',
-                    'is_active' => 1,
-                    'stores' => array($storeId),//available for all store views
-                    'content' => str_replace('{CMShtml}',$CMShtml,$defaultCmsPage)
-                ));
-                $cDat->saveConfig('wsu_themecontrol_layout/responsive/max_width', 'default', 'websites', $siteId);
-                $cDat->saveConfig('wsu_themecontrol_layout/responsive/fluid_width', 'hybrid', 'websites', $siteId);
-            }
-        }
-    }
-}
 
 $newRootCat = $SU_Helper->make_category("Student store root");
 if($newRootCat>0){
-    $SU_Helper->reparentCategory($newRootCat,10);
+    $SU_Helper->reparentCategory($newRootCat,22);
     $siteId = $SU_Helper->make_website(array('code'=>'studentstore','name'=>'Student store'));
     if( $siteId>0 ){
         $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'Student Store'), 'student.store.'.BASEURL.'', $siteId, $newRootCat );
@@ -176,7 +136,7 @@ if($newRootCat>0){
 
 $newRootCat = $SU_Helper->make_category("Tech store root");
 if($newRootCat>0){
-    $SU_Helper->reparentCategory($newRootCat,13);
+    $SU_Helper->reparentCategory($newRootCat,24);
     $siteId = $SU_Helper->make_website(array('code'=>'techstore','name'=>'Tech store'));
     if( $siteId>0 ){
         $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'Tech Store'), 'tech.store.'.BASEURL.'', $siteId, $newRootCat );
@@ -211,6 +171,49 @@ if($newRootCat>0){
         }
     }
 }
+
+
+$newRootCat = $SU_Helper->make_category("General store root");
+if($newRootCat>0){
+    $SU_Helper->reparentCategory($newRootCat,7);
+    $siteId = $SU_Helper->make_website(array('code'=>'generalstore','name'=>'General store'));
+    if( $siteId>0 ){
+        $storeGroupId = $SU_Helper->make_storeGroup( array('name'=>'General Store'), 'general.store.'.BASEURL.'', $siteId, $newRootCat );
+        if( $storeGroupId>0 ){
+            $storeId = $SU_Helper->make_store( $siteId, $storeGroupId, array('code'=>'generalstore','name'=>'base default veiw') );
+            if( $storeId>0 ){
+                $SU_Helper->moveStoreProducts( $siteId, $storeId, $newRootCat );
+				
+				
+				$storeCmsLayouts = array(
+					'col1'=>array(
+						'twelfths'=>'twelfths-12',
+						'blocks'=>array(
+							'blocktop'=>'<img src="{{storemedia url="/home_main_callout.jpg"}}" alt=""  border="0" />',
+							'blockbottom'=>'<img src="{{storemedia url="/free_shipping_callout.jpg"}}" alt=""  border="0" />'
+						)
+					)
+				);
+				$CMShtml="";
+				foreach($storeCmsLayouts as $col=>$part){
+					$CMShtml.="<div class='column ".$part['twelfths']."'>".$part['blocks']['blocktop'].$part['blocks']['blockbottom']."</div>";
+				}
+				
+                $SU_Helper->createCmsPage($storeId,array(
+                    'title' => 'General store',
+                    'identifier' => 'home',
+                    'content_heading' => '',
+                    'is_active' => 1,
+                    'stores' => array($storeId),//available for all store views
+                    'content' => str_replace('{CMShtml}',$CMShtml,$defaultCmsPage)
+                ));
+                $cDat->saveConfig('wsu_themecontrol_layout/responsive/max_width', 'default', 'websites', $siteId);
+                $cDat->saveConfig('wsu_themecontrol_layout/responsive/fluid_width', 'hybrid', 'websites', $siteId);
+            }
+        }
+    }
+}
+
 
 
 if(Mage::getConfig()->getModuleConfig('Wsu_eventTickets')->is('active', 'true')){
