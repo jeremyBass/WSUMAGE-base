@@ -73,7 +73,16 @@ Mage::helper('storeutilities/utilities')->createCat($storeCodeId,$rootcatID,arra
 		)
 	)
 ));
-$eventsCatId=Mage::getModel('catalog/category')->setStoreId($storeCodeId)->loadByAttribute('url_key', 'football')->getId(); 
+$eventsCat=Mage::getModel('catalog/category')->getCollection ()
+            ->setStoreId($storeCodeId)
+            ->addAttributeToFilter ('url_key', 'football')
+            ->getFirstItem ();
+
+if(!empty($eventsCat) && $eventsCat!=null){
+	$eventsCatId=$eventsCat->getId();
+}
+
+
 echo "added cat ".$eventsCatId."<br/>";
 
 
