@@ -73,25 +73,30 @@ magedb_grant-{{ database['name'] }}:
     - dir_mode: 775
     - file_mode: 664
 
-{% if vars.isLocal %}
+
 {{ web_root }}media:
     file.directory:
     - user: www-data
     - group: www-data
+{% if not vars.isLocal %}
     - dir_mode: 777
     - file_mode: 777
+{%- endif %}
 
 {{ web_root }}var:
     file.directory:
     - user: www-data
     - group: www-data
+{% if not vars.isLocal %}
     - dir_mode: 777
     - file_mode: 777
+{%- endif %}
 
 {{ web_root }}maps:
     file.directory:
     - user: www-data
     - group: www-data
+{% if not vars.isLocal %}
     - dir_mode: 775
     - file_mode: 744
 {%- endif %}
@@ -177,23 +182,11 @@ restart-nginx-{{ saltenv }}:
       - service: nginx-{{ saltenv }}
 
 
-
-
-#do a dry run test of modgit
-gitploy_dryrun:
-  cmd.run:
-    - name: gitploy -d Storeutilities https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git 2>/dev/null | grep -qi "error" && echo "name=gitploy_dryrun result=False changed=False comment=failed" || echo "name=gitploy_dryrun  result=True changed=True comment=passed"
-    - cwd: {{ web_root }}
-    - user: root
-    - stateful: True
-    - require:
-      - cmd: init_gitploy
-
 {% if vars.isLocal %}
 #add a database explorer
 install-adminer:
   cmd.run:
-    - name: wget "http://www.adminer.org/latest-mysql-en.php"  -O adminer.php | wget "https://raw.github.com/vrana/adminer/master/designs/haeckel/adminer.css"  -O --no-check-certificate adminer.css
+    - name: wget -q http://www.adminer.org/latest-mysql-en.php  -O adminer.php -o wgetlog | wget --no-check-certificate -q https://raw.github.com/vrana/adminer/master/designs/haeckel/adminer.css  -O adminer.css -o wgetlog 
     - cwd: {{ web_root }}
     - unless: -f {{ web_root }}adminer.php
 {%- endif %}
