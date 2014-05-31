@@ -12,7 +12,7 @@
 
 clear-caches:
   cmd.run:
-    - name: rm -rf ./var/cache/* ./var/session/* ./var/report/* ./var/locks/* ./var/log/* ./app/code/core/Zend/Cache/* ./media/css/* ./media/js/* 
+    - name: rm -rf ./var/cache/* ./var/session/* ./var/log/* ./app/code/core/Zend/Cache/* ./media/css/* ./media/js/* 
     - user: root
     - cwd: {{ web_root }}
 
