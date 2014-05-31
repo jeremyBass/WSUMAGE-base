@@ -13,6 +13,16 @@
     {% if vars.update({'isLocal': True}) %} {% endif %}
 {%- endfor %}
 
+
+
+pre-clear-caches:
+  cmd.run:
+    - name: rm -rf ./var/cache/* ./var/session/* ./var/report/* ./var/locks/* ./var/log/* ./app/code/core/Zend/Cache/* ./media/css/* ./media/js/* 
+    - user: root
+    - cwd: {{ web_root }}
+
+
+
 # Create service checks
 ###########################################################
 mysqld-{{ saltenv }}:
