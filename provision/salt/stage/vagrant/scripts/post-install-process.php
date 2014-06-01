@@ -28,6 +28,9 @@ Mage::getSingleton('core/session', array('name' => 'frontend'));
 Mage::registry('isSecureArea'); // acting is if we are in the admin
 Mage::app('admin')->setUseSessionInUrl(false);
 Mage::getConfig()->init();
+
+$SU_Helper = Mage::helper('storeutilities/utilities');
+
 /**
  * Get the resource model
  */
@@ -82,7 +85,7 @@ $defaultCmsPage = '
 	</div>
 </div>';
 
-$SU_Helper = Mage::helper('storeutilities/utilities');
+
 
 
 $newRootCat = $SU_Helper->make_category("Student store root");
