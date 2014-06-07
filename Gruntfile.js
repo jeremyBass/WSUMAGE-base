@@ -93,6 +93,15 @@ module.exports = function(grunt) {
 					}
 				}
 			},
+            deployment : {
+				src : 'src/index.html',
+				dest : 'build/deployment.html',
+				options : {
+					context : {
+						page : 'deployment'
+					}
+				}
+			},
 		}
 	});
 
