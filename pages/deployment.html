@@ -1,0 +1,11 @@
+<article>
+	<h1 class="header">WSU Magento deployment guide</h1>
+	<div class="wrapper markdown-body">
+		<h2 class="header">WSU Magento Installation</h2>
+		<p>There is a simple bash script that is used for the install and updating of the files needs for a Magento app.  `gitploy` is used to manage the install of the app.  This script will take a git repository and clone it to the server.  To advoid issues and the need for over use of submodules, gitploy tracks the local repository in a sub folder and sets things up do that you never have to worry about the install becoming corrupted.  For more information on how gitploy works please referr to the documantion.  The comand that is nomarly run in get the up today Magento app is something like,
+        </p>
+        `$>_ gitploy -t lastest MAGE http://github.com/washingtonstateuniversity/magento-mirror.git`
+        <p>What that command wil do is to clone in the repo for the latest tag of Magento.  Wsu hosts a mirror of all versions of Magento release starting from 1.8.0.0.  </p>
+	</div>
+	
+</article>
