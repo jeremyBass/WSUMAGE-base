@@ -1,4 +1,39 @@
+function makePagesObj(pagessets){
+    var pageOp={
+        options: {
+            inline: true,
+            context : {
+                DEBUG: true,
+                build_version : '<%= pkg.build_version %>',
+            }
+        },
+    };
+    
+    for(pageset in pagesets){
+        for(page in pageset){
+            pageOp.production : {
+				src : 'src/index.html',
+				dest : 'build/'+page+'.html',
+				options : {
+					context : {
+						"page" : page
+					}
+				}
+			}
+        }
+    }
+    
+}
+
 module.exports = function(grunt) {
+    
+    var pages = [ 'index', ['production'], ['development'], ['deployment'] ];
+    
+    
+    
+    
+    
+    
 	// Project configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -46,7 +81,7 @@ module.exports = function(grunt) {
 		copy: {
 			main: {
 				files: [
-					{expand: true,flatten: true, src: ['pub/build/*.html'], dest: ''}
+					{expand: true,flatten: true, src: ['pub/build/**/*.html'], dest: ''}
 				]
 			}
 		},
@@ -59,7 +94,7 @@ module.exports = function(grunt) {
 			},
 		},
 		preprocess : {
-			options: {
+			/*options: {
 				inline: true,
 				context : {
 					DEBUG: true,
@@ -101,7 +136,7 @@ module.exports = function(grunt) {
 						page : 'deployment'
 					}
 				}
-			},
+			},*/
 		}
 	});
 
