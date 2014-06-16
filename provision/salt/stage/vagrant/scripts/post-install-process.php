@@ -28,6 +28,9 @@ Mage::getSingleton('core/session', array('name' => 'frontend'));
 Mage::registry('isSecureArea'); // acting is if we are in the admin
 Mage::app('admin')->setUseSessionInUrl(false);
 Mage::getConfig()->init();
+
+$SU_Helper = Mage::helper('storeutilities/utilities');
+
 /**
  * Get the resource model
  */
@@ -47,7 +50,7 @@ $writeConnection = $resource->getConnection('core_write');
 error_reporting ( E_ALL & ~ E_NOTICE );
  
 $cDat = new Mage_Core_Model_Config();
-$settingsarray = Mage::helper('storeutilities/utilities')->csv_to_array('staging/scripts/settings.config');
+$settingsarray = $SU_Helper->csv_to_array('staging/scripts/settings.config');
 foreach($settingsarray as $item){
     $val =  $item['value']=="NULL"?NULL:$item['value'];
     $cDat->saveConfig($item['path'], $val, 'default', 0);
@@ -82,7 +85,7 @@ $defaultCmsPage = '
 	</div>
 </div>';
 
-$SU_Helper = Mage::helper('storeutilities/utilities');
+
 
 
 $newRootCat = $SU_Helper->make_category("Student store root");
