@@ -98,12 +98,12 @@ extensions:
     repo_owner: jeremyBass
     branch: master
     tag:        
-#  etx00016:
-#    track_name: pickupShipping
-#    name: pickupShipping
-#    repo_owner: jeremyBass
-#    branch: master
-#    tag:     
+  etx00016:
+    track_name: pickupShipping
+    name: pickupShipping
+    repo_owner: jeremyBass
+    branch: master
+    tag:     
 #  etx00017:
 #    track_name: AdminQuicklancher
 #    name: AdminQuicklancher
@@ -173,6 +173,12 @@ extensions:
   etx00028:
     track_name: WSUMAGE_comingsoon
     name: WSUMAGE-comingsoon 
+    repo_owner: washingtonstateuniversity
+    branch: master
+    tag:
+  etx00029:
+    track_name: WSUMAGE_central_cc 
+    name: WSUMAGE-central-cc-processing 
     repo_owner: washingtonstateuniversity
     branch: master
     tag:
