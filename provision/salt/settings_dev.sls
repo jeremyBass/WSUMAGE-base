@@ -22,6 +22,7 @@
     - replace: True
     - template: jinja
     - context:
+      isLocal: {{ vars.isLocal }}
       magento: {{ magento }}
       database: {{ database }}
       project: {{ project }}

@@ -1,4 +1,9 @@
 <?php
+{% if isLocal %}
+	    opcache_reset();
+{%- endif %}
+
+
 if(file_exists('fpc.php')){
 	include('fpc.php');
 }
@@ -72,16 +77,21 @@ if (file_exists($maintenanceFile)) {
 require_once $mageFilename;
 
 
-#Varien_Profiler::enable();
 
-if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
-    Mage::setIsDeveloperMode(true);
-}
+{% if isLocal %}
+	#Varien_Profiler::enable();
+	if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
+		Mage::setIsDeveloperMode(true);
+	}
 
-Mage::setIsDeveloperMode(true);
-ini_set('display_errors', 1);
+	Mage::setIsDeveloperMode(true);
+	ini_set('display_errors', 1);
 
-umask(0);
+	umask(0);
+{%- endif %}
+
+
+
 
 /* Store or website code */
 $mageRunCode = isset($_SERVER['MAGE_RUN_CODE']) && $_SERVER['MAGE_RUN_CODE']!="general"  ? $_SERVER['MAGE_RUN_CODE'] : '';
