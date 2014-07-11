@@ -156,7 +156,17 @@ magento:
       - service: php-{{ saltenv }}
 
 
-
+# move the apps nginx rules to the site-enabled
+/etc/nginx/mage-networked.conf:
+  file.managed:
+    - source: salt://config/nginx/mage-networked.conf
+    - user: root
+    - group: root
+    - template: jinja
+    - context:
+      isLocal: {{ vars.isLocal }}
+      saltenv: {{ saltenv }}
+      web_root: {{ web_root }}
 
 # move the apps nginx rules to the site-enabled
 /etc/nginx/sites-enabled/store.network.conf:
