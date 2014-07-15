@@ -182,5 +182,17 @@ extensions:
     repo_owner: washingtonstateuniversity
     branch: master
     tag:
+  etx00030:
+    track_name: akismet
+    name: Mgt_Akismet
+    repo_owner: mgtcommerce
+    branch: master
+    tag:
+    rootfolder: /htdocs
+
+
+
+
+
 #    #[Aoe_Eav]=AOEmedia          #https://github.com/AOEmedia/Aoe_Eav  
 #    #[Aoe_TemplateHints]=fbrnc
