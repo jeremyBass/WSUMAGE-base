@@ -189,6 +189,7 @@ extensions:
     branch: master
     tag:
     rootfolder: /htdocs
+    exclude: *.pdf
 
 
 
