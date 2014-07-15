@@ -189,7 +189,7 @@ extensions:
     branch: master
     tag:
     rootfolder: /htdocs
-    exclude: {% raw %}"*.pdf"{% endraw %}
+    exclude: *.pdf
 
 
 
