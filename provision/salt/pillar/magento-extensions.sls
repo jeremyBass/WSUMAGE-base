@@ -188,7 +188,7 @@ extensions:
     repo_owner: mgtcommerce
     branch: master
     tag:
-    rootfolder: /htdocs
+    rootfolder: htdocs/
     exclude: *.pdf
 
 
