@@ -41,6 +41,20 @@ nginx-{{ saltenv }}:
       - file: {{ web_root }}maps/nginx-mapping.conf
 
 
+/etc/incron.d/mapping.conf:
+  file.managed:
+    - source: salt://config/incron/incron.d/mapping.conf
+    - user: root
+    - group: root
+    - template: jinja
+    - context:
+      isLocal: {{ vars.isLocal }}
+      saltenv: {{ saltenv }}
+      web_root: {{ web_root }}
+
+
+
+
 # Turn off all caches
 memcached-stopped:
   cmd.run:
