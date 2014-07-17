@@ -37,6 +37,8 @@ php-{{ saltenv }}:
 nginx-{{ saltenv }}:
   service.running:
     - name: nginx
+    - watch:
+      - file: {{ web_root }}maps/nginx-mapping.conf
 
 
 # Turn off all caches
