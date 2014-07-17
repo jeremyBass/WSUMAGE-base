@@ -74,12 +74,6 @@ magneto-set-connect-prefs:
       project: {{ project }}
       saltenv: {{ saltenv }}
 
-insert-wsu-brand-favicon:
-  cmd.run:
-    - name: wget -q http://images.wsu.edu/favicon.ico -O favicon.ico
-    - cwd: {{ web_root }}
-    - require:
-      - cmd: magento
 
 ###############################################
 # staging
