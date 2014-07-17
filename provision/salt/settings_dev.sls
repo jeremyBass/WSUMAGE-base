@@ -50,7 +50,7 @@ post-install-settings:
     - name: php staging/scripts/post-install-process.php
     - cwd: {{ web_root }}
     - user: root
-    - unless: test x"$MagentoFreshInstalled" = x
+    - unless: test x"$MagentoInstalled_Fresh" = x
     - require:
       - cmd: magento
       - service: mysqld-{{ saltenv }}
