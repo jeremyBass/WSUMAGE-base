@@ -94,3 +94,10 @@ reindex-magento:
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
       - cmd: magneto-install
+
+insert-wsu-brand-favicon:
+  cmd.run:
+    - name: wget -q http://images.wsu.edu/favicon.ico -O favicon.ico
+    - cwd: {{ web_root }}
+    - require:
+      - cmd: magento
