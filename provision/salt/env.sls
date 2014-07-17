@@ -44,6 +44,7 @@ nginx-{{ saltenv }}:
 /etc/incron.d/mapping.conf:
   file.managed:
     - source: salt://config/incron/incron.d/mapping.conf
+    - makedirs: true
     - user: root
     - group: root
     - template: jinja
@@ -203,6 +204,7 @@ magento:
     - source: salt://config/nginx/maps/nginx-mapping.conf
     - user: www-data
     - group: www-data
+    - makedirs: true
     - mode: 744
     - template: jinja
     - context:
