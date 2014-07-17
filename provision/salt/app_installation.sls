@@ -28,6 +28,7 @@ PEAR-registry:
     - name: ./mage mage-setup .
     - user: root
     - cwd: {{ web_root }}
+    - unless: printenv 2>&1 | grep -qi "MagentoInstalled=True"
     - require:
       - cmd: magento
       
@@ -36,6 +37,7 @@ set-mage-ext-pref:
     - name: ./mage install magento-core Mage_All_Latest
     - user: root
     - cwd: {{ web_root }}
+    - unless: printenv 2>&1 | grep -qi "MagentoInstalled=True"
     - require:
       - cmd: magento
       
