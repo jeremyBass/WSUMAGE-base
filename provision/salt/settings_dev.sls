@@ -36,6 +36,7 @@
     - group: www-data
     - replace: True
     - template: jinja
+    - unless: test x"$MagentoInstalled_Fresh" = x
     - context:
       magento: {{ magento }}
       database: {{ database }}
