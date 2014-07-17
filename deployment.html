@@ -49,72 +49,27 @@
 			
 				<div class="column one">
 					<article>
-	<h1 class="header">WSU Magento Production Environment</h1>
+	<h1 class="header">WSU Magento deployment guide</h1>
 	<div class="wrapper markdown-body">
-		<h2 class="header">How to Put into production</h2>
-		<p>Generally if you are ready to push changes up to the server it will be done through the server administrator unless you are placing a new installation.  There are going to be two types of updates; a new theme for your site, or a new extension.</p>
-        
-        <p><b>Note</b>All new extension must be tested and installed by the <a class="header name" href="https://github.com/washingtonstateuniversity">WSU University Web Communications Team</a></p>
-	</div>
-	
-    <section>
-        <h3>Pushing a theme to production</h3>
-        <p>A a designer, you would be using <a href="http://gruntjs.com/">Grunt task runner</a> to test you theme and push it to production in one step.  
-        
+		<h2 class="header">WSU Magento Installation</h2>
+		<p>There is a simple bash script, `gitploy`, that is used for the install and updating of the files needs for a Magento app.  `gitploy` is used to manage the install of the app.  This script will take a git repository and clone it to the server.  To advoid issues and the need for over use of submodules, gitploy tracks the local repository in a sub folder and sets things up do that you never have to worry about the install becoming corrupted.  For more information on how gitploy works please referr to the documantion.  The comand that is nomarly run in get the up today Magento app is something like,
         </p>
+        `$>_ gitploy -t lastest MAGE http://github.com/washingtonstateuniversity/magento-mirror.git`
+        <p>What that command wil do is to clone in the repo for the latest tag of Magento.  Wsu hosts a mirror of all versions of Magento release starting from 1.8.0.0.  The `-t latest` option will chose the last tagged release.</p>
+	</div>
     
+    <div class="wrapper markdown-body">
+		<h2 class="header">WSU Magento Updates/Restores</h2>
+		<p>The gitploy is used to update the install with a simple command.  `gitploy up -t latest MAGE`  That is all it will take to run the update.  If you are trying to do this update one a WSU server you must be ssh'd in as a sudo user.  See the server notes for more information. 
+        </p>
+        <p>Sometimes there could be some misstake where in the files have been corrupted or removed.  In this case you can refrest the managed files with this command, `gitploy re MAGE`.  Since you are not moving from one tag/commit to another, there is no need to use the option flags.  This wil rebuild the deployment list and restore the files that are missing and overwirte the files that are not.  This can be used in noval ways besides the case where you know there were files deleted or something.  One usage of the gitploy refresh could be to set a cron job that runs the command to refresh every night at lets say 2am.  If the system have been infected with malwear then the file affected would be wiped.  This porcess wouldn't remove files that were added to the system, but in the sense that the compromissed Magento app files would have been used to server the stray infected files, you have prevented users from accessing the infected files.  A checksome is always a wise idea to insure the the system is safe, as wel as normal malwear and anti virus scans.</p>
+	</div>
+    <div class="wrapper markdown-body">
+        <h2 class="header">Deployment Notes</h2>
+        <p>It is highly suggested that you do not run the gitploy out side of the Salt provisionor unless it is to refresh the installation.  The provisioning is used to install and update as needed.  Since access is restricted it will not be something that any user may run the `gitploy` script.</p>
+    </div>
     
-    
-    </section>
-    
-    
-    
-    
-    
-    
-    
-	<section>
-		<a name="#productionModsLoaded"></a>
-		<h3>Extensions loaded for Magento in Production</h3>
-		<p>TBA</p>
-
-		<p>Plugins Loaded:</p>
-		<ol>
-		  <li><a href="https://github.com/washingtonstateuniversity/WSUMAGE-auditing.git">WSUMAGE-auditing</a></li>
-		  <li><a href="https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git">WSUMAGE-store-utilities</a></li>
-		  <li><a href="https://github.com/washingtonstateuniversity/WSUMAGE-structured-data.git">WSUMAGE-structured-data</a></li>
-		  <li><a href="https://github.com/washingtonstateuniversity/WSUMAGE-networksecurities.git">WSUMAGE-networksecurities</a></li>
-		  <li><a href="https://github.com/jeremyBass/WSUMAGE-Storepartitions.git">WSUMAGE-Storepartitions</a></li>
-		  <li><a href="https://github.com/jeremyBass/eventTickets.git">eventTickets</a></li>
-		  <li><a href="https://github.com/jeremyBass/webmastertools.git">webmastertools</a></li>
-		  <li><a href="https://github.com/jeremyBass/pickupShipping.git">pickupShipping</a></li>
-		  <li><a href="https://github.com/jeremyBass/AdminQuicklancher.git">AdminQuicklancher</a></li>
-		  <li><a href="https://github.com/jeremyBass/dropshippers.git">dropshippers</a></li>
-		  <li><a href="https://github.com/jeremyBass/Aoe_FilePicker.git">Aoe_FilePicker</a></li>
-		  <li><a href="https://github.com/jeremyBass/mailing_services.git">mailing_services</a></li>
-		  <li><a href="https://github.com/fbrnc/Aoe_ManageStores.git">Aoe_ManageStores</a></li>
-		  <li><a href="https://github.com/fbrnc/Aoe_AsyncCache.git">Aoe_AsyncCache</a></li>
-		  <li><a href="https://github.com/fbrnc/Aoe_ApiLog.git">Aoe_ApiLog</a></li>
-		  <li><a href="https://github.com/AOEmedia/Aoe_ClassPathCache.git">Aoe_ClassPathCache</a></li>
-		  <li><a href="https://github.com/mage-eag/mage-enhanced-admin-grids.git">Enhanced Admin Grids</a></li>
-		</ol>
-		<a name="#productionThemesLoaded"></a>
-		<h3>Themes Extensions loaded for Magento in Production</h3>
-		<p>Theme Plugins Loaded:</p>
-		<ol>
-			<li><a href="https://github.com/washingtonstateuniversity/WSUMAGE-admin-base.git">WSUMAGE-admin-base</a></li>
-			<li><a href="https://github.com/washingtonstateuniversity/WSUMAGE-theme-base.git">WSUMAGE-theme-base</a></li>
-		</ol>
-		<a name="#productionGatewaysLoaded"></a>
-		<h3>Gateways Extensions loaded for Magento in Production</h3>
-		<p>Gateways Plugins Loaded:</p>
-		<ol>
-			<li><a href="https://github.com/washingtonstateuniversity/WSUMAGE-iri-gateway.git">WSUMAGE-iri-gateway</a></li>
-			<li><a href="https://github.com/washingtonstateuniversity/WSUMAGE-central-cc-processing.git">WSUMAGE-central-cc-processing</a></li>
-			<li>Coming soon: CougarCash</li>
-		</ol>
-		
-	</section>
+	
 </article>
 				</div><!--/column-->
 			
