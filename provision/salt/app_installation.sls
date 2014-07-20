@@ -28,6 +28,7 @@ PEAR-registry:
     - name: ./mage mage-setup .
     - user: root
     - cwd: {{ web_root }}
+    - unless: printenv 2>&1 | grep -qi "MagentoInstalled=True"
     - require:
       - cmd: magento
       
@@ -36,13 +37,14 @@ set-mage-ext-pref:
     - name: ./mage install magento-core Mage_All_Latest
     - user: root
     - cwd: {{ web_root }}
+    - unless: printenv 2>&1 | grep -qi "MagentoInstalled=True"
     - require:
       - cmd: magento
       
 magneto-install:
   cmd.run:
-    - name: 'tmp=$(php -f install.php -- --license_agreement_accepted yes --locale {{ magento['locale'] }} --timezone {{ magento['timezone'] }} --default_currency {{ magento['default_currency'] }}  --db_host "{{ database['host'] }}" --db_name "{{ database['name'] }}" --db_user "{{ database['user'] }}" --db_pass "{{ database['pass'] }}" {% if database['prefix'] is defined and database['prefix'] is not none %} --db_prefix "{{ database['prefix'] }}" {%- endif %} --url {{ magento['url'] }} --use_rewrites {{ magento['use_rewrites'] }} --skip_url_validation {{ magento['skip_url_validation'] }} --use_secure {{ magento['use_secure'] }} --secure_base_url {{ magento['secure_base_url'] }} --use_secure_admin {{ magento['use_secure_admin'] }} --admin_firstname "{{ magento['admin_firstname'] }}" --admin_lastname "{{ magento['admin_lastname'] }}" --admin_email "{{ magento['admin_email'] }}" --admin_username "{{ magento['admin_username'] }}" --admin_password "{{ magento['admin_password'] }}"  3>&1 1>&2 2>&3) && echo "export MagentoFreshInstalled=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/profile && echo $tmp'
-    - unless: php -r 'require "app/Mage.php";$app = Mage::app("default"); $installer = Mage::getSingleton("install/installer_console");  $installer->init($app); if (Mage::isInstalled()) { print("already installed"); }' 2>&1 | grep -qi 'already installed'
+    - name: 'tmp=$(php -f install.php -- --license_agreement_accepted yes --locale {{ magento['locale'] }} --timezone {{ magento['timezone'] }} --default_currency {{ magento['default_currency'] }}  --db_host "{{ database['host'] }}" --db_name "{{ database['name'] }}" --db_user "{{ database['user'] }}" --db_pass "{{ database['pass'] }}" {% if database['prefix'] is defined and database['prefix'] is not none %} --db_prefix "{{ database['prefix'] }}" {%- endif %} --url {{ magento['url'] }} --use_rewrites {{ magento['use_rewrites'] }} --skip_url_validation {{ magento['skip_url_validation'] }} --use_secure {{ magento['use_secure'] }} --secure_base_url {{ magento['secure_base_url'] }} --use_secure_admin {{ magento['use_secure_admin'] }} --admin_firstname "{{ magento['admin_firstname'] }}" --admin_lastname "{{ magento['admin_lastname'] }}" --admin_email "{{ magento['admin_email'] }}" --admin_username "{{ magento['admin_username'] }}" --admin_password "{{ magento['admin_password'] }}"  3>&1 1>&2 2>&3) && echo "export MagentoInstalled_Fresh=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/profile && echo "export MagentoInstalled=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/profile && echo $tmp'
+    - unless: printenv 2>&1 | grep -qi "MagentoInstalled_Fresh=True"
     - user: root
     - cwd: {{ web_root }}
     - require:
@@ -54,6 +56,7 @@ magneto-set-connect-prefs:
   cmd.run:
     - name: ./mage config-set preferred_state alpha | ./mage clear-cache | ./mage sync
     - cwd: {{ web_root }}
+    - unless: printenv 2>&1 | grep -qi "MagentoInstalled=True"
     - require:
       - cmd: magento
 
@@ -71,12 +74,6 @@ magneto-set-connect-prefs:
       project: {{ project }}
       saltenv: {{ saltenv }}
 
-insert-wsu-brand-favicon:
-  cmd.run:
-    - name: wget -q http://images.wsu.edu/favicon.ico -O favicon.ico
-    - cwd: {{ web_root }}
-    - require:
-      - cmd: magento
 
 ###############################################
 # staging

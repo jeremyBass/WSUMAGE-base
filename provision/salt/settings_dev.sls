@@ -50,7 +50,7 @@ post-install-settings:
     - name: php staging/scripts/post-install-process.php
     - cwd: {{ web_root }}
     - user: root
-    - unless: test x"$MagentoFreshInstalled" = x
+    - unless: test x"$MagentoInstalled_Fresh" = x
     - require:
       - cmd: magento
       - service: mysqld-{{ saltenv }}
@@ -88,9 +88,16 @@ reindex-magento:
     - name: php -f indexer.php reindexall | php "{{ web_root }}index.php" 2>/dev/null
     - cwd: {{ web_root }}/shell
     - user: root
-    - unless: test x"$MagentoFreshInstalled" = x
+    - unless: test x"$MagentoInstalled_Fresh" = x
     - require:
       - cmd: magento
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
       - cmd: magneto-install
+
+insert-wsu-brand-favicon:
+  cmd.run:
+    - name: wget -q http://images.wsu.edu/favicon.ico -O favicon.ico
+    - cwd: {{ web_root }}
+    - require:
+      - cmd: magento

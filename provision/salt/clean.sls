@@ -34,7 +34,14 @@ clear-random-files:
     - user: root
     - onlyif: -f tmp?*
     - cwd: {{ web_root }}
-    
+
+
+clear-fresh-install:
+  cmd.run:
+    - name: unset MagentoInstalled_Fresh
+    - user: root
+    - onlyif: printenv 2>&1 | grep -qi "MagentoInstalled_Fresh=True"
+
 #this is really just to bandaid another issues being worked on
 finalrun-restart-nginx-{{ saltenv }}:
   cmd.run:

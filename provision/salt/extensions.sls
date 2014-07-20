@@ -19,18 +19,21 @@ remove-PaypalUk:
     - name: rm -rf app/code/core/Mage/PaypalUk/*
     - user: root
     - cwd: {{ web_root }}
+    - onlyif: -d app/code/core/Mage/PaypalUk/
 
 remove-Mage_Authorizenet:
   cmd.run:
     - name: rm -rf app/code/core/Mage/Authorizenet/* app/etc/modules/Mage_Authorizenet.xml
     - user: root
     - cwd: {{ web_root }}
+    - onlyif: -d app/code/core/Mage/Authorizenet/
 
 remove-Phoenix_Moneybookers:
   cmd.run:
     - name: rm -rf app/code/core/community/Phoenix/* app/etc/modules/Phoenix_Moneybookers.xml
     - user: root
     - cwd: {{ web_root }}
+    - onlyif: -d app/code/core/community/Phoenix/
       
 #come back on this one.. unsure   
 #rm -rf app/code/core/Mage/Paypal/* app/code/core/Mage/Paypal/*
@@ -54,7 +57,7 @@ remove-Phoenix_Moneybookers:
 
 base-ext-{{ ext_key }}:
   cmd.run:
-    - name: 'gitploy -q {% if ext_val['exclude'] is defined and ext_val['exclude'] is not none %} -e {{ ext_val['exclude'] }} {%- endif %} {% if ext_val['rootfolder'] is defined and ext_val['rootfolder'] is not none %} -r {% raw %}"{% endraw %}{{ ext_val['rootfolder'] }}{% raw %}"{% endraw %} {%- endif %} {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ track_name }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git && echo "export ADDED{{ track_name|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}-{{ ext_key }}" >> /etc/profile'
+    - name: 'gitploy -q {% if ext_val['exclude'] is defined and ext_val['exclude'] is not none %} -e {{ ext_val['exclude'] }} {%- endif %} {% if ext_val['rootfolder'] is defined and ext_val['rootfolder'] is not none %} -f {% raw %}"{% endraw %}{{ ext_val['rootfolder'] }}{% raw %}"{% endraw %} {%- endif %} {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ track_name }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git && echo "export ADDED{{ track_name|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}-{{ ext_key }}" >> /etc/profile'
     - cwd: {{ web_root }}
     - user: root
     - unless: gitploy ls 2>&1 | grep -qi "{{ track_name }}"

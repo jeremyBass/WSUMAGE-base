@@ -20,7 +20,7 @@ pre-clear-caches:
     - name: rm -rf ./var/cache/* ./var/session/* ./var/report/* ./var/locks/* ./var/log/* ./app/code/core/Zend/Cache/* ./media/css/* ./media/js/* 
     - user: root
     - cwd: {{ web_root }}
-    - unless: {{ web_root }}var
+    - unless: cd {{ web_root }}var
 
 
 
@@ -37,6 +37,23 @@ php-{{ saltenv }}:
 nginx-{{ saltenv }}:
   service.running:
     - name: nginx
+    - watch:
+      - file: {{ web_root }}maps/nginx-mapping.conf
+
+
+/etc/incron.d/mapping.conf:
+  file.managed:
+    - source: salt://config/incron/incron.d/mapping.conf
+    - makedirs: true
+    - user: root
+    - group: root
+    - template: jinja
+    - context:
+      isLocal: {{ vars.isLocal }}
+      saltenv: {{ saltenv }}
+      web_root: {{ web_root }}
+
+
 
 
 # Turn off all caches
@@ -187,6 +204,7 @@ magento:
     - source: salt://config/nginx/maps/nginx-mapping.conf
     - user: www-data
     - group: www-data
+    - makedirs: true
     - mode: 744
     - template: jinja
     - context:
