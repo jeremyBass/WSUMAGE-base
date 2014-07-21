@@ -20,7 +20,7 @@ pre-clear-caches:
     - name: rm -rf ./var/cache/* ./var/session/* ./var/report/* ./var/locks/* ./var/log/* ./app/code/core/Zend/Cache/* ./media/css/* ./media/js/* 
     - user: root
     - cwd: {{ web_root }}
-    - onlyif: cd {{ web_root }}var
+    - onlyif: test -d {{ web_root }}var
 
 
 
