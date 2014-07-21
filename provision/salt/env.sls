@@ -37,8 +37,7 @@ php-{{ saltenv }}:
 nginx-{{ saltenv }}:
   service.running:
     - name: nginx
-    - watch:
-      - file: {{ web_root }}maps/nginx-mapping.conf
+
 
 
 /etc/incron.d/mapping.conf:
