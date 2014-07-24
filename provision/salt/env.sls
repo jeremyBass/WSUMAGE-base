@@ -163,21 +163,13 @@ init_gitploy:
 
 magento:
   cmd.run:
-    - name: 'gitploy up -t {{ magento['version'] }} MAGE echo "export ADDEDMAGE=True {% raw %}#salt-set REMOVE{% endraw %}-MAGE" >> /etc/profile'
+    - name: 'gitploy ls 2>&1 | grep -qi "MAGE" && gitploy up -t {{ magento['version'] }} MAGE || gitploy -q -t {{ magento['version'] }} MAGE https://github.com/washingtonstateuniversity/magento-mirror.git'
     - cwd: {{ web_root }}
     - user: root
-    - onlyif: gitploy ls 2>&1 | grep -qi "MAGE"
     - require:
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
-  cmd.run:
-    - name: 'gitploy -q -t {{ magento['version'] }} MAGE https://github.com/washingtonstateuniversity/magento-mirror.git && echo "export ADDEDMAGE=True {% raw %}#salt-set REMOVE{% endraw %}-MAGE" >> /etc/profile'
-    - cwd: {{ web_root }}
-    - user: root
-    - unless: gitploy ls 2>&1 | grep -qi "MAGE"
-    - require:
-      - service: mysqld-{{ saltenv }}
-      - service: php-{{ saltenv }}
+
 
 
 
