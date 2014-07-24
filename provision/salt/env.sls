@@ -163,14 +163,6 @@ init_gitploy:
 
 magento:
   cmd.run:
-    - name: 'gitploy -q -t {{ magento['version'] }} MAGE https://github.com/washingtonstateuniversity/magento-mirror.git && echo "export ADDEDMAGE=True {% raw %}#salt-set REMOVE{% endraw %}-MAGE" >> /etc/profile'
-    - cwd: {{ web_root }}
-    - user: root
-    - unless: gitploy ls 2>&1 | grep -qi "MAGE"
-    - require:
-      - service: mysqld-{{ saltenv }}
-      - service: php-{{ saltenv }}
-  cmd.run:
     - name: 'gitploy up -t {{ magento['version'] }} MAGE echo "export ADDEDMAGE=True {% raw %}#salt-set REMOVE{% endraw %}-MAGE" >> /etc/profile'
     - cwd: {{ web_root }}
     - user: root
@@ -178,6 +170,15 @@ magento:
     - require:
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
+  cmd.run:
+    - name: 'gitploy -q -t {{ magento['version'] }} MAGE https://github.com/washingtonstateuniversity/magento-mirror.git && echo "export ADDEDMAGE=True {% raw %}#salt-set REMOVE{% endraw %}-MAGE" >> /etc/profile'
+    - cwd: {{ web_root }}
+    - user: root
+    - unless: gitploy ls 2>&1 | grep -qi "MAGE"
+    - require:
+      - service: mysqld-{{ saltenv }}
+      - service: php-{{ saltenv }}
+
 
 
 # move the apps nginx rules to the site-enabled
