@@ -229,13 +229,3 @@ restart-nginx-{{ saltenv }}:
       - service: nginx-{{ saltenv }}
 
 
-{% if vars.isLocal %}
-#add a database explorer
-install-adminer:
-  cmd.run:
-    - name: wget -q http://www.adminer.org/latest-mysql-en.php  -O adminer.php -o wgetlog | wget --no-check-certificate -q https://raw.github.com/vrana/adminer/master/designs/haeckel/adminer.css  -O adminer.css -o wgetlog 
-    - cwd: {{ web_root }}
-    - unless: test -f {{ web_root }}adminer.php
-{%- endif %}
-
-
