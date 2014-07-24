@@ -11,20 +11,11 @@
 
 download-sampledata:
   cmd.run:
-    - name: gitploy up -q -b master sampledata
+    - name: gitploy ls 2>&1 | grep -qi "MAGE" && gitploy up -q -b master sampledata || gitploy -q -b master sampledata https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git
     - cwd: {{ web_root }}
     - user: root
-    - onlyif: gitploy ls 2>&1 | grep -qi "MAGE"
     - require:
       - service: mysqld-{{ saltenv }}
-  cmd.run:
-    - name: gitploy -q -b master sampledata https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git
-    - cwd: {{ web_root }}
-    - user: root
-    - unless: gitploy ls 2>&1 | grep -qi "MAGE" && test -f sample-data.sql
-    - require:
-      - service: mysqld-{{ saltenv }}
-
 
 install-sample-date:
   cmd.run:
