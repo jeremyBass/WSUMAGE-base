@@ -17,9 +17,8 @@
 
 pre-clear-caches:
   cmd.run:
-    - name: rm -rf ./var/cache/* ./var/session/* ./var/report/* ./var/locks/* ./var/log/* ./app/code/core/Zend/Cache/* ./media/css/* ./media/js/* 
+    - name: rm -rf {{ web_root }}var/cache/* {{ web_root }}var/session/* {{ web_root }}var/report/* {{ web_root }}var/locks/* {{ web_root }}var/log/* {{ web_root }}app/code/core/Zend/Cache/* {{ web_root }}media/css/* {{ web_root }}media/js/* 
     - user: root
-    - cwd: {{ web_root }}
     - onlyif: test -d {{ web_root }}var
 
 
