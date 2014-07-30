@@ -32,7 +32,7 @@ clear-random-files:
   cmd.run:
     - name: rm -rf ./test.php && chmod -R u+w tmp?*.sh && rm -rf tmp?*.sh
     - user: root
-    - onlyif: -f tmp?*
+    - onlyif: test -f tmp?*
     - cwd: {{ web_root }}
 
 
