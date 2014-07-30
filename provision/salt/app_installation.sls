@@ -21,7 +21,9 @@
    file.managed:
     - user: root
     - group: root
+{% if not vars.isLocal %}
     - mode: 744
+{%- endif %}
 
 PEAR-registry:
   cmd.run:
