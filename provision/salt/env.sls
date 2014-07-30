@@ -204,7 +204,9 @@ magento:
     - user: www-data
     - group: www-data
     - makedirs: true
+{% if not vars.isLocal %}
     - mode: 744
+{%- endif %}
     - template: jinja
     - context:
       isLocal: {{ vars.isLocal }}
