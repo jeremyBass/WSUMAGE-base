@@ -14,26 +14,29 @@
     {% if vars.update({'isLocal': True}) %} {% endif %}
 {%- endfor %}
 
+
+
+
 remove-PaypalUk:
   cmd.run:
     - name: rm -rf app/code/core/Mage/PaypalUk/*
     - user: root
     - cwd: {{ web_root }}
-    - onlyif: -d app/code/core/Mage/PaypalUk/
+    - onlyif: test -d app/code/core/Mage/PaypalUk/
 
 remove-Mage_Authorizenet:
   cmd.run:
     - name: rm -rf app/code/core/Mage/Authorizenet/* app/etc/modules/Mage_Authorizenet.xml
     - user: root
     - cwd: {{ web_root }}
-    - onlyif: -d app/code/core/Mage/Authorizenet/
+    - onlyif: test -d app/code/core/Mage/Authorizenet/
 
 remove-Phoenix_Moneybookers:
   cmd.run:
     - name: rm -rf app/code/core/community/Phoenix/* app/etc/modules/Phoenix_Moneybookers.xml
     - user: root
     - cwd: {{ web_root }}
-    - onlyif: -d app/code/core/community/Phoenix/
+    - onlyif: test -d app/code/core/community/Phoenix/
       
 #come back on this one.. unsure   
 #rm -rf app/code/core/Mage/Paypal/* app/code/core/Mage/Paypal/*

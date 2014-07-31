@@ -17,10 +17,9 @@
 
 pre-clear-caches:
   cmd.run:
-    - name: rm -rf ./var/cache/* ./var/session/* ./var/report/* ./var/locks/* ./var/log/* ./app/code/core/Zend/Cache/* ./media/css/* ./media/js/* 
+    - name: rm -rf {{ web_root }}var/cache/* {{ web_root }}var/session/* {{ web_root }}var/report/* {{ web_root }}var/locks/* {{ web_root }}var/log/* {{ web_root }}app/code/core/Zend/Cache/* {{ web_root }}media/css/* {{ web_root }}media/js/* 
     - user: root
-    - cwd: {{ web_root }}
-    - unless: cd {{ web_root }}var
+    - onlyif: test -d {{ web_root }}var
 
 
 
@@ -37,8 +36,7 @@ php-{{ saltenv }}:
 nginx-{{ saltenv }}:
   service.running:
     - name: nginx
-    - watch:
-      - file: {{ web_root }}maps/nginx-mapping.conf
+
 
 
 /etc/incron.d/mapping.conf:
@@ -164,13 +162,14 @@ init_gitploy:
 
 magento:
   cmd.run:
-    - name: 'gitploy -q -t {{ magento['version'] }} MAGE https://github.com/washingtonstateuniversity/magento-mirror.git && echo "export ADDEDMAGE=True {% raw %}#salt-set REMOVE{% endraw %}-MAGE" >> /etc/profile'
+    - name: 'gitploy ls 2>&1 | grep -qi "MAGE" && gitploy up -t {{ magento['version'] }} MAGE || gitploy -q -t {{ magento['version'] }} MAGE https://github.com/washingtonstateuniversity/magento-mirror.git'
     - cwd: {{ web_root }}
     - user: root
-    - unless: gitploy ls 2>&1 | grep -qi "MAGE"
     - require:
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
+
+
 
 
 # move the apps nginx rules to the site-enabled
@@ -205,7 +204,9 @@ magento:
     - user: www-data
     - group: www-data
     - makedirs: true
+{% if not vars.isLocal %}
     - mode: 744
+{%- endif %}
     - template: jinja
     - context:
       isLocal: {{ vars.isLocal }}
@@ -219,15 +220,5 @@ restart-nginx-{{ saltenv }}:
     - cwd: /
     - require:
       - service: nginx-{{ saltenv }}
-
-
-{% if vars.isLocal %}
-#add a database explorer
-install-adminer:
-  cmd.run:
-    - name: wget -q http://www.adminer.org/latest-mysql-en.php  -O adminer.php -o wgetlog | wget --no-check-certificate -q https://raw.github.com/vrana/adminer/master/designs/haeckel/adminer.css  -O adminer.css -o wgetlog 
-    - cwd: {{ web_root }}
-    - unless: -f {{ web_root }}adminer.php
-{%- endif %}
 
 
