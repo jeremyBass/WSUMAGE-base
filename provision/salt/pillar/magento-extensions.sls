@@ -51,13 +51,13 @@ extensions:
     branch: master
     tag: 
   etx00008:
-    track_name: auditing
+    track_name: wsu_auditing
     name: WSUMAGE-auditing
     repo_owner: washingtonstateuniversity
     branch: master
     tag: 
   etx00009:
-    track_name: structureddata
+    track_name: richdata
     name: WSUMAGE-structured-data
     repo_owner: washingtonstateuniversity
     branch: master
@@ -165,19 +165,19 @@ extensions:
 #    branch: master
 #    tag:
   etx00027:
-    track_name: WSUMAGE_forms
+    track_name: wsu_forms
     name: WSUMAGE-forms
     repo_owner: jeremyBass
     branch: master
     tag:
   etx00028:
-    track_name: WSUMAGE_comingsoon
+    track_name: wsu_comingsoon
     name: WSUMAGE-comingsoon 
     repo_owner: washingtonstateuniversity
     branch: master
     tag:
   etx00029:
-    track_name: WSUMAGE_central_cc 
+    track_name: wsu_cc 
     name: WSUMAGE-central-cc-processing 
     repo_owner: washingtonstateuniversity
     branch: master
