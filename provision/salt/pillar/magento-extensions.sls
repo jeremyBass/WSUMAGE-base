@@ -93,7 +93,7 @@ extensions:
     branch: master
     tag:             
   etx00015:
-    track_name: mage-enhanced-admin-grids
+    track_name: admin-grids
     name: mage-enhanced-admin-grids
     repo_owner: jeremyBass
     branch: master
