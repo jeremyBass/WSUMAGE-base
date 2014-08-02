@@ -27,7 +27,7 @@ extensions:
     branch: master
     tag: #v0.1.0-beta.1
   etx00004:
-    track_name: opc
+    track_name: wsu_opc
     name: WSUMAGE-opc
     repo_owner: washingtonstateuniversity
     branch: master
