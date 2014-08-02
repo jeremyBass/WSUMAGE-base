@@ -129,7 +129,7 @@ extensions:
 #    branch: master
 #    tag:  
   etx00021:
-    track_name: AvS_FastSimpleImport
+    track_name: simple_importer
     name: AvS_FastSimpleImport
     repo_owner: jeremyBass
     branch: master
