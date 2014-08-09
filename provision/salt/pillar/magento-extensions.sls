@@ -4,15 +4,15 @@ extensions:
   etx00001:
     track_name: storeutilities
     name: WSUMAGE-store-utilities
-    repo_owner: washingtonstateuniversity
+    repo_owner: jeremyBass
     branch: master
     tag: v0.1.0-RC
   etx00002:
     track_name: networksecurities
     name: WSUMAGE-networksecurities
-    repo_owner: washingtonstateuniversity
+    repo_owner: jeremyBass
     branch: master
-    tag: v0.2.0-RC
+    tag: #v0.2.0-RC
 #  etx00002:
 #    track_name: landfill
 #    name: landfill
@@ -29,7 +29,7 @@ extensions:
   etx00004:
     track_name: wsu_opc
     name: WSUMAGE-opc
-    repo_owner: washingtonstateuniversity
+    repo_owner: jeremyBass
     branch: master
     tag:
   etx00005:
@@ -41,31 +41,31 @@ extensions:
   etx00006:
     track_name: admin-base
     name: WSUMAGE-admin-base
-    repo_owner: washingtonstateuniversity
+    repo_owner: jeremyBass
     branch: master
     tag: 
   etx00007:
     track_name: theme-base
     name: WSUMAGE-theme-base
-    repo_owner: washingtonstateuniversity
+    repo_owner: jeremyBass
     branch: master
     tag: 
   etx00008:
     track_name: wsu_auditing
     name: WSUMAGE-auditing
-    repo_owner: washingtonstateuniversity
+    repo_owner: jeremyBass
     branch: master
     tag: 
   etx00009:
     track_name: richdata
     name: WSUMAGE-structured-data
-    repo_owner: washingtonstateuniversity
+    repo_owner: jeremyBass
     branch: master
     tag: 
   etx00010:
     track_name: iri-gateway
     name: WSUMAGE-iri-gateway
-    repo_owner: washingtonstateuniversity
+    repo_owner: jeremyBass
     branch: master
     tag: 
   etx00011:
@@ -173,13 +173,13 @@ extensions:
   etx00028:
     track_name: wsu_comingsoon
     name: WSUMAGE-comingsoon 
-    repo_owner: washingtonstateuniversity
+    repo_owner: jeremyBass
     branch: master
     tag:
   etx00029:
     track_name: wsu_cc 
     name: WSUMAGE-central-cc-processing 
-    repo_owner: washingtonstateuniversity
+    repo_owner: jeremyBass
     branch: master
     tag:
   etx00030:
