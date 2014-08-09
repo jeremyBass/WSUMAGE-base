@@ -6,7 +6,7 @@ extensions:
     name: WSUMAGE-store-utilities
     repo_owner: jeremyBass
     branch: master
-    tag: v0.1.0-RC
+    tag: #v0.1.0-RC
   etx00002:
     track_name: networksecurities
     name: WSUMAGE-networksecurities
