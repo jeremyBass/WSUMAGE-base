@@ -135,6 +135,12 @@ extensions:
     tag:
     rootfolder: htdocs/
     exclude: "*.pdf"
+  etx00023:
+    track_name: xreport
+    name: WSUMAGE-xreport
+    repo_owner: jeremyBass
+    branch: master
+    tag:
 #  etx00017:
 #    track_name: AdminQuicklancher
 #    name: AdminQuicklancher
