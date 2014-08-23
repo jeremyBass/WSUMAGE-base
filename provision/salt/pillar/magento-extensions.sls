@@ -1,5 +1,5 @@
-# this is the list and data for all the repositories thru modgit
-# modgit add [-n] [-t tag_name] [-b branch_name] <module> <git_repository>
+# this is the list and data for all the repositories thru gitploy
+# gitploy add [-n] [-t tag_name] [-b branch_name] <module> <git_repository>
 extensions:
   etx00001:
     track_name: storeutilities
