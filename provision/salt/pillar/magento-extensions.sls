@@ -13,103 +13,96 @@ extensions:
     repo_owner: jeremyBass
     branch: master
     tag: #v0.2.0-RC
-#  etx00002:
-#    track_name: landfill
-#    name: landfill
-#    repo_owner: jeremyBass
-#    branch: master
-#    tag:
-#    localonly: true
   etx00003:
-    track_name: Magento-OpCache
-    name: Magento-OpCache
-    repo_owner: SchumacherFM
-    branch: master
-    tag: #v0.1.0-beta.1
-  etx00004:
-    track_name: wsu_opc
-    name: WSUMAGE-opc
-    repo_owner: jeremyBass
-    branch: master
-    tag:
-  etx00005:
-    track_name: Storepartitions
-    name: WSUMAGE-Storepartitions
-    repo_owner: jeremyBass
-    branch: master
-    tag: 
-  etx00006:
-    track_name: admin-base
-    name: WSUMAGE-admin-base
-    repo_owner: jeremyBass
-    branch: master
-    tag: 
-  etx00007:
-    track_name: theme-base
-    name: WSUMAGE-theme-base
-    repo_owner: jeremyBass
-    branch: master
-    tag: 
-  etx00008:
-    track_name: wsu_auditing
-    name: WSUMAGE-auditing
-    repo_owner: jeremyBass
-    branch: master
-    tag: 
-  etx00009:
-    track_name: richdata
-    name: WSUMAGE-structured-data
-    repo_owner: jeremyBass
-    branch: master
-    tag: 
-  etx00010:
-    track_name: iri-gateway
-    name: WSUMAGE-iri-gateway
-    repo_owner: jeremyBass
-    branch: master
-    tag: 
-  etx00011:
-    track_name: mediacontroll
-    name: WSUMAGE-mediacontroll
-    repo_owner: jeremyBass
-    branch: master
-    tag: 
-  etx00012:
-    track_name: mailing_services
-    name: mailing_services
-    repo_owner: jeremyBass
-    branch: master
-    tag:     
-  etx00013:
-    track_name: eventTickets
-    name: eventTickets
-    repo_owner: jeremyBass
-    branch: master
-    tag:     
-  etx00014:
-    track_name: webmastertools
-    name: webmastertools
-    repo_owner: jeremyBass
-    branch: master
-    tag:             
-  etx00015:
-    track_name: admin-grids
-    name: mage-enhanced-admin-grids
-    repo_owner: jeremyBass
-    branch: master
-    tag:        
-  etx00016:
-    track_name: pickupShipping
-    name: pickupShipping
-    repo_owner: jeremyBass
-    branch: master
-    tag: 
-  etx00017:
     track_name: ajax_cart
     name: WSUMAGE-ajax-cart-handler 
     repo_owner: jeremyBass
     branch: master
     tag:
+  etx00004:
+    track_name: Magento-OpCache
+    name: Magento-OpCache
+    repo_owner: SchumacherFM
+    branch: master
+    tag: #v0.1.0-beta.1
+  etx00005:
+    track_name: wsu_opc
+    name: WSUMAGE-opc
+    repo_owner: jeremyBass
+    branch: master
+    tag:
+  etx00006:
+    track_name: Storepartitions
+    name: WSUMAGE-Storepartitions
+    repo_owner: jeremyBass
+    branch: master
+    tag: 
+  etx00007:
+    track_name: admin-base
+    name: WSUMAGE-admin-base
+    repo_owner: jeremyBass
+    branch: master
+    tag: 
+  etx00008:
+    track_name: theme-base
+    name: WSUMAGE-theme-base
+    repo_owner: jeremyBass
+    branch: master
+    tag: 
+  etx00009:
+    track_name: wsu_auditing
+    name: WSUMAGE-auditing
+    repo_owner: jeremyBass
+    branch: master
+    tag: 
+  etx00010:
+    track_name: richdata
+    name: WSUMAGE-structured-data
+    repo_owner: jeremyBass
+    branch: master
+    tag: 
+  etx00011:
+    track_name: iri-gateway
+    name: WSUMAGE-iri-gateway
+    repo_owner: jeremyBass
+    branch: master
+    tag: 
+  etx00012:
+    track_name: mediacontroll
+    name: WSUMAGE-mediacontroll
+    repo_owner: jeremyBass
+    branch: master
+    tag: 
+  etx00013:
+    track_name: mailing_services
+    name: mailing_services
+    repo_owner: jeremyBass
+    branch: master
+    tag:     
+  etx00014:
+    track_name: eventTickets
+    name: eventTickets
+    repo_owner: jeremyBass
+    branch: master
+    tag:     
+  etx00015:
+    track_name: webmastertools
+    name: webmastertools
+    repo_owner: jeremyBass
+    branch: master
+    tag:             
+  etx00016:
+    track_name: admin-grids
+    name: mage-enhanced-admin-grids
+    repo_owner: jeremyBass
+    branch: master
+    tag:        
+  etx00017:
+    track_name: pickupShipping
+    name: pickupShipping
+    repo_owner: jeremyBass
+    branch: master
+    tag: 
 #  etx00017:
 #    track_name: AdminQuicklancher
 #    name: AdminQuicklancher
