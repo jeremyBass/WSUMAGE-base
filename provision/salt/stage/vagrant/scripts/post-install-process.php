@@ -50,10 +50,13 @@ $writeConnection = $resource->getConnection('core_write');
 error_reporting ( E_ALL & ~ E_NOTICE );
  
 $cDat = new Mage_Core_Model_Config();
-$settingsarray = $SU_Helper->csv_to_array('staging/scripts/settings.config');
-foreach($settingsarray as $item){
-    $val =  $item['value']=="NULL"?NULL:$item['value'];
-    $cDat->saveConfig($item['path'], $val, 'default', 0);
+
+foreach (glob("staging/store/default/mage_settings/*.config") as $filename) {
+	$settingsarray = $SU_Helper->csv_to_array($filename);
+	foreach($settingsarray as $item){
+		$val =  $item['value']=="NULL"?NULL:$item['value'];
+		$cDat->saveConfig($item['path'], $val, 'default', 0);
+	}
 }
 $cDat->saveConfig('admin/url/custom', 'http://store.admin.'.BASEURL.'/', 'default', 0);
 
