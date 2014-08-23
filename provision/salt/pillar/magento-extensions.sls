@@ -103,7 +103,13 @@ extensions:
     name: pickupShipping
     repo_owner: jeremyBass
     branch: master
-    tag:     
+    tag: 
+  etx00017:
+    track_name: ajax_cart
+    name: WSUMAGE-ajax-cart-handler 
+    repo_owner: jeremyBass
+    branch: master
+    tag:
 #  etx00017:
 #    track_name: AdminQuicklancher
 #    name: AdminQuicklancher
