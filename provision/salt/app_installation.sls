@@ -106,7 +106,7 @@ magneto-set-connect-prefs:
 
 {{ web_root }}staging/settings:
   cmd.run:
-    - name: mkdir -p {{ web_root }}staging/settings | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/stsettingsore/* {{ web_root }}staging/settings
+    - name: mkdir -p {{ web_root }}staging/settings | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/settings/* {{ web_root }}staging/settings
     - user: root
     - unless: cd {{ web_root }}staging/settings
 
