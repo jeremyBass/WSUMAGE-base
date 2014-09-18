@@ -24,17 +24,16 @@ clear-sampledata-files:
 
 clear-sample-files:
   cmd.run:
-    - name: rm -rf index.php.sample .htaccess .htaccess.sample php.ini.sample LICENSE.txt STATUS.txt LICENSE.html LICENSE_AFL.txt  RELEASE_NOTES.txt
+    - name: rm -rf index.php.sample .htaccess .htaccess.sample php.ini.sample LICENSE.txt STATUS.txt LICENSE.html LICENSE_AFL.txt  RELEASE_NOTES.txt LICENSE test.php README README.* *.pdf .travis.yml
     - user: root
     - cwd: {{ web_root }}
 
 clear-random-files:
   cmd.run:
-    - name: rm -rf ./test.php && chmod -R u+w tmp?*.sh && rm -rf tmp?*.sh
+    - name: chmod -R u+w tmp?*.sh && rm -rf tmp?*.sh
     - user: root
     - onlyif: test -f tmp?*
     - cwd: {{ web_root }}
-
 
 clear-fresh-install:
   cmd.run:

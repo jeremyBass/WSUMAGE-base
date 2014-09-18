@@ -51,7 +51,7 @@ error_reporting ( E_ALL & ~ E_NOTICE );
  
 $cDat = new Mage_Core_Model_Config();
 
-foreach (glob("staging/store/default/mage_settings/*.config") as $filename) {
+foreach (glob("staging/settings/*.config") as $filename) {
 	$settingsarray = $SU_Helper->csv_to_array($filename);
 	foreach($settingsarray as $item){
 		$val =  $item['value']=="NULL"?NULL:$item['value'];

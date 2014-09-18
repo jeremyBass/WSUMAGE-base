@@ -98,11 +98,18 @@ magneto-set-connect-prefs:
     - user: root
     - unless: cd {{ web_root }}staging/scripts
 
-{{ web_root }}staging/patches:
+#{{ web_root }}staging/patches:
+#  cmd.run:
+#    - name: mkdir {{ web_root }}staging/patches | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/patches/* {{ web_root }}staging/patches
+#    - user: root
+#    - unless: cd {{ web_root }}staging/patches
+
+{{ web_root }}staging/settings:
   cmd.run:
-    - name: mkdir {{ web_root }}staging/patches | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/patches/* {{ web_root }}staging/patches
+    - name: mkdir -p {{ web_root }}staging/settings | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/settings/* {{ web_root }}staging/settings
     - user: root
-    - unless: cd {{ web_root }}staging/patches
+    - unless: cd {{ web_root }}staging/settings
+
 
 ###############################################
 # patchs
