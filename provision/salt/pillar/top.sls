@@ -1,4 +1,4 @@
-store.wsu.edu:
+store:
   '*':
     - project
     - database
