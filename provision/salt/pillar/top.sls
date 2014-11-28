@@ -1,4 +1,4 @@
-store:
+stores:
   '*':
     - project
     - database

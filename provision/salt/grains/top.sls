@@ -1,3 +1,3 @@
-store:
+stores:
   '*':
     - grains
