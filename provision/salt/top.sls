@@ -8,7 +8,7 @@
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
-store.wsu.edu:
+{{ saltenv }}:
   '*':
     - project_manager
     - env
