@@ -8,7 +8,7 @@
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
-{{ saltenv }}:
+stores:
   '*':
     - project_manager
     - env
