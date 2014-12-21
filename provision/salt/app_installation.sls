@@ -106,7 +106,7 @@ magneto-set-connect-prefs:
 
 {{ web_root }}staging/settings:
   cmd.run:
-    - name: mkdir -p {{ web_root }}staging/settings | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/settings/* {{ web_root }}staging/settings
+    - name: mkdir {{ web_root }}staging/settings | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/settings/* {{ web_root }}staging/settings
     - user: root
     - unless: cd {{ web_root }}staging/settings
 
@@ -119,11 +119,11 @@ magneto-set-connect-prefs:
 ###############################################
 run-patches-4829-correct:
   cmd.run: #insure it's going to run on windows hosts
-    - name: dos2unix /srv/salt/{{ saltenv }}/stage/vagrant/patches/SUPEE-4829.sh
+    - name: dos2unix {{ web_root }}staging/patches/SUPEE-4829.sh
 run-patches-4829:
   cmd.script:
     - name: SUPEE-4829.sh
-    - source: {{ stage_root }}patches/SUPEE-4829.sh
+    - source: {{ web_root }}staging/patches/SUPEE-4829.sh
     - cwd: {{ web_root }}
     - unless: grep -qi "SUPEE-4829" {{ web_root }}app/etc/applied.patches.list  
 
