@@ -12,7 +12,6 @@
 {% if vars.update({'isLocal': salt['cmd.run']('test -n "$SERVER_TYPE" && echo $SERVER_TYPE || echo "false"') }) %} {% endif %}
 
 
-
 stores:
   '*':
     - project_manager
