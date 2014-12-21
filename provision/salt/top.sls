@@ -13,7 +13,7 @@
 
 
 
-{{ saltenv }}:
+stores:
   '*':
     - project_manager
     - env
