@@ -9,9 +9,9 @@
 {%- set stage_root = "salt://stage/vagrant/" %}
 
 {% set vars = {'isLocal': False} %}
-{% for ip in salt['grains.get']('ipv4') if ip.startswith('10.255.255') -%}
-    {% if vars.update({'isLocal': True}) %} {% endif %}
-{%- endfor %}
+{% if vars.update({'ip': salt['cmd.run']('ifconfig eth1 | grep "inet " | awk \'{gsub("addr:","",$2);  print $2 }\'') }) %} {% endif %}
+{% if vars.update({'isLocal': salt['cmd.run']('test -n "$SERVER_TYPE" && echo $SERVER_TYPE || echo "false"') }) %} {% endif %}
+
 
 
 
@@ -51,15 +51,13 @@ nginx-{{ saltenv }}:
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
 
-
-
-
+{% if 'webcaching' in grains.get('roles') %}
 # Turn off all caches
 memcached-stopped:
   cmd.run:
     - name: service memcached stop
     - cwd: /
-
+{% endif %}
 
 
 # Setup the MySQL requirements for WSUMAGE-base
