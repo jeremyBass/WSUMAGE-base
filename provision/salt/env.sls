@@ -38,19 +38,6 @@ nginx-{{ saltenv }}:
     - name: nginx
 
 
-
-/etc/incron.d/mapping.conf:
-  file.managed:
-    - source: salt://config/incron/incron.d/mapping.conf
-    - makedirs: true
-    - user: root
-    - group: root
-    - template: jinja
-    - context:
-      isLocal: {{ vars.isLocal }}
-      saltenv: {{ saltenv }}
-      web_root: {{ web_root }}
-
 {% if 'webcaching' in grains.get('roles') %}
 # Turn off all caches
 memcached-stopped:
@@ -211,6 +198,7 @@ magento:
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
 
+
 restart-nginx-{{ saltenv }}:
   cmd.run:
     - name: service nginx restart
@@ -219,4 +207,14 @@ restart-nginx-{{ saltenv }}:
     - require:
       - service: nginx-{{ saltenv }}
 
-
+/etc/incron.d/mapping.conf:
+  file.managed:
+    - source: salt://config/incron/incron.d/mapping.conf
+    - makedirs: true
+    - user: root
+    - group: root
+    - template: jinja
+    - context:
+      isLocal: {{ vars.isLocal }}
+      saltenv: {{ saltenv }}
+      web_root: {{ web_root }}
