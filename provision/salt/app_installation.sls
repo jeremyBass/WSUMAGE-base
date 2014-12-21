@@ -98,11 +98,11 @@ magneto-set-connect-prefs:
     - user: root
     - unless: cd {{ web_root }}staging/scripts
 
-#{{ web_root }}staging/patches:
-#  cmd.run:
-#    - name: mkdir {{ web_root }}staging/patches | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/patches/* {{ web_root }}staging/patches
-#    - user: root
-#    - unless: cd {{ web_root }}staging/patches
+{{ web_root }}staging/patches:
+  cmd.run:
+    - name: mkdir {{ web_root }}staging/patches | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/patches/* {{ web_root }}staging/patches
+    - user: root
+    - unless: cd {{ web_root }}staging/patches
 
 {{ web_root }}staging/settings:
   cmd.run:
@@ -117,14 +117,14 @@ magneto-set-connect-prefs:
 # this needs to be done in a better way
 # we have to push the patch to be executable
 ###############################################
-#run-patchs-2619-correct:
-#  cmd.run: #insure it's going to run on windows hosts
-#    - name: dos2unix /srv/salt/{{ saltenv }}/stage/vagrant/patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
-#run-patchs-2619:
-#  cmd.script:
-#    - name: PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
-#    - source: {{ stage_root }}patches/PATCH_SUPEE-2619_EE_1.13.1.0_v1.sh
-#    - cwd: {{ web_root }}
-#    - unless: grep -qi "SUPEE-2619" {{ web_root }}app/etc/applied.patches.list  
+run-patches-4829-correct:
+  cmd.run: #insure it's going to run on windows hosts
+    - name: dos2unix /srv/salt/{{ saltenv }}/stage/vagrant/patches/SUPEE-4829.sh
+run-patches-4829:
+  cmd.script:
+    - name: SUPEE-4829.sh
+    - source: {{ stage_root }}patches/SUPEE-4829.sh
+    - cwd: {{ web_root }}
+    - unless: grep -qi "SUPEE-4829" {{ web_root }}app/etc/applied.patches.list  
 
 
