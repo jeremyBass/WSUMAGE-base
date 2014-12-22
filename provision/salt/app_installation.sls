@@ -80,35 +80,37 @@ magneto-set-connect-prefs:
 ###############################################
 # staging
 ###############################################
+{%- set stage_root = "/var/app/{{ saltenv }}/provision/salt/stage/vagrant/" %}
+{%- set web_stage_root = "{{ web_root }}staging/" %}
 {{ web_root }}staging/:
   file.directory:
     - name: {{ web_root }}staging/
     - user: www-data
     - group: www-data
 
-{{ web_root }}staging/sql:
+{{ web_stage_root }}sql:
   cmd.run:
-    - name: mkdir {{ web_root }}staging/sql | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/sql/* {{ web_root }}staging/sql
+    - name: mkdir {{ web_root }}staging/sql | cp {{ stage_root }}sql/* {{ web_stage_root }}sql
     - user: root
-    - unless: cd {{ web_root }}staging/sql
+    - unless: cd {{ web_stage_root }}sql
     
-{{ web_root }}staging/scripts:
+{{ web_stage_root }}scripts:
   cmd.run:
-    - name: mkdir {{ web_root }}staging/scripts | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/scripts/* {{ web_root }}staging/scripts
+    - name: mkdir {{ web_root }}staging/scripts | cp {{ stage_root }}scripts/* {{ web_stage_root }}scripts
     - user: root
-    - unless: cd {{ web_root }}staging/scripts
+    - unless: cd {{ web_stage_root }}scripts
 
-{{ web_root }}staging/patches:
+{{ web_stage_root }}patches:
   cmd.run:
-    - name: mkdir {{ web_root }}staging/patches | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/patches/* {{ web_root }}staging/patches
+    - name: mkdir {{ web_root }}staging/patches | cp {{ stage_root }}patches/* {{ web_stage_root }}patches
     - user: root
-    - unless: cd {{ web_root }}staging/patches
+    - unless: cd {{ web_stage_root }}patches
 
-{{ web_root }}staging/settings:
+{{ web_stage_root }}settings:
   cmd.run:
-    - name: mkdir {{ web_root }}staging/settings | cp /var/app/{{ saltenv }}/provision/salt/stage/vagrant/settings/* {{ web_root }}staging/settings
+    - name: mkdir {{ web_stage_root }}settings | cp {{ stage_root }}settings/* {{ web_stage_root }}settings
     - user: root
-    - unless: cd {{ web_root }}staging/settings
+    - unless: cd {{ web_stage_root }}settings
 
 
 ###############################################
@@ -119,11 +121,11 @@ magneto-set-connect-prefs:
 ###############################################
 run-patches-4829-correct:
   cmd.run: #insure it's going to run on windows hosts
-    - name: dos2unix {{ web_root }}staging/patches/SUPEE-4829.sh
+    - name: dos2unix {{ web_stage_root }}patches/SUPEE-4829.sh
 run-patches-4829:
   cmd.script:
     - name: SUPEE-4829.sh
-    - source: {{ web_root }}staging/patches/SUPEE-4829.sh
+    - source: {{ web_stage_root }}patches/SUPEE-4829.sh
     - cwd: {{ web_root }}
     - unless: grep -qi "SUPEE-4829" {{ web_root }}app/etc/applied.patches.list  
 
