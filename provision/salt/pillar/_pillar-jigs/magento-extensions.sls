@@ -1,16 +1,13 @@
-# this is the list and data for all the repositories thru gitploy
-# gitploy add [-n] [-t tag_name] [-b branch_name] <module> <git_repository>
-{% if pillars.extensions %}
+{% set extpillars = pillars.magento_extensions -%}
 extensions:
-  {% for extension in pillars.extensions -%}
-  0000{{ loop.index }}--{{ extension.name }}:
-    track_name: {{ pillar.prefix if pillar.prefix else "" }}
-    name: {{ pillar.prefix if pillar.prefix else "" }}
-    repo_owner: {{ pillar.prefix if pillar.prefix else "" }}
-    branch: {{ pillar.prefix if pillar.prefix else "master" }}
-    tag: {{ pillar.prefix if pillar.prefix else "" }}
-    rootfolder: {{ pillar.prefix if pillar.prefix else "" }}
-    exclude: {{ pillar.prefix if pillar.prefix else "" }}
+  {% for name,extension in extpillars -%}
+  0000{{ loop.index }}--{{ name }}:
+    track_name: {{ extension.track_name if extension.track_name else "" }}
+    name: {{ extension.name if extension.name else "" }}
+    repo_owner: {{ extension.repo_owner if extension.repo_owner else "" }}
+    branch: {{ extension.branch if extension.branch else "master" }}
+    tag: {{ extension.tag if extension.tag else "" }}
+    rootfolder: {{ extension.rootfolder if extension.rootfolder else "" }}
+    exclude: {{ extension.exclude if extension.exclude else "" }}
   {% endfor -%}
-{%- endif %}
 

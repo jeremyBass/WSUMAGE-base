@@ -1,4 +1,3 @@
-{% if pillars.database %}
 {% set pillar = pillars.magento -%}
 magento:
   admin_firstname: {{ pillar.admin_firstname if pillar.admin_firstname else "Admin" }}
@@ -8,7 +7,6 @@ magento:
   admin_password: {{ pillar.admin_password if pillar.admin_password else "demo2014" }}
   sample_data: {{ pillar.sample_data if pillar.sample_data else "True" }}
   sample_stores: {{ pillar.sample_stores if pillar.sample_stores else "True" }}
-  #it should be noted that you will most likely not need anything below
   version: {{ pillar.version if pillar.version else "1.9.1.0" }}
   admin_route: {{ pillar.admin_route if pillar.admin_route else "admin" }}
   locale: {{ pillar.locale if pillar.locale else "en_US" }}
@@ -20,4 +18,3 @@ magento:
   use_secure: {{ pillar.use_secure if pillar.use_secure else "no" }}
   secure_base_url: {{ pillar.secure_base_url if pillar.secure_base_url else "" }}
   use_secure_admin: {{ pillar.use_secure_admin if pillar.use_secure_admin else "no" }}
-{%- endif %}
