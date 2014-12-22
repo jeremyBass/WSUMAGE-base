@@ -7,7 +7,7 @@
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
-
+{#%- set stage_root = "/var/app/{{ saltenv }}/provision/salt/stage/vagrant/" %#}
 {% set vars = {'isLocal': False} %}
 {% for ip in salt['grains.get']('ipv4') if ip.startswith('10.255.255') -%}
     {% if vars.update({'isLocal': True}) %} {% endif %}
@@ -80,7 +80,7 @@ magneto-set-connect-prefs:
 ###############################################
 # staging
 ###############################################
-{%- set stage_root = "/var/app/{{ saltenv }}/provision/salt/stage/vagrant/" %}
+
 {%- set web_stage_root = "{{ web_root }}staging/" %}
 {{ web_root }}staging/:
   file.directory:
@@ -90,25 +90,25 @@ magneto-set-connect-prefs:
 
 {{ web_stage_root }}sql:
   cmd.run:
-    - name: mkdir {{ web_root }}staging/sql | cp {{ stage_root }}sql/* {{ web_stage_root }}sql
+    - name: mkdir -p {{ web_stage_root }}sql && cp {{ stage_root }}sql/* {{ web_stage_root }}sql
     - user: root
     - unless: cd {{ web_stage_root }}sql
     
 {{ web_stage_root }}scripts:
   cmd.run:
-    - name: mkdir {{ web_root }}staging/scripts | cp {{ stage_root }}scripts/* {{ web_stage_root }}scripts
+    - name: mkdir -p {{ web_stage_root }}scripts && cp {{ stage_root }}scripts/* {{ web_stage_root }}scripts
     - user: root
     - unless: cd {{ web_stage_root }}scripts
 
 {{ web_stage_root }}patches:
   cmd.run:
-    - name: mkdir {{ web_root }}staging/patches | cp {{ stage_root }}patches/* {{ web_stage_root }}patches
+    - name: mkdir -p {{ web_stage_root }}patches && cp {{ stage_root }}patches/* {{ web_stage_root }}patches
     - user: root
     - unless: cd {{ web_stage_root }}patches
 
 {{ web_stage_root }}settings:
   cmd.run:
-    - name: mkdir {{ web_stage_root }}settings | cp {{ stage_root }}settings/* {{ web_stage_root }}settings
+    - name: mkdir -p {{ web_stage_root }}settings && cp {{ stage_root }}settings/* {{ web_stage_root }}settings
     - user: root
     - unless: cd {{ web_stage_root }}settings
 
