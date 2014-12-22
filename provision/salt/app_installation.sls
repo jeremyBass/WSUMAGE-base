@@ -81,7 +81,7 @@ magneto-set-connect-prefs:
 # staging
 ###############################################
 
-{%- set web_stage_root = "{{ web_root }}staging/" %}
+{%- set web_stage_root = web_root + "staging/" %}
 {{ web_root }}staging/:
   file.directory:
     - name: {{ web_root }}staging/
