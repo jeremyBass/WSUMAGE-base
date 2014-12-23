@@ -1,2 +1,4 @@
 #Pillar Data
-The pillar data here is for the serverbase only.  You may add pillar data for your app in the root folder of your app saltstack.  
+The pillar data here is for the `magento` app project only.  They wil be loaded **after** they are generated.
+
+**There is nothing you add here for data.**.  If you need a change you do one of 2 things, first is it just a value change?  if so they you will change the data with in the `server_project.conf` file.  If it's how the pillar data is output in the file then you'll change the file needed in the `_pillar-jigs/*.sls` file that corispons with the pillar you want to alter.  The pillars that are going to be used to provision are not hardcoded, and shouldn't be altered directly as they will be regenerated at somepoint.
