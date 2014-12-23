@@ -83,7 +83,7 @@ install-base-ext-{{ ext_key }}:
     - name: rm -rf {{ web_root }}var/cache/* | php "{{ web_root }}index.php" 2>/dev/null
     - cwd: {{ web_root }}
     - user: root
-    - unless: test x"$ADDED{{ track_name|replace("-","") }}" = x
+#    - unless: test x"$ADDED{{ track_name|replace("-","") }}" = x
     - require:
       - cmd: magento
       - service: mysqld-{{ saltenv }}
