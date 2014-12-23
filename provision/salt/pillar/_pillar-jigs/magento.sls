@@ -2,7 +2,7 @@
 magento:
   admin_firstname: {{ pillar.admin_firstname if pillar.admin_firstname else "Admin" }}
   admin_lastname: {{ pillar.admin_lastname if pillar.admin_lastname else "istrator" }}
-  admin_email: {{ pillar.admin_email if pillar.admin_email else "admin@mage.dev" }}
+  admin_email: {{ pillar.admin_email if pillar.admin_email else "web.support@wsu.edu" }}
   admin_username: {{ pillar.admin_username if pillar.admin_username else "admin" }}
   admin_password: {{ pillar.admin_password if pillar.admin_password else "demo2014" }}
   sample_data: {{ pillar.sample_data if pillar.sample_data else "True" }}
