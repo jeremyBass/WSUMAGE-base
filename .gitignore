@@ -2,3 +2,4 @@ html/
 .DS_Store?
 \.gitploy/
 \.gitploy?
+provision/salt/pillar/*.sls
