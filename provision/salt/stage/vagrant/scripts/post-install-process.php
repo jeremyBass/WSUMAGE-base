@@ -17,7 +17,6 @@ echo getcwd() . " (working from)\n";
 
 include_once('staging/scripts/install-config.php');
 
-
 //exit();die();
 //set up the store instance
 require_once "app/Mage.php";

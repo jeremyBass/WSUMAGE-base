@@ -13,6 +13,7 @@ magento:
   timezone: {{ pillar.timezone if pillar.timezone else "America/Los_Angeles" }}
   default_currency: {{ pillar.default_currency if pillar.default_currency else "USD" }}
   url: {{ pillar.url if pillar.url else "store.mage.dev" }}
+  baseurl: {{ pillar.url if pillar.url else "mage.dev" }}
   use_rewrites: {{ pillar.use_rewrites if pillar.use_rewrites else "yes" }}
   skip_url_validation: {{ pillar.skip_url_validation if pillar.skip_url_validation else "yes" }}
   use_secure: {{ pillar.use_secure if pillar.use_secure else "no" }}
