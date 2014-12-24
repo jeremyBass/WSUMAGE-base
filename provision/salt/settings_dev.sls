@@ -9,9 +9,10 @@
 {%- set stage_root = "salt://stage/vagrant/" %}
 
 {% set vars = {'isLocal': False} %}
-{% for ip in salt['grains.get']('ipv4') if ip.startswith('10.255.255') -%}
-    {% if vars.update({'isLocal': True}) %} {% endif %}
-{%- endfor %}
+{% if vars.update({'ip': salt['cmd.run']('ifconfig eth1 | grep "inet " | awk \'{gsub("addr:","",$2);  print $2 }\'') }) %} {% endif %}
+{% if vars.update({'isLocal': salt['cmd.run']('test -n "$SERVER_TYPE" && echo $SERVER_TYPE || echo "false"') }) %} {% endif %}
+
+
 
 # move the apps nginx rules to the site-enabled
 {{ web_root }}index.php:
