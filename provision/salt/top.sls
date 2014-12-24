@@ -16,7 +16,7 @@ stores:
   '*':
     - project_manager
     - env
-{% if magento.sample_data %}
+{% if magento['sample_data'] %}
     - sample_data
 {%- endif %}
     - app_installation
