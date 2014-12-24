@@ -132,17 +132,6 @@ init_gitploy:
     - user: root
 
 
-#magento base
-#magento:
-#  git.latest:
-#    - name: git://github.com/washingtonstateuniversity/magento-mirror.git
-#    - rev: 1.8.1.0
-#    - target: {{ web_root }}
-#    - force: True
-#    - unless: cd {{ web_root }}app/code/core/Mage/Admin/data/admin_setup
-
-
-
 
 
 magento:
