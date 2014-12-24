@@ -18,7 +18,7 @@ clear-caches:
 
 clear-sampledata-files:
   cmd.run:
-    - name: rm -rf ./WSUMAGE-sampledata-master/ ./sample-data.sql ./sample-data-files/ ./staging
+    - name: rm -rf ./staging
     - user: root
     - cwd: {{ web_root }}
 
