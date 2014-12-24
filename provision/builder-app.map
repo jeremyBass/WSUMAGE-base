@@ -1,0 +1,68 @@
+{
+	"repo": "https://github.com/washingtonstateuniversity/WSUMAGE-base.git",
+	"branch": "builder_hook_up",
+	"repoid": "washingtonstateuniversity/WSUMAGE-base",
+	"install_dir":"stores",
+	"remote": {
+		"database_host": "10.255.255.3",
+		"hosts": [
+			"store.mage.dev"
+		],
+		"salt":{
+			"env": [
+				"serverbase",
+				"database",
+				"security",
+				"web",
+				"webcaching",
+			],
+			"pillars":{
+				"magento":{
+					"admin_firstname": "Admin",
+					"admin_lastname": "istrator",
+					"admin_email": "web.support@wsu.edu",
+					"admin_username": "admin",
+					"admin_password": "demo2014",
+					"sample_data": "True",
+					"sample_stores": "True",
+					"version": "1.9.1.0",
+					"admin_route": "admin",
+					"locale": "en_US",
+					"timezone": "America/Los_Angeles",
+					"default_currency": "USD",
+					"url": "store.mage.dev",
+					"baseurl": "mage.dev",
+					"use_rewrites": "yes",
+					"skip_url_validation": "yes",
+					"use_secure": "no",
+					"secure_base_url": "",
+					"use_secure_admin": "no",
+					"crypt_key": "a723ebb767352a1f2cf5036b95e4b367",
+					"trim_defaultext": "True",
+				},
+				"database":{
+					"host: "127.0.0.1",
+					"name: "wsumage_networks"
+					"user: "mageNtkUsr2014",
+					"pass: "VAGRANT"
+					"prefix: ""
+				},
+				"magento_extensions":{
+					/* extension object block */
+					"extension-name": {
+						"track_name": "", //extension-name
+						"name": "", //Github extension-name
+						"repo_owner": "", //Github repo owner name
+						"branch": "master",
+						"tag": "",
+						"rootfolder": "",
+						"exclude": "",
+					}
+					/* END OF extension object block */
+				}
+			}
+		}
+	},
+	/* same as remote but is merged into the remote */
+	"vagrant": {}
+}
