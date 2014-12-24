@@ -13,7 +13,7 @@ NOTE that this requires
 
 //just as a guide, no real purpose
 echo getcwd() . " (working from)\n";
-$argv = $_SERVER['argv'];
+/*$argv = $_SERVER['argv'];*/
 
 include_once('staging/scripts/install-config.php');
 
