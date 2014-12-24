@@ -15,8 +15,7 @@
 {%- endfor %}
 
 
-
-
+{% if magento.trim_defaultext == "true" %}
 remove-PaypalUk:
   cmd.run:
     - name: rm -rf app/code/core/Mage/PaypalUk/*
@@ -41,7 +40,7 @@ remove-Phoenix_Moneybookers:
 #come back on this one.. unsure   
 #rm -rf app/code/core/Mage/Paypal/* app/code/core/Mage/Paypal/*
 #rm -rf app/design/adminhtml/default/default/template/paypal/*
-
+{%- endif %}
 
 
 
