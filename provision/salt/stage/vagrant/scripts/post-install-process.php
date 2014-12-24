@@ -63,7 +63,7 @@ $cDat->saveConfig('admin/url/custom', 'http://store.admin.'.BASEURL.'/', 'defaul
 $cDat->saveConfig('web/unsecure/base_url', 'http://store.'.BASEURL.'/', 'default', 0);
 $cDat->saveConfig('web/secure/base_url', 'http://store.'.BASEURL.'/', 'default', 0);
 
-
+if(SAMPLE_STORE){
 
 echo "Applying the default multi-store setup\n";
 
@@ -273,6 +273,6 @@ if(Mage::getConfig()->getModuleConfig('Wsu_eventTickets')->is('active', 'true'))
         }
     }
 }
-
+}
 $output = ob_get_clean();
 echo "name=post-install-settings result=True changed=True comment='$output'";
