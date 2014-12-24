@@ -57,10 +57,10 @@ foreach (glob("staging/settings/*.config") as $filename) {
 		$cDat->saveConfig($item['path'], $val, 'default', 0);
 	}
 }
-$cDat->saveConfig('admin/url/custom', 'http://store.admin.'.BASEURL.'/', 'default', 0);
 
-$cDat->saveConfig('web/unsecure/base_url', 'http://store.'.BASEURL.'/', 'default', 0);
-$cDat->saveConfig('web/secure/base_url', 'http://store.'.BASEURL.'/', 'default', 0);
+$cDat->saveConfig('admin/url/custom', ADMIN_URL, 'default', 0);
+$cDat->saveConfig('web/unsecure/base_url', UNSECURE_BASE_URL, 'default', 0);
+$cDat->saveConfig('web/secure/base_url', SECURE_BASE_URL, 'default', 0);
 
 if(SAMPLE_STORE){
 
