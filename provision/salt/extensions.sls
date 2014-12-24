@@ -67,7 +67,7 @@ base-ext-{{ ext_key }}-update:
 
 base-ext-{{ ext_key }}:
   cmd.run:
-    - name: 'gitploy -q {% if ext_val['exclude'] is defined and ext_val['exclude'] is not none %} -e {{ ext_val['exclude'] }} {%- endif %} {% if ext_val['rootfolder'] is defined and ext_val['rootfolder'] is not none %} -f {% raw %}"{% endraw %}{{ ext_val['rootfolder'] }}{% raw %}"{% endraw %} {%- endif %} {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ track_name }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git && echo "export ADDED{{ track_name|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}-{{ ext_key }}" >> /etc/profile'
+    - name: 'gitploy -q {% if ext_val['exclude'] is defined and ext_val['exclude'] is not none %} -e {{ ext_val['exclude'] }} {%- endif %} {% if ext_val['rootfolder'] is defined and ext_val['rootfolder'] is not none %} -f {% raw %}"{% endraw %}{{ ext_val['rootfolder'] }}{% raw %}"{% endraw %} {%- endif %} {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ track_name }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git && echo "export ADDED{{ track_name|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}-{{ ext_key }}" >> /etc/environment'
     - cwd: {{ web_root }}
     - user: root
     - unless: gitploy ls 2>&1 | grep -qi "{{ track_name }}"
