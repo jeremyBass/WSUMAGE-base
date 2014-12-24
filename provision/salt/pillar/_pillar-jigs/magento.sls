@@ -18,3 +18,4 @@ magento:
   use_secure: {{ pillar.use_secure if pillar.use_secure else "no" }}
   secure_base_url: {{ pillar.secure_base_url if pillar.secure_base_url else "" }}
   use_secure_admin: {{ pillar.use_secure_admin if pillar.use_secure_admin else "no" }}
+  crypt_key: {{ pillar.crypt_key if pillar.crypt_key else "a723ebb767352a1f2cf5036b95e4b367" }}
