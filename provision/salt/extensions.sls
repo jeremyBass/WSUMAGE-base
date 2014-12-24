@@ -15,7 +15,7 @@
 {%- endfor %}
 
 
-{% if magento.trim_defaultext == "true" %}
+{% if magento.trim_defaultext %}
 remove-PaypalUk:
   cmd.run:
     - name: rm -rf app/code/core/Mage/PaypalUk/*
