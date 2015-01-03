@@ -9,4 +9,5 @@ extensions:
     tag: {{ extension.tag if extension.tag else "" }}
     rootfolder: {{ extension.rootfolder if extension.rootfolder else "" }}
     exclude: {{ extension.exclude if extension.exclude else "" }}
+    protocol: {{ extension.protocol if extension.protocol else "" }}
   {% endfor -%}
