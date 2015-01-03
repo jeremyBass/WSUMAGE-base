@@ -59,23 +59,18 @@ remove-Phoenix_Moneybookers:
 
 base-ext-{{ ext_key }}-update:
   cmd.run:
-    - name: 'gitploy up -q {% if ext_val['exclude'] is defined and ext_val['exclude'] is not none %} -e {{ ext_val['exclude'] }} {%- endif %} {% if ext_val['rootfolder'] is defined and ext_val['rootfolder'] is not none %} -f {% raw %}"{% endraw %}{{ ext_val['rootfolder'] }}{% raw %}"{% endraw %} {%- endif %} {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ track_name }} {% if ext_val['protocal'] is defined and ext_val['protocol'] is not none %}{{ ext_val['protocol'] }}{%- else %}https://github.com/{%- endif %}{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git'
+    - name: 'gitploy up -q {% if ext_val['exclude'] %} -e {{ ext_val['exclude'] }} {%- endif %} {% if ext_val['rootfolder'] %} -f {% raw %}"{% endraw %}{{ ext_val['rootfolder'] }}{% raw %}"{% endraw %} {%- endif %} {% if ext_val['tag'] %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] %} -b {{ ext_val['branch'] }} {%- endif %} {{ track_name }} {% if ext_val['protocol'] %}{{ ext_val['protocol'] }}{%- else %}https://github.com/{%- endif %}{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git'
     - cwd: {{ web_root }}
     - user: root
     - onlyif: gitploy ls 2>&1 | grep -qi "{{ track_name }}"
 
 base-ext-{{ ext_key }}:
   cmd.run:
-    - name: 'gitploy -q {% if ext_val['exclude'] is defined and ext_val['exclude'] is not none %} -e {{ ext_val['exclude'] }} {%- endif %} {% if ext_val['rootfolder'] is defined and ext_val['rootfolder'] is not none %} -f {% raw %}"{% endraw %}{{ ext_val['rootfolder'] }}{% raw %}"{% endraw %} {%- endif %} {% if ext_val['tag'] is defined and ext_val['tag'] is not none %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] is defined and ext_val['branch'] is not none %} -b {{ ext_val['branch'] }} {%- endif %} {{ track_name }} https://github.com/{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git && echo "export ADDED{{ track_name|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}-{{ ext_key }}" >> /etc/environment'
+    - name: 'gitploy -q {% if ext_val['exclude'] %} -e {{ ext_val['exclude'] }} {%- endif %} {% if ext_val['rootfolder'] %} -f {% raw %}"{% endraw %}{{ ext_val['rootfolder'] }}{% raw %}"{% endraw %} {%- endif %} {% if ext_val['tag'] %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] %} -b {{ ext_val['branch'] }} {%- endif %} {{ track_name }} {% if ext_val['protocol'] %}{{ ext_val['protocol'] }}{%- else %}https://github.com/{%- endif %}{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git && echo "export ADDED{{ track_name|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}-{{ ext_key }}" >> /etc/environment'
     - cwd: {{ web_root }}
     - user: root
     - unless: gitploy ls 2>&1 | grep -qi "{{ track_name }}"
-    - require:
-      - cmd: magento
-      - service: mysqld-{{ saltenv }}
-      - service: php-{{ saltenv }}
-      - cmd: magneto-install
-      - cmd: init_gitploy
+
       
 install-base-ext-{{ ext_key }}:
   cmd.run:
@@ -83,11 +78,6 @@ install-base-ext-{{ ext_key }}:
     - cwd: {{ web_root }}
     - user: root
 #    - unless: test x"$ADDED{{ track_name|replace("-","") }}" = x
-    - require:
-      - cmd: magento
-      - service: mysqld-{{ saltenv }}
-      - service: php-{{ saltenv }}
-      - cmd: magneto-install      
 
 {% else %}
 {%- endif %}
