@@ -157,6 +157,7 @@ magento:
       isLocal: {{ vars.isLocal }}
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
+      magento: {{ magento }}
 
 # move the apps nginx rules to the site-enabled
 /etc/nginx/sites-enabled/store.network.conf:
@@ -169,6 +170,7 @@ magento:
       isLocal: {{ vars.isLocal }}
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
+      magento: {{ magento }}
 
 
 # move the apps nginx rules to the site-enabled
