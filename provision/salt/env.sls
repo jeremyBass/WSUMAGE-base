@@ -210,3 +210,4 @@ restart-nginx-{{ saltenv }}:
       isLocal: {{ vars.isLocal }}
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
+      magento: {{ magento }}
