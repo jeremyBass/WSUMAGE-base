@@ -74,7 +74,7 @@ base-ext-{{ ext_key }}:
       
 install-base-ext-{{ ext_key }}:
   cmd.run:
-    - name: rm -rf {{ web_root }}var/cache/* | tmp=$(php "{{ web_root }}index.php"  3>&1 1>&2 2>&3) && echo $tmp 2>&1 | grep -qi "500 error" && echo $tmp || echo "no issue with install of {{ ext_key }}"
+    - name: rm -rf {{ web_root }}var/cache/* && tmp=$(php "{{ web_root }}index.php" 2>&1) && echo $tmp 2>&1 | grep -qi "<title>Home</title >" && echo "no issue with install of {{ ext_key }}" || echo $tmp
     - cwd: {{ web_root }}
     - user: root
 #    - unless: test x"$ADDED{{ track_name|replace("-","") }}" = x
