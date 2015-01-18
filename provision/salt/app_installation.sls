@@ -73,7 +73,7 @@ get-backup:
 
 load-backup:
   cmd.run:
-    - name: "mysql -u root < /var/app/db_bak/{{ saltenv }}/current--{{ saltenv }}.sql"
+    - name: "mysql -h{{ database['host'] }} -u{{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} < /var/app/db_bak/{{ saltenv }}/current--{{ saltenv }}.sql"
     - onlyif: test -f /var/app/db_bak/{{ saltenv }}/current--{{ saltenv }}.sql
 
 magneto-install:
