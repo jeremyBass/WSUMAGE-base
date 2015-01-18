@@ -58,6 +58,19 @@ updatelocal.xml:
       saltenv: {{ saltenv }}
 
 
+{% if magento['db_restore_host'] %}
+db_bak:
+  file.directory:
+    - name: /var/app/db_bak/{{ saltenv }}/
+    - makedirs: True
+    - user: root
+    - group: root
+
+get-backup:
+  cmd.run:
+    - name: "mysqldump -h{{ magento['db_restore_host'] }} -u{{ magento['db_restore_user'] }} -p{{ magento['db_restore_pass'] }} {{ magento['db_restore_db'] }} > /var/app/db_bak/{{ saltenv }}/current--{{ saltenv }}.sql"
+{%- endif %}
+
 load-backup:
   cmd.run:
     - name: "mysql -u root < /var/app/db_bak/{{ saltenv }}/current--{{ saltenv }}.sql"

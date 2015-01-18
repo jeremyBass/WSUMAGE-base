@@ -21,3 +21,7 @@ magento:
   use_secure_admin: {{ pillar.use_secure_admin if pillar.use_secure_admin else "no" }}
   crypt_key: {{ pillar.crypt_key if pillar.crypt_key else "a723ebb767352a1f2cf5036b95e4b367" }}
   trim_defaultext: {{ pillar.trim_defaultext if pillar.trim_defaultext else "True" }}
+  db_restore_host: {{ pillar.db_restore_host if pillar.db_restore_host else "" }}
+  db_restore_user: {{ pillar.db_restore_user if pillar.db_restore_user else "" }}
+  db_restore_pass: {{ pillar.db_restore_pass if pillar.db_restore_pass else "" }}
+  db_restore_db: {{ pillar.db_restore_db if pillar.db_restore_db else "" }}
