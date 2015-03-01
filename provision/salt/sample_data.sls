@@ -8,34 +8,3 @@
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
-reload-sampledata:
-  cmd.run:
-    - name: gitploy re -q -b 1.9.1.0 sampledata
-    - cwd: {{ web_root }}
-    - user: root
-    - onlyif: gitploy ls 2>&1 | grep -qi "sampledata"
-    - require:
-      - service: mysqld-{{ saltenv }}
-  
-load-sampledata:
-  cmd.run:
-    - name: gitploy ls 2>&1 | grep -qi "MAGE" && gitploy -q -b 1.9.1.0 sampledata https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git
-    - cwd: {{ web_root }}
-    - user: root
-    - unless: gitploy ls 2>&1 | grep -qi "sampledata"
-    - require:
-      - service: mysqld-{{ saltenv }}
-
-install-sample-date:
-  cmd.run:
-    - name: 'mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} < sample-data.sql && mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} -e "create database somedb"'
-    - cwd: {{ web_root }}
-    - onlyif: test -f sample-data.sql
-    - require:
-      - cmd: download-sampledata
-
-clear-sampledata:
-  cmd.run:
-    - name: rm -rf ./WSUMAGE-sampledata-master/ ./sample-data.sql ./sample-data-files/
-    - user: root
-    - cwd: {{ web_root }}
