@@ -14,17 +14,13 @@
 
 stores:
   '*':
-    - project_manager
-    - env
+    - env_prep
 {% if magento['sample_data'] %}
     - sample_data
 {%- endif %}
-    - app_installation
+    - mage_pre_install
+    - mage_install
     - extensions
-    - settings_dev
-    - stage_dev
+    - mage_post_install
     - clean
-  'saltenv:production':
-    - match: grain
-    - stage_prod
-    - clean
+
