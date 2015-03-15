@@ -13,8 +13,6 @@
 {% if vars.update({'isLocal': salt['cmd.run']('test -n "$SERVER_TYPE" && echo $SERVER_TYPE || echo "false"') }) %} {% endif %}
 
 
-
-
 pre-clear-caches:
   cmd.run:
     - name: rm -rf {{ web_root }}var/cache/* {{ web_root }}var/session/* {{ web_root }}var/report/* {{ web_root }}var/locks/* {{ web_root }}var/log/* {{ web_root }}app/code/core/Zend/Cache/* {{ web_root }}media/css/* {{ web_root }}media/js/* 
@@ -38,6 +36,8 @@ nginx-{{ saltenv }}:
     - name: nginx
 
 
+# Stop services
+###########################################################
 {% if 'webcaching' in grains.get('roles') %}
 # Turn off all caches
 memcached-stopped:

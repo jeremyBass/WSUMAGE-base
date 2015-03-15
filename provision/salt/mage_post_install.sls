@@ -87,6 +87,8 @@
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
 
+# we now will start to call out for the store state files for the dev/prod setup
+
 # settings to stores
 post-install-settings:
   cmd.run:
