@@ -8,31 +8,40 @@
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
+{% set vars = {'isLocal': False} %}
+{% if vars.update({'ip': salt['cmd.run']('ifconfig eth1 | grep "inet " | awk \'{gsub("addr:","",$2);  print $2 }\'') }) %} {% endif %}
+{% if vars.update({'isLocal': salt['cmd.run']('test -n "$SERVER_TYPE" && echo $SERVER_TYPE || echo "false"') }) %} {% endif %}
+
+## note it should be that only on need does this get run
+## question what the need is, then test for it
+
+
+## if the repo of sample data exists
 reload-sampledata:
   cmd.run:
+    - onlyif: gitploy ls 2>&1 | grep -qi "sampledata"
     - name: gitploy re -q -b 1.9.1.0 sampledata
     - cwd: {{ web_root }}
     - user: root
-    - onlyif: gitploy ls 2>&1 | grep -qi "sampledata"
     - require:
       - service: mysqld-{{ saltenv }}
-  
+##else load it 
 load-sampledata:
   cmd.run:
+    - unless: gitploy ls 2>&1 | grep -qi "sampledata"
     - name: gitploy ls 2>&1 | grep -qi "MAGE" && gitploy -q -b 1.9.1.0 sampledata https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git
     - cwd: {{ web_root }}
     - user: root
-    - unless: gitploy ls 2>&1 | grep -qi "sampledata"
     - require:
       - service: mysqld-{{ saltenv }}
+##end 
 
+##install sample data
 install-sample-date:
   cmd.run:
+    - onlyif: test -f sample-data.sql
     - name: 'mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} < sample-data.sql && mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} -e "create database somedb"'
     - cwd: {{ web_root }}
-    - onlyif: test -f sample-data.sql
-    - require:
-      - cmd: download-sampledata
 
 clear-sampledata:
   cmd.run:
