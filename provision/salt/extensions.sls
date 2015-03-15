@@ -16,6 +16,7 @@
 
 
 {% if magento['trim_defaultext'] %}
+# this should be a looped item
 remove-PaypalUk:
   cmd.run:
     - name: rm -rf app/code/core/Mage/PaypalUk/*

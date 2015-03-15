@@ -57,6 +57,10 @@ updatelocal.xml:
       project: {{ project }}
       saltenv: {{ saltenv }}
 
+# Database actions
+##########################################################
+## Note this should test for it being requested to be done,
+## not just assumed that it should be if it's there
 
 {% if magento['db_restore_host'] %}
 db_bak:

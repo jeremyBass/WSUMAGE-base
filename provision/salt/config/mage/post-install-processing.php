@@ -15,7 +15,7 @@ NOTE that this requires
 echo getcwd() . " (working from)\n";
 /*$argv = $_SERVER['argv'];*/
 
-include_once('staging/scripts/install-config.php');
+include_once('staging/install-config.php');
 
 //exit();die();
 //set up the store instance
@@ -50,7 +50,7 @@ error_reporting ( E_ALL & ~ E_NOTICE );
 
 $cDat = new Mage_Core_Model_Config();
 
-foreach (glob("staging/settings/*.config") as $filename) {
+foreach (glob("staging/stores/settings/*.config") as $filename) {
 	$settingsarray = $SU_Helper->csv_to_array($filename);
 	foreach($settingsarray as $item){
 		$val =  $item['value']=="NULL"?NULL:$item['value'];
