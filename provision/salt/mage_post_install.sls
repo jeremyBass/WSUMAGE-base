@@ -128,7 +128,7 @@
 # settings to stores
 post-install-settings:
   cmd.run:
-    - name: php {{ web_stage_root }}post-install-processing.php
+    - name: php {{ stage_root }}post-install-processing.php
     - cwd: {{ web_root }}
     - user: root
     - unless: test x"$MagentoInstalled_Fresh" = x
