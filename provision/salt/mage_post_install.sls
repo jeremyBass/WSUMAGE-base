@@ -44,7 +44,7 @@
 
 {% for store,repo_parts in stores_objs.items() %}
 
-{%- set track_name = repo_part['track_name'] -%}
+{%- set track_name = repo_parts['track_name'] -%}
 
 "{{ app_root }}states/{{ store }}":
   cmd.run:
