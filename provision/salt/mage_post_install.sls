@@ -3,7 +3,7 @@
 {%- set project = pillar.get('project') %}
 {%- set database = pillar.get('database') %}
 {%- set magento = pillar.get('magento') %}
-{%- set stores = pillar.get('stores',{}) %}
+{%- set stores_obj = pillar.get('stores',{}) %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set app_root = "/var/app/" + saltenv + "/" %}
@@ -41,7 +41,7 @@
 # retrive store base states
 ##############################################
 
-{% for ext_key, ext_val in stores %}
+{% for ext_key, ext_val in stores_obj %}
 
 {%- set track_name = ext_val['track_name'] -%}
 
