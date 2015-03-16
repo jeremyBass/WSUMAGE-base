@@ -15,6 +15,31 @@
 {% if vars.update({'isLocal': salt['cmd.run']('test -n "$SERVER_TYPE" && echo $SERVER_TYPE || echo "false"') }) %} {% endif %}
 
 
+###############################################
+# staging
+###############################################
+
+{%- set web_stage_root = web_root + "staging/" %}
+{{ web_root }}staging/:
+  file.directory:
+    - name: {{ web_stage_root }}
+    - user: www-data
+    - group: www-data
+    
+{{ web_stage_root }}states:
+  cmd.run:
+    - name: mkdir -p {{ web_stage_root }}states && cp {{ app_root }}states/* {{ web_stage_root }}states
+    - user: root
+    - unless: cd {{ web_stage_root }}states
+
+{{ web_stage_root }}settings:
+  cmd.run:
+    - name: mkdir -p {{ web_stage_root }}settings && cp {{ stage_root }}settings/* {{ web_stage_root }}settings
+    - user: root
+    - unless: cd {{ web_stage_root }}settings
+
+
+
 # retrive store base states
 ##############################################
 
@@ -48,33 +73,25 @@ store-{{ ext_key }}-install:
     - cwd: {{ app_root }}
     - user: root
 
+{{ web_stage_root }}states/{{ ext_key }}:
+  cmd.run:
+    - name: mkdir -p {{ web_stage_root }}states/{{ ext_key }} && cp {{ app_root }}states/{{ ext_key }}/* {{ web_stage_root }}states/{{ ext_key }}
+    - user: root
+    - unless: cd {{ web_stage_root }}states/{{ ext_key }}
+
+{{ web_stage_root }}states/{{ ext_key }}/settings:
+  cmd.run:
+    - name: mkdir -p {{ web_stage_root }}states/{{ ext_key }}/settings && cp {{ app_root }}states/{{ ext_key }}/settings/* {{ web_stage_root }}states/{{ ext_key }}/settings
+    - user: root
+    - unless: cd {{ web_stage_root }}states/{{ ext_key }}/settings
+
+
 {% endfor %}
 
 
 
 
-###############################################
-# staging
-###############################################
 
-{%- set web_stage_root = web_root + "staging/" %}
-{{ web_root }}staging/:
-  file.directory:
-    - name: {{ web_stage_root }}
-    - user: www-data
-    - group: www-data
-    
-{{ web_stage_root }}states:
-  cmd.run:
-    - name: mkdir -p {{ web_stage_root }}states && cp {{ app_root }}states/* {{ web_stage_root }}states
-    - user: root
-    - unless: cd {{ web_stage_root }}states
-
-{{ web_stage_root }}settings:
-  cmd.run:
-    - name: mkdir -p {{ web_stage_root }}settings && cp {{ stage_root }}settings/* {{ web_stage_root }}settings
-    - user: root
-    - unless: cd {{ web_stage_root }}settings
 
 
 ###############################################
