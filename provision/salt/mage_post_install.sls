@@ -25,31 +25,23 @@
     - name: {{ web_stage_root }}
     - user: www-data
     - group: www-data
-    
-{{ web_stage_root }}states:
-  cmd.run:
-    - name: mkdir -p {{ web_stage_root }}states && cp {{ app_root }}states/* {{ web_stage_root }}states
-    - user: root
-    - unless: cd {{ web_stage_root }}states
 
-{{ web_stage_root }}settings:
-  cmd.run:
-    - name: mkdir -p {{ web_stage_root }}settings && cp {{ stage_root }}settings/* {{ web_stage_root }}settings
-    - user: root
-    - unless: cd {{ web_stage_root }}settings
+{{ app_root }}states:
+  file.directory:
+    - name: {{ app_root }}states
+    - user: www-data
+    - group: www-data
 
-
+{{ web_stage_root }}states/:
+  file.directory:
+    - name: {{ web_stage_root }}states/
+    - user: www-data
+    - group: www-data
 
 # retrive store base states
 ##############################################
 
-{{ app_root }}states:
-  cmd.run:
-    - name: mkdir -p {{ app_root }}states
-    - user: root
-    - unless: cd {{ app_root }}states
-
-{% for ext_key, ext_val in stores|dictsort %}
+{% for ext_key, ext_val in stores %}
 
 {%- set track_name = ext_val['track_name'] -%}
 
@@ -89,7 +81,7 @@ store-{{ ext_key }}-install:
 {% endfor %}
 
 
-
+    
 
 
 
