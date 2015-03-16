@@ -5,3 +5,4 @@ stores:
     - magento
     - magento-extensions
     - users
+    - stores
