@@ -40,38 +40,37 @@
 
 # retrive store base states
 ##############################################
-{% for store, store_parts in stores_obj %}
-{% for part_name, parts in store_parts %}
+{% for store, repo_parts in stores_obj %}
 
-{%- set track_name = parts['track_name'] -%}
+{%- set track_name = repo_part['track_name'] -%}
 
-{{ app_root }}states/{{ store }}:
+"{{ app_root }}states/{{ store }}":
   cmd.run:
     - name: mkdir -p {{ app_root }}states/{{ store }}
     - user: root
     - unless: cd {{ app_root }}states/{{ store }}
 
-store-{{ store }}-update:
+"store-{{ store }}-update":
   cmd.run:
     - onlyif: gitploy ls 2>&1 | grep -qi "{{ track_name }}"
-    - name: 'gitploy up -q {% if parts['exclude'] %} -e {{ parts['exclude'] }} {%- endif %} -p "{{ app_root }}states/{{ store }}" {% if parts['tag'] %} -t {{ parts['tag'] }} {%- endif %} {% if parts['branch'] %} -b {{ parts['branch'] }} {%- endif %} {{ track_name }}'
+    - name: 'gitploy up -q {% if repo_parts['exclude'] %} -e {{ repo_parts['exclude'] }} {%- endif %} -p "{{ app_root }}states/{{ store }}" {% if repo_parts['tag'] %} -t {{ repo_parts['tag'] }} {%- endif %} {% if repo_parts['branch'] %} -b {{ repo_parts['branch'] }} {%- endif %} {{ track_name }}'
     - cwd: {{ app_root }}
     - user: root
 
-store-{{ store }}-install:
+"store-{{ store }}-install":
   cmd.run:
     - unless: gitploy ls 2>&1 | grep -qi "{{ track_name }}"
-    - name: 'gitploy -q {% if parts['exclude'] %} -e {{ parts['exclude'] }} {%- endif %} -p "{{ app_root }}states" {% if parts['tag'] %} -t {{ parts['tag'] }} {%- endif %} {% if parts['branch'] %} -b {{ parts['branch'] }} {%- endif %} {{ track_name }} {% if parts['protocol'] %}{{ parts['protocol'] }}{%- else %}https://github.com/{%- endif %}{{ parts['repo_owner'] }}/{{ parts['name'] }}.git && echo "export ADDED{{ track_name|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}-{{ store }}" >> /etc/environment'
+    - name: 'gitploy -q {% if repo_parts['exclude'] %} -e {{ repo_parts['exclude'] }} {%- endif %} -p "{{ app_root }}states" {% if repo_parts['tag'] %} -t {{ repo_parts['tag'] }} {%- endif %} {% if repo_parts['branch'] %} -b {{ repo_parts['branch'] }} {%- endif %} {{ track_name }} {% if repo_parts['protocol'] %}{{ repo_parts['protocol'] }}{%- else %}https://github.com/{%- endif %}{{ repo_parts['repo_owner'] }}/{{ repo_parts['name'] }}.git && echo "export ADDED{{ track_name|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}-{{ store }}" >> /etc/environment'
     - cwd: {{ app_root }}
     - user: root
 
-{{ web_stage_root }}states/{{ store }}:
+"{{ web_stage_root }}states/{{ store }}":
   cmd.run:
     - name: mkdir -p {{ web_stage_root }}states/{{ store }} && cp {{ app_root }}states/{{ store }}/* {{ web_stage_root }}states/{{ store }}
     - user: root
     - unless: cd {{ web_stage_root }}states/{{ store }}
 
-{{ web_stage_root }}states/{{ store }}/settings:
+"{{ web_stage_root }}states/{{ store }}/settings":
   cmd.run:
     - name: mkdir -p {{ web_stage_root }}states/{{ store }}/settings && cp {{ app_root }}states/{{ store }}/settings/* {{ web_stage_root }}states/{{ store }}/settings
     - user: root
@@ -79,8 +78,6 @@ store-{{ store }}-install:
 
 
 {% endfor %}
-{% endfor %}
-
     
 
 

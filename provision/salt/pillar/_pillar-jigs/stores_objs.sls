@@ -1,7 +1,7 @@
 {% set stores = pillars.stores -%}
 stores_objs:
   {% for name,store in stores -%}
-  {{ name|lower|replace("-","_")|replace(" ","_")|replace(".","_")|replace("__","_")|replace("__","_") }}:
+  "{{ name }}":
     track_name: "{{ store.track_name if store.track_name else store.name|lower|replace("-","_")|replace(" ","_") }}"
     name: "{{ store.name if store.name else "" }}"
     repo_owner: "{{ store.repo_owner if store.repo_owner else "" }}"
