@@ -60,7 +60,7 @@ remove-Phoenix_Moneybookers:
 
 base-ext-{{ ext_key }}-update:
   cmd.run:
-    - name: 'gitploy up -q {% if ext_val['exclude'] %} -e {{ ext_val['exclude'] }} {%- endif %} {% if ext_val['rootfolder'] %} -f {% raw %}"{% endraw %}{{ ext_val['rootfolder'] }}{% raw %}"{% endraw %} {%- endif %} {% if ext_val['tag'] %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] %} -b {{ ext_val['branch'] }} {%- endif %} {{ track_name }} {% if ext_val['protocol'] %}{{ ext_val['protocol'] }}{%- else %}https://github.com/{%- endif %}{{ ext_val['repo_owner'] }}/{{ ext_val['name'] }}.git'
+    - name: 'gitploy up -q {% if ext_val['exclude'] %} -e {{ ext_val['exclude'] }} {%- endif %} {% if ext_val['rootfolder'] %} -f {% raw %}"{% endraw %}{{ ext_val['rootfolder'] }}{% raw %}"{% endraw %} {%- endif %} {% if ext_val['tag'] %} -t {{ ext_val['tag'] }} {%- endif %} {% if ext_val['branch'] %} -b {{ ext_val['branch'] }} {%- endif %} {{ track_name }}'
     - cwd: {{ web_root }}
     - user: root
     - onlyif: gitploy ls 2>&1 | grep -qi "{{ track_name }}"
