@@ -15,6 +15,7 @@ NOTE that this requires
 echo getcwd() . " (working from)\n";
 /*$argv = $_SERVER['argv'];*/
 
+
 include_once('staging/install-config.php');
 
 //exit();die();
@@ -50,17 +51,28 @@ error_reporting ( E_ALL & ~ E_NOTICE );
 
 $cDat = new Mage_Core_Model_Config();
 
-foreach (glob("staging/stores/settings/*.config") as $filename) {
-	$settingsarray = $SU_Helper->csv_to_array($filename);
-	foreach($settingsarray as $item){
-		$val =  $item['value']=="NULL"?NULL:$item['value'];
-		$cDat->saveConfig($item['path'], $val, 'default', 0);
-	}
-}
 
 $cDat->saveConfig('admin/url/custom', ADMIN_URL, 'default', 0);
 $cDat->saveConfig('web/unsecure/base_url', UNSECURE_BASE_URL, 'default', 0);
 $cDat->saveConfig('web/secure/base_url', SECURE_BASE_URL, 'default', 0);
+
+foreach($_GLOBAL['STORES'] as $store){
+	foreach (glob("staging/stores/".$store."/settings/*.config") as $filename) {
+		$settingsarray = $SU_Helper->csv_to_array($filename);
+		foreach($settingsarray as $item){
+			$val =  $item['value']=="NULL"?NULL:$item['value'];
+			$cDat->saveConfig($item['path'], $val, 'default', 0);
+		}
+	}
+	$stage_file = "staging/".$store."/state.php";
+	if(file_exists($stage_file)){
+		include_once($stage_file);
+	}
+}
+
+
+
+
 
 if(SAMPLE_STORE){
 

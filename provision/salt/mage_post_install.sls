@@ -130,6 +130,7 @@ store-{{ ext_key }}-install:
       isLocal: {{ vars.isLocal }}
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
+      stores: {{ stores }}
 
 # we now will start to call out for the store state files for the dev/prod setup
 
