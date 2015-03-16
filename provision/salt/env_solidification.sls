@@ -29,7 +29,7 @@ memcached-start:
     - cwd: /
 {% endif %}
 
-{% if isLocal %}
+{% if vars.isLocal %}
    # only items that needs to be truned back on for only local devleopment.
    # xdebug is the thought
 {% else %}
