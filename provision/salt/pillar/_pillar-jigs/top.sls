@@ -5,4 +5,4 @@ stores:
     - magento
     - magento-extensions
     - users
-    - stores
+    - stores_objs

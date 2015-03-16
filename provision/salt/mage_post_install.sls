@@ -3,7 +3,7 @@
 {%- set project = pillar.get('project') %}
 {%- set database = pillar.get('database') %}
 {%- set magento = pillar.get('magento') %}
-{%- set stores_obj = pillar.get('stores',{}) %}
+{%- set stores_obj = pillar.get('stores_objs',{}) %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set app_root = "/var/app/" + saltenv + "/" %}
