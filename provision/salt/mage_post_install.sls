@@ -5,7 +5,8 @@
 {%- set magento = pillar.get('magento') %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
-{%- set web_root = "/var/app/" + saltenv + "/html/" %}
+{%- set app_root = "/var/app/" + saltenv + "/" %}
+{%- set web_root = app_root "/html/" %}
 {#%- set stage_root = "salt://config/mage/" %#}
 {%- set stage_root = "/var/app/" + saltenv + "/provision/salt/config/mage/" %}
 {% set vars = {'isLocal': False} %}

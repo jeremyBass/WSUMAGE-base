@@ -1,14 +1,14 @@
-{{ if pillar.url }}
+{% if pillar.url -%}
     {% set URL = pillar.url -%}
-{{ else}}
+{% else -%}
     {% set URL = "store.mage.dev" -%}
-{{ endif }}
+{% endif -%}
 
-{{ if pillar.admin_url }}
+{% if pillar.admin_url -%}
     {% set ADMIN_URL = pillar.admin_url -%}
-{{ else}}
-    {% set ADMIN_URL = URL ~ "/" ~ pillar.admin_route ~ -%}
-{{ endif }}
+{% else -%}
+    {% set ADMIN_URL = URL + "/" + pillar.admin_route -%}
+{% endif -%}
 
 {% set pillar = pillars.magento -%}
 magento:
