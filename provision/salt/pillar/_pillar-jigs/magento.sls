@@ -1,3 +1,15 @@
+{{ if pillar.url }}
+    {% set URL = pillar.url -%}
+{{ else}}
+    {% set URL = "store.mage.dev" -%}
+{{ endif }}
+
+{{ if pillar.admin_url }}
+    {% set ADMIN_URL = pillar.admin_url -%}
+{{ else}}
+    {% set ADMIN_URL = ~ URL ~ pillar.admin_route ~ -%}
+{{ endif }}
+
 {% set pillar = pillars.magento -%}
 magento:
   admin_firstname: {{ pillar.admin_firstname if pillar.admin_firstname else "Admin" }}
@@ -12,8 +24,9 @@ magento:
   locale: {{ pillar.locale if pillar.locale else "en_US" }}
   timezone: {{ pillar.timezone if pillar.timezone else "America/Los_Angeles" }}
   default_currency: {{ pillar.default_currency if pillar.default_currency else "USD" }}
-  url: {{ pillar.url if pillar.url else "store.mage.dev" }}
+  url: {{ URL }}
   baseurl: {{ pillar.baseurl if pillar.baseurl else "mage.dev" }}
+  admin_url: {{ ADMIN_URL }}
   use_rewrites: {{ pillar.use_rewrites if pillar.use_rewrites else "yes" }}
   skip_url_validation: {{ pillar.skip_url_validation if pillar.skip_url_validation else "yes" }}
   use_secure: {{ pillar.use_secure if pillar.use_secure else "no" }}
