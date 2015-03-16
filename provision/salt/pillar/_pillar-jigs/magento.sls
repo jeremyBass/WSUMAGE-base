@@ -7,7 +7,7 @@
 {{ if pillar.admin_url }}
     {% set ADMIN_URL = pillar.admin_url -%}
 {{ else}}
-    {% set ADMIN_URL = ~ URL ~ pillar.admin_route ~ -%}
+    {% set ADMIN_URL = URL ~ "/" ~ pillar.admin_route ~ -%}
 {{ endif }}
 
 {% set pillar = pillars.magento -%}
