@@ -3,7 +3,8 @@
 {%- set project = pillar.get('project') %}
 {%- set database = pillar.get('database') %}
 {%- set magento = pillar.get('magento') %}
-{%- set stores_obj = pillar.get('stores_objs',{}) %}
+
+{%- set stores_objs = pillar.get('stores_objs',{}) %}
 {%- set magento_version = magento['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set app_root = "/var/app/" + saltenv + "/" %}
@@ -40,7 +41,8 @@
 
 # retrive store base states
 ##############################################
-{% for store, repo_parts in stores_obj %}
+
+{% for store,repo_parts in stores_objs.iteritems() %}
 
 {%- set track_name = repo_part['track_name'] -%}
 
@@ -119,7 +121,7 @@
       isLocal: {{ vars.isLocal }}
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
-      stores: {{ stores_obj }}
+      stores: {{ stores_objs }}
 
 # we now will start to call out for the store state files for the dev/prod setup
 
