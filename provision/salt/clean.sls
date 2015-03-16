@@ -16,11 +16,11 @@ clear-caches:
     - user: root
     - cwd: {{ web_root }}
 
-clear-sampledata-files:
-  cmd.run:
-    - name: rm -rf ./staging
-    - user: root
-    - cwd: {{ web_root }}
+#clear-staging-files:
+#  cmd.run:
+#    - name: rm -rf ./staging
+#    - user: root
+#    - cwd: {{ web_root }}
 
 clear-sample-files:
   cmd.run:
