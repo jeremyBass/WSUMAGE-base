@@ -42,7 +42,7 @@
 # retrive store base states
 ##############################################
 
-{% for store,repo_parts in stores_objs.iteritems() %}
+{% for store,repo_parts in stores_objs.items() %}
 
 {%- set track_name = repo_part['track_name'] -%}
 
