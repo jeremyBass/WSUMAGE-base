@@ -55,14 +55,14 @@
 "store-{{ store }}-update":
   cmd.run:
     - onlyif: gitploy ls 2>&1 | grep -qi "{{ track_name }}"
-    - name: 'gitploy up -q {% if repo_parts['exclude'] %} -e {{ repo_parts['exclude'] }} {%- endif %} -p "{{ app_root }}states/{{ store }}" {% if repo_parts['tag'] %} -t {{ repo_parts['tag'] }} {%- endif %} {% if repo_parts['branch'] %} -b {{ repo_parts['branch'] }} {%- endif %} {{ track_name }}'
+    - name: 'gitploy up -q {% if repo_parts['exclude'] %} -e {{ repo_parts['exclude'] }} {%- endif %} -p "/states/{{ store }}" {% if repo_parts['tag'] %} -t {{ repo_parts['tag'] }} {%- endif %} {% if repo_parts['branch'] %} -b {{ repo_parts['branch'] }} {%- endif %} {{ track_name }}'
     - cwd: {{ app_root }}
     - user: root
 
 "store-{{ store }}-install":
   cmd.run:
     - unless: gitploy ls 2>&1 | grep -qi "{{ track_name }}"
-    - name: 'gitploy -q {% if repo_parts['exclude'] %} -e {{ repo_parts['exclude'] }} {%- endif %} -p "{{ app_root }}states/{{ store }}" {% if repo_parts['tag'] %} -t {{ repo_parts['tag'] }} {%- endif %} {% if repo_parts['branch'] %} -b {{ repo_parts['branch'] }} {%- endif %} {{ track_name }} {% if repo_parts['protocol'] %}{{ repo_parts['protocol'] }}{%- else %}https://github.com/{%- endif %}{{ repo_parts['repo_owner'] }}/{{ repo_parts['name'] }}.git && echo "export ADDED{{ track_name|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}-{{ store }}" >> /etc/environment'
+    - name: 'gitploy -q {% if repo_parts['exclude'] %} -e {{ repo_parts['exclude'] }} {%- endif %} -p "/states/{{ store }}" {% if repo_parts['tag'] %} -t {{ repo_parts['tag'] }} {%- endif %} {% if repo_parts['branch'] %} -b {{ repo_parts['branch'] }} {%- endif %} {{ track_name }} {% if repo_parts['protocol'] %}{{ repo_parts['protocol'] }}{%- else %}https://github.com/{%- endif %}{{ repo_parts['repo_owner'] }}/{{ repo_parts['name'] }}.git && echo "export ADDED{{ track_name|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}-{{ store }}" >> /etc/environment'
     - cwd: {{ app_root }}
     - user: root
 
