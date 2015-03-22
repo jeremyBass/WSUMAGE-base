@@ -1,16 +1,14 @@
+{% set pillar = pillars.magento -%}
 {% if pillar.url -%}
     {% set URL = pillar.url -%}
 {% else -%}
     {% set URL = "store.mage.dev" -%}
 {% endif -%}
-
 {% if pillar.admin_url -%}
     {% set ADMIN_URL = pillar.admin_url -%}
 {% else -%}
     {% set ADMIN_URL = URL + "/" + pillar.admin_route -%}
 {% endif -%}
-
-{% set pillar = pillars.magento -%}
 magento:
   admin_firstname: {{ pillar.admin_firstname if pillar.admin_firstname else "Admin" }}
   admin_lastname: {{ pillar.admin_lastname if pillar.admin_lastname else "istrator" }}
