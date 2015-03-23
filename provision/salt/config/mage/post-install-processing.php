@@ -57,16 +57,23 @@ $cDat->saveConfig('web/unsecure/base_url', UNSECURE_BASE_URL, 'default', 0);
 $cDat->saveConfig('web/secure/base_url', SECURE_BASE_URL, 'default', 0);
 
 foreach($_GLOBAL['STORES'] as $store){
+	echo "Starting the store by store setting updates\n";
+	$i=0;
 	foreach (glob("staging/stores/".$store."/settings/*.config") as $filename) {
 		$settingsarray = $SU_Helper->csv_to_array($filename);
 		foreach($settingsarray as $item){
 			$val =  $item['value']=="NULL"?NULL:$item['value'];
 			$cDat->saveConfig($item['path'], $val, 'default', 0);
+			$i++;
 		}
 	}
+	echo "updated ".$i." settings for store ".$store."\n";
 	$stage_file = "staging/".$store."/state.php";
 	if(file_exists($stage_file)){
+		echo "initalized the store ".$store."'s class\n";
 		include_once($stage_file);
+	}else{
+		echo "There was no stage class to initalize\n";
 	}
 }
 
