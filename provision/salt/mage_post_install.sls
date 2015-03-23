@@ -125,6 +125,24 @@
 
 # we now will start to call out for the store state files for the dev/prod setup
 
+# to define the stores
+{{ web_stage_root }}post-install-processing.php:
+  file.managed:
+    - source: {{ stage_root }}post-install-processing.php
+    - user: www-data
+    - group: www-data
+    - replace: True
+    - template: jinja
+    - context:
+      magento: {{ magento }}
+      database: {{ database }}
+      project: {{ project }}
+      isLocal: {{ vars.isLocal }}
+      saltenv: {{ saltenv }}
+      web_root: {{ web_root }}
+      stores: {{ stores_objs }}
+
+
 # settings to stores
 post-install-settings:
   cmd.run:
