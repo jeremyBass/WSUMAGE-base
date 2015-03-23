@@ -7,7 +7,11 @@
 {% if pillar.admin_url -%}
     {% set ADMIN_URL = pillar.admin_url -%}
 {% else -%}
+{% if pillar.admin_route -%}
     {% set ADMIN_URL = URL + "/" + pillar.admin_route -%}
+{% else -%}
+    {% set ADMIN_URL = URL + "/admin" -%}
+{% endif -%}
 {% endif -%}
 magento:
   admin_firstname: {{ pillar.admin_firstname if pillar.admin_firstname else "Admin" }}
