@@ -127,8 +127,9 @@
 
 # to define the stores
 {{ web_stage_root }}post-install-processing.php:
-  file.managed:
+  file.copy:
     - source: {{ stage_root }}post-install-processing.php
+    - force: True
     - user: www-data
     - group: www-data
     - replace: True
@@ -139,7 +140,7 @@ post-install-settings:
     - name: php {{ web_stage_root }}post-install-processing.php
     - cwd: {{ web_root }}
     - user: root
-    - unless: test x"$MagentoInstalled_Fresh" = x
+#    - unless: test x"$MagentoInstalled_Fresh" = x
     - require:
       - cmd: magento
       - service: mysqld-{{ saltenv }}
