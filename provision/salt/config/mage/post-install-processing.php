@@ -68,7 +68,7 @@ foreach($_GLOBAL['STORES'] as $store){
 		}
 	}
 	echo "updated ".$i." settings for store ".$store."\n";
-	$stage_file = "staging/".$store."/state.php";
+	$stage_file = "staging/states/".$store."/state.php";
 	if(file_exists($stage_file)){
 		echo "initalized the store ".$store."'s class\n";
 		include_once($stage_file);
