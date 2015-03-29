@@ -61,7 +61,7 @@ magneto-set-connect-prefs:
 newlocal.xml:
   file.managed:
     - name: {{ web_root }}app/etc/local.xml
-    - source: salt://config/mage/local.xml
+    - source: {{ stage_root }}config/mage/local.xml
     - onlyif: printenv 2>&1 | grep -qi "MagentoInstalled_Fresh=True"
     - show_diff: False
     - replace: True

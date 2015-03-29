@@ -46,7 +46,7 @@ set-mage-ext-pref:
 updatelocal.xml:
   file.managed:
     - name: {{ web_root }}app/etc/local.xml
-    - source: {{ stage_root }}scripts/local.xml
+    - source: {{ stage_root }}config/mage/local.xml
     - onlyif: printenv 2>&1 | grep -qi "MagentoInstalled=True"
     - show_diff: False
     - replace: True
