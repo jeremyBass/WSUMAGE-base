@@ -34,11 +34,11 @@ magneto-install:
 ###############################################
 run-patches-4829-correct:
   cmd.run: #insure it's going to run on windows hosts
-    - name: dos2unix salt://patches/SUPEE-4829.sh
+    - name: dos2unix {{ stage_root }}patches/SUPEE-4829.sh
 run-patches-4829:
   cmd.script:
     - name: sh SUPEE-4829.sh
-    - source: salt://patches/SUPEE-4829.sh
+    - source: {{ stage_root }}patches/SUPEE-4829.sh
     - cwd: {{ web_root }}
     - unless: grep -qi "SUPEE-4829" {{ web_root }}app/etc/applied.patches.list  
 
