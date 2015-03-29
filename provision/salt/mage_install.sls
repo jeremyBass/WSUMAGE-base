@@ -38,7 +38,7 @@ run-patches-4829-correct:
 run-patches-4829:
   cmd.script:
     - name: sh SUPEE-4829.sh
-    - source: {{ stage_root }}patches/SUPEE-4829.sh
+    - source: /var/app/" + saltenv + "/provision/salt/patches/SUPEE-4829.sh
     - cwd: {{ web_root }}
     - unless: grep -qi "SUPEE-4829" {{ web_root }}app/etc/applied.patches.list  
 
@@ -61,7 +61,7 @@ magneto-set-connect-prefs:
 newlocal.xml:
   file.managed:
     - name: {{ web_root }}app/etc/local.xml
-    - source: {{ stage_root }}config/mage/local.xml
+    - source: /var/app/" + saltenv + "/provision/salt/config/mage/local.xml
     - onlyif: printenv 2>&1 | grep -qi "MagentoInstalled_Fresh=True"
     - show_diff: False
     - replace: True
