@@ -154,5 +154,10 @@ setup-magento-cron:
     - user: root
     - minute: '*/5'
 
-
+# install any cronjob needed
+setup-magento-log-cleaner-cron:
+  cron.present:
+    - name: php -f {{ web_root }}shell/log.php -- clean --days 1
+    - user: root
+    - hour: '2'
 
