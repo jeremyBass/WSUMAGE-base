@@ -52,9 +52,7 @@ error_reporting ( E_ALL & ~ E_NOTICE );
 $cDat = new Mage_Core_Model_Config();
 
 
-$cDat->saveConfig('admin/url/custom', ADMIN_URL, 'default', 0);
-$cDat->saveConfig('web/unsecure/base_url', UNSECURE_BASE_URL, 'default', 0);
-$cDat->saveConfig('web/secure/base_url', SECURE_BASE_URL, 'default', 0);
+
 
 foreach($_GLOBAL['STORES'] as $store){
 	echo "Starting the store by store setting updates\n";
@@ -77,7 +75,9 @@ foreach($_GLOBAL['STORES'] as $store){
 	}
 }
 
-
+$cDat->saveConfig('admin/url/custom', ADMIN_URL, 'default', 0);
+$cDat->saveConfig('web/unsecure/base_url', UNSECURE_BASE_URL, 'default', 0);
+$cDat->saveConfig('web/secure/base_url', SECURE_BASE_URL, 'default', 0);
 
 
 
