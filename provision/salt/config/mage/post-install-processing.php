@@ -59,11 +59,11 @@ $cDat->saveConfig('web/secure/base_url', SECURE_BASE_URL, 'default', 0);
 foreach($_GLOBAL['STORES'] as $store){
 	echo "Starting the store by store setting updates\n";
 	$i=0;
-	foreach (glob("staging/states/".$store."/settings/*.config") as $filename) {
+	foreach ( glob("staging/states/".$store."/settings/*.csv") as $filename ) {
 		$settingsarray = $SU_Helper->csv_to_array($filename);
 		foreach($settingsarray as $item){
 			$val =  $item['value']=="NULL"?NULL:$item['value'];
-			$cDat->saveConfig($item['path'], $val, 'default', 0);
+			$cDat->saveConfig($item['path'], $val, $scope,$scope_id);
 			$i++;
 		}
 	}
