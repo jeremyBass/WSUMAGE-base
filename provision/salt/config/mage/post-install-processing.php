@@ -60,14 +60,9 @@ foreach($_GLOBAL['STORES'] as $store){
 	foreach ( glob("staging/states/".$store."/settings/*.csv") as $filename ) {
 		$settingsarray = $SU_Helper->csv_to_array($filename);
 		foreach($settingsarray as $item){
-			if($scope != NULL){
-				$val =  $item['value']=="NULL"?NULL:$item['value'];
-				$cDat->saveConfig($item['path'], $val, $scope , $scope_id);
-				$i++;
-			}else{
-				echo "$filename was in error at";
-				var_dump($item);
-			}
+			$val =  $item['value']=="NULL"?NULL:$item['value'];
+			$cDat->saveConfig($item['path'], $val, $item['scope'] , $item['scope_id']);
+			$i++;
 		}
 	}
 	echo "updated ".$i." settings for store ".$store."\n";
