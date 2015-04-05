@@ -62,7 +62,7 @@ foreach($_GLOBAL['STORES'] as $store){
 		foreach ( glob("staging/states/".$store."/settings/*.csv") as $filename ) {
 			$settingsarray = $SU_Helper->csv_to_array($filename);
 			foreach($settingsarray as $item){
-				if( !empty($item['path']) {
+				if( !empty($item['path']) ) {
 					$val =  $item['value']=="NULL"?NULL:$item['value'];
 					$scope =  !isset($item['scope']) || empty($item['scope']) || $item['scope'] == "NULL" || $item['scope'] == NULL ? 'default' : $item['scope'];
 					$scope_id =  !isset($item['scope_id']) || empty($item['scope_id']) || $item['scope_id'] == "NULL" || $item['scope_id'] == NULL ? 0 : $item['scope_id'];
