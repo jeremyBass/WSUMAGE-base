@@ -32,15 +32,16 @@ magneto-install:
 # this needs to be done in a better way
 # we have to push the patch to be executable
 ###############################################
-run-patches-4829-correct:
+run-patches-5994-correct:
   cmd.run: #insure it's going to run on windows hosts
-    - name: dos2unix /var/app/{{ saltenv }}/provision/salt/patches/SUPEE-4829.sh
-run-patches-4829:
+    - name: dos2unix /var/app/{{ saltenv }}/provision/salt/patches/SUPEE-5994.sh
+run-patches-5994:
   cmd.script:
-    - name: sh SUPEE-4829.sh
-    - source: /var/app/{{ saltenv }}/provision/salt/patches/SUPEE-4829.sh
+    - name: sh SUPEE-5994.sh
+    - source: /var/app/{{ saltenv }}/provision/salt/patches/SUPEE-5994.sh
     - cwd: {{ web_root }}
-    - unless: grep -qi "SUPEE-4829" {{ web_root }}app/etc/applied.patches.list  
+    - unless: grep -qi "SUPEE-5994" {{ web_root }}app/etc/applied.patches.list  
+
 
 
 ###############################################
