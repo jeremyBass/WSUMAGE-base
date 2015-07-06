@@ -21,7 +21,7 @@ magento:
   admin_password: {{ pillar.admin_password if pillar.admin_password else "demo2014" }}
   sample_data: {{ pillar.sample_data if pillar.sample_data else "True" }}
   sample_stores: {{ pillar.sample_stores if pillar.sample_stores else "True" }}
-  version: {{ pillar.version if pillar.version else "1.9.1.0" }}
+  version: {{ pillar.version if pillar.version else "1.9.1.1" }}
   admin_route: {{ pillar.admin_route if pillar.admin_route else "admin" }}
   locale: {{ pillar.locale if pillar.locale else "en_US" }}
   timezone: {{ pillar.timezone if pillar.timezone else "America/Los_Angeles" }}
