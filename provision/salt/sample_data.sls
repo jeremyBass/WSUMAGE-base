@@ -39,7 +39,7 @@ load-sampledata:
 ##install sample data
 install-sample-date:
   cmd.run:
-    - onlyif: test -f sample-data.sql && test x"$mage_sameple_data" = x
+    - onlyif: test -f sample-data.sql && count=$(mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} --skip-column-names  --batch -D {{ database['name'] }} -e 'SELECT count(*) FROM admin_user;' 2>/dev/null) && test $count -gt 0
     - name: 'mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} < sample-data.sql && mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} -e "create database somedb" && echo "export mage_sameple_data=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment && mage_sameple_data=True '
     - cwd: {{ web_root }}
 
