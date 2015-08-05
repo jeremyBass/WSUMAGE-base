@@ -40,7 +40,8 @@ load-sampledata:
 install-sample-date:
   cmd.run:
     - onlyif: test -f sample-data.sql
-    - name: 'mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} < sample-data.sql && mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} -e "create database somedb"'
+    - unless: test x"$mage_sameple_data" = x
+    - name: 'mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} < sample-data.sql && mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} -e "create database somedb" && echo "export mage_sameple_data=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment'
     - cwd: {{ web_root }}
 
 clear-sampledata:
