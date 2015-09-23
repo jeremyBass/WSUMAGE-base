@@ -14,7 +14,7 @@
 {% set vars = {'isLocal': False} %}
 {% if vars.update({'ip': salt['cmd.run']('(ifconfig eth1 2>/dev/null || ifconfig eth0 2>/dev/null) | grep "inet " | awk \'{gsub("addr:","",$2);  print $2 }\'') }) %} {% endif %}
 {% if vars.update({'isLocal': salt['cmd.run']('test -n "$SERVER_TYPE" && echo $SERVER_TYPE || echo "false"') }) %} {% endif %}
-{% if vars.update({'settings_installed': salt['cmd.run']('test x"$settings_installed" = x || echo "false"') }) %} {% endif %}
+{% if vars.update({'settings_installed': salt['cmd.run']('test x"$settings_installed" = x && echo "false"') }) %} {% endif %}
 
 ###############################################
 # staging
