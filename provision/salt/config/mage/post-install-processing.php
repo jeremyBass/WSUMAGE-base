@@ -52,39 +52,42 @@ error_reporting ( E_ALL & ~ E_NOTICE );
 $cDat = new Mage_Core_Model_Config();
 
 
+if( (SETTINGS_INSTALLED == "true" && OVERLOAD_SETTINGS == "true") || (SETTINGS_INSTALLED != "true" )){
 
+    foreach($_GLOBAL['STORES'] as $store){
+        echo "Starting the store by store setting updates\n";
+        $i=0;
+        foreach ( glob("staging/states/".$store."/settings/*.csv") as $filename ) {
+            $settingsarray = $SU_Helper->csv_to_array($filename);
+            foreach ( glob("staging/states/".$store."/settings/*.csv") as $filename ) {
+                $settingsarray = $SU_Helper->csv_to_array($filename);
+                foreach($settingsarray as $item){
+                    if( !empty($item['path']) ) {
+                        $val =  $item['value']=="NULL"?NULL:$item['value'];
+                        $scope =  !isset($item['scope']) || empty($item['scope']) || $item['scope'] == "NULL" || $item['scope'] == NULL ? 'default' : $item['scope'];
+                        $scope_id =  !isset($item['scope_id']) || empty($item['scope_id']) || $item['scope_id'] == "NULL" || $item['scope_id'] == NULL ? 0 : $item['scope_id'];
+                        $cDat->saveConfig($item['path'], $val, $scope, $scope_id);
+                        $i++;
+                    }
+                }
+            }
+        }
+        echo "updated ".$i." settings for store ".$store."\n";
+        $stage_file = "staging/states/".$store."/state.php";
+        if(file_exists($stage_file)){
+            echo "initalized the store ".$store."'s class\n";
+            include_once($stage_file);
+        }else{
+            echo "There was no stage class to initalize\n";
+        }
+    }
 
-foreach($_GLOBAL['STORES'] as $store){
-	echo "Starting the store by store setting updates\n";
-	$i=0;
-	foreach ( glob("staging/states/".$store."/settings/*.csv") as $filename ) {
-		$settingsarray = $SU_Helper->csv_to_array($filename);
-		foreach ( glob("staging/states/".$store."/settings/*.csv") as $filename ) {
-			$settingsarray = $SU_Helper->csv_to_array($filename);
-			foreach($settingsarray as $item){
-				if( !empty($item['path']) ) {
-					$val =  $item['value']=="NULL"?NULL:$item['value'];
-					$scope =  !isset($item['scope']) || empty($item['scope']) || $item['scope'] == "NULL" || $item['scope'] == NULL ? 'default' : $item['scope'];
-					$scope_id =  !isset($item['scope_id']) || empty($item['scope_id']) || $item['scope_id'] == "NULL" || $item['scope_id'] == NULL ? 0 : $item['scope_id'];
-					$cDat->saveConfig($item['path'], $val, $scope, $scope_id);
-					$i++;
-				}
-			}
-		}
-	}
-	echo "updated ".$i." settings for store ".$store."\n";
-	$stage_file = "staging/states/".$store."/state.php";
-	if(file_exists($stage_file)){
-		echo "initalized the store ".$store."'s class\n";
-		include_once($stage_file);
-	}else{
-		echo "There was no stage class to initalize\n";
-	}
+    $cDat->saveConfig('admin/url/custom', ADMIN_URL, 'default', 0);
+    $cDat->saveConfig('web/unsecure/base_url', UNSECURE_BASE_URL, 'default', 0);
+    $cDat->saveConfig('web/secure/base_url', SECURE_BASE_URL, 'default', 0);
+
 }
 
-$cDat->saveConfig('admin/url/custom', ADMIN_URL, 'default', 0);
-$cDat->saveConfig('web/unsecure/base_url', UNSECURE_BASE_URL, 'default', 0);
-$cDat->saveConfig('web/secure/base_url', SECURE_BASE_URL, 'default', 0);
 
 {% if not magento.sample_stores %}
 if(SAMPLE_STORE != "false"){

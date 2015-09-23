@@ -14,7 +14,7 @@
 {% set vars = {'isLocal': False} %}
 {% if vars.update({'ip': salt['cmd.run']('(ifconfig eth1 2>/dev/null || ifconfig eth0 2>/dev/null) | grep "inet " | awk \'{gsub("addr:","",$2);  print $2 }\'') }) %} {% endif %}
 {% if vars.update({'isLocal': salt['cmd.run']('test -n "$SERVER_TYPE" && echo $SERVER_TYPE || echo "false"') }) %} {% endif %}
-
+{% if vars.update({'settings_installed': salt['cmd.run']('test x"$settings_installed" = x || echo "false"') }) %} {% endif %}
 
 ###############################################
 # staging
@@ -62,7 +62,7 @@
 "store-{{ store }}-install":
   cmd.run:
     - unless: gitploy ls 2>&1 | grep -qi "{{ track_name }}"
-    - name: 'gitploy -q {% if repo_parts['exclude'] %} -e {{ repo_parts['exclude'] }} {%- endif %} -p "/states/{{ store }}" {% if repo_parts['tag'] %} -t {{ repo_parts['tag'] }} {%- endif %} {% if repo_parts['branch'] %} -b {{ repo_parts['branch'] }} {%- endif %} {{ track_name }} "{% if repo_parts['protocol'] %}{{ repo_parts['protocol'] }}{%- else %}https://github.com/{%- endif %}{{ repo_parts['repo_owner'] }}/{{ repo_parts['name'] }}.git" && echo "export ADDED{{ track_name|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}-{{ store }}" >> /etc/environment'
+    - name: 'gitploy -q {% if repo_parts['exclude'] %} -e {{ repo_parts['exclude'] }} {%- endif %} -p "/states/{{ store }}" {% if repo_parts['tag'] %} -t {{ repo_parts['tag'] }} {%- endif %} {% if repo_parts['branch'] %} -b {{ repo_parts['branch'] }} {%- endif %} {{ track_name }} "{% if repo_parts['protocol'] %}{{ repo_parts['protocol'] }}{%- else %}https://github.com/{%- endif %}{{ repo_parts['repo_owner'] }}/{{ repo_parts['name'] }}.git" && echo "export ADDED{{ track_name|replace("-","") }}=True {% raw %}#salt-set REMOVE{% endraw %}-{{ store }}" >> /etc/environment  && ADDED{{ track_name|replace("-","") }}=True '
     - cwd: {{ app_root }}
     - user: root
 
@@ -102,6 +102,7 @@
       database: {{ database }}
       project: {{ project }}
       saltenv: {{ saltenv }}
+
 
 ###############################################
 # start a setting stage for each store
@@ -146,7 +147,7 @@
 # settings to stores
 post-install-settings:
   cmd.run:
-    - name: php {{ web_stage_root }}post-install-processing.php
+    - name: php {{ web_stage_root }}post-install-processing.php && echo "export settings_installed=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment  && settings_installed=True
     - cwd: {{ web_root }}
     - user: root
 #    - unless: test x"$MagentoInstalled_Fresh" = x
@@ -155,6 +156,7 @@ post-install-settings:
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
       - cmd: magneto-install
+
 
 # install any cronjob needed
 setup-magento-cron:

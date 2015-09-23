@@ -1,6 +1,8 @@
 <?php
 define('BASEURL', '{{ magento['baseurl']|lower }}');
 define('SAMPLE_STORE', '{{ magento['sample_stores']|lower }}');
+define('SETTINGS_INSTALLED', '{{ var.settings_installed }}');
+define('OVERLOAD_SETTINGS', '{{ magento['overload_settings']|lower }}'); 
 
 
 define('UNSECURE_BASE_URL', 'http://{{ magento['url']|lower }}/');
