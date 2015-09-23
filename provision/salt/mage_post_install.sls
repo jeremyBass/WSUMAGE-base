@@ -120,6 +120,7 @@
       database: {{ database }}
       project: {{ project }}
       isLocal: {{ vars.isLocal }}
+      settings_installed: {{ vars.settings_installed }}
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
       stores: {{ stores_objs }}
@@ -134,15 +135,6 @@
     - user: www-data
     - group: www-data
     - replace: True
-    - template: jinja
-    - context:
-      magento: {{ magento }}
-      database: {{ database }}
-      project: {{ project }}
-      isLocal: {{ vars.isLocal }}
-      saltenv: {{ saltenv }}
-      web_root: {{ web_root }}
-      stores: {{ stores_objs }}
 
 # settings to stores
 post-install-settings:

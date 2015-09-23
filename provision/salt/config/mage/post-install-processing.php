@@ -52,7 +52,7 @@ error_reporting ( E_ALL & ~ E_NOTICE );
 $cDat = new Mage_Core_Model_Config();
 
 
-if( (SETTINGS_INSTALLED == "true" && OVERLOAD_SETTINGS == "true") || (SETTINGS_INSTALLED != "true" )){
+if( (SETTINGS_INSTALLED == "true" && OVERLOAD_SETTINGS == "true") || (SETTINGS_INSTALLED != "true" ) ){
 
     foreach($_GLOBAL['STORES'] as $store){
         echo "Starting the store by store setting updates\n";
@@ -89,7 +89,7 @@ if( (SETTINGS_INSTALLED == "true" && OVERLOAD_SETTINGS == "true") || (SETTINGS_I
 }
 
 
-{% if not magento.sample_stores %}
+
 if(SAMPLE_STORE != "false"){
 
 	echo "Applying the default multi-store setup\n";
@@ -301,6 +301,6 @@ if(SAMPLE_STORE != "false"){
 		}
 	}
 }
-{%- endif %}
+
 $output = ob_get_clean();
 echo "name=post-install-settings result=True changed=True comment='$output'";

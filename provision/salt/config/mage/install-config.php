@@ -1,7 +1,7 @@
 <?php
 define('BASEURL', '{{ magento['baseurl']|lower }}');
 define('SAMPLE_STORE', '{{ magento['sample_stores']|lower }}');
-define('SETTINGS_INSTALLED', '{{ var.settings_installed }}');
+define('SETTINGS_INSTALLED', '{{ settings_installed }}');
 define('OVERLOAD_SETTINGS', '{{ magento['overload_settings']|lower }}'); 
 
 
