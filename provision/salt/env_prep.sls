@@ -211,3 +211,16 @@ restart-nginx-{{ saltenv }}:
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
       magento: {{ magento }}
+
+/etc/incron.d/ngx_pagespeed.conf:
+  file.managed:
+    - source: salt://config/incron/incron.d/ngx_pagespeed.conf
+    - makedirs: true
+    - user: root
+    - group: root
+    - template: jinja
+    - context:
+      isLocal: {{ vars.isLocal }}
+      saltenv: {{ saltenv }}
+      web_root: {{ web_root }}
+      magento: {{ magento }}
