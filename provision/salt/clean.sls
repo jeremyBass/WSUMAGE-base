@@ -42,6 +42,12 @@ clear-dev-files:
     - onlyif: test -d dev
     - cwd: {{ web_root }}
 
+clear-pkginfo-files:
+  cmd.run:
+    - name: rm -rf pkginfo/
+    - user: root
+    - onlyif: test -d pkginfo
+    - cwd: {{ web_root }}
 
 clear-fresh-install:
   cmd.run:
