@@ -35,6 +35,14 @@ clear-random-files:
     - onlyif: test -f tmp?*
     - cwd: {{ web_root }}
 
+clear-dev-files:
+  cmd.run:
+    - name: rm -rf dev/
+    - user: root
+    - onlyif: test -d dev
+    - cwd: {{ web_root }}
+
+
 clear-fresh-install:
   cmd.run:
     - name: unset MagentoInstalled_Fresh
