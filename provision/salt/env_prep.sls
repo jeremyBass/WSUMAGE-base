@@ -94,6 +94,15 @@ magedb_grant-{{ database['name'] }}:
     - file_mode: 777
 {%- endif %}
 
+{{ web_root }}skin:
+    file.directory:
+    - user: www-data
+    - group: www-data
+{% if not vars.isLocal %}
+    - dir_mode: 777
+    - file_mode: 777
+{%- endif %}
+
 {{ web_root }}var:
     file.directory:
     - user: www-data
