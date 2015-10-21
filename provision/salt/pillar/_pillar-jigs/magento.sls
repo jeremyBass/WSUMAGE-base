@@ -21,6 +21,7 @@ magento:
   admin_password: {{ pillar.admin_password if pillar.admin_password else "demo2014" }}
   sample_data: {{ pillar.sample_data if pillar.sample_data else "True" }}
   sample_stores: {{ pillar.sample_stores if pillar.sample_stores else "True" }}
+  overload_settings: {{ pillar.overload_settings if pillar.overload_settings else "True" }}
   version: {{ pillar.version if pillar.version else "1.9.2.1" }}
   admin_route: {{ pillar.admin_route if pillar.admin_route else "admin" }}
   locale: {{ pillar.locale if pillar.locale else "en_US" }}
