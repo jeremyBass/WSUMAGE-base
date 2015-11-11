@@ -50,16 +50,16 @@
 					<article class="wrapper markdown-body">
 					<h1 id="wsu-magento-parent-theme">WSU Magento parent theme</h1>
 <h2 id="repo-wsumage-base-https-github-com-washingtonstateuniversity-wsumage-base-">Repo : <a href="https://github.com/washingtonstateuniversity/WSUMAGE-base">WSUMAGE-base</a></h2>
-<p>This is a Magento web app repo.  This is loaded in to a server base project such as <a href="https://github.com/washingtonstateuniversity/WSU-Web-Serverbase">https://github.com/washingtonstateuniversity/WSU-Web-Serverbase</a>.  This project may be loaded with other web apps as well, but it&#39;s all loaded in with the server base.  A web app can&#39;t live without the server.  The steps to get this project up is</p>
+<p>This is a Magento web app repo.  This is loaded in to a server base project such as <a href="https://github.com/washingtonstateuniversity/WSU-Web-Serverbase">WSU-Web-Serverbase</a>.  This project may be loaded with other web apps as well, but it&#39;s all loaded in with the server base.  A web app can&#39;t live without the server.  The steps to get this project up is</p>
 <ol>
-<li>git clone the server base<pre><code class="lang-bash"> $ git clone git@github.com:washingtonstateuniversity/WSU-Web-Serverbase.git wsuweb
- $ cd wsuweb
+<li>git clone the server base<pre><code class="lang-bash"> git clone git@github.com:washingtonstateuniversity/WSU-Web-Serverbase.git wsuweb
+ cd wsuweb
 </code></pre>
 </li>
-<li>git clone the web app to the app folder<pre><code class="lang-bash"> $ git clone git@github.com:washingtonstateuniversity/WSUMAGE-base.git app/store.wsu.edu
+<li>git clone the web app to the app folder<pre><code class="lang-bash"> git clone git@github.com:washingtonstateuniversity/WSUMAGE-base.git app/store.wsu.edu
 </code></pre>
 </li>
-<li>From the server root folder, just vagrant up and the app will be installed with the<pre><code class="lang-bash"> $ vagrant up
+<li>From the server root folder, just vagrant up and the app will be installed with the<pre><code class="lang-bash"> vagrant up
 </code></pre>
 </li>
 <li><strong>NOTE:</strong> If you have your local server up already, including a new app is simple.  All that is needed is to call the highstate for salt from the server.  To do this fallow these steps:<pre><code class="lang-bash"> vagrant ssh
@@ -172,7 +172,24 @@
 </div><!--/cover-->
 	</div><!--/jacket-->
 	<!-- /WRAPPING -->
-	<!--[if !IE]><script>fixScale(document);</script><![endif]-->
+	<!-- CONTACT INFO: Adjust the sample contact info below to reflect appropriate contact information. -->
+<div id="contact-details" itemscope itemtype="http://schema.org/Organization"> 
+    <span itemprop="department"  content="University Communications"></span> 
+    <span itemprop="name" content="Washington State University"></span> 
+    <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        <span itemprop="location" content="ITB"></span>
+        <span itemprop="streetAddress" content="ITB"></span>
+        <span itemprop="addressLocality" content="Pullman"></span>
+        <span itemprop="addressRegion" content="WA"></span>
+        <span itemprop="postalCode" content="99164"></span>
+    </div>
+    <span itemprop="telephone" content="(509) 335-2700"></span>
+    <span itemprop="email" content="web.support@wsu.edu"></span>
+    <span itemprop="contactPoint" content="https://ucomm.wsu.edu/contact/"></span>
+    <span itemprop="url" content="https://github.com/washingtonstateuniversity"></span>
+</div>
+
+<!--[if !IE]><script>fixScale(document);</script><![endif]-->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
