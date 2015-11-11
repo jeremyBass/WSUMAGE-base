@@ -8,20 +8,44 @@
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {%- set stage_root = "salt://stage/vagrant/" %}
 
+{% set vars = {'isLocal': False} %}
+{% if vars.update({'ip': salt['cmd.run']('(ifconfig eth1 2>/dev/null || ifconfig eth0 2>/dev/null) | grep "inet " | awk \'{gsub("addr:","",$2);  print $2 }\'') }) %} {% endif %}
+{% if vars.update({'isLocal': salt['cmd.run']('test -n "$SERVER_TYPE" && echo $SERVER_TYPE || echo "false"') }) %} {% endif %}
 
-download-sampledata:
+## note it should be that only on need does this get run
+## question what the need is, then test for it
+
+
+## if the repo of sample data exists
+reload-sampledata:
   cmd.run:
-    - name: gitploy ls 2>&1 | grep -qi "MAGE" && gitploy up -q -b master sampledata || gitploy -q -b master sampledata https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git
+    - onlyif: gitploy ls 2>&1 | grep -qi "sampledata"
+    - name: gitploy re -q -b 1.9.1.0 sampledata
     - cwd: {{ web_root }}
     - user: root
     - require:
       - service: mysqld-{{ saltenv }}
+##else load it 
+load-sampledata:
+  cmd.run:
+    - unless: gitploy ls 2>&1 | grep -qi "sampledata"
+    - name: gitploy ls 2>&1 | grep -qi "MAGE" && gitploy -q -b 1.9.1.0 sampledata https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git
+    - cwd: {{ web_root }}
+    - user: root
+    - require:
+      - service: mysqld-{{ saltenv }}
+##end 
 
+##install sample data
 install-sample-date:
   cmd.run:
-    - name: mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} < sample-data.sql
+    - onlyif: test -f sample-data.sql 
+    - unless: count=$(mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} --skip-column-names  --batch -D {{ database['name'] }} -e 'SELECT count(*) FROM admin_user;' 2>/dev/null) && test $count -gt 0
+    - name: 'mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} < sample-data.sql && mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} -e "create database somedb" && echo "export mage_sameple_data=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment && mage_sameple_data=True '
     - cwd: {{ web_root }}
-    - onlyif: test -f sample-data.sql
-    #- unless:  test x"$MagentoFreshInstalled" = x
-    - require:
-      - cmd: download-sampledata
+
+clear-sampledata:
+  cmd.run:
+    - name: rm -rf ./WSUMAGE-sampledata-master/ ./sample-data.sql ./sample-data-files/
+    - user: root
+    - cwd: {{ web_root }}

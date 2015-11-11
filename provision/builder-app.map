@@ -1,0 +1,95 @@
+/*
+ * Note this file is a map of all the options used currently. Anything with real values
+ * is to be treated as the defualt value an rendering of the app object block.
+ * One should be ok with doing nothing but
+ * {
+ *   "repo": "https://github.com/washingtonstateuniversity/WSUMAGE-base.git", //apps repo
+ *   "branch": "builder_hook_up", //apps repo branch
+ *   "repoid": "washingtonstateuniversity/WSUMAGE-base", //apps full repo ID
+ *   "install_dir":"stores", //where to install the app
+ *   /* production server settings */
+ *   "remote": {
+ *      "hosts": [
+ *          "store.mage.dev"
+ *      ],
+ *      "salt":{
+ *          "env": [
+ *              "serverbase",
+ *              "database",
+ *              "security",
+ *              "web",
+ *              "webcaching",
+ *          ]
+ *      }
+ *  }
+ * not this will change so one could do just the repo info and nothing more.
+ */
+{
+	"repo": "https://github.com/washingtonstateuniversity/WSUMAGE-base.git", //apps repo
+	"branch": "builder_hook_up", //apps repo branch
+	"repoid": "washingtonstateuniversity/WSUMAGE-base", //apps full repo ID
+	"install_dir":"stores", //where to install the app
+	/* production server settings */
+	"remote": {
+		"hosts": [ //the urls that will resolve here
+			"store.mage.dev"
+		],
+		"salt":{ // the provisioning of the app it's self
+			"env": [ //which envronments should be called on if not already there
+				"serverbase",
+				"database",
+				"security",
+				"web",
+				"webcaching",
+			],
+			"pillars":{ // create pillars with these values
+				"magento":{ // settings when installing magento 
+					"admin_firstname": "Admin",
+					"admin_lastname": "istrator",
+					"admin_email": "web.support@wsu.edu",
+					"admin_username": "admin",
+					"admin_password": "demo2014",
+					"sample_data": "True", //should you install the sample data
+					"sample_stores": "True", //should you load up extra sample stores for networks
+					"version": "1.9.1.0",
+					"admin_route": "admin",
+					"locale": "en_US",
+					"timezone": "America/Los_Angeles",
+					"default_currency": "USD",
+					"url": "store.mage.dev",
+					"baseurl": "mage.dev",
+					"use_rewrites": "yes",
+					"skip_url_validation": "yes",
+					"use_secure": "no",
+					"secure_base_url": "",
+					"use_secure_admin": "no",
+					"crypt_key": "a723ebb767352a1f2cf5036b95e4b367",
+					"trim_defaultext": "True", //should you try to remove extension from the defualt installs and be as bare as possible?
+				},
+				"database":{ // the database magento connects to
+					"host: "127.0.0.1",
+					"name: "wsumage_networks"
+					"user: "mageNtkUsr2014",
+					"pass: "VAGRANT"
+					"prefix: ""
+				},
+				"magento_extensions":{ // the array of extensions to install, loaded in order of array position
+					/* extension object block */
+					"extension-name": {
+						"track_name": "", //extension-name
+						"name": "", //Github extension-name
+						"repo_owner": "", //Github repo owner name
+						"branch": "master", // use a branch unless a tag is set
+						"tag": "", //use a tag release of the repo
+						"rootfolder": "", //where should the git controlled repo be installed at
+						"exclude": "", //should we drop any files before installing the repo
+					}
+					/* END OF extension object block */
+				}
+			}
+		}
+	},
+	/* END OF production server settings */
+	/* NOTE: vagrant is same as remote but is merged into the remote */
+	"vagrant": {}
+}

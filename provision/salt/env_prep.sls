@@ -9,10 +9,8 @@
 {%- set stage_root = "salt://stage/vagrant/" %}
 
 {% set vars = {'isLocal': False} %}
-{% for ip in salt['grains.get']('ipv4') if ip.startswith('10.255.255') -%}
-    {% if vars.update({'isLocal': True}) %} {% endif %}
-{%- endfor %}
-
+{% if vars.update({'ip': salt['cmd.run']('(ifconfig eth1 2>/dev/null || ifconfig eth0 2>/dev/null) | grep "inet " | awk \'{gsub("addr:","",$2);  print $2 }\'') }) %} {% endif %}
+{% if vars.update({'isLocal': salt['cmd.run']('test -n "$SERVER_TYPE" && echo $SERVER_TYPE || echo "false"') }) %} {% endif %}
 
 
 pre-clear-caches:
@@ -38,28 +36,15 @@ nginx-{{ saltenv }}:
     - name: nginx
 
 
-
-/etc/incron.d/mapping.conf:
-  file.managed:
-    - source: salt://config/incron/incron.d/mapping.conf
-    - makedirs: true
-    - user: root
-    - group: root
-    - template: jinja
-    - context:
-      isLocal: {{ vars.isLocal }}
-      saltenv: {{ saltenv }}
-      web_root: {{ web_root }}
-
-
-
-
+# Stop services
+###########################################################
+{% if 'webcaching' in grains.get('roles') %}
 # Turn off all caches
 memcached-stopped:
   cmd.run:
     - name: service memcached stop
     - cwd: /
-
+{% endif %}
 
 
 # Setup the MySQL requirements for WSUMAGE-base
@@ -109,6 +94,15 @@ magedb_grant-{{ database['name'] }}:
     - file_mode: 777
 {%- endif %}
 
+{{ web_root }}skin:
+    file.directory:
+    - user: www-data
+    - group: www-data
+{% if not vars.isLocal %}
+    - dir_mode: 777
+    - file_mode: 777
+{%- endif %}
+
 {{ web_root }}var:
     file.directory:
     - user: www-data
@@ -147,17 +141,6 @@ init_gitploy:
     - user: root
 
 
-#magento base
-#magento:
-#  git.latest:
-#    - name: git://github.com/washingtonstateuniversity/magento-mirror.git
-#    - rev: 1.8.1.0
-#    - target: {{ web_root }}
-#    - force: True
-#    - unless: cd {{ web_root }}app/code/core/Mage/Admin/data/admin_setup
-
-
-
 
 
 magento:
@@ -183,6 +166,7 @@ magento:
       isLocal: {{ vars.isLocal }}
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
+      magento: {{ magento }}
 
 # move the apps nginx rules to the site-enabled
 /etc/nginx/sites-enabled/store.network.conf:
@@ -195,6 +179,7 @@ magento:
       isLocal: {{ vars.isLocal }}
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
+      magento: {{ magento }}
 
 
 # move the apps nginx rules to the site-enabled
@@ -212,6 +197,8 @@ magento:
       isLocal: {{ vars.isLocal }}
       saltenv: {{ saltenv }}
       web_root: {{ web_root }}
+      magento: {{ magento }}
+
 
 restart-nginx-{{ saltenv }}:
   cmd.run:
@@ -221,4 +208,28 @@ restart-nginx-{{ saltenv }}:
     - require:
       - service: nginx-{{ saltenv }}
 
+/etc/incron.d/mapping.conf:
+  file.managed:
+    - source: salt://config/incron/incron.d/mapping.conf
+    - makedirs: true
+    - user: root
+    - group: root
+    - template: jinja
+    - context:
+      isLocal: {{ vars.isLocal }}
+      saltenv: {{ saltenv }}
+      web_root: {{ web_root }}
+      magento: {{ magento }}
 
+/etc/incron.d/ngx_pagespeed.conf:
+  file.managed:
+    - source: salt://config/incron/incron.d/ngx_pagespeed.conf
+    - makedirs: true
+    - user: root
+    - group: root
+    - template: jinja
+    - context:
+      isLocal: {{ vars.isLocal }}
+      saltenv: {{ saltenv }}
+      web_root: {{ web_root }}
+      magento: {{ magento }}
