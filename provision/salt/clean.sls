@@ -16,11 +16,11 @@ clear-caches:
     - user: root
     - cwd: {{ web_root }}
 
-clear-sampledata-files:
-  cmd.run:
-    - name: rm -rf ./WSUMAGE-sampledata-master/ ./sample-data.sql ./sample-data-files/ ./staging
-    - user: root
-    - cwd: {{ web_root }}
+#clear-staging-files:
+#  cmd.run:
+#    - name: rm -rf ./staging
+#    - user: root
+#    - cwd: {{ web_root }}
 
 clear-sample-files:
   cmd.run:
@@ -33,6 +33,20 @@ clear-random-files:
     - name: chmod -R u+w tmp?*.sh && rm -rf tmp?*.sh
     - user: root
     - onlyif: test -f tmp?*
+    - cwd: {{ web_root }}
+
+clear-dev-files:
+  cmd.run:
+    - name: rm -rf dev/
+    - user: root
+    - onlyif: test -d dev
+    - cwd: {{ web_root }}
+
+clear-pkginfo-files:
+  cmd.run:
+    - name: rm -rf pkginfo/
+    - user: root
+    - onlyif: test -d pkginfo
     - cwd: {{ web_root }}
 
 clear-fresh-install:

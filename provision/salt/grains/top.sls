@@ -1,3 +1,3 @@
-store.wsu.edu:
+stores:
   '*':
     - grains
