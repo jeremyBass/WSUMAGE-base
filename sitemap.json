@@ -12,14 +12,14 @@
 			"name":"index",
 			"nav_link":"",
 			"root":"../",
-			"title":"WSU Serverbase",
+			"title":"WSU Magento Base",
 			"vars":{
 				"showstuff":true
 			}
 		},
 		"deployment":{
 			"name":"deployment",
-			"title":"WSU Serverbase deployment guide",
+			"title":"WSU Magneto deployment guide",
 			"nav_title":"Deployment",
 			"vars":{
 				"showstuff":true
@@ -29,7 +29,7 @@
 		},
 		"development":{
 			"name":"development",
-			"title":"WSU Serverbase development guide",
+			"title":"WSU Magneto development guide",
 			"nav_title":"Development",
 			"vars":{
 				"showstuff":true
@@ -39,7 +39,7 @@
 		},
 		"production":{
 			"name":"production",
-			"title":"WSU Server Production Environment",
+			"title":"WSU Magneto Production Environment",
 			"nav_title":"Production",
 			"vars":{
 				"showstuff":true
