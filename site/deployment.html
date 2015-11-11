@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-svg lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-svg lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-svg lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
+
+<head>
+
+	<meta charset="utf-8">
+	
+	<title>WSU Serverbase deployment guide | Washington State University</title>
+	
+	<!-- FAVICON -->
+	<link rel="shortcut icon" href="//repo.wsu.edu/spine/1/favicon.ico" />
+	
+	<!-- STYLESHEETS -->
+	<link href="//repo.wsu.edu/spine/1/spine.min.css" rel="stylesheet" type="text/css" />
+	<!-- Your custom stylesheets here -->
+	<link href="/WSU-Web-Serverbase/site/stylesheets/git_styles.css" rel="stylesheet" type="text/css" />
+	<!-- RESPOND -->
+	<meta name="viewport" content="width=device-width, user-scalable=yes">
+	
+	<!-- SCRIPTS -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script src="//repo.wsu.edu/spine/1/spine.min.js"></script>
+	<!-- Your supplementary scripts here (jQuery Mobile, modernizr, site specific scripts, etcetera) -->
+	
+	<!-- COMPATIBILITY -->
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<noscript><style>#spine #spine-sitenav ul ul li { display: block !important; }</style></noscript>
+	
+	<!-- DOCS -->
+	<link type="text/plain" rel="author" href="http://repo.wsu.edu/spine/1/authors.txt">
+	<link type="text/html" rel="help" href="http://brand.wsu.edu">
+	
+	<!-- ANALYTICS -->
+	<base href="http://washingtonstateuniversity.github.io/WSUMAGE-base/"/> <!-- reminder make this a setting in sitemap -->
+</head><body>
+	<!-- WRAPPING -->
+	<div id="jacket">
+		<div id="binder" class="fluid max-1782 xlarge">
+			<!-- CONTENT -->
+			<main>
+			<!-- Responsive Sections -->
+			<section class="row side-right gutter pad short">
+			
+				<div class="column one">
+					<article class="wrapper markdown-body">
+					<h1 id="wsu-magento-deployment-guide">WSU Magento deployment guide</h1>
+<h2 id="wsu-magento-installation">WSU Magento Installation</h2>
+<p>There is a simple bash script, <code>gitploy</code>, that is used for the install and updating of the files needs for a Magento app.  <code>gitploy</code> is used to manage the install of the app.  This script will take a git repository and clone it to the server.  To advoid issues and the need for over use of submodules, gitploy tracks the local repository in a sub folder and sets things up do that you never have to worry about the install becoming corrupted.  For more information on how gitploy works please referr to the documantion.  The comand that is nomarly run in get the up today Magento app is something like,</p>
+<pre><code>`$&gt;_ gitploy -t lastest MAGE http://github.com/washingtonstateuniversity/magento-mirror.git`
+</code></pre><p>What that command wil do is to clone in the repo for the latest tag of Magento.  Wsu hosts a mirror of all versions of Magento release starting from 1.8.0.0.  The <code>-t latest</code> option will chose the last tagged release.</p>
+<h2 id="wsu-magento-updates-restores">WSU Magento Updates/Restores</h2>
+<p>The gitploy is used to update the install with a simple command.  <code>gitploy up -t latest MAGE</code>  That is all it will take to run the update.  If you are trying to do this update one a WSU server you must be ssh&#39;d in as a sudo user.  See the server notes for more information. </p>
+<p>Sometimes there could be some misstake where in the files have been corrupted or removed.  In this case you can refrest the managed files with this command, <code>gitploy re MAGE</code>.  Since you are not moving from one tag/commit to another, there is no need to use the option flags.  This wil rebuild the deployment list and restore the files that are missing and overwirte the files that are not.  This can be used in noval ways besides the case where you know there were files deleted or something.  One usage of the gitploy refresh could be to set a cron job that runs the command to refresh every night at lets say 2am.  If the system have been infected with malwear then the file affected would be wiped.  This porcess wouldn&#39;t remove files that were added to the system, but in the sense that the compromissed Magento app files would have been used to server the stray infected files, you have prevented users from accessing the infected files.  A checksome is always a wise idea to insure the the system is safe, as wel as normal malwear and anti virus scans.</p>
+<h2 id="deployment-notes">Deployment Notes</h2>
+<p>It is highly suggested that you do not run the gitploy out side of the Salt provisionor unless it is to refresh the installation.  The provisioning is used to install and update as needed.  Since access is restricted it will not be something that any user may run the <code>gitploy</code> script.</p>
+<p><strong>Note:</strong> More to come. Thank you for reading.</p>
+
+</article>
+				</div><!--/column-->
+			
+				<div class="column two">
+					<aside>
+						<section>
+						<h2 id="download-this-project">Download this project</h2>
+<ul>
+<li><a href="https://github.com/washingtonstateuniversity/WSU-Web-Serverbase">View On GitHub</a></li>
+<li><a href="https://github.com/washingtonstateuniversity/WSU-Web-Serverbase/zipball/master">Download ZIP</a></li>
+<li><a href="https://github.com/washingtonstateuniversity/WSU-Web-Serverbase/tarball/master">Download TAR</a></li>
+</ul>
+<p>This project is maintained by <a href="https://github.com/washingtonstateuniversity">Washington State University</a>.  If you have found an issue please report it in the <a href="https://github.com/washingtonstateuniversity/WSU-Web-Serverbase/issues">repo issue list</a>.  </p>
+
+</section>
+					</aside>
+				</div><!--/column-->
+			</section>
+			</main>
+			<!-- /CONTENT -->
+				<!-- SPINE -->
+	<div id="spine" class="shelved">
+		<div id="glue" class="spine-glue">
+		
+			<header class="spine-header">
+				<a href="http://www.wsu.edu/" id="wsu-signature" class="spine-signature">Washington State University</a>
+			</header>
+			
+			<!-- ACTIONS -->
+			<section id="wsu-actions" class="spine-actions">
+				<!-- Tabs -->
+				<ul id="wsu-actions-tabs" class="spine-actions-tabs clearfix">
+					<!--<li id="wsu-search-tab" class="spine-search-tab closed"><button>Search</button></li>
+					This will be taken out for the mean time, but will add it back in later.
+					-->
+					<li id="wsu-contact-tab" class="spine-contact-tab closed"><button>Contact</button></li>
+					<li id="wsu-share-tab" class="spine-share-tab closed"><button>Share</button></li>
+					<li id="wsu-print-tab" class="spine-print-tab closed"><button>Print</button></li>
+				</ul>
+			</section><!--/#wsu-actions-->
+	
+			<nav id="spine-navigation" class="spine-navigation">
+				<nav id="spine-sitenav" class="spine-sitenav">
+					<ul>
+					
+						<li><a href="" >WSU Serverbase</a></li>
+					<li>
+						<a href="site/deployment.html" class="active" >Deployment</a>
+								<ul>
+							
+								</ul>
+							
+						</li>
+					
+					<li>
+						<a href="site/development.html" >Development</a>
+								<ul>
+							
+								</ul>
+							
+						</li>
+					
+					
+						<li><a href="site/production.html" >Production</a></li>
+					
+						<li><a href="site/troubleshooting.html" >Trouble Shooting</a></li>
+					</ul>
+				</nav>
+				<nav id="spine-offsitenav" class="spine-offsitenav">
+					<ul>
+						<li><a href="//washingtonstateuniversity.github.io/WSUMAGE-base/">WSU Magento deployment</a></li>
+					</ul>
+				</nav>
+			</nav><!-- #navigation -->
+	
+			<!-- Social and Global Links -->
+			<footer class="spine-footer">
+				<!--<nav id="wsu-social-channels" class="spine-social-channels">
+					<ul>
+						<li id="facebook"><a href="http://facebook.com/wsupullman">Facebook</a></li>
+						<li id="twitter"><a href="http://twitter.com/wsupullman">Twitter</a></li>
+						<li id="youtube"><a href="http://www.youtube.com/washingtonstateuniv">YouTube</a></li>
+						<li id="directory"><a href="http://social.wsu.edu">Social</a></li>
+					</ul>
+				</nav>-->
+				<nav id="wsu-global-links" class="spine-global-links">
+					<ul>
+						<li id="zzusis"><a href="https://my.wsu.edu/">my<strong>WSU</strong></a></li>
+						<li id="access"><a href="https://oeo.wsu.edu/">Access</a></li>
+						<li id="policies"><a href="https://policies.wsu.edu/">Policies</a></li>
+						<li id="copyright"><a href="https://ucomm.wsu.edu/wsu-copyright-policy/">&copy;</a></li>
+					</ul>
+				</nav>	
+				<!-- <small id="copyright"><a href="http://copyright.wsu.edu">&copy; Washington State University</a></small> -->
+			</footer>
+	
+		</div><!--/glue-->
+	</div><!--/spine-->
+	<!-- /SPINE -->
+</div><!--/cover-->
+	</div><!--/jacket-->
+	<!-- /WRAPPING -->
+	<!--[if !IE]><script>fixScale(document);</script><![endif]-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-XXXXXXXX-XX', 'auto');
+  ga('send', 'pageview');
+
+</script></body>
+</html>
