@@ -6,11 +6,12 @@ There is an ideal way to development for Magento against the WSUMAGE-base repo. 
 
 <a name="#devModsLoaded"></a>
 ### Extensions loaded for Magento in Development
-There are many extensions that are loaded for production, and you may <a href="/WSUMAGE-base/production.html#productionModsLoaded">see them here</a>.  The listed extensions loaded in the development environment are used to ease your requirements to produce an extension.
+There are many extensions that are loaded for production, and you may [see them here](/site/production.html#productionModsLoaded).  The listed extensions loaded in the development environment are used to ease your requirements to produce an extension.
 
 **Plugins Loaded:**
-	1. [Aoe_Profiler](https://github.com/jeremyBass/Aoe_Profiler.git)
-	1. Coming soon: Script Debugger</li>
+
+1. [Aoe_Profiler](https://github.com/jeremyBass/Aoe_Profiler.git)
+1. Coming soon: Script Debugger</li>
 
 
 

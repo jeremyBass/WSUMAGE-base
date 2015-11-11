@@ -16,37 +16,31 @@ TBA
 
 **Default Plugins Loaded:**
 
-1. <a href="https://github.com/washingtonstateuniversity/WSUMAGE-auditing.git">WSUMAGE-auditing</a>
-1. <a href="https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git">WSUMAGE-store-utilities</a>
-1. <a href="https://github.com/washingtonstateuniversity/WSUMAGE-structured-data.git">WSUMAGE-structured-data</a>
-1. <a href="https://github.com/washingtonstateuniversity/WSUMAGE-networksecurities.git">WSUMAGE-networksecurities</a>
-1. <a href="https://github.com/jeremyBass/WSUMAGE-Storepartitions.git">WSUMAGE-Storepartitions</a>
-1. <a href="https://github.com/jeremyBass/eventTickets.git">eventTickets</a>
-1. <a href="https://github.com/jeremyBass/webmastertools.git">webmastertools</a>
-1. <a href="https://github.com/jeremyBass/pickupShipping.git">pickupShipping</a>
-1. <a href="https://github.com/jeremyBass/AdminQuicklancher.git">AdminQuicklancher</a>
-1. <a href="https://github.com/jeremyBass/dropshippers.git">dropshippers</a>
-1. <a href="https://github.com/jeremyBass/Aoe_FilePicker.git">Aoe_FilePicker</a>
-1. <a href="https://github.com/jeremyBass/mailing_services.git">mailing_services</a>
-1. <a href="https://github.com/fbrnc/Aoe_ManageStores.git">Aoe_ManageStores</a>
-1. <a href="https://github.com/fbrnc/Aoe_AsyncCache.git">Aoe_AsyncCache</a>
-1. <a href="https://github.com/fbrnc/Aoe_ApiLog.git">Aoe_ApiLog</a>
-1. <a href="https://github.com/AOEmedia/Aoe_ClassPathCache.git">Aoe_ClassPathCache</a>
-1. <a href="https://github.com/mage-eag/mage-enhanced-admin-grids.git">Enhanced Admin Grids</a>
+1. [WSUMAGE-auditing](https://github.com/washingtonstateuniversity/WSUMAGE-auditing.git)
+1. [WSUMAGE-store-utilities](https://github.com/washingtonstateuniversity/WSUMAGE-store-utilities.git)
+1. [WSUMAGE-structured-data](https://github.com/washingtonstateuniversity/WSUMAGE-structured-data.git)
+1. [WSUMAGE-networksecurities](https://github.com/washingtonstateuniversity/WSUMAGE-networksecurities.git)
+1. [WSUMAGE-Storepartitions](https://github.com/jeremyBass/WSUMAGE-Storepartitions.git)
+1. [eventTickets](https://github.com/jeremyBass/eventTickets.git)
+1. [webmastertools](https://github.com/jeremyBass/webmastertools.git)
+1. [pickupShipping](https://github.com/jeremyBass/pickupShipping.git)
+1. [AdminQuicklancher](https://github.com/jeremyBass/AdminQuicklancher.git)
+1. [dropshippers](https://github.com/jeremyBass/dropshippers.git)
+1. [mailing_services](https://github.com/jeremyBass/mailing_services.git)
 
 <a name="#productionThemesLoaded"></a>
-###Themes Extensions loaded for Magento in Production
+### Themes Extensions loaded for Magento in Production
 <p>Theme Plugins Loaded:</p>
 
-1. <a href="https://github.com/washingtonstateuniversity/WSUMAGE-admin-base.git">WSUMAGE-admin-base</a>
-1. <a href="https://github.com/washingtonstateuniversity/WSUMAGE-theme-base.git">WSUMAGE-theme-base</a>
+1. [WSUMAGE-admin-base](https://github.com/washingtonstateuniversity/WSUMAGE-admin-base.git)
+1. [WSUMAGE-theme-base](https://github.com/washingtonstateuniversity/WSUMAGE-theme-base.git)
 
 <a name="#productionGatewaysLoaded"></a>
-###Gateways Extensions loaded for Magento in Production
+### Gateways Extensions loaded for Magento in Production
 Gateways Plugins Loaded:
 
-1. <a href="https://github.com/washingtonstateuniversity/WSUMAGE-iri-gateway.git">WSUMAGE-iri-gateway</a>
-1. <a href="https://github.com/washingtonstateuniversity/WSUMAGE-central-cc-processing.git">WSUMAGE-central-cc-processing</a>
+1. [WSUMAGE-iri-gateway](https://github.com/washingtonstateuniversity/WSUMAGE-iri-gateway.git)
+1. [WSUMAGE-central-cc-processing](https://github.com/washingtonstateuniversity/WSUMAGE-central-cc-processing.git)
 1. Coming soon: CougarCash
 
 **Note:** More to come. Thank you for reading.

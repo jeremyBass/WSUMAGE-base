@@ -1,5 +1,5 @@
 {% markdown %}
-#WSU Magento parent theme
+# WSU Magento parent theme
 ## Repo : [WSUMAGE-base](https://github.com/washingtonstateuniversity/WSUMAGE-base)
 This is a Magento web app repo.  This is loaded in to a server base project such as [https://github.com/washingtonstateuniversity/WSU-Web-Serverbase](https://github.com/washingtonstateuniversity/WSU-Web-Serverbase).  This project may be loaded with other web apps as well, but it's all loaded in with the server base.  A web app can't live without the server.  The steps to get this project up is
 
