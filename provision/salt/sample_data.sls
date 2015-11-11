@@ -29,7 +29,7 @@ reload-sampledata:
 load-sampledata:
   cmd.run:
     - unless: gitploy ls 2>&1 | grep -qi "sampledata"
-    - name: gitploy ls 2>&1 | grep -qi "MAGE" && gitploy -q -b 1.9.1.0 sampledata https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git
+    - name: gitploy ls 2>&1 | grep -qi "MAGE" && gitploy -q -b 1.9.1.0-clean sampledata https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git
     - cwd: {{ web_root }}
     - user: root
     - require:
