@@ -1,5 +1,6 @@
 {% set extpillars = pillars.magento_extensions -%}
 extensions:
+{% if extpillars != "false" %}
   {% for name,extension in extpillars -%}
   ext{{ loop.index|leadingzero(5) }}--{{ name }}:
     track_name: "{{ extension.track_name if extension.track_name else extension.name|lower|replace("-","_")|replace(" ","_") }}"
@@ -11,3 +12,4 @@ extensions:
     exclude: "{{ extension.exclude if extension.exclude else "" }}"
     protocol: "{{ extension.protocol if extension.protocol else "" }}"
   {% endfor -%}
+{%- endif %}
