@@ -1,6 +1,6 @@
+{% if pillars.magento_extensions is defined %}
 {% set extpillars = pillars.magento_extensions -%}
 extensions:
-{% if extpillars != "false" %}
   {% for name,extension in extpillars -%}
   ext{{ loop.index|leadingzero(5) }}--{{ name }}:
     track_name: "{{ extension.track_name if extension.track_name else extension.name|lower|replace("-","_")|replace(" ","_") }}"

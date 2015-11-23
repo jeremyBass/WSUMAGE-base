@@ -46,6 +46,7 @@ remove-Phoenix_Moneybookers:
 
 
 # Start the extension intsalls
+{% if magento_extensions is defined %}
 {% for ext_key, ext_val in magento_extensions|dictsort %}
 
 {%- set installExt = "true" -%}
@@ -84,5 +85,6 @@ install-base-ext-{{ ext_key }}:
 {%- endif %}
 
 {% endfor %}
+{%- endif %}
 
 
