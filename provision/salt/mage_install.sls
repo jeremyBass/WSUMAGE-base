@@ -13,6 +13,14 @@
 {% if vars.update({'isLocal': salt['cmd.run']('test -n "$SERVER_TYPE" && echo $SERVER_TYPE || echo "false"') }) %} {% endif %}
 
 ###############################################
+# Setup the magento CLI path
+###############################################
+magneto-cli-setup:
+  cmd.run:
+    - name: export PATH=$PATH:{{ web_root }}bin
+    - cwd: {{ web_root }}
+
+###############################################
 # install Magento via CLI
 ###############################################
 magneto-install:
