@@ -30,11 +30,11 @@ magento:
   url: {{ URL }}
   baseurl: {{ pillar.baseurl if pillar.baseurl else "mage.dev" }}
   admin_url: {{ ADMIN_URL }}
-  use_rewrites: {{ pillar.use_rewrites if pillar.use_rewrites else "yes" }}
-  skip_url_validation: {{ pillar.skip_url_validation if pillar.skip_url_validation else "yes" }}
-  use_secure: {{ pillar.use_secure if pillar.use_secure else "no" }}
+  use_rewrites: {{ pillar.use_rewrites if pillar.use_rewrites else "1" }}
+  skip_url_validation: {{ pillar.skip_url_validation if pillar.skip_url_validation else "1" }}
+  use_secure: {{ pillar.use_secure if pillar.use_secure else "0" }}
   secure_base_url: {{ pillar.secure_base_url if pillar.secure_base_url else "" }}
-  use_secure_admin: {{ pillar.use_secure_admin if pillar.use_secure_admin else "no" }}
+  use_secure_admin: {{ pillar.use_secure_admin if pillar.use_secure_admin else "0" }}
   crypt_key: {{ pillar.crypt_key if pillar.crypt_key else "a723ebb767352a1f2cf5036b95e4b367" }}
   trim_defaultext: {{ pillar.trim_defaultext if pillar.trim_defaultext else "True" }}
   db_restore_host: {{ pillar.db_restore_host if pillar.db_restore_host else "" }}
