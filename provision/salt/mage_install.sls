@@ -31,6 +31,7 @@ magneto-install:
     - cwd: {{ web_root }}
     - require:
       - cmd: magento
+      - cmd: magneto-cli-setup
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
 
