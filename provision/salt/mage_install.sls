@@ -17,7 +17,7 @@
 ###############################################
 magneto-cli-setup:
   cmd.run:
-    - name: export PATH=$PATH:{{ web_root }}bin
+    - name: export PATH=$PATH:{{ web_root }}bin && echo "export PATH=$PATH:{{ web_root }}bin" >> /etc/environment && source /etc/environment
     - cwd: {{ web_root }}
 
 ###############################################
