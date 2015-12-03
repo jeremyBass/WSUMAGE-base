@@ -19,6 +19,7 @@ magento:
   admin_email: {{ pillar.admin_email if pillar.admin_email else "web.support@wsu.edu" }}
   admin_username: {{ pillar.admin_username if pillar.admin_username else "admin" }}
   admin_password: {{ pillar.admin_password if pillar.admin_password else "demo2014" }}
+  backend_frontname: {{ pillar.backend_frontname if pillar.backend_frontname else "admin" }}
   sample_data: {{ pillar.sample_data if pillar.sample_data else "True" }}
   sample_stores: {{ pillar.sample_stores if pillar.sample_stores else "True" }}
   overload_settings: {{ pillar.overload_settings if pillar.overload_settings else "True" }}
