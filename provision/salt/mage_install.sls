@@ -23,6 +23,7 @@ magneto-cli-setup:
 ###############################################
 # install Magento via CLI
 ###############################################
+# look to http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento
 magneto-install:
   cmd.run:
     - name: |
