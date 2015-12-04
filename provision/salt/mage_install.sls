@@ -77,13 +77,13 @@ magneto-install:
 ###############################################
 # connect settings
 ###############################################
-magneto-set-connect-prefs:
-  cmd.run:
-    - name: ./mage config-set preferred_state alpha | ./mage clear-cache | ./mage sync
-    - cwd: {{ web_root }}
-    - unless: printenv 2>&1 | grep -qi "MagentoInstalled=True"
-    - require:
-      - cmd: magento
+#magneto-set-connect-prefs:
+#  cmd.run:
+#    - name: ./mage config-set preferred_state alpha | ./mage clear-cache | ./mage sync
+#    - cwd: {{ web_root }}
+#    - unless: printenv 2>&1 | grep -qi "MagentoInstalled=True"
+#    - require:
+#      - cmd: magento
 
 
 ###############################################
