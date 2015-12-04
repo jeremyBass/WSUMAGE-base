@@ -103,3 +103,13 @@ newlocal.xml:
       project: {{ project }}
       saltenv: {{ saltenv }}
 
+###############################################
+# connect settings
+###############################################
+static-content-deploy:
+  cmd.run:
+    - name: php bin/magento setup:static-content:deploy
+    - cwd: {{ web_root }}
+    - require:
+      - cmd: magneto-install
+
