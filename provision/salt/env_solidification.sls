@@ -60,14 +60,9 @@ reset-magento:
 
 reindex-magento:
   cmd.run:
-    - name: php -f indexer.php reindexall | php "{{ web_root }}index.php" 2>/dev/null
-    - cwd: {{ web_root }}/shell
-    - user: root
-    - unless: test x"$MagentoInstalled_Fresh" = x
+    - name: php bin/magento indexer:reindex 
+    - cwd: {{ web_root }}
     - require:
-      - cmd: magento
-      - service: mysqld-{{ saltenv }}
-      - service: php-{{ saltenv }}
       - cmd: magneto-install
 
 
