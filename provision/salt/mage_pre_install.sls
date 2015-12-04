@@ -16,31 +16,31 @@
 # magneto install
 ###############################################    
 # move the apps nginx rules to the site-enabled
-{{ web_root }}mage: 
-   file.managed:
-    - user: root
-    - group: root
-{% if not vars.isLocal %}
-    - mode: 744
-{%- endif %}
+#{{ web_root }}mage: 
+#   file.managed:
+#    - user: root
+#    - group: root
+#{% if not vars.isLocal %}
+#    - mode: 744
+#{%- endif %}
 
-PEAR-registry:
-  cmd.run:
-    - name: ./mage mage-setup .
-    - user: root
-    - cwd: {{ web_root }}
-    - unless: printenv 2>&1 | grep -qi "MagentoInstalled=True"
-    - require:
-      - cmd: magento
+#PEAR-registry:
+#  cmd.run:
+#    - name: ./mage mage-setup .
+#    - user: root
+#    - cwd: {{ web_root }}
+#    - unless: printenv 2>&1 | grep -qi "MagentoInstalled=True"
+#    - require:
+#      - cmd: magento
       
-set-mage-ext-pref:
-  cmd.run:
-    - name: ./mage install magento-core Mage_All_Latest
-    - user: root
-    - cwd: {{ web_root }}
-    - unless: printenv 2>&1 | grep -qi "MagentoInstalled=True"
-    - require:
-      - cmd: magento
+#set-mage-ext-pref:
+#  cmd.run:
+#    - name: ./mage install magento-core Mage_All_Latest
+#    - user: root
+#    - cwd: {{ web_root }}
+#    - unless: printenv 2>&1 | grep -qi "MagentoInstalled=True"
+#    - require:
+#      - cmd: magento
 
 # move the apps nginx rules to the site-enabled
 updatelocal.xml:
