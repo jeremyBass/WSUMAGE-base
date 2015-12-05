@@ -27,7 +27,7 @@ magneto-cli-setup:
 magneto-install:
   cmd.run:
     - name: |
-       php bin/magento setup:install \
+       php bin/magento setup:upgrade || php bin/magento setup:install \
        --language={{ magento['locale'] }} \
        --timezone={{ magento['timezone'] }} \
        --currency={{ magento['default_currency'] }} \
