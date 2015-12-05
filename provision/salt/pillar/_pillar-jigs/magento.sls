@@ -6,6 +6,7 @@
     {% set URL = "http://store.mage.dev" -%}
 {% endif -%}
 magento:
+  mode: {{ MAGE.mode if MAGE.mode else "default" }}
   sample_data: {{ MAGE.sample_data if MAGE.sample_data else "True" }}
   sample_stores: {{ MAGE.sample_stores if MAGE.sample_stores else "True" }}
   overload_settings: {{ MAGE.overload_settings if MAGE.overload_settings else "True" }}
