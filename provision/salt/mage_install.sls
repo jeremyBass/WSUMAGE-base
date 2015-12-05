@@ -2,8 +2,8 @@
 ###########################################################
 {%- set project = pillar.get('project') %}
 {%- set database = pillar.get('database') %}
-{%- set magento = pillar.get('magento') %}
-{%- set magento_version = magento['version'] %}
+{%- set MAGE = pillar.get('magento') %}
+{%- set magento_version = MAGE['version'] %}
 {%- set magento_extensions = pillar.get('extensions',{}) %}
 {%- set web_root = "/var/app/" + saltenv + "/html/" %}
 {#%- set stage_root = "salt://stage/vagrant/" %#}
@@ -20,27 +20,32 @@
 magneto-install:
   cmd.run:
     - name: |
-       php bin/magento setup:upgrade --quiet --no-interaction || php bin/magento setup:install --quiet --no-interaction \
-       --language={{ magento['locale'] }} \
-       --timezone={{ magento['timezone'] }} \
-       --currency={{ magento['default_currency'] }} \
-       --db-host="{{ database['host'] }}" \
-       --db-name="{{ database['name'] }}" \
-       --db-user="{{ database['user'] }}" \
-       --db-password="{{ database['pass'] }}" \
-       {% if database['prefix'] is defined and database['prefix'] is not none %} --db-prefix="{{ database['prefix'] }}" {%- endif %} \
-       --base-url={{ magento['url'] }} \
-       --use-rewrites={{ magento['use_rewrites'] }} \
-       --use-secure={{ magento['use_secure'] }} \
-       {% if magento['secure_base_url'] is defined and magento['secure_base_url'] is not none %} --base-url-secure={{ magento['secure_base_url'] }} {%- endif %} \
-       --backend-frontname="{{ magento['backend_frontname'] }}" \
-       --use-secure-admin={{ magento['use_secure_admin'] }} \
-       --admin-firstname="{{ magento['admin_firstname'] }}" \
-       --admin-lastname="{{ magento['admin_lastname'] }}" \
-       --admin-email="{{ magento['admin_email'] }}" \
-       --admin-user="{{ magento['admin_username'] }}" \
-       --admin-password="{{ magento['admin_password'] }}" \
-       && echo "export MagentoInstalled_Fresh=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment
+       php bin/magento setup:upgrade --no-interaction || php bin/magento setup:install --no-interaction \
+        --admin-firstname="{{ MAGE['admin-firstname'] }}" \
+        --admin-lastname="{{ MAGE['admin-lastname'] }}" \
+        --admin-email="{{ MAGE['admin-email'] }}" \
+        --admin-user="{{ MAGE['admin-user'] }}" \
+        --admin-password="{{ MAGE['admin-password'] }}" \
+        --base-url={{ MAGE['url'] }} \
+        --backend-frontname="{{ MAGE['backend-frontname'] }}" \
+        --db-host="{{ MAGE['db-host'] }}" \
+        --db-name="{{ MAGE['db-name'] }}" \
+        --db-user="{{ MAGE['db-user'] }}" \
+        --db-password="{{ MAGE['db-pass'] }}" \
+        --db-prefix="{{ MAGE['db-prefix'] }}" \
+        --language="{{ MAGE['locale'] }}" \
+        --currency={{ MAGE['currency'] }} \
+        --timezone={{ MAGE['timezone'] }} \
+        --use-rewrites={{ MAGE['use-rewrites'] }} \
+        --use-secure={{ MAGE['use-secure'] }} \
+        --base-url-secure={{ MAGE['base-url-secure'] }} \
+        --use-secure-admin={{ MAGE['use-secure-admin'] }} \
+        --admin-use-security-key={{ MAGE['admin-use-security-key'] }} \
+        --session-save={{ MAGE['session-save'] }} \
+        --key={{ MAGE['key'] }} \
+        --cleanup-database={{ MAGE['cleanup-database'] }} \
+        --db-init-statements={{ MAGE['db-init-statements'] }} \
+        --sales-order-increment-prefix={{ MAGE['sales-order-increment-prefix'] }}&& echo "export MagentoInstalled_Fresh=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment
     - user: root
     - cwd: {{ web_root }}
     - require:
@@ -90,7 +95,7 @@ newlocal.xml:
     - replace: True
     - template: jinja
     - context:
-      magento: {{ magento }}
+      magento: {{ MAGE }}
       database: {{ database }}
       project: {{ project }}
       saltenv: {{ saltenv }}

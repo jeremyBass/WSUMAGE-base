@@ -1,44 +1,44 @@
-{% set pillar = pillars.magento -%}
-{% if pillar.url -%}
-    {% set URL = pillar.url -%}
+{% set MAGE = pillars.magento -%}
+{% set DB = pillars.database -%}
+{% if MAGE.url -%}
+    {% set URL = MAGE.url -%}
 {% else -%}
-    {% set URL = "store.mage.dev" -%}
-{% endif -%}
-{% if pillar.admin_url -%}
-    {% set ADMIN_URL = pillar.admin_url -%}
-{% else -%}
-{% if pillar.admin_route -%}
-    {% set ADMIN_URL = URL + "/" + pillar.admin_route -%}
-{% else -%}
-    {% set ADMIN_URL = URL + "/admin" -%}
-{% endif -%}
+    {% set URL = "http://store.mage.dev" -%}
 {% endif -%}
 magento:
-  admin_firstname: {{ pillar.admin_firstname if pillar.admin_firstname else "Admin" }}
-  admin_lastname: {{ pillar.admin_lastname if pillar.admin_lastname else "istrator" }}
-  admin_email: {{ pillar.admin_email if pillar.admin_email else "web.support@wsu.edu" }}
-  admin_username: {{ pillar.admin_username if pillar.admin_username else "admin" }}
-  admin_password: {{ pillar.admin_password if pillar.admin_password else "demo2014" }}
-  backend_frontname: {{ pillar.backend_frontname if pillar.backend_frontname else "admin" }}
-  sample_data: {{ pillar.sample_data if pillar.sample_data else "True" }}
-  sample_stores: {{ pillar.sample_stores if pillar.sample_stores else "True" }}
-  overload_settings: {{ pillar.overload_settings if pillar.overload_settings else "True" }}
-  version: {{ pillar.version if pillar.version else "1.9.2.2" }}
-  admin_route: {{ pillar.admin_route if pillar.admin_route else "admin" }}
-  locale: {{ pillar.locale if pillar.locale else "en_US" }}
-  timezone: {{ pillar.timezone if pillar.timezone else "America/Los_Angeles" }}
-  default_currency: {{ pillar.default_currency if pillar.default_currency else "USD" }}
+  sample_data: {{ MAGE.sample_data if MAGE.sample_data else "True" }}
+  sample_stores: {{ MAGE.sample_stores if MAGE.sample_stores else "True" }}
+  overload_settings: {{ MAGE.overload_settings if MAGE.overload_settings else "True" }}
+  version: {{ MAGE.version if MAGE.version else "2.0.0" }}
+  admin-firstname: {{ MAGE.admin_firstname if MAGE.admin_firstname else "Admin" }}
+  admin-lastname: {{ MAGE.admin_lastname if MAGE.admin_lastname else "istrator" }}
+  admin-email: {{ MAGE.admin_email if MAGE.admin_email else "web.support@wsu.edu" }}
+  admin-user: {{ MAGE.admin_username if MAGE.admin_username else "admin" }}
+  admin-password: {{ MAGE.admin_password if MAGE.admin_password else "demo2014" }}
+  base-url: {{ MAGE.baseurl if MAGE.baseurl else "mage.dev" }}
   url: {{ URL }}
-  baseurl: {{ pillar.baseurl if pillar.baseurl else "mage.dev" }}
-  admin_url: {{ ADMIN_URL }}
-  use_rewrites: {{ pillar.use_rewrites if pillar.use_rewrites else "1" }}
-  skip_url_validation: {{ pillar.skip_url_validation if pillar.skip_url_validation else "1" }}
-  use_secure: {{ pillar.use_secure if pillar.use_secure else "0" }}
-  secure_base_url: {{ pillar.secure_base_url if pillar.secure_base_url else "" }}
-  use_secure_admin: {{ pillar.use_secure_admin if pillar.use_secure_admin else "0" }}
-  crypt_key: {{ pillar.crypt_key if pillar.crypt_key else "a723ebb767352a1f2cf5036b95e4b367" }}
-  trim_defaultext: {{ pillar.trim_defaultext if pillar.trim_defaultext else "True" }}
-  db_restore_host: {{ pillar.db_restore_host if pillar.db_restore_host else "" }}
-  db_restore_user: {{ pillar.db_restore_user if pillar.db_restore_user else "" }}
-  db_restore_pass: {{ pillar.db_restore_pass if pillar.db_restore_pass else "" }}
-  db_restore_db: {{ pillar.db_restore_db if pillar.db_restore_db else "" }}
+  backend-frontname: {{ MAGE.backend_frontname if MAGE.backend_frontname else "mage_backend" }}
+  language: {{ MAGE.locale if MAGE.locale else "en_US" }}
+  currency: {{ MAGE.default_currency if MAGE.default_currency else "USD" }}
+  timezone: {{ MAGE.timezone if MAGE.timezone else "America/Los_Angeles" }}
+  use-rewrites: {{ MAGE.use_rewrites if MAGE.use_rewrites else "1" }}
+  use-secure: {{ MAGE.use_secure if MAGE.use_secure else "0" }}
+  base-url-secure: {{ MAGE.secure_base_url if MAGE.secure_base_url else "" }}
+  use-secure-admin: {{ MAGE.use_secure_admin if MAGE.use_secure_admin else "0" }}
+  admin-use-security-key: {{ MAGE.admin-use-security-key if MAGE.use_secure_admin else "1" }}
+  session-save: {{ MAGE.session-save if MAGE.use_secure_admin else "1" }}
+  key: {{ MAGE.crypt_key if MAGE.crypt_key else "a723ebb767352a1f2cf5036b95e4b367" }}
+  cleanup-database: {{ MAGE.cleanup-database if MAGE.cleanup-database else "0" }}
+  db-init-statements: {{ MAGE.db-init-statements if MAGE.db-init-statements else "" }}
+  sales-order-increment-prefix: {{ MAGE.sales-order-increment-prefix if MAGE.sales-order-increment-prefix else "wsumarket_" }}
+  db-host: {{ DB.host if DB.host else "127.0.0.1" }}
+  db-name: {{ DB.name if DB.name else "wsumage_networks" }}
+  db-user: {{ DB.user if DB.user else "mageNtkUsr2014" }}
+  db-password: {{ DB.pass if DB.pass else "VAGRANT" }}
+  db-prefix: {{ DB.prefix if DB.prefix else "mage_" }}
+  trim_defaultext: {{ MAGE.trim_defaultext if MAGE.trim_defaultext else "True" }}
+  db_restore_host: {{ MAGE.db_restore_host if MAGE.db_restore_host else "" }}
+  db_restore_user: {{ MAGE.db_restore_user if MAGE.db_restore_user else "" }}
+  db_restore_pass: {{ MAGE.db_restore_pass if MAGE.db_restore_pass else "" }}
+  db_restore_db: {{ MAGE.db_restore_db if MAGE.db_restore_db else "" }}
+  
