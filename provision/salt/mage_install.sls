@@ -12,13 +12,6 @@
 {% if vars.update({'ip': salt['cmd.run']('(ifconfig eth1 2>/dev/null || ifconfig eth0 2>/dev/null) | grep "inet " | awk \'{gsub("addr:","",$2);  print $2 }\'') }) %} {% endif %}
 {% if vars.update({'isLocal': salt['cmd.run']('test -n "$SERVER_TYPE" && echo $SERVER_TYPE || echo "false"') }) %} {% endif %}
 
-###############################################
-# Setup the magento CLI path
-###############################################
-magneto-cli-setup:
-  cmd.run:
-    - name: export PATH=$PATH:{{ web_root }}bin && echo "export PATH=$PATH:{{ web_root }}bin" >> /etc/environment && source /etc/environment
-    - cwd: {{ web_root }}
 
 ###############################################
 # install Magento via CLI
@@ -52,7 +45,6 @@ magneto-install:
     - cwd: {{ web_root }}
     - require:
       - cmd: magento
-      - cmd: magneto-cli-setup
       - service: mysqld-{{ saltenv }}
       - service: php-{{ saltenv }}
 
