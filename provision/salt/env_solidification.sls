@@ -65,6 +65,14 @@ reindex-magento:
     - require:
       - cmd: magneto-install
 
+cache-clean-magento:
+  cmd.run:
+    - name: php bin/magento cache:enable && php bin/magento cache:flush 
+    - cwd: {{ web_root }}
+    - require:
+      - cmd: magneto-install
+
+
 
 
 
