@@ -33,7 +33,7 @@ magneto-install:
         --db-user="{{ MAGE['db-user'] }}" \
         --db-password="{{ MAGE['db-password'] }}" \
         --db-prefix="{{ MAGE['db-prefix'] }}" \
-        --language="{{ MAGE['locale'] }}" \
+        --language="{{ MAGE['language'] }}" \
         --currency={{ MAGE['currency'] }} \
         --timezone={{ MAGE['timezone'] }} \
         --use-rewrites={{ MAGE['use-rewrites'] }} \
