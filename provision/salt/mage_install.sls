@@ -45,7 +45,7 @@ magneto-install:
         --key={{ MAGE['key'] }} \
         {{ "--cleanup-database" if MAGE['cleanup-database'] == 1 else "" }} \
         --db-init-statements={{ MAGE['db-init-statements'] }} \
-        --sales-order-increment-prefix={{ MAGE['sales-order-increment-prefix'] }} && echo "export MagentoInstalled_Fresh=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment
+        --sales-order-increment-prefix="{{ MAGE['sales-order-increment-prefix'] }}" && echo "export MagentoInstalled_Fresh=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment
     - user: root
     - cwd: {{ web_root }}
     - require:
