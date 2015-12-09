@@ -24,7 +24,7 @@ magento:
   timezone: {{ MAGE.timezone if MAGE.timezone else "America/Los_Angeles" }}
   use-rewrites: {{ MAGE.use_rewrites if MAGE.use_rewrites else "1" }}
   use-secure: {{ MAGE.use_secure if MAGE.use_secure else "0" }}
-  base-url-secure: {{ MAGE.secure_base_url if MAGE.secure_base_url else "" }}
+  base-url-secure: {{ MAGE.secure_base_url if MAGE.secure_base_url else URL }}
   use-secure-admin: {{ MAGE.use_secure_admin if MAGE.use_secure_admin else "0" }}
   admin-use-security-key: {{ MAGE.admin-use-security-key if MAGE.use_secure_admin else "1" }}
   session-save: {{ MAGE.session-save if MAGE.use_secure_admin else "files" }}
