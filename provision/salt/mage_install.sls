@@ -43,7 +43,7 @@ magneto-install:
         --admin-use-security-key={{ MAGE['admin-use-security-key'] }} \
         --session-save={{ MAGE['session-save'] }} \
         --key={{ MAGE['key'] }} \
-        {{ "--cleanup-database" if magento['baseurl'] == 1 else "" }} \
+        {{ "--cleanup-database" if MAGE['cleanup-database'] == 1 else "" }} \
         --db-init-statements={{ MAGE['db-init-statements'] }} \
         --sales-order-increment-prefix={{ MAGE['sales-order-increment-prefix'] }} && echo "export MagentoInstalled_Fresh=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment
     - user: root
