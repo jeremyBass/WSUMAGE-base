@@ -27,7 +27,7 @@ magento:
   base-url-secure: {{ MAGE.secure_base_url if MAGE.secure_base_url else "" }}
   use-secure-admin: {{ MAGE.use_secure_admin if MAGE.use_secure_admin else "0" }}
   admin-use-security-key: {{ MAGE.admin-use-security-key if MAGE.use_secure_admin else "1" }}
-  session-save: {{ MAGE.session-save if MAGE.use_secure_admin else "1" }}
+  session-save: {{ MAGE.session-save if MAGE.use_secure_admin else "files" }}
   key: {{ MAGE.crypt_key if MAGE.crypt_key else "a723ebb767352a1f2cf5036b95e4b367" }}
   cleanup-database: {{ MAGE.cleanup-database if MAGE.cleanup-database else "0" }}
   db-init-statements: {{ MAGE.db-init-statements if MAGE.db-init-statements else "" }}
