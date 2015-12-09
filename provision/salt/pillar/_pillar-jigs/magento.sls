@@ -5,6 +5,11 @@
 {% else -%}
     {% set URL = "http://store.mage.dev" -%}
 {% endif -%}
+{% if MAGE.secure_base_url -%}
+    {% set secureURL = MAGE.secure_base_url -%}
+{% else -%}
+    {% set secureURL = "https://store.mage.dev" -%}
+{% endif -%}
 magento:
   mode: {{ MAGE.mode if MAGE.mode else "default" }}
   sample_data: {{ MAGE.sample_data if MAGE.sample_data else "True" }}
@@ -24,7 +29,7 @@ magento:
   timezone: {{ MAGE.timezone if MAGE.timezone else "America/Los_Angeles" }}
   use-rewrites: {{ MAGE.use_rewrites if MAGE.use_rewrites else "1" }}
   use-secure: {{ MAGE.use_secure if MAGE.use_secure else "0" }}
-  base-url-secure: {{ MAGE.secure_base_url if MAGE.secure_base_url else URL }}
+  base-url-secure: {{ secureURL }}
   use-secure-admin: {{ MAGE.use_secure_admin if MAGE.use_secure_admin else "0" }}
   admin-use-security-key: {{ MAGE.admin-use-security-key if MAGE.use_secure_admin else "1" }}
   session-save: {{ MAGE.session-save if MAGE.use_secure_admin else "files" }}
