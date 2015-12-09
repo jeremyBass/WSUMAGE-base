@@ -30,7 +30,7 @@ magento:
   session-save: {{ MAGE.session-save if MAGE.use_secure_admin else "files" }}
   key: {{ MAGE.crypt_key if MAGE.crypt_key else "a723ebb767352a1f2cf5036b95e4b367" }}
   cleanup-database: {{ MAGE.cleanup-database if MAGE.cleanup-database else "0" }}
-  db-init-statements: {{ MAGE.db-init-statements if MAGE.db-init-statements else "" }}
+  db-init-statements: {{ MAGE.db-init-statements if MAGE.db-init-statements else "SET NAMES utf8;" }}
   sales-order-increment-prefix: {{ MAGE.sales-order-increment-prefix if MAGE.sales-order-increment-prefix else "wsumarket_" }}
   db-host: {{ DB.host if DB.host else "127.0.0.1" }}
   db-name: {{ DB.name if DB.name else "wsumage_networks" }}
