@@ -15,16 +15,15 @@
 ## note it should be that only on need does this get run
 ## question what the need is, then test for it
 
-
+{% if magento['sample_data'] %}
 ## if the repo of sample data exists
 reload-sampledata:
   cmd.run:
     - onlyif: gitploy ls 2>&1 | grep -qi "sampledata"
-    - name: gitploy re -q -b 1.9.1.0 sampledata
+    - name: gitploy re -q -b 2.0 sampledata
     - cwd: {{ web_root }}
     - user: root
-    - require:
-      - service: mysqld-{{ saltenv }}
+
 ##else load it
 load-sampledata:
   cmd.run:
@@ -33,21 +32,44 @@ load-sampledata:
     - cwd: {{ web_root }}
     - user: root
     - require:
-      - service: mysqld-{{ saltenv }}
+      - service: reload-sampledata
 ##end
 
 ##Link the sample data
 link-sample-date:
   cmd.run:
-    - onlyif: test -f app/code/Magento/BundleSampleData/registration.php
+    - onlyif: gitploy ls 2>&1 | grep -qi "sampledata"
     - name: php -f {{ web_root }}dev/tools/build-sample-data.php -- --ce-source="{{ web_root }}"
     - cwd: {{ web_root }}
+    - require:
+      - service: load-sampledata
 
 ##Link the sample data
 install-sample-date:
   cmd.run:
-    - onlyif: test -f app/code/Magento/BundleSampleData/registration.php
     - name: php bin/magento setup:upgrade
     - cwd: {{ web_root }}
 
+{% else %}
 
+
+##Link the sample data
+unlink-sample-date:
+  cmd.run:
+    - onlyif: gitploy ls 2>&1 | grep -qi "sampledata"
+    - name: php -f {{ web_root }}dev/tools/build-sample-data.php -- --command=unlink --ce-source="{{ web_root }}"
+    - cwd: {{ web_root }}
+
+remove-sampledata:
+  cmd.run:
+    - onlyif: gitploy ls 2>&1 | grep -qi "sampledata"
+    - name: gitploy rm -q -u sampledata
+    - cwd: {{ web_root }}
+    - user: root
+
+##Link the sample data
+uninstall-sample-date:
+  cmd.run:
+    - name: php bin/magento setup:upgrade
+    - cwd: {{ web_root }}
+{%- endif %}
