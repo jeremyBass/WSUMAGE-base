@@ -15,12 +15,10 @@
 stores:
   '*':
     - env_prep
-{% if magento['sample_data'] %}
-    - sample_data
-{%- endif %}
     - mage_pre_install
     - mage_install
     - extensions
+    - sample_data
     - mage_post_install
     - clean
     - env_solidification
