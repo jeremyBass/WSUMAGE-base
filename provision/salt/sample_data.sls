@@ -25,27 +25,29 @@ reload-sampledata:
     - user: root
     - require:
       - service: mysqld-{{ saltenv }}
-##else load it 
+##else load it
 load-sampledata:
   cmd.run:
     - unless: gitploy ls 2>&1 | grep -qi "sampledata"
-    - name: gitploy ls 2>&1 | grep -qi "MAGE" && gitploy -q -b 1.9.1.0-clean sampledata https://github.com/washingtonstateuniversity/WSUMAGE-sampledata.git
+    - name: gitploy ls 2>&1 | grep -qi "MAGE" && gitploy -q -b 2.0 sampledata https://github.com/magento/magento2-sample-data.git
     - cwd: {{ web_root }}
     - user: root
     - require:
       - service: mysqld-{{ saltenv }}
-##end 
+##end
 
-##install sample data
+##Link the sample data
+link-sample-date:
+  cmd.run:
+    - onlyif: test -f app/code/Magento/BundleSampleData/registration.php
+    - name: php -f {{ web_root }}dev/tools/build-sample-data.php -- --ce-source="{{ web_root }}"
+    - cwd: {{ web_root }}
+
+##Link the sample data
 install-sample-date:
   cmd.run:
-    - onlyif: test -f sample-data.sql 
-    - unless: count=$(mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} --skip-column-names  --batch -D {{ database['name'] }} -e 'SELECT count(*) FROM admin_user;' 2>/dev/null) && test $count -gt 0
-    - name: 'mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} < sample-data.sql && mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} -e "create database somedb" && echo "export mage_sameple_data=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment && mage_sameple_data=True '
+    - onlyif: test -f app/code/Magento/BundleSampleData/registration.php
+    - name: php bin/magento setup:upgrade
     - cwd: {{ web_root }}
 
-clear-sampledata:
-  cmd.run:
-    - name: rm -rf ./WSUMAGE-sampledata-master/ ./sample-data.sql ./sample-data-files/
-    - user: root
-    - cwd: {{ web_root }}
+
