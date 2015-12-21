@@ -16,24 +16,13 @@
 ## question what the need is, then test for it
 
 {% if magento['sample_data']|lower == "true" %}
-## if the repo of sample data exists
-reload-sampledata:
-  cmd.run:
-    - onlyif: gitploy ls 2>&1 | grep -qi "sampledata"
-    - name: gitploy re -q -b 2.0 sampledata
-    - cwd: {{ web_root }}
-    - user: root
 
-##else load it
+##Load sampledate
 load-sampledata:
   cmd.run:
-    - unless: gitploy ls 2>&1 | grep -qi "sampledata"
-    - name: gitploy ls 2>&1 | grep -qi "MAGE" && gitploy -q -b 2.0 sampledata https://github.com/magento/magento2-sample-data.git
+    - name: gitploy ls 2>&1 | grep -qi "sampledata" && gitploy re -q -b 2.0 sampledata || gitploy -q -b 2.0 sampledata https://github.com/magento/magento2-sample-data.git
     - cwd: {{ web_root }}
     - user: root
-    - require:
-      - service: reload-sampledata
-##end
 
 ##Link the sample data
 link-sample-date:
