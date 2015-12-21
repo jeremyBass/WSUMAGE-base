@@ -15,7 +15,7 @@
 ## note it should be that only on need does this get run
 ## question what the need is, then test for it
 
-{% if magento['sample_data'] == "True" %}
+{% if magento['sample_data']|lower == "true" %}
 ## if the repo of sample data exists
 reload-sampledata:
   cmd.run:
