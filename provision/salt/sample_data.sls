@@ -30,8 +30,6 @@ link-sample-date:
     - onlyif: gitploy ls 2>&1 | grep -qi "sampledata"
     - name: php -f {{ web_root }}dev/tools/build-sample-data.php -- --ce-source="{{ web_root }}"
     - cwd: {{ web_root }}
-    - require:
-      - service: load-sampledata
 
 ##Link the sample data
 install-sample-date:
