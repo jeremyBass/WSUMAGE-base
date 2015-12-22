@@ -12,7 +12,7 @@
 
 clear-caches:
   cmd.run:
-    - name: rm -rf ./var/cache/* ./var/session/* ./var/log/* ./app/code/core/Zend/Cache/* ./media/css/* ./media/js/* 
+    - name: rm -rf ./var/cache/* ./var/session/* ./var/log/* ./app/code/core/Zend/Cache/* ./media/css/* ./media/js/*
     - user: root
     - cwd: {{ web_root }}
 
@@ -35,12 +35,12 @@ clear-random-files:
     - onlyif: test -f tmp?*
     - cwd: {{ web_root }}
 
-clear-dev-files:
-  cmd.run:
-    - name: rm -rf dev/
-    - user: root
-    - onlyif: test -d dev
-    - cwd: {{ web_root }}
+#clear-dev-files:
+#  cmd.run:
+#    - name: rm -rf dev/
+#    - user: root
+#    - onlyif: test -d dev
+#    - cwd: {{ web_root }}
 
 clear-pkginfo-files:
   cmd.run:
