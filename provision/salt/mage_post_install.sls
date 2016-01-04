@@ -80,7 +80,7 @@
 
 
 {% endfor %}
-    
+
 
 
 
@@ -136,18 +136,18 @@
     - group: www-data
     - replace: True
 
-# settings to stores
-post-install-settings:
-  cmd.run:
-    - name: php {{ web_stage_root }}post-install-processing.php && echo "export settings_installed=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment  && settings_installed=True
-    - cwd: {{ web_root }}
-    - user: root
-#    - unless: test x"$MagentoInstalled_Fresh" = x
-    - require:
-      - cmd: magento
-      - service: mysqld-{{ saltenv }}
-      - service: php-{{ saltenv }}
-      - cmd: magneto-install
+## settings to stores
+#post-install-settings:
+#  cmd.run:
+#    - name: php {{ web_stage_root }}post-install-processing.php && echo "export settings_installed=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment  && settings_installed=True
+#    - cwd: {{ web_root }}
+#    - user: root
+##    - unless: test x"$MagentoInstalled_Fresh" = x
+#    - require:
+#      - cmd: magento
+#      - service: mysqld-{{ saltenv }}
+#      - service: php-{{ saltenv }}
+#      - cmd: magneto-install
 
 
 # install any cronjob needed
