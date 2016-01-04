@@ -31,8 +31,8 @@ magento:
   use-secure: {{ MAGE.use_secure if MAGE.use_secure else "0" }}
   base-url-secure: {{ secureURL }}
   use-secure-admin: {{ MAGE.use_secure_admin if MAGE.use_secure_admin else "0" }}
-  admin-use-security-key: {{ MAGE.admin-use-security-key if MAGE.use_secure_admin else "1" }}
-  session-save: {{ MAGE.session-save if MAGE.use_secure_admin else "files" }}
+  admin-use-security-key: {{ MAGE.admin-use-security-key if MAGE.admin-use-security-key else "1" }}
+  session-save: {{ MAGE.session-save if MAGE.session-save else "files" }}
   key: {{ MAGE.crypt_key if MAGE.crypt_key else "a723ebb767352a1f2cf5036b95e4b367" }}
   cleanup-database: {{ MAGE.cleanup-database if MAGE.cleanup-database else "0" }}
   db-init-statements: {{ MAGE.db-init-statements if MAGE.db-init-statements else "SET NAMES utf8;" }}
@@ -47,4 +47,4 @@ magento:
   db_restore_user: {{ MAGE.db_restore_user if MAGE.db_restore_user else "" }}
   db_restore_pass: {{ MAGE.db_restore_pass if MAGE.db_restore_pass else "" }}
   db_restore_db: {{ MAGE.db_restore_db if MAGE.db_restore_db else "" }}
-  
+
