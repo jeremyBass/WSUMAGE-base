@@ -21,31 +21,31 @@ magneto-install:
   cmd.run:
     - name: |
        php bin/magento setup:upgrade --no-interaction || php bin/magento setup:install --no-interaction \
-        --admin-firstname="{{ MAGE['admin-firstname'] }}" \
-        --admin-lastname="{{ MAGE['admin-lastname'] }}" \
-        --admin-email="{{ MAGE['admin-email'] }}" \
-        --admin-user="{{ MAGE['admin-user'] }}" \
-        --admin-password="{{ MAGE['admin-password'] }}" \
+        --admin-firstname="{{ MAGE['admin_firstname'] }}" \
+        --admin-lastname="{{ MAGE['admin_lastname'] }}" \
+        --admin-email="{{ MAGE['admin_email'] }}" \
+        --admin-user="{{ MAGE['admin_user'] }}" \
+        --admin-password="{{ MAGE['admin_password'] }}" \
         --base-url={{ MAGE['url'] }} \
-        --backend-frontname="{{ MAGE['backend-frontname'] }}" \
-        --db-host="{{ MAGE['db-host'] }}" \
-        --db-name="{{ MAGE['db-name'] }}" \
-        --db-user="{{ MAGE['db-user'] }}" \
-        --db-password="{{ MAGE['db-password'] }}" \
-        --db-prefix="{{ MAGE['db-prefix'] }}" \
+        --backend-frontname="{{ MAGE['backend_frontname'] }}" \
+        --db-host="{{ MAGE['db_host'] }}" \
+        --db-name="{{ MAGE['db_name'] }}" \
+        --db-user="{{ MAGE['db_user'] }}" \
+        --db-password="{{ MAGE['db_password'] }}" \
+        --db-prefix="{{ MAGE['db_prefix'] }}" \
         --language="{{ MAGE['language'] }}" \
         --currency={{ MAGE['currency'] }} \
         --timezone={{ MAGE['timezone'] }} \
-        --use-rewrites={{ MAGE['use-rewrites'] }} \
-        --use-secure={{ MAGE['use-secure'] }} \
-        --base-url-secure={{ MAGE['base-url-secure'] }} \
-        --use-secure-admin={{ MAGE['use-secure-admin'] }} \
-        --admin-use-security-key={{ MAGE['admin-use-security-key'] }} \
-        --session-save={{ MAGE['session-save'] }} \
+        --use-rewrites={{ MAGE['use_rewrites'] }} \
+        --use-secure={{ MAGE['use_secure'] }} \
+        --base-url-secure={{ MAGE['base_url_secure'] }} \
+        --use-secure-admin={{ MAGE['use_secure_admin'] }} \
+        --admin-use-security-key={{ MAGE['admin_use_security_key'] }} \
+        --session-save={{ MAGE['session_save'] }} \
         --key={{ MAGE['key'] }} \
-        {{ "--cleanup-database" if MAGE['cleanup-database'] == 1 else "" }} \
-        --db-init-statements="{{ MAGE['db-init-statements'] }}" \
-        --sales-order-increment-prefix="{{ MAGE['sales-order-increment-prefix'] }}" \
+        {{ "--cleanup-database" if MAGE['cleanup_database'] == 1 else "" }} \
+        --db-init-statements="{{ MAGE['db_init_statements'] }}" \
+        --sales-order-increment-prefix="{{ MAGE['sales_order_increment_prefix'] }}" \
         && echo "export MagentoInstalled_Fresh=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment
     - user: root
     - cwd: {{ web_root }}
@@ -68,7 +68,7 @@ magneto-install:
 #    - name: sh SUPEE-5994.sh
 #    - source: /var/app/{{ saltenv }}/provision/salt/patches/SUPEE-5994.sh
 #    - cwd: {{ web_root }}
-#    - unless: grep -qi "SUPEE-5994" {{ web_root }}app/etc/applied.patches.list  
+#    - unless: grep -qi "SUPEE-5994" {{ web_root }}app/etc/applied.patches.list
 
 
 
