@@ -15,7 +15,7 @@ magento:
   sample_data: {{ MAGE.sample_data if MAGE.sample_data else "True" }}
   sample_stores: {{ MAGE.sample_stores if MAGE.sample_stores else "True" }}
   overload_settings: {{ MAGE.overload_settings if MAGE.overload_settings else "True" }}
-  version: {{ MAGE.version if MAGE.version else "2.0.1" }}
+  version: {{ MAGE.version if MAGE.version else "2.0.2" }}
   admin_firstname: {{ MAGE.admin_firstname if MAGE.admin_firstname else "Admin" }}
   admin_lastname: {{ MAGE.admin_lastname if MAGE.admin_lastname else "istrator" }}
   admin_email: {{ MAGE.admin_email if MAGE.admin_email else "web.support@wsu.edu" }}
