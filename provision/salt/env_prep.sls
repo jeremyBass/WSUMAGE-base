@@ -15,7 +15,7 @@
 
 pre-clear-caches:
   cmd.run:
-    - name: rm -rf {{ web_root }}var/cache/* {{ web_root }}var/session/* {{ web_root }}var/report/* {{ web_root }}var/locks/* {{ web_root }}var/log/* {{ web_root }}app/code/core/Zend/Cache/* {{ web_root }}media/css/* {{ web_root }}media/js/* 
+    - name: rm -rf {{ web_root }}var/cache/* {{ web_root }}var/session/* {{ web_root }}var/report/* {{ web_root }}var/locks/* {{ web_root }}var/log/* {{ web_root }}app/code/core/Zend/Cache/* {{ web_root }}media/css/* {{ web_root }}media/js/*
     - user: root
     - onlyif: test -d {{ web_root }}var
 
@@ -62,7 +62,7 @@ magedb_users-{{ database['user'] }}:
     - host: {{ database['host'] }}
     - require:
       - service: mysqld-{{ saltenv }}
-      
+
 magedb_grant-{{ database['name'] }}:
   mysql_grants.present:
     - grant: all
@@ -140,8 +140,11 @@ init_gitploy:
     - unless: test -d {{ web_root }}.gitploy
     - user: root
 
-
-
+composer:
+  cmd.run:
+    - name: curl -sS https://getcomposer.org/installer | php -- --filename=composer
+    - cwd: /
+    - user: root
 
 magento:
   cmd.run:
