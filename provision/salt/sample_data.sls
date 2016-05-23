@@ -60,7 +60,7 @@ clear-sampledata:
 
 
 
-remove_mysql_config_editor:
+remove_mysql_config_editor-sample-date:
   cmd.run:
     - name: 'mysql_config_editor remove --login-path=local'
     - cwd: /
