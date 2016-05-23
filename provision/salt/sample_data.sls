@@ -25,7 +25,7 @@ reload-sampledata:
     - user: root
     - require:
       - service: mysqld-{{ saltenv }}
-##else load it 
+##else load it
 load-sampledata:
   cmd.run:
     - unless: gitploy ls 2>&1 | grep -qi "sampledata"
@@ -34,14 +34,22 @@ load-sampledata:
     - user: root
     - require:
       - service: mysqld-{{ saltenv }}
-##end 
+##end
+
+
+set_mysql_config_editor-sample-date:
+  cmd.run:
+    - name: 'touch .mylogin.cnf && printf "[local]\nuser = {{ database['user'] }}\npassword = {{ database['pass'] }}\nhost = {{ database['host'] }}" >> .mylogin.cnf'
+    - cwd: /
+
+
 
 ##install sample data
 install-sample-date:
   cmd.run:
-    - onlyif: test -f sample-data.sql 
-    - unless: count=$(mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} --skip-column-names  --batch -D {{ database['name'] }} -e 'SELECT count(*) FROM admin_user;' 2>/dev/null) && test $count -gt 0
-    - name: 'mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} < sample-data.sql && mysql -h {{ database['host'] }} -u {{ database['user'] }} -p{{ database['pass'] }} {{ database['name'] }} -e "create database somedb" && echo "export mage_sameple_data=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment && mage_sameple_data=True '
+    - onlyif: test -f sample-data.sql
+    - unless: count=$(mysql  --login-path=local --skip-column-names  --batch -D {{ database['name'] }} -e 'SELECT count(*) FROM admin_user;' 2>/dev/null) && test $count -gt 0
+    - name: 'mysql  --login-path=local {{ database['name'] }} < sample-data.sql && mysql --login-path=local {{ database['name'] }} -e "create database somedb" && echo "export mage_sameple_data=True {% raw %}#salt-set REMOVE{% endraw %}" >> /etc/environment && mage_sameple_data=True '
     - cwd: {{ web_root }}
 
 clear-sampledata:
@@ -49,3 +57,10 @@ clear-sampledata:
     - name: rm -rf ./WSUMAGE-sampledata-master/ ./sample-data.sql ./sample-data-files/
     - user: root
     - cwd: {{ web_root }}
+
+
+
+remove_mysql_config_editor:
+  cmd.run:
+    - name: 'mysql_config_editor remove --login-path=local'
+    - cwd: /
